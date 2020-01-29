@@ -8,6 +8,7 @@ public class PlayerControls : MonoBehaviour
     public float movementSpeed = 5f;
     public GameObject pointer;
     public int planeLayer = 8;
+    public GameObject fireball;
 
     public KeyCode[] keys;
     private int[] mouseButtons = { 0, 1, 2 };
@@ -26,7 +27,7 @@ public class PlayerControls : MonoBehaviour
             }, keys,
             new Action[3] // MouseBindings
             {
-                () => Debug.Log("Left Click"),
+                () => CastFireball(),
                 () => Debug.Log("Right Click"),
                 () => Debug.Log("Middle Click")
             }, mouseButtons
@@ -39,8 +40,10 @@ public class PlayerControls : MonoBehaviour
 
         pointer.transform.position = GetMousePositionOn2DPlane();
     }
+    private Vector3 GetMouseDirection() =>
+        (GetMousePositionOn2DPlane() - transform.position).normalized;
 
-    public Vector3 GetMousePositionOn2DPlane()
+    private Vector3 GetMousePositionOn2DPlane()
     {
         var position = Vector3.zero;
         Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
@@ -52,6 +55,19 @@ public class PlayerControls : MonoBehaviour
         return position;
     }
 
-    public void Move(Vector3 translation) =>
+    private void Move(Vector3 translation) =>
         transform.Translate(translation * Time.deltaTime * movementSpeed);
+
+    private void CastFireball()
+    {
+        var fireballObject = Instantiate(
+            fireball,
+            transform.position + GetMouseDirection(),
+            Quaternion.identity
+        );
+
+        fireballObject
+            .GetComponent<MoveTowardsDirection>()
+            .direction = GetMouseDirection();
+    }
 }
