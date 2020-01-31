@@ -4,7 +4,16 @@ using System.Text;
 
 public abstract class Stat
 {
+    float modifier;
     public string Name { get; protected set; }
+    public float Modifier
+    {
+        get { return modifier; }
+        protected set
+        {
+            OnModifierChanged
+        }
+    }
 }
 #region Stats
 public class HP : Stat
@@ -39,10 +48,12 @@ public class HP : Stat
     }
         
     #endregion
-    public HP(int hPValue)
+    public HP(int initMaxHP)
     {
-        HPValue = hPValue;
+        MaxHP = initMaxHP;
+        HPValue = initMaxHP;
         Name = "HP";
+        Modifier = 1;
     }
     #region Methods
     public void TakeDamage(int damage) => HPValue -= damage;
@@ -106,16 +117,8 @@ public class Mana : Stat
 }
 public class XP : Stat
 {
-    float currentXP;
-    public float CurrentXP
-    {
-        get { return currentXP; }
-        private set
-        {
-            currentXP = value;
-        }
-    }
-     
+    public float CurrentXP { get; private set; }
+
     public XP()
     {
         CurrentXP = 0;
@@ -129,6 +132,10 @@ public class OnHeal
         
 }
 public class OnTakenDamage
+{
+
+}
+public class OnModifierChanged
 {
 
 }
