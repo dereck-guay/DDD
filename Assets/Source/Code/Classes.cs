@@ -2,17 +2,14 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace DDDClasses
+public class Classes
 {
-    public class Classes
-    {
-    }
-    public class Fighter
-    {
+}
+public class Fighter
+{
 
-    }
-    public class Wizard
-    {
+}
+public class Wizard
+{
 
-    }
 }
