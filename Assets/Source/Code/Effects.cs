@@ -2,38 +2,30 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace DDDClasses
+public abstract class Effect
 {
-    public abstract class Effect
+    public float NumberValue { get; protected set; }
+}
+public class Buff : Effect
+{
+    public Stat StatToBuff { get; private set; }
+    public Buff(int buffValue, Stat statToBuff)
     {
-        public string Name { get; private set; }
+        NumberValue = buffValue;
+        StatToBuff = statToBuff;
     }
-    public class Buff : Effect
+}
+public class Heal : Effect
+{
+    public Heal(int healingValue)
     {
-        int valueOfBuff;
-        public int ValueOfBuff
-        {
-            get { return valueOfBuff; }
-            set { valueOfBuff = value; }
-
-        }
-        public Stat StatToBuff { get; private set; }
-        public Buff(int buffValue, Stat statToBuff)
-        {
-            ValueOfBuff = buffValue;
-            StatToBuff = statToBuff;
-        }
+        NumberValue = healingValue;
     }
-    public class AOE : Effect
+}
+public class Damage : Effect
+{
+    public Damage(int damageValue)
     {
-
-    }
-    public class SingleTarget : Effect
-    {
-
-    }
-    public class RangedAttack : Effect
-    {
-
+        NumberValue = damageValue;
     }
 }
