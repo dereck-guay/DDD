@@ -7,11 +7,18 @@ public class PlayerControls : MonoBehaviour
 {
     public float movementSpeed = 5f;
     public GameObject fireball;
+    public LayerMask rayCastHitLayers;
 
     public KeyCode[] keys;
     private int[] mouseButtons = { 0, 1, 2 };
     private KeyBindings keyBindings;
     private Action[] actions;
+
+
+    // For demo ONLY
+    private float fireballCooldown = 1f;
+    private float fireballCurrentCooldown = 0;
+    private bool fireballCasted = false;
 
     void Awake()
     {
@@ -25,15 +32,31 @@ public class PlayerControls : MonoBehaviour
             }, keys,
             new Action[] // MouseBindings
             {
-                () => CastFireball(),
+                () => {
+                    if (! fireballCasted)
+                        CastFireball();
+                },
                 () => Debug.Log("Right Click"),
                 () => Debug.Log("Middle Click")
             }, mouseButtons
         );
     }
     
-    void Update() =>
+    void Update()
+    {
         keyBindings.CallBindings();
+
+        if (fireballCurrentCooldown >= fireballCooldown)
+        {
+            fireballCasted = false;
+            fireballCurrentCooldown = 0f;
+        }
+        else
+        {
+            fireballCurrentCooldown += Time.deltaTime;
+        }
+    }
+        
 
     private Vector3 GetMouseDirection() =>
         (GetMousePositionOn2DPlane() - transform.position).normalized;
@@ -44,7 +67,7 @@ public class PlayerControls : MonoBehaviour
         Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
         RaycastHit hit;
 
-        if (Physics.Raycast(ray, out hit))
+        if (Physics.Raycast(ray, out hit, Mathf.Infinity, rayCastHitLayers))
             position = hit.point;
 
         return position;
@@ -55,14 +78,20 @@ public class PlayerControls : MonoBehaviour
 
     private void CastFireball()
     {
+        // OffSet needed to create the fireball out of the playerObject,
+        // so that it doesn't collide with it right away.
+        var offSet = 1.05f;
+
         var fireballObject = Instantiate(
             fireball,
-            transform.position + GetMouseDirection(),
+            transform.position + offSet * GetMouseDirection(),
             Quaternion.identity
         );
 
         fireballObject
             .GetComponent<MoveTowardsDirection>()
             .direction = GetMouseDirection();
+
+        fireballCasted = true;
     }
 }
