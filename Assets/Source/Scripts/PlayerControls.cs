@@ -6,8 +6,6 @@ using UnityEngine;
 public class PlayerControls : MonoBehaviour
 {
     public float movementSpeed = 5f;
-    public GameObject pointer;
-    public int planeLayer = 8;
     public GameObject fireball;
 
     public KeyCode[] keys;
@@ -25,7 +23,7 @@ public class PlayerControls : MonoBehaviour
                 () => Move(Vector3.back),
                 () => Move(Vector3.right)
             }, keys,
-            new Action[3] // MouseBindings
+            new Action[] // MouseBindings
             {
                 () => CastFireball(),
                 () => Debug.Log("Right Click"),
@@ -34,12 +32,9 @@ public class PlayerControls : MonoBehaviour
         );
     }
     
-    void Update()
-    {
+    void Update() =>
         keyBindings.CallBindings();
 
-        pointer.transform.position = GetMousePositionOn2DPlane();
-    }
     private Vector3 GetMouseDirection() =>
         (GetMousePositionOn2DPlane() - transform.position).normalized;
 

@@ -58,6 +58,6 @@ public class KeyBindings
             if (Input.GetKey(Keys[i])) KeyboardBindings[i]();
 
         for (byte i = 0; i < MouseButtons.Length; ++i)
-            if (Input.GetMouseButton(MouseButtons[i])) MouseBindings[i]();
+            if (Input.GetMouseButtonDown(MouseButtons[i])) MouseBindings[i]();
     }
 }

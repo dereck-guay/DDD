@@ -13,7 +13,7 @@ namespace DDDClasses
         public Speed Speed { get; private set; }
         public Classes Class { get; private set; }
         #endregion
-
+        
         #region Methods
         #endregion
     }
