@@ -42,8 +42,9 @@ public class Spell
     public string Description { get; private set; }
     public Effect Effect { get; private set; }
     public int ManaCost { get; private set; }
+    public TypeOfSpell TypeOfSpell { get; private set; }
     #endregion
-    public Spell(float cooldownI, string nameI, string descriptionI, Effect effectI)
+    public Spell(float cooldownI, string nameI, string descriptionI, Effect effectI, TypeOfSpell typeI)
     {
         Cooldown = cooldownI;
         Name = nameI;
@@ -51,6 +52,7 @@ public class Spell
         CurrentCooldown = 0;
         Effect = effectI;
         Level = 1;
+        TypeOfSpell = typeI;
     }
     public void UpdateCooldown(float elapsedTime)
     {

@@ -10,6 +10,7 @@ public class Character
     public AtkSpeed AtkSpeed { get; private set; }
     public Speed Speed { get; private set; }
     public Classes Class { get; private set; }
+    public XP XP { get; private set; }
     #endregion
 
     #region Methods

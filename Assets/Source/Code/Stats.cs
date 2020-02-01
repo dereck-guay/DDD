@@ -11,7 +11,6 @@ public abstract class Stat
         get { return modifier; }
         protected set
         {
-            OnModifierChanged
         }
     }
 }
@@ -123,6 +122,25 @@ public class XP : Stat
     {
         CurrentXP = 0;
         Name = "XP";
+    }
+}
+public class Level : Stat
+{
+    int levelNb;
+    public int LevelNb
+    {
+        get { return levelNb; }
+        private set
+        {
+            if (value < 1)
+                value = 1;
+            levelNb = value;
+        }
+    }
+    public Level(int initLevel)
+    {
+        LevelNb = initLevel;
+        Name = "Level";
     }
 }
 #endregion

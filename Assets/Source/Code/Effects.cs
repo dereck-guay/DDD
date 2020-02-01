@@ -4,33 +4,28 @@ using System.Text;
 
 public abstract class Effect
 {
-    public string Name { get; private set; }
+    public float NumberValue { get; protected set; }
 }
 public class Buff : Effect
 {
-    int valueOfBuff;
-    public int ValueOfBuff
-    {
-        get { return valueOfBuff; }
-        set { valueOfBuff = value; }
-
-    }
     public Stat StatToBuff { get; private set; }
     public Buff(int buffValue, Stat statToBuff)
     {
-        ValueOfBuff = buffValue;
+        NumberValue = buffValue;
         StatToBuff = statToBuff;
     }
 }
-public class AOE : Effect
+public class Heal : Effect
 {
-
+    public Heal(int healingValue)
+    {
+        NumberValue = healingValue;
+    }
 }
-public class SingleTarget : Effect
+public class Damage : Effect
 {
-
-}
-public class RangedAttack : Effect
-{
-
+    public Damage(int damageValue)
+    {
+        NumberValue = damageValue;
+    }
 }
