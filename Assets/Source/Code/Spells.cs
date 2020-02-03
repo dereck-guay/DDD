@@ -7,6 +7,8 @@ public class Spell
     float cooldown;
     float currentCooldown;
     int level;
+    int maxLevel;
+    float duration;
 
     public float Cooldown
     {
@@ -38,13 +40,26 @@ public class Spell
             level = value;
         }
     }
+    public int MaxLevel
+    {
+        get { return maxLevel; }
+        private set
+        {
+            if (value < 1)
+                value = 1;
+            maxLevel = value;
+        }
+    }
+    #region Non-mechanical props
     public string Name { get; private set; }
     public string Description { get; private set; }
-    public Effect Effect { get; private set; }
+    #endregion
+    
+    public IEffect Effect { get; private set; }
     public int ManaCost { get; private set; }
     public TypeOfSpell TypeOfSpell { get; private set; }
     #endregion
-    public Spell(float cooldownI, string nameI, string descriptionI, Effect effectI, TypeOfSpell typeI)
+    public Spell(float cooldownI, string nameI, string descriptionI, IEffect effectI, TypeOfSpell typeI, int maxLevelI)
     {
         Cooldown = cooldownI;
         Name = nameI;
@@ -52,6 +67,7 @@ public class Spell
         CurrentCooldown = 0;
         Effect = effectI;
         Level = 1;
+        MaxLevel = maxLevelI;
         TypeOfSpell = typeI;
     }
     public void UpdateCooldown(float elapsedTime)

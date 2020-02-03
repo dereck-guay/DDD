@@ -33,10 +33,9 @@ public class AOE : TypeOfSpell
     }
     public override string ToString()
     {
-        StringBuilder sb = new StringBuilder("Area of effect spell");
-        sb.AppendLine();
-        sb.Append($"Range : {Range}");
-        sb.AppendLine();
+        StringBuilder sb = new StringBuilder();
+        sb.AppendLine("Area of effect spell");
+        sb.AppendLine($"Range : {Range}");
         sb.Append($"Radius : {Radius}");
 
         return sb.ToString();

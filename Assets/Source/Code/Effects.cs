@@ -2,29 +2,38 @@
 using System.Collections.Generic;
 using System.Text;
 
-public abstract class Effect
+public interface IEffect
 {
-    public float NumberValue { get; protected set; }
+    void ApplyEffect();
 }
-public class Buff : Effect
+public class Buff : IEffect
 {
+    public Character Caster { get; private set; }
+    public float NumberValue { get; private set; }
     public Stat StatToBuff { get; private set; }
-    public Buff(int buffValue, Stat statToBuff)
+    public Buff(float buffValue, Stat statToBuff, Character casterI)
     {
         NumberValue = buffValue;
         StatToBuff = statToBuff;
+        Caster = casterI;
+    }
+    public void ApplyEffect()
+    {
+        Caster.
     }
 }
-public class Heal : Effect
+public class Heal : IEffect
 {
-    public Heal(int healingValue)
+    public float NumberValue { get; private set; }
+    public Heal(float healingValue)
     {
         NumberValue = healingValue;
     }
 }
-public class Damage : Effect
+public class Damage : IEffect
 {
-    public Damage(int damageValue)
+    public float NumberValue { get; private set; }
+    public Damage(float damageValue)
     {
         NumberValue = damageValue;
     }
