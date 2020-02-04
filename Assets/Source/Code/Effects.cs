@@ -10,8 +10,8 @@ public class Buff : IEffect
 {
     public Character Caster { get; private set; }
     public float NumberValue { get; private set; }
-    public Stat StatToBuff { get; private set; }
-    public Buff(float buffValue, Stat statToBuff, Character casterI)
+    public ModifiableStat StatToBuff { get; private set; }
+    public Buff(float buffValue, ModifiableStat statToBuff, Character casterI)
     {
         NumberValue = buffValue;
         StatToBuff = statToBuff;
@@ -19,22 +19,34 @@ public class Buff : IEffect
     }
     public void ApplyEffect()
     {
-        Caster.
+        //Caster.Whatever method buffs the casters stats
     }
 }
 public class Heal : IEffect
 {
+    public Character Caster { get; private set; }
     public float NumberValue { get; private set; }
-    public Heal(float healingValue)
+    public Heal(float healingValue, Character casterI)
     {
         NumberValue = healingValue;
+        Caster = casterI;
+    }
+    public void ApplyEffect()
+    {
+        //Caster.Whatever method heals the caster
     }
 }
 public class Damage : IEffect
 {
+    public Character Caster { get; private set; }
     public float NumberValue { get; private set; }
-    public Damage(float damageValue)
+    public Damage(float damageValue, Character casterI)
     {
         NumberValue = damageValue;
+        Caster = casterI;
+    }
+    public void ApplyEffect()
+    {
+        //Caster.Whatever method damage the caster
     }
 }

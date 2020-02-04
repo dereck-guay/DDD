@@ -1,26 +1,23 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Text;
 
-public abstract class Stat
+public interface ModifiableStat
 {
-    float modifier;
-    public string Name { get; protected set; }
-    public float Modifier
-    {
-        get { return modifier; }
-        protected set
-        {
-        }
-    }
+    void ApplyModifier(float modifier);
+    void EndModifier(float modifier);
+}
+public interface RegenerativeStat
+{
+    void Update(float time);
 }
 #region Stats
-public class HP : Stat
+public class HP : ModifiableStat, RegenerativeStat
 {
     #region Props
-    int maxHP;
-    int hPValue;
-    public int MaxHP
+    float maxHP;
+    float hPValue;
+
+    public float HPRegen { get; private set; }
+    public float MaxHP
     {
         get { return maxHP; }
         private set
@@ -30,8 +27,8 @@ public class HP : Stat
             maxHP = value;
         }
     }
-    public int HPValue 
-    { 
+    public float CurrentHP
+    {
         get { return hPValue; }
         private set
         {
@@ -45,48 +42,100 @@ public class HP : Stat
             hPValue = value;
         }
     }
-        
+    public string Name { get; private set; }
+
     #endregion
-    public HP(int initMaxHP)
+    public HP(float initMaxHP, float hPRegen)
     {
+        HPRegen = hPRegen;
         MaxHP = initMaxHP;
-        HPValue = initMaxHP;
+        CurrentHP = initMaxHP;
         Name = "HP";
-        Modifier = 1;
     }
+
     #region Methods
-    public void TakeDamage(int damage) => HPValue -= damage;
-    public void Heal(int hPToHeal) => HPValue += hPToHeal;
+    public void TakeDamage(float damage) => CurrentHP -= damage;
+    public void Heal(float hPToHeal) => CurrentHP += hPToHeal;
+    public void Update(float time) => CurrentHP += time * HPRegen;
+    public void ApplyModifier(float modifier) => HPRegen *= modifier;
+    public void EndModifier(float modifier) => HPRegen /= modifier;
     #endregion
 }
-public class AtkSpeed : Stat
+public class AtkDamage : ModifiableStat //auto-attack damage
 {
-    public float BaseAtkSpeed { get; private set; }
-    public float CurrentAtkSpeed { get; private set; }
-    public AtkSpeed(float baseAtkSpeed)
+    #region Props
+    public float BaseDmg { get; private set; }
+    public float CurrentDmg { get; private set; }
+    public string Name { get; private set; }
+    #endregion
+
+    public AtkDamage(float baseDmg)
     {
-        BaseAtkSpeed = baseAtkSpeed;
+        BaseDmg = baseDmg;
+        CurrentDmg = baseDmg;
+        Name = "Auto-Attack Damage";
+    }
+    #region Methods
+    public void ApplyModifier(float modifier) => CurrentDmg *= modifier;
+    public void EndModifier(float modifier) => CurrentDmg /= modifier;
+    #endregion
+}
+public class AtkSpeed : ModifiableStat
+{
+    #region Props
+    float baseAtkSpeed;
+    public float BaseAtkSpeed
+    {
+        get { return baseAtkSpeed; }
+        private set
+        {
+            if (value < 0)
+                throw new ArgumentException("BaseAtkSpeed must be higher than 0");
+            baseAtkSpeed = value;
+        }
+    }
+    public float CurrentAtkSpeed { get; private set; }
+    public string Name { get; private set; }
+    #endregion
+
+    public AtkSpeed(float baseAtkSpeedI)
+    {
+        BaseAtkSpeed = baseAtkSpeedI;
         CurrentAtkSpeed = baseAtkSpeed;
         Name = "AtkSpeed";
     }
+    #region Methods
+    public void ApplyModifier(float modifier) => CurrentAtkSpeed *= modifier;
+    public void EndModifier(float modifier) => CurrentAtkSpeed /= modifier;
+    #endregion
 }
-public class Speed : Stat
+public class Speed : ModifiableStat
 {
+    #region Props
     public float BaseSpeed { get; private set; }
     public float CurrentSpeed { get; private set; }
+    public string Name { get; private set; }
+    #endregion
+
     public Speed(float baseSpeed)
     {
         BaseSpeed = baseSpeed;
         CurrentSpeed = baseSpeed;
         Name = "Speed";
     }
+    #region Methods
+    public void ApplyModifier(float modifier) => CurrentSpeed *= modifier;
+    public void EndModifier(float modifier) => CurrentSpeed /= modifier;
+    #endregion
 }
-public class Mana : Stat
+public class Mana : ModifiableStat, RegenerativeStat
 {
     #region Props
-    int currentMana;
-    int maxMana;
-    public int CurrentMana
+    float currentMana;
+    float maxMana;
+
+    public float ManaRegen { get; private set; }
+    public float CurrentMana
     {
         get { return currentMana; }
         private set
@@ -96,7 +145,7 @@ public class Mana : Stat
             currentMana = value;
         }
     }
-    public int MaxMana
+    public float MaxMana
     {
         get { return maxMana; }
         private set
@@ -106,26 +155,40 @@ public class Mana : Stat
             maxMana = value;
         }
     }
+    public string Name { get; private set; }
     #endregion
-    public Mana(int maxManaI)
+    public Mana(float maxManaI, float manaRegen)
     {
-        MaxMana = maxMana;
+        ManaRegen = manaRegen;
+        MaxMana = maxManaI;
+        CurrentMana = maxManaI;
         Name = "Mana";
     }
-    public void UseMana(int manaUsed) => CurrentMana -= manaUsed;
+    #region Methods
+    public void UseMana(float manaUsed) => CurrentMana -= manaUsed;
+    public void ApplyModifier(float modifier) => ManaRegen *= modifier;
+    public void EndModifier(float modifier) => ManaRegen /= modifier;
+    public void Update(float time) => CurrentMana += ManaRegen * time;
+    #endregion
 }
-public class XP : Stat
+public class XP
 {
+    #region Props
     public float CurrentXP { get; private set; }
-
+    public string Name { get; private set; }
+    #endregion
     public XP()
     {
         CurrentXP = 0;
         Name = "XP";
     }
+    #region Methods
+    public void AddXP(float xpAmount) => CurrentXP += xpAmount;
+    #endregion
 }
-public class Level : Stat
+/*public class Level
 {
+    
     int levelNb;
     public int LevelNb
     {
@@ -137,17 +200,18 @@ public class Level : Stat
             levelNb = value;
         }
     }
+    public string Name { get; private set; }
     public Level(int initLevel)
     {
         LevelNb = initLevel;
         Name = "Level";
     }
-}
+}*/
 #endregion
 #region ActionsOnChange
 public class OnHeal
 {
-        
+
 }
 public class OnTakenDamage
 {
