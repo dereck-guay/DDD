@@ -4,45 +4,36 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-public abstract class TypeOfSpell
+public interface ITypeOfSpell
+{
+    float Range { get; }
+    float Radius { get; }
+}
+public class SingleTarget : ITypeOfSpell
 {
     float range;
+    float radius;
     public float Range
     {
         get { return range; }
-        protected set
+        private set
         {
             if (value < 0)
-                throw new ArgumentException("Range cannot be smaller than 0");
+                value = 0;
             range = value;
         }
     }
-}
-public class AOE : TypeOfSpell
-{
-    float radius;
     public float Radius
     {
         get { return radius; }
         private set
         {
             if (value < 0)
-                throw new ArgumentException("Radius cannot be smaller than 0");
+                value = 0;
             radius = value;
         }
     }
-    public override string ToString()
-    {
-        StringBuilder sb = new StringBuilder();
-        sb.AppendLine("Area of effect spell");
-        sb.AppendLine($"Range : {Range}");
-        sb.Append($"Radius : {Radius}");
 
-        return sb.ToString();
-    }
-}
-public class SingleTarget : TypeOfSpell
-{
     //public Entity Target { get; private set; }
 
     /*public SingleTarget(float range, Entity target)
@@ -51,14 +42,36 @@ public class SingleTarget : TypeOfSpell
     }*/ // Create entity you coward
     public override string ToString()
     {
-        StringBuilder sb = new StringBuilder("Single Target spell");
-        sb.AppendLine();
-        sb.Append($"Range : {Range}");
-
+        StringBuilder sb = new StringBuilder();
+        sb.AppendLine("Single Target spell");
+        sb.AppendLine($"Range : {Range}");
+        sb.AppendLine($"Radius : {Radius}");
         return sb.ToString();
     }
 }
-public class RangedAttack : TypeOfSpell
+public class SkillShot : ITypeOfSpell
 {
+    float range;
+    float radius;
+    public float Range
+    {
+        get { return range; }
+        private set
+        {
+            if (value < 0)
+                value = 0;
+            range = value;
+        }
+    }
+    public float Radius
+    {
+        get { return radius; }
+        private set
+        {
+            if (value < 0)
+                value = 0;
+            radius = value;
+        }
+    }
 
 }

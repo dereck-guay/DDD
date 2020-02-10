@@ -10,6 +10,7 @@ public class Character : MonoBehaviour
     public ClassNames ClassName;
     public IPlayableClass playableClass;
     public Spell[] Spells;
+
     #region Methods
     public void CastSpell(Spell spell)
     {
