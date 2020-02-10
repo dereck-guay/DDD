@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
+using Unity;
+using UnityEngine;
 public class Spell
 {
     #region Props
@@ -77,10 +79,10 @@ public class Spell
         else
             CurrentCooldown -= elapsedTime;
     }
-    public void Cast(Character caster)
+    public void Cast(Character cha)
     {
         CurrentCooldown = Cooldown;
-        caster.Mana.UseMana(ManaCost);
+        cha.playableClass.Mana.UseMana(ManaCost);
     }
     public void LevelUp()
     {
