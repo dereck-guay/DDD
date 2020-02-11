@@ -43,9 +43,9 @@ public class SingleTarget : ITypeOfSpell
     public override string ToString()
     {
         StringBuilder sb = new StringBuilder();
-        sb.AppendLine("Single Target spell");
-        sb.AppendLine($"Range : {Range}");
-        sb.AppendLine($"Radius : {Radius}");
+        sb.AppendLine("\t Single Target spell");
+        sb.AppendLine($"\t Range : {Range}");
+        sb.AppendLine($"\t Radius : {Radius}");
         return sb.ToString();
     }
 }

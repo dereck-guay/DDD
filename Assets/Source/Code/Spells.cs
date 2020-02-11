@@ -89,5 +89,12 @@ public class Spell
     {
         Level += 1;
     }
+    public override string ToString()
+    {
+        StringBuilder sb = new StringBuilder();
+        sb.AppendLine($"{Name}, {Description}");
+        sb.AppendLine($"\t Type : {TypeOfSpell.ToString()}");
+        return sb.ToString();
+    }
 
 }

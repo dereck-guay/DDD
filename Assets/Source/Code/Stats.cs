@@ -1,16 +1,18 @@
-﻿using System;
+﻿using System.Text;
+using System;
+using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
 
 public interface ModifiableStat
 {
     void ApplyModifier(float modifier);
     void EndModifier(float modifier);
+    float Base { get; }
+    float Current { get; }
 }
 public enum ModifiableStats { AtkDamage, AtkSpeed, HP, Mana, Speed };
-public class DictionnaryCreation
-{
-    public int Length { get; private set; }
-    public 
-}
+
 public interface RegenerativeStat
 {
     void Update(float time);
@@ -19,23 +21,23 @@ public interface RegenerativeStat
 public class HP : ModifiableStat, RegenerativeStat
 {
     #region Props
-    float maxHP;
-    float hPValue;
+    float @base;
+    float current;
 
     public float HPRegen { get; private set; }
-    public float MaxHP
+    public float Base
     {
-        get { return maxHP; }
+        get { return @base; }
         private set
         {
             if (value < 1)
                 value = 1;
-            maxHP = value;
+            @base = value;
         }
     }
-    public float CurrentHP
+    public float Current
     {
-        get { return hPValue; }
+        get { return current; }
         private set
         {
             if (value < 0)
@@ -43,9 +45,9 @@ public class HP : ModifiableStat, RegenerativeStat
                 value = 0;
                 //Add death method
             }
-            else if (value > maxHP)
-                value = maxHP;
-            hPValue = value;
+            else if (value > @base)
+                value = @base;
+            current = value;
         }
     }
     public string Name { get; private set; }
@@ -54,43 +56,60 @@ public class HP : ModifiableStat, RegenerativeStat
     public HP(float initMaxHP, float hPRegen)
     {
         HPRegen = hPRegen;
-        MaxHP = initMaxHP;
-        CurrentHP = initMaxHP;
+        Base = initMaxHP;
+        Current = initMaxHP;
         Name = "HP";
     }
 
     #region Methods
-    public void TakeDamage(float damage) => CurrentHP -= damage;
-    public void Heal(float hPToHeal) => CurrentHP += hPToHeal;
-    public void Update(float time) => CurrentHP += time * HPRegen;
+    public void TakeDamage(float damage) => Current -= damage;
+    public void Heal(float hPToHeal) => Current += hPToHeal;
+    public void Update(float time) => Current += time * HPRegen;
     public void ApplyModifier(float modifier) => HPRegen *= modifier;
     public void EndModifier(float modifier) => HPRegen /= modifier;
+    public override string ToString()
+    {
+        StringBuilder sb = new StringBuilder();
+        sb.AppendLine(Name);
+        sb.AppendLine($"\t MaxHP : {Base}");
+        sb.AppendLine($"\t CurrentHP : {Current}");
+        sb.AppendLine($"\t HPRegen : {HPRegen}");
+        return sb.ToString();
+    }
     #endregion
 }
 public class AtkDamage : ModifiableStat //auto-attack damage
 {
     #region Props
-    public float BaseDmg { get; private set; }
-    public float CurrentDmg { get; private set; }
+    public float Base { get; private set; }
+    public float Current { get; private set; }
     public string Name { get; private set; }
     #endregion
 
     public AtkDamage(float baseDmg)
     {
-        BaseDmg = baseDmg;
-        CurrentDmg = baseDmg;
+        Base = baseDmg;
+        Current = baseDmg;
         Name = "Auto-Attack Damage";
     }
     #region Methods
-    public void ApplyModifier(float modifier) => CurrentDmg *= modifier;
-    public void EndModifier(float modifier) => CurrentDmg /= modifier;
+    public void ApplyModifier(float modifier) => Current *= modifier;
+    public void EndModifier(float modifier) => Current /= modifier;
+    public override string ToString()
+    {
+        StringBuilder sb = new StringBuilder();
+        sb.AppendLine(Name);
+        sb.AppendLine($"\t Base {Name} : {Base}");
+        sb.AppendLine($"\t Current {Name} : {Current}");
+        return sb.ToString();
+    }
     #endregion
 }
 public class AtkSpeed : ModifiableStat
 {
     #region Props
     float baseAtkSpeed;
-    public float BaseAtkSpeed
+    public float Base
     {
         get { return baseAtkSpeed; }
         private set
@@ -100,38 +119,54 @@ public class AtkSpeed : ModifiableStat
             baseAtkSpeed = value;
         }
     }
-    public float CurrentAtkSpeed { get; private set; }
+    public float Current { get; private set; }
     public string Name { get; private set; }
     #endregion
 
     public AtkSpeed(float baseAtkSpeedI)
     {
-        BaseAtkSpeed = baseAtkSpeedI;
-        CurrentAtkSpeed = baseAtkSpeed;
-        Name = "AtkSpeed";
+        Base = baseAtkSpeedI;
+        Current = baseAtkSpeed;
+        Name = "Attack Speed";
     }
     #region Methods
-    public void ApplyModifier(float modifier) => CurrentAtkSpeed *= modifier;
-    public void EndModifier(float modifier) => CurrentAtkSpeed /= modifier;
+    public void ApplyModifier(float modifier) => Current *= modifier;
+    public void EndModifier(float modifier) => Current /= modifier;
+    public override string ToString()
+    {
+        StringBuilder sb = new StringBuilder();
+        sb.AppendLine(Name);
+        sb.AppendLine($"\t Base {Name} : {Base}");
+        sb.AppendLine($"\t Current {Name} : {Current}");
+        return sb.ToString();
+    }
     #endregion
 }
 public class Speed : ModifiableStat
 {
     #region Props
-    public float BaseSpeed { get; private set; }
-    public float CurrentSpeed { get; private set; }
+    public float Base { get; private set; }
+    public float Current { get; private set; }
     public string Name { get; private set; }
     #endregion
 
     public Speed(float baseSpeed)
     {
-        BaseSpeed = baseSpeed;
-        CurrentSpeed = baseSpeed;
+        Base = baseSpeed;
+        Current = baseSpeed;
         Name = "Speed";
     }
     #region Methods
-    public void ApplyModifier(float modifier) => CurrentSpeed *= modifier;
-    public void EndModifier(float modifier) => CurrentSpeed /= modifier;
+    public void ApplyModifier(float modifier) => Current *= modifier;
+    public void EndModifier(float modifier) => Current /= modifier;
+    public override string ToString()
+    {
+        StringBuilder sb = new StringBuilder();
+        sb.AppendLine(Name);
+        sb.AppendLine($"\t Base {Name} : {Base}");
+        sb.AppendLine($"\t Current {Name} : {Current}");
+        return sb.ToString();
+    }
     #endregion
 }
 public class Mana : ModifiableStat, RegenerativeStat
@@ -141,7 +176,7 @@ public class Mana : ModifiableStat, RegenerativeStat
     float maxMana;
 
     public float ManaRegen { get; private set; }
-    public float CurrentMana
+    public float Current
     {
         get { return currentMana; }
         private set
@@ -151,7 +186,7 @@ public class Mana : ModifiableStat, RegenerativeStat
             currentMana = value;
         }
     }
-    public float MaxMana
+    public float Base
     {
         get { return maxMana; }
         private set
@@ -166,30 +201,45 @@ public class Mana : ModifiableStat, RegenerativeStat
     public Mana(float maxManaI, float manaRegen)
     {
         ManaRegen = manaRegen;
-        MaxMana = maxManaI;
-        CurrentMana = maxManaI;
+        Base = maxManaI;
+        Current = maxManaI;
         Name = "Mana";
     }
     #region Methods
-    public void UseMana(float manaUsed) => CurrentMana -= manaUsed;
+    public void UseMana(float manaUsed) => Current -= manaUsed;
     public void ApplyModifier(float modifier) => ManaRegen *= modifier;
     public void EndModifier(float modifier) => ManaRegen /= modifier;
-    public void Update(float time) => CurrentMana += ManaRegen * time;
+    public void Update(float time) => Current += ManaRegen * time;
+    public override string ToString()
+    {
+        StringBuilder sb = new StringBuilder();
+        sb.AppendLine(Name);
+        sb.AppendLine($"\t Base {Name} : {Base}");
+        sb.AppendLine($"\t Current {Name} : {Current}");
+        return sb.ToString();
+    }
     #endregion
 }
 public class XP
 {
     #region Props
-    public float CurrentXP { get; private set; }
+    public float Current { get; private set; }
     public string Name { get; private set; }
     #endregion
     public XP()
     {
-        CurrentXP = 0;
+        Current = 0;
         Name = "XP";
     }
     #region Methods
-    public void AddXP(float xpAmount) => CurrentXP += xpAmount;
+    public void AddXP(float xpAmount) => Current += xpAmount;
+    public override string ToString()
+    {
+        StringBuilder sb = new StringBuilder();
+        sb.AppendLine(Name);
+        sb.AppendLine($"\t Current {Name} : {Current}");
+        return sb.ToString();
+    }
     #endregion
 }
 /*public class Level

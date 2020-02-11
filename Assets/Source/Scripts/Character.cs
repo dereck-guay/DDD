@@ -2,11 +2,14 @@
 using System.Collections.Generic;
 using System.Text;
 using UnityEngine;
+using Miscellaneous;
+using System.Reflection;
+using System.Linq;
 
 public enum ClassNames { Fighter, Wizard }
 public class Character : MonoBehaviour
 {
-    Dictionary<int, IPlayableClass> pairs = new Dictionary<int, IPlayableClass>();
+    DictionaryCreator<IPlayableClass> pairs;
     public ClassNames ClassName;
     public IPlayableClass playableClass;
     public Spell[] Spells;
@@ -17,15 +20,21 @@ public class Character : MonoBehaviour
         spell.Cast(this);
     }
     #endregion
-    private void Start()
-    {
-        pairs.Add(0, new Fighter());
-        pairs.Add(1, new Wizard());
-    }
     private void Awake()
     {
-        pairs.TryGetValue((int)ClassName, out playableClass);
+        var playableClasses = new IPlayableClass[2]
+        {
+            new Fighter(),
+            new Wizard(),
+        };
+        pairs = new DictionaryCreator<IPlayableClass>(playableClasses);
+        // Ceci est surtout pour faire les tests, pouvoir rapidement changer de classe dans l'inspecteur par le enum
+    }
+    private void Start()
+    {
+        playableClass = pairs[(int)ClassName];
         Spells = playableClass.Spells;
+        Debug.Log(playableClass.ToString());
     }
     private void Update()
     {
