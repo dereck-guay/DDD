@@ -59,9 +59,9 @@ public class Spell
     
     public IEffect Effect { get; private set; }
     public int ManaCost { get; private set; }
-    public TypeOfSpell TypeOfSpell { get; private set; }
+    public ITypeOfSpell TypeOfSpell { get; private set; }
     #endregion
-    public Spell(float cooldownI, string nameI, string descriptionI, IEffect effectI, TypeOfSpell typeI, int maxLevelI)
+    public Spell(float cooldownI, string nameI, string descriptionI, IEffect effectI, ITypeOfSpell typeI, int maxLevelI)
     {
         Cooldown = cooldownI;
         Name = nameI;
