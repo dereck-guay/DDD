@@ -8,14 +8,12 @@ public interface IEffect
 }
 public class Buff : IEffect
 {
-    public Character Caster { get; private set; }
     public float NumberValue { get; private set; }
     public ModifiableStat StatToBuff { get; private set; }
-    public Buff(float buffValue, ModifiableStat statToBuff, Character casterI)
+    public Buff(float buffValue, ModifiableStat statToBuff)
     {
         NumberValue = buffValue;
         StatToBuff = statToBuff;
-        Caster = casterI;
     }
     public void ApplyEffect()
     {
@@ -24,12 +22,10 @@ public class Buff : IEffect
 }
 public class Heal : IEffect
 {
-    public Character Caster { get; private set; }
     public float NumberValue { get; private set; }
-    public Heal(float healingValue, Character casterI)
+    public Heal(float healingValue)
     {
         NumberValue = healingValue;
-        Caster = casterI;
     }
     public void ApplyEffect()
     {
@@ -38,12 +34,10 @@ public class Heal : IEffect
 }
 public class Damage : IEffect
 {
-    public Character Caster { get; private set; }
     public float NumberValue { get; private set; }
-    public Damage(float damageValue, Character casterI)
+    public Damage(float damageValue)
     {
         NumberValue = damageValue;
-        Caster = casterI;
     }
     public void ApplyEffect()
     {

@@ -25,6 +25,7 @@ public class Character : MonoBehaviour
     private void Awake()
     {
         pairs.TryGetValue((int)ClassName, out playableClass);
+        Spells = playableClass.Spells;
     }
     private void Update()
     {

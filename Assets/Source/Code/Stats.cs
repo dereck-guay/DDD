@@ -5,6 +5,12 @@ public interface ModifiableStat
     void ApplyModifier(float modifier);
     void EndModifier(float modifier);
 }
+public enum ModifiableStats { AtkDamage, AtkSpeed, HP, Mana, Speed };
+public class DictionnaryCreation
+{
+    public int Length { get; private set; }
+    public 
+}
 public interface RegenerativeStat
 {
     void Update(float time);

@@ -73,5 +73,10 @@ public class SkillShot : ITypeOfSpell
             radius = value;
         }
     }
+    public SkillShot(float initRange, float initRadius)
+    {
+        Range = initRange;
+        Radius = initRadius;
+    }
 
 }

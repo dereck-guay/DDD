@@ -60,6 +60,7 @@ public class Spell
     public IEffect Effect { get; private set; }
     public int ManaCost { get; private set; }
     public ITypeOfSpell TypeOfSpell { get; private set; }
+    public Action OnLevelUp { get; set; }
     #endregion
     public Spell(float cooldownI, string nameI, string descriptionI, IEffect effectI, ITypeOfSpell typeI, int maxLevelI)
     {

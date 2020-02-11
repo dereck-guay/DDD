@@ -31,7 +31,15 @@ public class Fighter : IPlayableClass
         Mana = new Mana(50, 2.5f);
         Speed = new Speed(30);
         XP = new XP();
+        //Spells = CreateSpells();
     }
+    /*Spell[] CreateSpells()
+    {
+        Spell[] spells = new Spell[4]
+        {
+            new Spell(1, "")
+        }
+    }*/
 }
 public class Wizard : IPlayableClass
 {
@@ -52,5 +60,17 @@ public class Wizard : IPlayableClass
         Mana = new Mana(50, 2.5f);
         Speed = new Speed(30);
         XP = new XP();
+        Spells = CreateSpells();
+    }
+    Spell[] CreateSpells()
+    {
+        Spell[] spells = new Spell[4]
+        {
+            new Spell(4, "Fireball", $"Shoot a large fireball that deals {5} damage on-hit", new Damage(5), new SkillShot(10, 4), 4),
+            new Spell(4, "Heal", $"Heal a target within range for {5} health", new Heal(5), new SingleTarget(), 4),
+            new Spell(4, "Slow", "Decrease a target's speed", new Buff(-2, ), new SkillShot(10, 4), 4),
+            new Spell(4, "Fireball", "Shoot a dart of red crackling energy towards a point before exploding upon impact with the ground into a large fireball", new Damage(5), new SkillShot(10, 4), 4),
+        };
+        return spells;
     }
 }
