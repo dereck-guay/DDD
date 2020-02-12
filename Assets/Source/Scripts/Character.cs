@@ -11,13 +11,24 @@ public class Character : MonoBehaviour
 {
     DictionaryCreator<IPlayableClass> pairs;
     public ClassNames ClassName;
-    public IPlayableClass playableClass;
+    public IPlayableClass CharacterClass;
     public Spell[] Spells;
-
     #region Methods
     public void CastSpell(Spell spell)
     {
         spell.Cast(this);
+    }
+    public void Attack(Entity target)
+    {
+        target.TakeDamage(CharacterClass.AtkDamage.Current);
+    }
+    public void Attack(Character target)
+    {
+        target.TakeDamage(CharacterClass.AtkDamage.Current);
+    }
+    public void TakeDamage(float damage)
+    {
+        CharacterClass.HP.TakeDamage(damage);
     }
     #endregion
     private void Awake()
@@ -32,9 +43,9 @@ public class Character : MonoBehaviour
     }
     private void Start()
     {
-        playableClass = pairs[(int)ClassName];
-        Spells = playableClass.Spells;
-        Debug.Log(playableClass.ToString());
+        CharacterClass = pairs[(int)ClassName];
+        Spells = CharacterClass.Spells;
+        Debug.Log(CharacterClass.ToString());
     }
     private void Update()
     {
@@ -42,3 +53,5 @@ public class Character : MonoBehaviour
     }
 
 }
+
+

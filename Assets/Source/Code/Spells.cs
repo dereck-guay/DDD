@@ -83,7 +83,12 @@ public class Spell
     public void Cast(Character cha)
     {
         CurrentCooldown = Cooldown;
-        cha.playableClass.Mana.UseMana(ManaCost);
+        cha.CharacterClass.Mana.UseMana(ManaCost);
+    }
+    public void Cast(SpellTester spe)
+    {
+        CurrentCooldown = Cooldown;
+        spe.playableClass.Mana.UseMana(ManaCost);
     }
     public void LevelUp()
     {

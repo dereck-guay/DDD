@@ -40,18 +40,23 @@ public class HP : ModifiableStat, RegenerativeStat
         get { return current; }
         private set
         {
-            if (value < 0)
+            if (value <= 0)
             {
                 value = 0;
-                //Add death method
+                OnDeath?.Invoke();
             }
+            else if (value < Current)
+                OnTakeDamage?.Invoke();
             else if (value > @base)
                 value = @base;
             current = value;
         }
     }
     public string Name { get; private set; }
-
+    #region Actions
+    public Action OnDeath { get; set; }
+    public Action OnTakeDamage { get; set; }
+    #endregion
     #endregion
     public HP(float initMaxHP, float hPRegen)
     {
@@ -265,15 +270,7 @@ public class XP
 }*/
 #endregion
 #region ActionsOnChange
-public class OnHeal
-{
-
-}
-public class OnTakenDamage
-{
-
-}
-public class OnModifierChanged
+public class StatChangeArgs
 {
 
 }

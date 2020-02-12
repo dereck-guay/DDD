@@ -26,4 +26,13 @@ namespace Miscellaneous
             }
         }
     }
+    public interface ITargetable
+    {
+
+    }
+    public interface IDamageable
+    {
+        void TakeDamage(float damage);
+        HP HP { get; }
+    }
 }

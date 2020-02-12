@@ -125,3 +125,4 @@ public class Wizard : IPlayableClass
         return sb.ToString();
     }
 }
+public enum SpellList { Fireball, Heal, Slow }
