@@ -5,59 +5,47 @@ using UnityEngine;
 
 public class KeyBindings
 {
-    // Attr
     private KeyCode[] keys;
-    private int[] mouseButtons;
-    private Action[] keyboardBindings;
-    private Action[] mouseBindings;
+    private Action[] keybindings;
 
-    // Props
     public KeyCode[] Keys
     {
         get { return keys; }
         set { keys = value; }
     }
 
-    public int[] MouseButtons
+    public Action[] Keybindings
     {
-        get { return mouseButtons; }
-        set { mouseButtons = value; }
+        get { return keybindings; }
+        set { keybindings = value; }
     }
 
-    public Action[] KeyboardBindings
+    public KeyBindings(Action[] keybindings, KeyCode[] keys)
     {
-        get { return keyboardBindings; }
-        set { keyboardBindings = value; }
-    }
-
-    public Action[] MouseBindings
-    {
-        get { return mouseBindings; }
-        set { mouseBindings = value; }
-    }
-
-    // Ctor
-    public KeyBindings(
-        Action[] keyboardBindings,
-        KeyCode[] keys,
-        Action[] mouseBindings,
-        int[] mouseButtons
-    )
-    {
-        KeyboardBindings = keyboardBindings;
-        MouseBindings = mouseBindings;
+        Keybindings = keybindings;
 
         Keys = keys;
-        MouseButtons = mouseButtons;
     }
 
-    // Methods
     public void CallBindings()
     {
-        for (byte i = 0; i < Keys.Length; ++i)
-            if (Input.GetKey(Keys[i])) KeyboardBindings[i]();
+        /**
+         * Les keybindings sont sur onPress faque si le bindings n'a pas de cooldown
+         * ça shoot non-stop.
+         */
 
-        for (byte i = 0; i < MouseButtons.Length; ++i)
-            if (Input.GetMouseButton(MouseButtons[i])) MouseBindings[i]();
+        for (byte i = 0; i < Keys.Length; ++i)
+            if (Input.GetKey(Keys[i])) keybindings[i]();
     }
 }
+
+/** INSTANTIATE
+ * new KeyBindings(
+ *      new Action[] {
+ *          Fonction utilisées par les keybindings selon l'index.
+ *      }, 
+ *      new KeyCode[] {
+ *          Les keycodes contiennes les keys du clavier et les mouseButton.
+ *      }
+ * );
+ */

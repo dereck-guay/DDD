@@ -8,15 +8,13 @@ public class PlayerControls : MonoBehaviour
     public float movementSpeed = 5f;
     public GameObject fireball;
     public LayerMask rayCastHitLayers;
+    public LayerMask selectableEntities; // Entities that can be selected with mouse click.
 
     public KeyCode[] keys;
-    private int[] mouseButtons = { 0, 1, 2 };
     private KeyBindings keyBindings;
-    private Action[] actions;
-
 
     // For demo ONLY
-    private float fireballCooldown = 1f;
+    private float fireballCooldown = 2f;
     private float fireballCurrentCooldown = 0;
     private bool fireballCasted = false;
 
@@ -25,20 +23,22 @@ public class PlayerControls : MonoBehaviour
         keyBindings = new KeyBindings(
             new Action[] // KeyboardBindings
             {
-                () => Move(Vector3.forward),
-                () => Move(Vector3.left),
-                () => Move(Vector3.back),
-                () => Move(Vector3.right)
-            }, keys,
-            new Action[] // MouseBindings
-            {
-                () => {
+                ()=> {
                     if (! fireballCasted)
                         CastFireball();
                 },
-                () => Debug.Log("Right Click"),
+                () => Debug.Log("Wassup"),
+                // Click Bindings
+                () => {
+                    var playerSelected = GetEntityAtMousePosition();
+                    if (playerSelected.activeSelf)
+                        Debug.Log(playerSelected.name);
+                    else
+                        Destroy(playerSelected);
+                },
+                () => Debug.Log("Left Click"),
                 () => Debug.Log("Middle Click")
-            }, mouseButtons
+            }, keys
         );
     }
     
@@ -52,12 +52,9 @@ public class PlayerControls : MonoBehaviour
             fireballCurrentCooldown = 0f;
         }
         else
-        {
             fireballCurrentCooldown += Time.deltaTime;
-        }
     }
         
-
     private Vector3 GetMouseDirection() =>
         (GetMousePositionOn2DPlane() - transform.position).normalized;
 
@@ -73,14 +70,32 @@ public class PlayerControls : MonoBehaviour
         return position;
     }
 
-    private void Move(Vector3 translation) =>
-        transform.Translate(translation * Time.deltaTime * movementSpeed);
+    private GameObject GetEntityAtMousePosition()
+    {
+        // Create disabled GO.
+        GameObject GO = new GameObject();
+        GO.SetActive(false);
+
+        Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+        RaycastHit hit;
+
+        // Fill GO with hit value.
+        if (Physics.Raycast(ray, out hit, Mathf.Infinity, selectableEntities))
+            GO = hit.collider.gameObject;
+
+        // In function call always check:
+        // if (GO.activeSelf) Do stuff;
+        return GO;
+    }
+
+    private void Move(Vector3 direction) =>
+        transform.Translate(direction * Time.deltaTime * movementSpeed);
 
     private void CastFireball()
     {
         // OffSet needed to create the fireball out of the playerObject,
         // so that it doesn't collide with it right away.
-        var offSet = 1.05f;
+        var offSet = 2f;
 
         var fireballObject = Instantiate(
             fireball,
