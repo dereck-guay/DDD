@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Miscellaneous;
 
 public interface ITypeOfSpell
 {
@@ -34,12 +35,10 @@ public class SingleTarget : ITypeOfSpell
         }
     }
 
-    //public Entity Target { get; private set; }
-
-    /*public SingleTarget(float range, Entity target)
+    public SingleTarget(float range)
     {
 
-    }*/ // Create entity you coward
+    } // Create entity you coward
     public override string ToString()
     {
         StringBuilder sb = new StringBuilder();

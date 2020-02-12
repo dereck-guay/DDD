@@ -11,6 +11,7 @@ public interface ModifiableStat
     float Base { get; }
     float Current { get; }
 }
+public interface IStat { }
 public enum ModifiableStats { AtkDamage, AtkSpeed, HP, Mana, Speed };
 
 public interface RegenerativeStat
@@ -18,7 +19,7 @@ public interface RegenerativeStat
     void Update(float time);
 }
 #region Stats
-public class HP : ModifiableStat, RegenerativeStat
+public class HP : ModifiableStat, RegenerativeStat, IStat
 {
     #region Props
     float @base;
@@ -83,7 +84,7 @@ public class HP : ModifiableStat, RegenerativeStat
     }
     #endregion
 }
-public class AtkDamage : ModifiableStat //auto-attack damage
+public class AtkDamage : ModifiableStat, IStat //auto-attack damage
 {
     #region Props
     public float Base { get; private set; }
@@ -110,7 +111,7 @@ public class AtkDamage : ModifiableStat //auto-attack damage
     }
     #endregion
 }
-public class AtkSpeed : ModifiableStat
+public class AtkSpeed : ModifiableStat, IStat
 {
     #region Props
     float baseAtkSpeed;
@@ -147,7 +148,7 @@ public class AtkSpeed : ModifiableStat
     }
     #endregion
 }
-public class Speed : ModifiableStat
+public class Speed : ModifiableStat, IStat
 {
     #region Props
     public float Base { get; private set; }
@@ -174,7 +175,7 @@ public class Speed : ModifiableStat
     }
     #endregion
 }
-public class Mana : ModifiableStat, RegenerativeStat
+public class Mana : ModifiableStat, RegenerativeStat, IStat
 {
     #region Props
     float currentMana;
@@ -225,7 +226,7 @@ public class Mana : ModifiableStat, RegenerativeStat
     }
     #endregion
 }
-public class XP
+public class XP : IStat
 {
     #region Props
     public float Current { get; private set; }

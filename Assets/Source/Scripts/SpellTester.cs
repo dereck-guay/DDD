@@ -30,7 +30,7 @@ public class SpellTester : MonoBehaviour
         var availableSpells = new Spell[]
         {
             new Spell(4, "Fireball", $"Shoot a large fireball that deals {5} damage on-hit", new Damage(5), new SkillShot(10, 4), 4),
-            new Spell(4, "Heal", $"Heal a target within range for {5} health", new Heal(5), new SingleTarget(), 4),
+            new Spell(4, "Heal", $"Heal a target within range for {5} health", new Heal(5), new SingleTarget(2), 4),
             new Spell(4, "Slow", "Decrease a target's speed", new Damage(5), new SkillShot(10, 4), 4),
         };
         spells = new DictionaryCreator<Spell>(availableSpells);

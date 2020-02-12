@@ -14,6 +14,7 @@ public interface IPlayableClass
     XP XP { get; }
     Spell[] Spells { get; }
     DictionaryCreator<Spell> SpellDictionary { get; }
+    IStat[] ClassSpecificStats { get; }
 }
 public class Fighter : IPlayableClass
 {
@@ -28,6 +29,7 @@ public class Fighter : IPlayableClass
     public Spell[] Spells { get; private set; }
     public DictionaryCreator<Spell> SpellDictionary { get; private set; }
     public string Name { get; private set; }
+    public IStat[] ClassSpecificStats { get; private set; }
     public Fighter()
     {
         Name = "Mike the Fighter";
@@ -39,13 +41,21 @@ public class Fighter : IPlayableClass
         XP = new XP();
         Spells = CreateSpells();
         SpellDictionary = new DictionaryCreator<Spell>(Spells);
+        ClassSpecificStats = new IStat[]
+        {
+            AtkDamage,
+            AtkSpeed,
+            HP,
+            Mana,
+            Speed,
+        };
     }
     Spell[] CreateSpells()
     {
         Spell[] spells = new Spell[4]
         {
             new Spell(4, "Fireball", $"Shoot a large fireball that deals {5} damage on-hit", new Damage(5), new SkillShot(10, 4), 4),
-            new Spell(4, "Heal", $"Heal a target within range for {5} health", new Heal(5), new SingleTarget(), 4),
+            new Spell(4, "Heal", $"Heal a target within range for {5} health", new Heal(5), new SingleTarget(2), 4),
             new Spell(4, "Slow", "Decrease a target's speed", new Damage(5), new SkillShot(10, 4), 4),
             new Spell(4, "Fireball", "Shoot a dart of red crackling energy towards a point before exploding upon impact with the ground into a large fireball", new Damage(5), new SkillShot(10, 4), 4),
         };
@@ -80,6 +90,7 @@ public class Wizard : IPlayableClass
     public Speed Speed { get; private set; }
     public XP XP { get; private set; }
     #endregion
+    public IStat[] ClassSpecificStats { get; private set; }
     public Spell[] Spells { get; private set; }
     public DictionaryCreator<Spell> SpellDictionary { get; private set; }
     public string Name { get; private set; }
@@ -94,13 +105,21 @@ public class Wizard : IPlayableClass
         XP = new XP();
         Spells = CreateSpells();
         SpellDictionary = new DictionaryCreator<Spell>(Spells);
+        ClassSpecificStats = new IStat[]
+        {
+            AtkDamage,
+            AtkSpeed,
+            HP,
+            Mana,
+            Speed,
+        };
     }
     Spell[] CreateSpells()
     {
         Spell[] spells = new Spell[4]
         {
             new Spell(4, "Fireball", $"Shoot a large fireball that deals {5} damage on-hit", new Damage(5), new SkillShot(10, 4), 4),
-            new Spell(4, "Heal", $"Heal a target within range for {5} health", new Heal(5), new SingleTarget(), 4),
+            new Spell(4, "Heal", $"Heal a target within range for {5} health", new Heal(5), new SingleTarget(2), 4),
             new Spell(4, "Slow", "Decrease a target's speed", new Damage(5), new SkillShot(10, 4), 4),
             new Spell(4, "Fireball", "Shoot a dart of red crackling energy towards a point before exploding upon impact with the ground into a large fireball", new Damage(5), new SkillShot(10, 4), 4),
         };

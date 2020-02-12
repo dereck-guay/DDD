@@ -7,12 +7,31 @@ using System.Reflection;
 using System.Linq;
 
 public enum ClassNames { Fighter, Wizard }
-public class Character : MonoBehaviour
+public class Character : MonoBehaviour, ITargetable, IDamageable
 {
+    IPlayableClass characterClass;
     DictionaryCreator<IPlayableClass> pairs;
-    public ClassNames ClassName;
-    public IPlayableClass CharacterClass;
+    public ClassNames CharacterClassName;
+    
     public Spell[] Spells;
+    public IPlayableClass CharacterClass
+    {
+        get { return characterClass; }
+        private set
+        {
+            characterClass = value;
+            AssignStats();
+            Debug.Log(CharacterClass.ToString());
+        }
+    }
+    public AtkDamage AtkDamage { get; private set; }
+    public AtkSpeed AtkSpeed { get; private set; }
+    public HP HP { get; private set; }
+    public Mana Mana { get; private set; }
+    public Speed Speed { get; private set; }
+    public XP XP { get; private set; }
+
+    IStat[] classSpecificStats;
     #region Methods
     public void CastSpell(Spell spell)
     {
@@ -20,7 +39,7 @@ public class Character : MonoBehaviour
     }
     public void Attack(Entity target)
     {
-        target.TakeDamage(CharacterClass.AtkDamage.Current);
+        //target.TakeDamage(CharacterClass.AtkDamage.Current);
     }
     public void Attack(Character target)
     {
@@ -39,17 +58,33 @@ public class Character : MonoBehaviour
             new Wizard(),
         };
         pairs = new DictionaryCreator<IPlayableClass>(playableClasses);
+        classSpecificStats = new IStat[]
+        {
+            AtkDamage,
+            AtkSpeed,
+            HP,
+            Mana,
+            Speed,
+        };
         // Ceci est surtout pour faire les tests, pouvoir rapidement changer de classe dans l'inspecteur par le enum
     }
     private void Start()
     {
-        CharacterClass = pairs[(int)ClassName];
+        CharacterClass = pairs[(int)CharacterClassName];
         Spells = CharacterClass.Spells;
-        Debug.Log(CharacterClass.ToString());
     }
     private void Update()
     {
-        
+        if(CharacterClass != pairs[(int)CharacterClassName])
+        {
+            CharacterClass = pairs[(int)CharacterClassName];
+            CharacterClass.ToString();
+        }
+    }
+    void AssignStats()
+    {
+        for (int i = 0; i < classSpecificStats.Length; ++i)
+            classSpecificStats[i] = CharacterClass.ClassSpecificStats[i];
     }
 
 }
