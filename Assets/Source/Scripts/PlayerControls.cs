@@ -30,7 +30,7 @@ public class PlayerControls : MonoBehaviour
                 () => Debug.Log("Wassup"),
                 // Click Bindings
                 () => {
-                    var playerSelected = GetPlayerAtMousePosition();
+                    var playerSelected = GetEntityAtMousePosition();
                     if (playerSelected.activeSelf)
                         Debug.Log(playerSelected.name);
                     else
@@ -70,7 +70,7 @@ public class PlayerControls : MonoBehaviour
         return position;
     }
 
-    private GameObject GetPlayerAtMousePosition()
+    private GameObject GetEntityAtMousePosition()
     {
         // Create disabled GO.
         GameObject GO = new GameObject();
@@ -80,7 +80,7 @@ public class PlayerControls : MonoBehaviour
         RaycastHit hit;
 
         // Fill GO with hit value.
-        if (Physics.Raycast(ray, out hit, Mathf.Infinity, rayCastHitLayers))
+        if (Physics.Raycast(ray, out hit, Mathf.Infinity, selectableEntities))
             GO = hit.collider.gameObject;
 
         // In function call always check:
