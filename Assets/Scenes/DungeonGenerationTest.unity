@@ -306,6 +306,7 @@ GameObject:
   m_Component:
   - component: {fileID: 710166747}
   - component: {fileID: 710166748}
+  - component: {fileID: 710166749}
   m_Layer: 0
   m_Name: MapObject
   m_TagString: Untagged
@@ -321,7 +322,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 710166746}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 1.2447462, y: 1.9834051, z: 1.6110119}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -340,5 +341,18 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   prefabSubFoldersNames:
-  - test
-  prefabsFolderPath: Asset\Ressources
+  - MapPrefabs
+  prefabsFolderPath: Assets\Resources\Prefabs
+--- !u!114 &710166749
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 710166746}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 171cc498d38789247914e28e57de5c5d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  mapSize: 6
