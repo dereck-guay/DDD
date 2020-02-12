@@ -19,7 +19,7 @@ namespace Miscellaneous
         {
             get
             {
-                if (i > Length || i < 0)
+                if (i >= Length || i < 0)
                     throw new Exception("index is out of range for this dictionnary");
                 Pairs.TryGetValue(i, out T valueToReturn);
                 return valueToReturn;
