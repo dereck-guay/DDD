@@ -5,15 +5,15 @@ using UnityEngine;
 using Miscellaneous;
 using System.Reflection;
 using System.Linq;
+using Interfaces;
+
 
 public enum ClassNames { Fighter, Wizard }
-public class Character : MonoBehaviour, ITargetable, IDamageable
+public class Character : MonoBehaviour
 {
     IPlayableClass characterClass;
-    DictionaryCreator<IPlayableClass> pairs;
+    DictionaryCreator<GameObject> pairs;
     public ClassNames CharacterClassName;
-    
-    public Spell[] Spells;
     public IPlayableClass CharacterClass
     {
         get { return characterClass; }
@@ -21,17 +21,18 @@ public class Character : MonoBehaviour, ITargetable, IDamageable
         {
             characterClass = value;
             AssignStats();
-            Debug.Log(CharacterClass.ToString());
         }
     }
-    public AtkDamage AtkDamage { get; private set; }
-    public AtkSpeed AtkSpeed { get; private set; }
-    public HP HP { get; private set; }
-    public Mana Mana { get; private set; }
-    public Speed Speed { get; private set; }
-    public XP XP { get; private set; }
+    public Spell[] Spells;
 
-    IStat[] classSpecificStats;
+    public AtkSpeed AtkSpeed;
+    public AtkDamage AtkDamage;
+    public HP HP;
+    public Mana Mana;
+    public Speed Speed;
+    public XP XP;
+    IModifiableStat[] ClassSpecificStats;
+    public DictionaryCreator<IModifiableStat> ModifiableStatDictionary { get; private set; }
     #region Methods
     public void CastSpell(Spell spell)
     {
@@ -43,48 +44,37 @@ public class Character : MonoBehaviour, ITargetable, IDamageable
     }
     public void Attack(Character target)
     {
-        target.TakeDamage(CharacterClass.AtkDamage.Current);
+        target.TakeDamage(AtkDamage.Current);
     }
     public void TakeDamage(float damage)
     {
-        CharacterClass.HP.TakeDamage(damage);
+        HP.TakeDamage(damage);
     }
+
     #endregion
     private void Awake()
     {
-        var playableClasses = new IPlayableClass[2]
+        var playableClasses = new GameObject[2]
         {
-            new Fighter(),
-            new Wizard(),
+            Resources.Load("Prefabs\\Fighter") as GameObject,
+            Resources.Load("Prefabs\\Wizard") as GameObject,
         };
-        pairs = new DictionaryCreator<IPlayableClass>(playableClasses);
-        classSpecificStats = new IStat[]
-        {
-            AtkDamage,
-            AtkSpeed,
-            HP,
-            Mana,
-            Speed,
-        };
+        pairs = new DictionaryCreator<GameObject>(playableClasses);
         // Ceci est surtout pour faire les tests, pouvoir rapidement changer de classe dans l'inspecteur par le enum
     }
     private void Start()
     {
-        CharacterClass = pairs[(int)CharacterClassName];
+        CharacterClass = pairs[(int)CharacterClassName].GetComponent<IPlayableClass>();
         Spells = CharacterClass.Spells;
     }
     private void Update()
     {
-        if(CharacterClass != pairs[(int)CharacterClassName])
-        {
-            CharacterClass = pairs[(int)CharacterClassName];
-            CharacterClass.ToString();
-        }
+
     }
     void AssignStats()
     {
-        for (int i = 0; i < classSpecificStats.Length; ++i)
-            classSpecificStats[i] = CharacterClass.ClassSpecificStats[i];
+        for (int i = 0; i < ClassSpecificStats.Length; ++i)
+            ClassSpecificStats[i] = CharacterClass.ClassStats[i];
     }
 
 }

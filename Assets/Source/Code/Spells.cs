@@ -4,6 +4,7 @@ using System.Text;
 using Unity;
 using UnityEngine;
 using Miscellaneous;
+using Interfaces;
 public class Spell
 {
     #region Props
@@ -12,6 +13,8 @@ public class Spell
     int level;
     int maxLevel;
     float duration;
+
+    public bool IsOnCooldown { get; private set; }
 
     public float Cooldown
     {
@@ -28,8 +31,13 @@ public class Spell
         get { return currentCooldown; }
         private set
         {
-            if (value < 0)
+            if (value <= 0)
+            {
                 value = 0;
+                IsOnCooldown = false;
+            }
+            else if(!IsOnCooldown)
+                IsOnCooldown = true;
             currentCooldown = value;
         }
     }
@@ -61,6 +69,7 @@ public class Spell
     public IEffect Effect { get; private set; }
     public int ManaCost { get; private set; }
     public ITypeOfSpell TypeOfSpell { get; private set; }
+    public Action Actions { get; set; }
     public Action OnLevelUp { get; set; }
     #endregion
     public Spell(float cooldownI, string nameI, string descriptionI, IEffect effectI, ITypeOfSpell typeI, int maxLevelI)
@@ -73,6 +82,7 @@ public class Spell
         Level = 1;
         MaxLevel = maxLevelI;
         TypeOfSpell = typeI;
+        IsOnCooldown = false;
     }
     public void UpdateCooldown(float elapsedTime)
     {
@@ -83,13 +93,21 @@ public class Spell
     }
     public void Cast(Character cha)
     {
-        CurrentCooldown = Cooldown;
-        cha.CharacterClass.Mana.UseMana(ManaCost);
+        if (!IsOnCooldown)
+        {
+            CurrentCooldown = Cooldown;
+            cha.CharacterClass.Mana.UseMana(ManaCost);
+            Actions?.Invoke();
+        }
     }
     public void Cast(SpellTester spe)
     {
-        CurrentCooldown = Cooldown;
-        spe.playableClass.Mana.UseMana(ManaCost);
+        if (!IsOnCooldown)
+        {
+            CurrentCooldown = Cooldown;
+            spe.playableClass.Mana.UseMana(ManaCost);
+            Actions?.Invoke();
+        }
     }
     public void LevelUp()
     {

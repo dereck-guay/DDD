@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using Miscellaneous;
-
+using Interfaces;
 public class SpellTester : MonoBehaviour
 {
     DictionaryCreator<IPlayableClass> pairs;

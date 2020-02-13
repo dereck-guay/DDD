@@ -4,12 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Miscellaneous;
+using Interfaces;
 
-public interface ITypeOfSpell
-{
-    float Range { get; }
-    float Radius { get; }
-}
+
 public class SingleTarget : ITypeOfSpell
 {
     float range;

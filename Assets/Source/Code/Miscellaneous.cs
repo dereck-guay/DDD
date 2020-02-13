@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using System;
+using Interfaces;
 
 namespace Miscellaneous
 {
@@ -25,14 +26,5 @@ namespace Miscellaneous
                 return valueToReturn;
             }
         }
-    }
-    public interface ITargetable
-    {
-
-    }
-    public interface IDamageable
-    {
-        void TakeDamage(float damage);
-        HP HP { get; }
     }
 }

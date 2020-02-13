@@ -3,33 +3,20 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
-public interface ModifiableStat
-{
-    void ApplyModifier(float modifier);
-    void EndModifier(float modifier);
-    float Base { get; }
-    float Current { get; }
-}
-public interface IStat { }
+using Miscellaneous;
+using Interfaces;
 public enum ModifiableStats { AtkDamage, AtkSpeed, HP, Mana, Speed };
-
-public interface RegenerativeStat
-{
-    void Update(float time);
-}
-#region Stats
-public class HP : ModifiableStat, RegenerativeStat, IStat
+public class HP : MonoBehaviour, IModifiableStat, IRegenerativeStat
 {
     #region Props
     float @base;
     float current;
 
-    public float HPRegen { get; private set; }
+    public float HPRegen { get; set; }
     public float Base
     {
         get { return @base; }
-        private set
+        set
         {
             if (value < 1)
                 value = 1;
@@ -39,7 +26,7 @@ public class HP : ModifiableStat, RegenerativeStat, IStat
     public float Current
     {
         get { return current; }
-        private set
+        set
         {
             if (value <= 0)
             {
@@ -53,24 +40,26 @@ public class HP : ModifiableStat, RegenerativeStat, IStat
             current = value;
         }
     }
-    public string Name { get; private set; }
+    public string Name = "HP";
     #region Actions
     public Action OnDeath { get; set; }
     public Action OnTakeDamage { get; set; }
     #endregion
     #endregion
-    public HP(float initMaxHP, float hPRegen)
+    private void Update()
     {
-        HPRegen = hPRegen;
-        Base = initMaxHP;
-        Current = initMaxHP;
-        Name = "HP";
+        Regen(Time.deltaTime);
     }
-
     #region Methods
+    public void ApplyStats(float iBase, float iRegen)
+    {
+        Base = iBase;
+        Current = iBase;
+        HPRegen = iRegen;
+    }
     public void TakeDamage(float damage) => Current -= damage;
     public void Heal(float hPToHeal) => Current += hPToHeal;
-    public void Update(float time) => Current += time * HPRegen;
+    public void Regen(float time) => Current += time * HPRegen;
     public void ApplyModifier(float modifier) => HPRegen *= modifier;
     public void EndModifier(float modifier) => HPRegen /= modifier;
     public override string ToString()
@@ -84,22 +73,15 @@ public class HP : ModifiableStat, RegenerativeStat, IStat
     }
     #endregion
 }
-public class AtkDamage : ModifiableStat, IStat //auto-attack damage
+public class AtkDamage : MonoBehaviour, IModifiableStat //auto-attack damage
 {
     #region Props
-    public float Base { get; private set; }
-    public float Current { get; private set; }
-    public string Name { get; private set; }
-    #endregion
-
-    public AtkDamage(float baseDmg)
-    {
-        Base = baseDmg;
-        Current = baseDmg;
-        Name = "Auto-Attack Damage";
-    }
+    public float Base { get; set; }
+    public float Current { get; set; }
+    public string Name = "Auto-Attack Damage";
     #region Methods
     public void ApplyModifier(float modifier) => Current *= modifier;
+    public void ApplyStats(float iBase) => Base = iBase;
     public void EndModifier(float modifier) => Current /= modifier;
     public override string ToString()
     {
@@ -111,33 +93,27 @@ public class AtkDamage : ModifiableStat, IStat //auto-attack damage
     }
     #endregion
 }
-public class AtkSpeed : ModifiableStat, IStat
+public class AtkSpeed : MonoBehaviour, IModifiableStat
 {
     #region Props
     float baseAtkSpeed;
     public float Base
     {
         get { return baseAtkSpeed; }
-        private set
+        set
         {
             if (value < 0)
                 throw new ArgumentException("BaseAtkSpeed must be higher than 0");
             baseAtkSpeed = value;
         }
     }
-    public float Current { get; private set; }
-    public string Name { get; private set; }
+    public float Current { get; set; }
+    public string Name = "Attack Speed";
     #endregion
-
-    public AtkSpeed(float baseAtkSpeedI)
-    {
-        Base = baseAtkSpeedI;
-        Current = baseAtkSpeed;
-        Name = "Attack Speed";
-    }
     #region Methods
     public void ApplyModifier(float modifier) => Current *= modifier;
     public void EndModifier(float modifier) => Current /= modifier;
+    public void ApplyStats(float iBase) => Base = iBase;
     public override string ToString()
     {
         StringBuilder sb = new StringBuilder();
@@ -148,23 +124,17 @@ public class AtkSpeed : ModifiableStat, IStat
     }
     #endregion
 }
-public class Speed : ModifiableStat, IStat
+public class Speed : MonoBehaviour, IModifiableStat
 {
     #region Props
-    public float Base { get; private set; }
-    public float Current { get; private set; }
-    public string Name { get; private set; }
+    public float Base { get; set; }
+    public float Current { get; set; }
+    public string Name = "Speed";
     #endregion
-
-    public Speed(float baseSpeed)
-    {
-        Base = baseSpeed;
-        Current = baseSpeed;
-        Name = "Speed";
-    }
     #region Methods
     public void ApplyModifier(float modifier) => Current *= modifier;
     public void EndModifier(float modifier) => Current /= modifier;
+    public void ApplyStats(float iBase) => Base = iBase;
     public override string ToString()
     {
         StringBuilder sb = new StringBuilder();
@@ -175,17 +145,17 @@ public class Speed : ModifiableStat, IStat
     }
     #endregion
 }
-public class Mana : ModifiableStat, RegenerativeStat, IStat
+public class Mana : MonoBehaviour, IModifiableStat, IRegenerativeStat
 {
     #region Props
     float currentMana;
     float maxMana;
 
-    public float ManaRegen { get; private set; }
+    public float ManaRegen { get; set; }
     public float Current
     {
         get { return currentMana; }
-        private set
+        set
         {
             if (value < 0)
                 value = 0;
@@ -195,27 +165,23 @@ public class Mana : ModifiableStat, RegenerativeStat, IStat
     public float Base
     {
         get { return maxMana; }
-        private set
+        set
         {
             if (value < 1)
                 value = 1;
             maxMana = value;
         }
     }
-    public string Name { get; private set; }
+    public string Name = "Mana";
     #endregion
-    public Mana(float maxManaI, float manaRegen)
-    {
-        ManaRegen = manaRegen;
-        Base = maxManaI;
-        Current = maxManaI;
-        Name = "Mana";
-    }
+    private void Update() => Regen(Time.deltaTime);
     #region Methods
     public void UseMana(float manaUsed) => Current -= manaUsed;
     public void ApplyModifier(float modifier) => ManaRegen *= modifier;
     public void EndModifier(float modifier) => ManaRegen /= modifier;
-    public void Update(float time) => Current += ManaRegen * time;
+    public void Regen(float time) => Current += ManaRegen * time;
+    public void ApplyStats(float iBase, float iRegen)
+    { Base = iBase; ManaRegen = iRegen; }
     public override string ToString()
     {
         StringBuilder sb = new StringBuilder();
@@ -226,17 +192,12 @@ public class Mana : ModifiableStat, RegenerativeStat, IStat
     }
     #endregion
 }
-public class XP : IStat
+public class XP : MonoBehaviour
 {
     #region Props
-    public float Current { get; private set; }
-    public string Name { get; private set; }
+    public float Current { get; set; }
+    public string Name = "XP";
     #endregion
-    public XP()
-    {
-        Current = 0;
-        Name = "XP";
-    }
     #region Methods
     public void AddXP(float xpAmount) => Current += xpAmount;
     public override string ToString()

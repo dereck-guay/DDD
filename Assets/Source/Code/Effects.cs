@@ -1,23 +1,25 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
+using Miscellaneous;
+using Interfaces;
 
 public interface IEffect
 {
-    void ApplyEffect();
+    void ApplyEffect(ITargetable target);
 }
 public class Buff : IEffect
 {
     public float NumberValue { get; private set; }
-    public ModifiableStat StatToBuff { get; private set; }
-    public Buff(float buffValue, ModifiableStat statToBuff)
+    public int IndexOfStatToBuff { get; private set; }
+    public Buff(float buffValue, int statIndex)
     {
         NumberValue = buffValue;
-        StatToBuff = statToBuff;
+        IndexOfStatToBuff = statIndex;
     }
-    public void ApplyEffect()
+    public void ApplyEffect(ITargetable target)
     {
-        //Caster.Whatever method buffs the casters stats
+        target.ModifiableStatDictionary[IndexOfStatToBuff].ApplyModifier(NumberValue);
     }
 }
 public class Heal : IEffect
@@ -27,9 +29,9 @@ public class Heal : IEffect
     {
         NumberValue = healingValue;
     }
-    public void ApplyEffect()
+    public void ApplyEffect(ITargetable target)
     {
-        //Caster.Whatever method heals the caster
+        target.HP.Heal(NumberValue);
     }
 }
 public class Damage : IEffect
@@ -39,8 +41,8 @@ public class Damage : IEffect
     {
         NumberValue = damageValue;
     }
-    public void ApplyEffect()
+    public void ApplyEffect(ITargetable target)
     {
-        //Caster.Whatever method damage the caster
+        target.HP.TakeDamage(NumberValue);
     }
 }
