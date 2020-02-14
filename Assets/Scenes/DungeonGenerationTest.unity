@@ -355,4 +355,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 171cc498d38789247914e28e57de5c5d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  mapSize: 6
+  mapSize: 10

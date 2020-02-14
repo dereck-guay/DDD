@@ -22,7 +22,7 @@ public class FollowProjectile : MonoBehaviour
         RecalculateDirection();    
         transform.Translate(direction * speed * Time.deltaTime);
     }
-    
-    private void RecalculateDirection() =>
-        direction = (target.transform.position - transform.position).normalize;
+
+   private void RecalculateDirection() =>
+       direction = Vector3.Normalize(target.transform.position - transform.position);
 }

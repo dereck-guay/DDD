@@ -23,6 +23,6 @@ public class RoomComponent : MonoBehaviour
    {
       for (int i = 0; i < Room.Length; i++)
          for (int j = 0; j < Room.Width; j++)
-            Instantiate(testWall, new Vector3(j - posY, 0, i - posX), Quaternion.identity, transform);
+            Instantiate(testWall, new Vector3(i - posY, 0, j - posX), Quaternion.identity, transform);
    }
 }
