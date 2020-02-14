@@ -6,7 +6,7 @@ using Interfaces;
 
 public interface IEffect
 {
-    void ApplyEffect(ITargetable target);
+    //void ApplyEffect(ITargetable target);
 }
 public class Buff : IEffect
 {
@@ -17,10 +17,10 @@ public class Buff : IEffect
         NumberValue = buffValue;
         IndexOfStatToBuff = statIndex;
     }
-    public void ApplyEffect(ITargetable target)
-    {
-        target.ModifiableStatDictionary[IndexOfStatToBuff].ApplyModifier(NumberValue);
-    }
+    //public void ApplyEffect(ITargetable target)
+    //{
+    //    target.ModifiableStatDictionary[IndexOfStatToBuff].ApplyModifier(NumberValue);
+    //}
 }
 public class Heal : IEffect
 {
@@ -29,10 +29,10 @@ public class Heal : IEffect
     {
         NumberValue = healingValue;
     }
-    public void ApplyEffect(ITargetable target)
-    {
-        target.HP.Heal(NumberValue);
-    }
+    //public void ApplyEffect(ITargetable target)
+    //{
+    //    target.HP.Heal(NumberValue);
+    //}
 }
 public class Damage : IEffect
 {
@@ -41,8 +41,8 @@ public class Damage : IEffect
     {
         NumberValue = damageValue;
     }
-    public void ApplyEffect(ITargetable target)
-    {
-        target.HP.TakeDamage(NumberValue);
-    }
+    //public void ApplyEffect(ITargetable target)
+    //{
+    //    target.HP.TakeDamage(NumberValue);
+    //}
 }

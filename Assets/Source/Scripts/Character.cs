@@ -6,9 +6,7 @@ using Miscellaneous;
 using System.Reflection;
 using System.Linq;
 using Interfaces;
-
-
-public enum ClassNames { Fighter, Wizard }
+using Enums;
 public class Character : MonoBehaviour
 {
     IPlayableClass characterClass;
@@ -20,23 +18,25 @@ public class Character : MonoBehaviour
         private set
         {
             characterClass = value;
-            AssignStats();
+            //AssignStats();
         }
     }
     public Spell[] Spells;
 
-    public AtkSpeed AtkSpeed;
-    public AtkDamage AtkDamage;
-    public HP HP;
-    public Mana Mana;
-    public Speed Speed;
-    public XP XP;
+    public AtkSpeedComponent AtkSpeed;
+    public AtkDamageComponent AtkDamage;
+    public HPComponent HP;
+    public ManaComponent Mana;
+    public SpeedComponent Speed;
+    public XPComponent XP;
+
+    GameObject ClassPrefab;
     IModifiableStat[] ClassSpecificStats;
     public DictionaryCreator<IModifiableStat> ModifiableStatDictionary { get; private set; }
     #region Methods
     public void CastSpell(Spell spell)
     {
-        spell.Cast(this);
+        spell.Cast();
     }
     public void Attack(Entity target)
     {
@@ -56,16 +56,19 @@ public class Character : MonoBehaviour
     {
         var playableClasses = new GameObject[2]
         {
-            Resources.Load("Prefabs\\Fighter") as GameObject,
-            Resources.Load("Prefabs\\Wizard") as GameObject,
+            Resources.Load("Prefabs\\ClassPrefabs\\Fighter") as GameObject,
+            Resources.Load("Prefabs\\ClassPrefabs\\Wizard") as GameObject,
         };
         pairs = new DictionaryCreator<GameObject>(playableClasses);
         // Ceci est surtout pour faire les tests, pouvoir rapidement changer de classe dans l'inspecteur par le enum
     }
     private void Start()
     {
-        CharacterClass = pairs[(int)CharacterClassName].GetComponent<IPlayableClass>();
+        ClassPrefab = Instantiate(pairs[(int)CharacterClassName], this.gameObject.transform);
+        CharacterClass = ClassPrefab.GetComponent<IPlayableClass>();
         Spells = CharacterClass.Spells;
+        foreach (Spell s in Spells)
+            Debug.Log(s.ToString());
     }
     private void Update()
     {

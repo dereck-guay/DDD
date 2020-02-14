@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class Entity : MonoBehaviour
 {
-    public HP HP { get; protected set; }
+    public HPComponent HP { get; protected set; }
     
     void Start()
     {

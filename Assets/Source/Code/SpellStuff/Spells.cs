@@ -61,6 +61,7 @@ public class Spell
             maxLevel = value;
         }
     }
+    public ICaster Caster { get; private set; }
     #region Non-mechanical props
     public string Name { get; private set; }
     public string Description { get; private set; }
@@ -72,7 +73,7 @@ public class Spell
     public Action Actions { get; set; }
     public Action OnLevelUp { get; set; }
     #endregion
-    public Spell(float cooldownI, string nameI, string descriptionI, IEffect effectI, ITypeOfSpell typeI, int maxLevelI)
+    public Spell(float cooldownI, string nameI, string descriptionI, IEffect effectI, ITypeOfSpell typeI, int maxLevelI, ICaster caster)
     {
         Cooldown = cooldownI;
         Name = nameI;
@@ -83,6 +84,7 @@ public class Spell
         MaxLevel = maxLevelI;
         TypeOfSpell = typeI;
         IsOnCooldown = false;
+        Caster = caster;
     }
     public void UpdateCooldown(float elapsedTime)
     {
@@ -91,28 +93,16 @@ public class Spell
         else
             CurrentCooldown -= elapsedTime;
     }
-    public void Cast(Character cha)
+    public void Cast()
     {
         if (!IsOnCooldown)
         {
             CurrentCooldown = Cooldown;
-            cha.CharacterClass.Mana.UseMana(ManaCost);
+            Caster.Mana.UseMana(ManaCost);
             Actions?.Invoke();
         }
     }
-    public void Cast(SpellTester spe)
-    {
-        if (!IsOnCooldown)
-        {
-            CurrentCooldown = Cooldown;
-            spe.playableClass.Mana.UseMana(ManaCost);
-            Actions?.Invoke();
-        }
-    }
-    public void LevelUp()
-    {
-        Level += 1;
-    }
+    public void LevelUp() => Level += 1;
     public override string ToString()
     {
         StringBuilder sb = new StringBuilder();
@@ -120,5 +110,5 @@ public class Spell
         sb.AppendLine($"\t Type : {TypeOfSpell.ToString()}");
         return sb.ToString();
     }
-
+    public Spell Clone(ICaster caster) => new Spell(Cooldown, Name, Description, Effect, TypeOfSpell, MaxLevel, caster);
 }

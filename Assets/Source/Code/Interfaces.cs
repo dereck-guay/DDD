@@ -5,9 +5,8 @@ using Miscellaneous;
 
 namespace Interfaces
 {
-    public interface IPlayableClass
+    public interface IPlayableClass : ICaster
     {
-        Spell[] Spells { get; }
         DictionaryCreator<Spell> SpellDictionary { get; }
         IModifiableStat[] ClassStats { get; }
     }
@@ -26,5 +25,10 @@ namespace Interfaces
     {
         float Range { get; }
         float Radius { get; }
+    }
+    public interface ICaster
+    {
+        Spell[] Spells { get; }
+        ManaComponent Mana { get; }
     }
 }
