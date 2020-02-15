@@ -7,7 +7,6 @@ using UnityEngine;
 
 class Map
 {
-   //Temporary constants.
    int maxRoomCount;
    public int MapSize { get; }
    public int MapMiddle { get => MapSize / 2; }
@@ -74,15 +73,9 @@ class Map
          undefinedRooms.RemoveAt(0);
       }
    }
-   public Map(int mapScale)
+   void TryGenerateMap()
    {
-      if (mapScale < 0)
-         mapScale = 0;
-
-      //mapSize includes a 3x3 area for the boss room.
-      MapSize = 2 * mapScale + 3;
-
-      maxRoomCount = MapSize * MapSize / 4;  //Might have to change... (Game design)
+      currentRoomCount = 0;
 
       rooms = new Room[MapSize, MapSize];
       spaceStates = new SpaceState[MapSize, MapSize];
@@ -91,6 +84,21 @@ class Map
       CreateEmptyMap();
       GenerateBossRoom();
       GenerateMap();
+
+      Debug.Log(currentRoomCount);
+   }
+   public Map(int mapScale)
+   {
+      if (mapScale < 0)
+         mapScale = 0;
+
+      //mapSize includes a 3x3 area for the boss room.
+      MapSize = 2 * mapScale + 3;
+
+      maxRoomCount = MapSize * MapSize / 2;  //Might have to change... (Game design)
+      
+      while (!SizeReached())
+         TryGenerateMap();
    }
    void UpdateAdjacentSpaces(Tuple<int, int> currentPosition)
    {
