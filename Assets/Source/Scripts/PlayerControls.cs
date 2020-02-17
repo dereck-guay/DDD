@@ -3,7 +3,11 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+<<<<<<< HEAD
 public class PlayerControls : OrientedMonoBehaviour
+=======
+public class PlayerControls : MonoBehaviour
+>>>>>>> 389faaeb42064fd86499599ccd96e3f35746ea25
 {
     public float movementSpeed = 5f;
     public GameObject fireball;
@@ -54,7 +58,43 @@ public class PlayerControls : OrientedMonoBehaviour
         else
             fireballCurrentCooldown += Time.deltaTime;
     }
+<<<<<<< HEAD
        
+=======
+        
+    private Vector3 GetMouseDirection() =>
+        (GetMousePositionOn2DPlane() - transform.position).normalized;
+
+    private Vector3 GetMousePositionOn2DPlane()
+    {
+        var position = Vector3.zero;
+        Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+        RaycastHit hit;
+
+        if (Physics.Raycast(ray, out hit, Mathf.Infinity, rayCastHitLayers))
+            position = hit.point;
+
+        return position;
+    }
+
+    private GameObject GetEntityAtMousePosition()
+    {
+        // Create disabled GO.
+        GameObject GO = new GameObject();
+        GO.SetActive(false);
+
+        Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+        RaycastHit hit;
+
+        // Fill GO with hit value.
+        if (Physics.Raycast(ray, out hit, Mathf.Infinity, selectableEntities))
+            GO = hit.collider.gameObject;
+
+        // In function call always check:
+        // if (GO.activeSelf) Do stuff;
+        return GO;
+    }
+>>>>>>> 389faaeb42064fd86499599ccd96e3f35746ea25
 
     private void Move(Vector3 direction) =>
         transform.Translate(direction * Time.deltaTime * movementSpeed);

@@ -33,8 +33,12 @@ Transform:
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
+<<<<<<< HEAD
   m_Children:
   - {fileID: 1697517528431659647}
+=======
+  m_Children: []
+>>>>>>> 389faaeb42064fd86499599ccd96e3f35746ea25
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -128,6 +132,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dec1de13540f55a4c87249c0c97f9af4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+<<<<<<< HEAD
   selectableEntities:
     serializedVersion: 2
     m_Bits: 0
@@ -212,3 +217,12 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 2153683868181810572}
   m_PrefabAsset: {fileID: 0}
+=======
+  Name: 
+  AtkSpeed: {fileID: 0}
+  AtkDamage: {fileID: 0}
+  HP: {fileID: 0}
+  Mana: {fileID: 0}
+  Speed: {fileID: 0}
+  XP: {fileID: 0}
+>>>>>>> 389faaeb42064fd86499599ccd96e3f35746ea25

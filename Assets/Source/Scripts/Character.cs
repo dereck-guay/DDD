@@ -54,7 +54,11 @@ public class Character : MonoBehaviour
     #endregion
     private void Awake()
     {
+<<<<<<< HEAD
         var playableClasses = new GameObject[]
+=======
+        var playableClasses = new GameObject[2]
+>>>>>>> 389faaeb42064fd86499599ccd96e3f35746ea25
         {
             Resources.Load("Prefabs\\ClassPrefabs\\Fighter") as GameObject,
             Resources.Load("Prefabs\\ClassPrefabs\\Wizard") as GameObject,
