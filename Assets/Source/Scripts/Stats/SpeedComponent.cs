@@ -12,7 +12,11 @@ public class SpeedComponent : MonoBehaviour, IModifiableStat
     public string Name = "Speed";
     public void ApplyModifier(float modifier) => Current *= modifier;
     public void EndModifier(float modifier) => Current /= modifier;
-    public void ApplyStats(float iBase) => Base = iBase;
+    public void ApplyStats(float iBase)
+    {
+        Base = iBase;
+        Current = iBase;
+    }
     public override string ToString()
     {
         StringBuilder sb = new StringBuilder();

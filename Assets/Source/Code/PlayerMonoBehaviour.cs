@@ -27,19 +27,12 @@ public abstract class PlayerMonoBehaviour : MonoBehaviour
 
     protected GameObject GetEntityAtMousePosition()
     {
-        // Create disabled GO.
-        GameObject GO = new GameObject();
-        GO.SetActive(false);
-
         Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
         RaycastHit hit;
 
-        // Fill GO with hit value.
         if (Physics.Raycast(ray, out hit, Mathf.Infinity, selectableEntities))
-            GO = hit.collider.gameObject;
+            return hit.collider.gameObject;
 
-        // In function call always check:
-        // if (GO.activeSelf) Do stuff;
-        return GO;
+        return null;
     }
 }

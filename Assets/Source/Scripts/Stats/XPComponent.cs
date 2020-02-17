@@ -8,6 +8,8 @@ using Interfaces;
 public class XPComponent : MonoBehaviour
 {
     public float Current { get; set; }
+    public int Level { get; } // Level is going to be calculated with xp, can't be set.
+
     public string Name = "XP";
     public void AddXP(float xpAmount) => Current += xpAmount;
     public override string ToString()
