@@ -67,8 +67,7 @@ public class Character : MonoBehaviour
         ClassPrefab = Instantiate(pairs[(int)CharacterClassName], this.gameObject.transform);
         CharacterClass = ClassPrefab.GetComponent<IPlayableClass>();
         Spells = CharacterClass.Spells;
-        foreach (Spell s in Spells)
-            Debug.Log(s.ToString());
+        AssignStats();
     }
     private void Update()
     {
