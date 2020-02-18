@@ -76,7 +76,7 @@ public class FighterComponent : PlayerMonoBehaviour
         AtkDamage.ApplyStats(30);
         HP.ApplyStats(50, 3);
         Mana.ApplyStats(60, 2);
-        Speed.ApplyStats(32);
+        Speed.ApplyStats(20);
         XP.Current = 0;
     }
 
