@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using Miscellaneous;
@@ -11,22 +12,25 @@ using Interfaces;
 [RequireComponent(typeof(ManaComponent))]
 [RequireComponent(typeof(SpeedComponent))]
 [RequireComponent(typeof(XPComponent))]
-public class FighterComponent : MonoBehaviour, ICaster, IPlayableClass
+public class FighterComponent : PlayerMonoBehaviour
 {
-    #region Stats
-    public AtkSpeedComponent AtkSpeed;
-    public AtkDamageComponent AtkDamage;
-    public HPComponent HP;
-    public ManaComponent Mana;
-    public SpeedComponent Speed;
-    public XPComponent XP;
-    #endregion
-    public Spell[] Spells { get; private set; }
-    public DictionaryCreator<Spell> SpellDictionary { get; private set; }
-    public string Name;
-    public IModifiableStat[] ClassStats { get; private set; }
+    public KeyCode[] inputs;
+    private KeyBindings keyBindings;
+    private IModifiableStat[] characterStats;
 
-    ManaComponent ICaster.Mana => Mana;
+    [HideInInspector]
+    public bool spellLocked = false;
+
+    // Spell Attr
+    public float slamRange;
+
+    // Character Stats
+    private AtkSpeedComponent AtkSpeed;
+    private AtkDamageComponent AtkDamage;
+    private HPComponent HP;
+    private ManaComponent Mana;
+    private SpeedComponent Speed;
+    private XPComponent XP;
 
     private void Awake()
     {
@@ -36,57 +40,49 @@ public class FighterComponent : MonoBehaviour, ICaster, IPlayableClass
         Mana = GetComponent<ManaComponent>();
         Speed = GetComponent<SpeedComponent>();
         XP = GetComponent<XPComponent>();
-        CreateSpells();
+
+        keyBindings = new KeyBindings(
+            new Action[]
+            {
+                () => Move(Vector3.forward),
+                () => Move(Vector3.left),
+                () => Move(Vector3.back),
+                () => Move(Vector3.right),
+                () => {
+                    if (! IsOnCooldown(typeof(SlamSpell)))
+                    {
+                        var slamSpell = gameObject.AddComponent<SlamSpell>();
+                        slamSpell.range = slamRange;
+                        slamSpell.position = GetMousePositionOn2DPlane();
+                        slamSpell.Cast();
+                        // Pour pas que le player puisse bouger pendant l'ainimation du spell
+                        // spellLocked = true;
+                    }
+                }
+            }, inputs
+        );
     }
-    private void Start()
+
+    private void Start() => ApplyAllStats();
+    private void Update()
     {
-        Name = "Mike the Fighter";
-        ApplyAllStats();
-        SpellDictionary = new DictionaryCreator<Spell>(Spells);
-        ClassStats = new IModifiableStat[]
-        {
-            AtkDamage,
-            AtkSpeed,
-            HP,
-            Mana,
-            Speed,
-        };
+        if (! spellLocked)
+            keyBindings.CallBindings();
     }
-    void CreateSpells()
+
+    private void ApplyAllStats()
     {
-        Spells = new Spell[4]
-        {
-            new Spell(4, "Fireball", $"Shoot a large fireball that deals {5} damage on-hit", new Damage(5), new SkillShot(10, 4), 4, this),
-            new Spell(4, "Heal", $"Heal a target within range for {5} health", new Heal(5), new SingleTarget(2), 4, this),
-            new Spell(4, "Slow", "Decrease a target's speed", new Buff(-4, 4), new SingleTarget(2), 4, this),
-            new Spell(4, "Fireball", "Shoot a large fireball", new Damage(5), new SkillShot(10, 4), 4, this),
-        };
-    }
-    void ApplyAllStats()
-    {
-        AtkSpeed.ApplyStats(30);
-        AtkDamage.ApplyStats(20);
-        HP.ApplyStats(25, 1);
-        Mana.ApplyStats(50, 2.5f);
-        Speed.ApplyStats(30);
+        AtkSpeed.ApplyStats(20);
+        AtkDamage.ApplyStats(30);
+        HP.ApplyStats(50, 3);
+        Mana.ApplyStats(60, 2);
+        Speed.ApplyStats(32);
         XP.Current = 0;
     }
-    public override string ToString()
+
+    private void Move(Vector3 direction)
     {
-        StringBuilder sb = new StringBuilder();
-
-        sb.AppendLine($"Class : {Name}");
-        sb.AppendLine("Base Stats :");
-        sb.AppendLine(AtkDamage.ToString());
-        sb.AppendLine(AtkSpeed.ToString());
-        sb.AppendLine(HP.ToString());
-        sb.AppendLine(Mana.ToString());
-        sb.AppendLine(Speed.ToString());
-        sb.AppendLine(XP.ToString());
-        sb.AppendLine("Spells :");
-        foreach (Spell s in Spells)
-            sb.AppendLine($"\t {s.ToString()}");
-
-        return sb.ToString();
+        transform.LookAt(transform.position + direction);
+        transform.Translate(direction * Speed.Current * Time.deltaTime, Space.World);
     }
 }

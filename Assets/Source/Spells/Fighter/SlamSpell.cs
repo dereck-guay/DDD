@@ -2,20 +2,23 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class SlowSpell : MonoBehaviour
+public class SlamSpell : MonoBehaviour
 {
-    public GameObject target;
-    public float slowValue;
+    public float range;
+    public Vector3 position;
 
     private float[] cooldowns = { 10f, 9f, 8f };
-    private float[] effectDurations = { 2f, 4f, 6f };
     private float currentLifeTime;
     private int playerLevel;
     private bool isActive;
 
     public void Cast()
     {
-        target.GetComponent<SpeedComponent>().ApplyModifier(slowValue);
+        if (position.magnitude >= range)
+            position = position.normalized * range;
+
+        Debug.Log(position.ToString());
+
         playerLevel = GetComponent<XPComponent>().Level;
         isActive = true;
     }
@@ -24,11 +27,11 @@ public class SlowSpell : MonoBehaviour
     {
         if (currentLifeTime >= cooldowns[playerLevel])
             Destroy(this);
-        else if(currentLifeTime >= effectDurations[playerLevel] && isActive)
-        {
-            target.GetComponent<SpeedComponent>().EndModifier(slowValue);
-            isActive = false;
-        }
+
+        // Mouvement projectile vers la position
+
+        // Quand l'animation est fini
+        // GetComponent<FighterComponent>().spellLocked = false;
 
         currentLifeTime += Time.deltaTime;
     }
