@@ -6,10 +6,10 @@ public class SlowSpell : MonoBehaviour
 {
     public GameObject target;
     public float slowValue;
+    public float[] effectDurations = { 2f, 4f, 6f };
 
     private float[] cooldowns = { 10f, 9f, 8f };
-    private float[] effectDurations = { 2f, 4f, 6f };
-    private float currentLifeTime;
+    public float currentLifeTime;
     private int playerLevel;
     private bool isActive;
 

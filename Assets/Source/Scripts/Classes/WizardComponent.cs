@@ -19,7 +19,13 @@ public class WizardComponent : PlayerMonoBehaviour
     private IModifiableStat[] characterStats;
 
     // Spell Attr
-    public float[] slowValues;
+    [Header("Spell Settings")]
+
+    [Header("Fireball Spell")]
+    public GameObject fireballPrefab;
+
+    [Header("Slow Spell")]
+    public float slowValue;
 
     // Character Stats
     private AtkSpeedComponent AtkSpeed;
@@ -41,10 +47,20 @@ public class WizardComponent : PlayerMonoBehaviour
         keyBindings = new KeyBindings(
             new Action[]
             {
+                () => AutoAttack(),
                 () => Move(Vector3.forward),
                 () => Move(Vector3.left),
                 () => Move(Vector3.back),
                 () => Move(Vector3.right),
+                () => {
+                   if (! IsOnCooldown(typeof(FireballSpell)))
+                    {
+                        var fireballSpell = gameObject.AddComponent<FireballSpell>();
+                        fireballSpell.fireballPrefab = fireballPrefab;
+                        fireballSpell.direction = GetMouseDirection();
+                        fireballSpell.Cast();
+                    }
+                },
                 () => {
                     if (! IsOnCooldown(typeof(SlowSpell)))
                     {
@@ -54,7 +70,7 @@ public class WizardComponent : PlayerMonoBehaviour
                         {
                             // Get parent object because the collider is in the body of the character.
                             slowSpell.target = target.transform.parent.gameObject;
-                            slowSpell.slowValue = slowValues[XP.Level];
+                            slowSpell.slowValue = slowValue;
                             slowSpell.Cast();
                         } else { Destroy(target); }
                     }
@@ -79,6 +95,15 @@ public class WizardComponent : PlayerMonoBehaviour
     {
         transform.LookAt(transform.position + direction);
         transform.Translate(direction * Speed.Current * Time.deltaTime, Space.World);
+    }
+
+    private void AutoAttack()
+    {
+        var target = GetEntityAtMousePosition();
+        if (target)
+        {
+            Debug.Log(target.transform.parent.gameObject.name);
+        }
     }
 
     private void Update() => keyBindings.CallBindings();
