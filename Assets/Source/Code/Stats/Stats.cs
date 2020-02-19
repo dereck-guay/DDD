@@ -1,6 +1,8 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Interfaces;
+using Miscellaneous;
 
 [System.Serializable]
 public class Stats
@@ -12,6 +14,7 @@ public class Stats
     public Range Range { get; private set; }
     public Speed Speed { get; private set; }
     public XP XP { get; private set; }
+    public DictionaryCreator<IModifiableStat> ModifiableStats;
     public Stats(float damageBase, float atkSpeedBase, float hPBase, float hPRegen, float manaBase, float manaRegen, float rangeBase, float speedBase)
     {
         AtkDamage = new AtkDamage(damageBase);
@@ -21,6 +24,15 @@ public class Stats
         Range = new Range(rangeBase);
         Speed = new Speed(speedBase);
         XP = new XP();
+        var stats = new IModifiableStat[]
+        {
+            AtkDamage,
+            AtkSpeed,
+            HP,
+            Mana,
+            Speed
+        };
+        ModifiableStats = new DictionaryCreator<IModifiableStat>(stats);
     }
     public void Regen(float elaspedTime)
     {

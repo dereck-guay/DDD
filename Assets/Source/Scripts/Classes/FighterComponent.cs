@@ -53,7 +53,6 @@ public class FighterComponent : PlayerMonoBehaviour
             statsInit.range,
             statsInit.speed
         );
-
         keyBindings = new KeyBindings(
             new Action[]
             {
@@ -67,7 +66,7 @@ public class FighterComponent : PlayerMonoBehaviour
                         var slamSpell = gameObject.AddComponent<SlamSpell>();
                         slamSpell.range = slam.range;
                         slamSpell.position = GetMousePositionOn2DPlane();
-                        slamSpell.Cast();
+                        slamSpell.Cast(stats.XP.Level);
                         // Pour pas que le player puisse bouger pendant l'ainimation du spell
                         // spellLocked = true;
                     }

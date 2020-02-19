@@ -36,13 +36,18 @@ public class WizardComponent : PlayerMonoBehaviour
     {
         public float slowValue;
     };
+    [System.Serializable]
+    public class Heal
+    {
+        public float[] healValues;
+    };
 
     [Header("Spell Settings")]
     public Fireball fireball;
     public Slow slow;
+    public Heal heal;
 
     private KeyBindings keyBindings;
-
     private void Awake()
     {
         stats = new Stats(
@@ -55,7 +60,6 @@ public class WizardComponent : PlayerMonoBehaviour
                 statsInit.range,
                 statsInit.speed
         );
-
         keyBindings = new KeyBindings(
             new Action[]
             {
@@ -70,7 +74,7 @@ public class WizardComponent : PlayerMonoBehaviour
                         var fireballSpell = gameObject.AddComponent<FireballSpell>();
                         fireballSpell.fireballPrefab = fireball.fireballPrefab;
                         fireballSpell.direction = GetMouseDirection();
-                        fireballSpell.Cast();
+                        fireballSpell.Cast(stats.XP.Level);
                     }
                 },
                 () => {
@@ -83,7 +87,21 @@ public class WizardComponent : PlayerMonoBehaviour
                             // Get parent object because the collider is in the body of the character.
                             slowSpell.target = target.transform.parent.gameObject;
                             slowSpell.slowValue = slow.slowValue;
-                            slowSpell.Cast();
+                            slowSpell.Cast(stats.XP.Level);
+                        } else { Destroy(target); }
+                    }
+                },
+                () => {
+                    if (! IsOnCooldown(typeof(HealSpell)))
+                    {
+                        var healSpell = gameObject.AddComponent<HealSpell>();
+                        var target = GetEntityAtMousePosition();
+                        if (target) // target != null
+                        {
+                            // Get parent object because the collider is in the body of the character.
+                            healSpell.target = target.transform.parent.gameObject;
+                            healSpell.healValue = heal.healValues;
+                            healSpell.Cast(stats.XP.Level);
                         } else { Destroy(target); }
                     }
                 },

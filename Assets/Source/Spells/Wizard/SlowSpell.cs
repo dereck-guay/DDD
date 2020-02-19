@@ -14,11 +14,13 @@ public class SlowSpell : MonoBehaviour
     private int playerLevel;
     private bool isActive;
 
-    public void Cast()
+    public void Cast(int level)
     {
+        Debug.Log(target.GetComponent<EffectHandlerComponent>().player.stats.Speed.Current);
         target.GetComponent<EffectHandlerComponent>().ApplyEffect((int)ModifiableStats.Speed, slowValue);
-        playerLevel = GetComponent<XP>().Level;
+        playerLevel = level;
         isActive = true;
+        Debug.Log(target.GetComponent<EffectHandlerComponent>().player.stats.Speed.Current);
     }
 
     private void Update()
