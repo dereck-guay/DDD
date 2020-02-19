@@ -6,7 +6,7 @@ using UnityEngine;
 using Miscellaneous;
 using Interfaces;
 
-public class HPComponent : MonoBehaviour, IModifiableStat, IRegenerativeStat
+public class HP : IModifiableStat
 {
     float @base;
     float current;
@@ -39,19 +39,15 @@ public class HPComponent : MonoBehaviour, IModifiableStat, IRegenerativeStat
             current = value;
         }
     }
+    public HP(float hPBase, float hPRegen)
+    {
+        Base = hPBase;
+        Current = hPBase;
+        HPRegen = hPRegen;
+    }
     public string Name = "HP";
     public Action OnDeath { get; set; }
     public Action OnTakeDamage { get; set; }
-    private void Update()
-    {
-        Regen(Time.deltaTime);
-    }
-    public void ApplyStats(float iBase, float iRegen)
-    {
-        Base = iBase;
-        Current = iBase;
-        HPRegen = iRegen;
-    }
     public void TakeDamage(float damage) => Current -= damage;
     public void Heal(float hPToHeal) => Current += hPToHeal;
     public void Regen(float time) => Current += time * HPRegen;

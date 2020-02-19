@@ -5,7 +5,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using Miscellaneous;
 using Interfaces;
-public class XPComponent : MonoBehaviour
+public class XP
 {
     public float Current { get; set; }
     public int Level { get; } // Level is going to be calculated with xp, can't be set.

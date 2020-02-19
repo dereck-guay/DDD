@@ -1,18 +1,21 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using System.Text;
+using System;
 using UnityEngine;
 using Miscellaneous;
 using Interfaces;
-
-
-public class AtkDamageComponent : MonoBehaviour, IModifiableStat //auto-attack
+public class Speed : IModifiableStat
 {
     public float Base { get; set; }
     public float Current { get; set; }
-    public string Name = "Auto-Attack Damage";
+    public string Name = "Speed";
+    public Speed(float speedBase)
+    {
+        Base = speedBase;
+        Current = speedBase;
+    }
     public void ApplyModifier(float modifier) => Current *= modifier;
-    public void ApplyStats(float iBase) => Base = iBase;
     public void EndModifier(float modifier) => Current /= modifier;
     public override string ToString()
     {

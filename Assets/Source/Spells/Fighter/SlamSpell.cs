@@ -8,18 +8,18 @@ public class SlamSpell : MonoBehaviour
     public Vector3 position;
 
     private float[] cooldowns = { 10f, 9f, 8f };
-    private float currentLifeTime;
+    public float currentLifeTime;
     private int playerLevel;
     private bool isActive;
 
     public void Cast()
     {
+        Debug.Log("ÉPIC SLAM DUNK");
+
         if (position.magnitude >= range)
             position = position.normalized * range;
 
-        Debug.Log(position.ToString());
-
-        playerLevel = GetComponent<XPComponent>().Level;
+        playerLevel = GetComponent<XP>().Level;
         isActive = true;
     }
 

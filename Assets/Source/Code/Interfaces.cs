@@ -29,6 +29,6 @@ namespace Interfaces
     public interface ICaster
     {
         Spell[] Spells { get; }
-        ManaComponent Mana { get; }
+        Mana Mana { get; }
     }
 }

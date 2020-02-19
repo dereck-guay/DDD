@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using Enums;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -6,17 +7,17 @@ public class SlowSpell : MonoBehaviour
 {
     public GameObject target;
     public float slowValue;
+    public float[] effectDurations = { 2f, 4f, 6f };
 
     private float[] cooldowns = { 10f, 9f, 8f };
-    private float[] effectDurations = { 2f, 4f, 6f };
-    private float currentLifeTime;
+    public float currentLifeTime;
     private int playerLevel;
     private bool isActive;
 
     public void Cast()
     {
-        target.GetComponent<SpeedComponent>().ApplyModifier(slowValue);
-        playerLevel = GetComponent<XPComponent>().Level;
+        target.GetComponent<EffectHandlerComponent>().ApplyEffect((int)ModifiableStats.Speed, slowValue);
+        playerLevel = GetComponent<XP>().Level;
         isActive = true;
     }
 
@@ -26,7 +27,7 @@ public class SlowSpell : MonoBehaviour
             Destroy(this);
         else if(currentLifeTime >= effectDurations[playerLevel] && isActive)
         {
-            target.GetComponent<SpeedComponent>().EndModifier(slowValue);
+            target.GetComponent<EffectHandlerComponent>().EndEffect((int)ModifiableStats.Speed, slowValue);
             isActive = false;
         }
 

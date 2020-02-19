@@ -5,7 +5,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using Miscellaneous;
 using Interfaces;
-public class ManaComponent : MonoBehaviour, IModifiableStat, IRegenerativeStat
+public class Mana : IModifiableStat
 {
     float currentMana;
     float maxMana;
@@ -31,14 +31,17 @@ public class ManaComponent : MonoBehaviour, IModifiableStat, IRegenerativeStat
             maxMana = value;
         }
     }
+    public Mana(float manaBase, float manaRegen)
+    {
+        Base = manaBase;
+        Current = manaBase;
+        ManaRegen = manaRegen;
+    }
     public string Name = "Mana";
-    private void Update() => Regen(Time.deltaTime);
     public void UseMana(float manaUsed) => Current -= manaUsed;
     public void ApplyModifier(float modifier) => ManaRegen *= modifier;
     public void EndModifier(float modifier) => ManaRegen /= modifier;
     public void Regen(float time) => Current += ManaRegen * time;
-    public void ApplyStats(float iBase, float iRegen)
-    { Base = iBase; ManaRegen = iRegen; }
     public override string ToString()
     {
         StringBuilder sb = new StringBuilder();
