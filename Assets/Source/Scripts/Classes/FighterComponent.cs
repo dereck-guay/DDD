@@ -6,40 +6,53 @@ using Miscellaneous;
 using System.Text;
 using Interfaces;
 
-[RequireComponent(typeof(AtkDamage))]
-[RequireComponent(typeof(AtkSpeed))]
-[RequireComponent(typeof(HP))]
-[RequireComponent(typeof(Mana))]
-[RequireComponent(typeof(Speed))]
-[RequireComponent(typeof(XP))]
 public class FighterComponent : PlayerMonoBehaviour
 {
+    [System.Serializable]
+    public class StatsInit
+    {
+        public float attackDamage;
+        public float attackSpeed;
+        public float maxHp;
+        public float hpRegen;
+        public float maxMana;
+        public float manaRegen;
+        public float range;
+        public float speed;
+
+    };
+    [Header("Stats")]
+    public StatsInit statsInit;
+
+    [Header("Inputs")]
     public KeyCode[] inputs;
-    private KeyBindings keyBindings;
-    private IModifiableStat[] characterStats;
 
     [HideInInspector]
     public bool spellLocked = false;
 
-    // Spell Attr
-    public float slamRange;
+    
+    [System.Serializable]
+    public class Slam {
+        public float range;
+    };
 
-    // Character Stats
-    private AtkSpeed AtkSpeed;
-    private AtkDamage AtkDamage;
-    private HP HP;
-    private Mana Mana;
-    private Speed Speed;
-    private XP XP;
+    [Header("Spell Settings")]
+    public Slam slam;
+
+    private KeyBindings keyBindings;
 
     private void Awake()
     {
-        AtkDamage = GetComponent<AtkDamage>();
-        AtkSpeed = GetComponent<AtkSpeed>();
-        HP = GetComponent<HP>();
-        Mana = GetComponent<Mana>();
-        Speed = GetComponent<Speed>();
-        XP = GetComponent<XP>();
+        stats = new Stats(
+            statsInit.attackDamage,
+            statsInit.attackSpeed,
+            statsInit.maxHp,
+            statsInit.hpRegen,
+            statsInit.maxMana,
+            statsInit.manaRegen,
+            statsInit.range,
+            statsInit.speed
+        );
 
         keyBindings = new KeyBindings(
             new Action[]
@@ -52,7 +65,7 @@ public class FighterComponent : PlayerMonoBehaviour
                     if (! IsOnCooldown(typeof(SlamSpell)))
                     {
                         var slamSpell = gameObject.AddComponent<SlamSpell>();
-                        slamSpell.range = slamRange;
+                        slamSpell.range = slam.range;
                         slamSpell.position = GetMousePositionOn2DPlane();
                         slamSpell.Cast();
                         // Pour pas que le player puisse bouger pendant l'ainimation du spell
@@ -62,27 +75,15 @@ public class FighterComponent : PlayerMonoBehaviour
             }, inputs
         );
     }
-
-    private void Start() => ApplyAllStats();
     private void Update()
     {
         if (! spellLocked)
             keyBindings.CallBindings();
     }
 
-    private void ApplyAllStats()
-    {
-        AtkSpeed.ApplyStats(20);
-        AtkDamage.ApplyStats(30);
-        HP.ApplyStats(50, 3);
-        Mana.ApplyStats(60, 2);
-        Speed.ApplyStats(20);
-        XP.Current = 0;
-    }
-
     private void Move(Vector3 direction)
     {
         transform.LookAt(transform.position + direction);
-        transform.Translate(direction * Speed.Current * Time.deltaTime, Space.World);
+        transform.Translate(direction * stats.Speed.Current * Time.deltaTime, Space.World);
     }
 }

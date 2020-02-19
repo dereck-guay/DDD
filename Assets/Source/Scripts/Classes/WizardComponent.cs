@@ -5,44 +5,56 @@ using UnityEngine;
 using Miscellaneous;
 using System.Text;
 using Interfaces;
-
-[RequireComponent(typeof(AtkDamage))]
-[RequireComponent(typeof(AtkSpeed))]
-[RequireComponent(typeof(HP))]
-[RequireComponent(typeof(Mana))]
-[RequireComponent(typeof(Speed))]
-[RequireComponent(typeof(XP))]
 public class WizardComponent : PlayerMonoBehaviour
 {
+    [System.Serializable]
+    public class StatsInit
+    {
+        public float attackDamage;
+        public float attackSpeed;
+        public float maxHp;
+        public float hpRegen;
+        public float maxMana;
+        public float manaRegen;
+        public float range;
+        public float speed;
+
+    };
+    [Header("Stats")]
+    public StatsInit statsInit;
+
+    [Header("Inputs")]
     public KeyCode[] inputs;
-    private KeyBindings keyBindings;
-    private IModifiableStat[] characterStats;
 
-    // Spell Attr
+    [System.Serializable]
+    public class Fireball
+    {
+        public GameObject fireballPrefab;
+    };
+    [System.Serializable]
+    public class Slow
+    {
+        public float slowValue;
+    };
+
     [Header("Spell Settings")]
+    public Fireball fireball;
+    public Slow slow;
 
-    [Header("Fireball Spell")]
-    public GameObject fireballPrefab;
-
-    [Header("Slow Spell")]
-    public float slowValue;
-
-    // Character Stats
-    private AtkSpeed AtkSpeed;
-    private AtkDamage AtkDamage;
-    private HP HP;
-    private Mana Mana;
-    private Speed Speed;
-    private XP XP;
+    private KeyBindings keyBindings;
 
     private void Awake()
     {
-        AtkDamage = GetComponent<AtkDamage>();
-        AtkSpeed = GetComponent<AtkSpeed>();
-        HP = GetComponent<HP>();
-        Mana = GetComponent<Mana>();
-        Speed = GetComponent<Speed>();
-        XP = GetComponent<XP>();
+        stats = new Stats(
+                statsInit.attackDamage,
+                statsInit.attackSpeed,
+                statsInit.maxHp,
+                statsInit.hpRegen,
+                statsInit.maxMana,
+                statsInit.manaRegen,
+                statsInit.range,
+                statsInit.speed
+        );
 
         keyBindings = new KeyBindings(
             new Action[]
@@ -56,7 +68,7 @@ public class WizardComponent : PlayerMonoBehaviour
                    if (! IsOnCooldown(typeof(FireballSpell)))
                     {
                         var fireballSpell = gameObject.AddComponent<FireballSpell>();
-                        fireballSpell.fireballPrefab = fireballPrefab;
+                        fireballSpell.fireballPrefab = fireball.fireballPrefab;
                         fireballSpell.direction = GetMouseDirection();
                         fireballSpell.Cast();
                     }
@@ -70,31 +82,25 @@ public class WizardComponent : PlayerMonoBehaviour
                         {
                             // Get parent object because the collider is in the body of the character.
                             slowSpell.target = target.transform.parent.gameObject;
-                            slowSpell.slowValue = slowValue;
+                            slowSpell.slowValue = slow.slowValue;
                             slowSpell.Cast();
                         } else { Destroy(target); }
                     }
+                },
+                () => {
+                    Debug.Log("3");
+                },
+                () => {
+                    Debug.Log("4");
                 }
             }, inputs
         );
     }
 
-    private void Start() => ApplyAllStats();
-
-    private void ApplyAllStats()
-    {
-        AtkSpeed.ApplyStats(15);
-        AtkDamage.ApplyStats(10);
-        HP.ApplyStats(20, 1);
-        Mana.ApplyStats(100, 5);
-        Speed.ApplyStats(27);
-        XP.Current = 0;
-    }
-
     private void Move(Vector3 direction)
     {
         transform.LookAt(transform.position + direction);
-        transform.Translate(direction * Speed.Current * Time.deltaTime, Space.World);
+        transform.Translate(direction * stats.Speed.Current * Time.deltaTime, Space.World);
     }
 
     private void AutoAttack()

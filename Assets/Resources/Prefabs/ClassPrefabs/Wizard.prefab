@@ -158,7 +158,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 13c3d932dc0026949a1b803e1f66d951, type: 2}
+  - {fileID: 2100000, guid: 814e445f931412c44ad0dc43079f28f3, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -202,12 +202,7 @@ GameObject:
   m_Component:
   - component: {fileID: 3775914533828635212}
   - component: {fileID: 8654396917311496859}
-  - component: {fileID: 5582899320147897936}
-  - component: {fileID: -2287394507625315175}
-  - component: {fileID: -9146513884787911851}
-  - component: {fileID: -8017820587602941485}
-  - component: {fileID: -7787086493913193703}
-  - component: {fileID: 1251276784654716324}
+  - component: {fileID: -642070748268803513}
   - component: {fileID: 6085515682664728954}
   m_Layer: 0
   m_Name: Wizard
@@ -250,11 +245,22 @@ MonoBehaviour:
   rayCastHitLayers:
     serializedVersion: 2
     m_Bits: 256
+  statsInit:
+    attackDamage: 0
+    attackSpeed: 0
+    maxHp: 0
+    hpRegen: 0
+    maxMana: 0
+    manaRegen: 0
+    range: 0
+    speed: 0
   inputs: 430100007700000061000000730000006400000031000000320000003300000034000000
-  fireballPrefab: {fileID: 3649683291444178571, guid: d094952558deb094c859cab0eb697499,
-    type: 3}
-  slowValue: 0
---- !u!114 &5582899320147897936
+  fireball:
+    fireballPrefab: {fileID: 3649683291444178571, guid: d094952558deb094c859cab0eb697499,
+      type: 3}
+  slow:
+    slowValue: 0.8
+--- !u!114 &-642070748268803513
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -263,75 +269,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 2594412224279639478}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7141f91011bb2df4791faca5751d0711, type: 3}
+  m_Script: {fileID: 11500000, guid: 5cd2e3005b2a344479108480710813ba, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Name: Auto-Attack Damage
---- !u!114 &-2287394507625315175
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2594412224279639478}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 899b5c911bf75b5469a8fddac826ef7a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  Name: Attack Speed
---- !u!114 &-9146513884787911851
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2594412224279639478}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4708e87c88404d348b3ae9f69303006b, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  Name: HP
---- !u!114 &-8017820587602941485
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2594412224279639478}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2a9eb8152e219534e9a3becf29b57adb, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  Name: Mana
---- !u!114 &-7787086493913193703
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2594412224279639478}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 38f06a408945bb141a62a77fddf75e00, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  Name: Speed
---- !u!114 &1251276784654716324
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2594412224279639478}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 19c4e8e7f6f391742877d28ac5d974a5, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  Name: XP
+  player: {fileID: 8654396917311496859}
 --- !u!54 &6085515682664728954
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -407,7 +348,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 13c3d932dc0026949a1b803e1f66d951, type: 2}
+  - {fileID: 2100000, guid: 814e445f931412c44ad0dc43079f28f3, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -500,7 +441,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 13c3d932dc0026949a1b803e1f66d951, type: 2}
+  - {fileID: 2100000, guid: 814e445f931412c44ad0dc43079f28f3, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -646,7 +587,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 13c3d932dc0026949a1b803e1f66d951, type: 2}
+  - {fileID: 2100000, guid: 814e445f931412c44ad0dc43079f28f3, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0

@@ -6,7 +6,7 @@ using UnityEngine;
 using Miscellaneous;
 using Interfaces;
 
-public class AtkSpeed
+public class AtkSpeed : IModifiableStat
 {
     float baseAtkSpeed;
     public float Base

@@ -5,7 +5,7 @@ using System;
 using UnityEngine;
 using Miscellaneous;
 using Interfaces;
-public class Speed
+public class Speed : IModifiableStat
 {
     public float Base { get; set; }
     public float Current { get; set; }

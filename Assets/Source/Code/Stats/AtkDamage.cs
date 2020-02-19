@@ -6,7 +6,7 @@ using Miscellaneous;
 using Interfaces;
 
 
-public class AtkDamage //auto-attack
+public class AtkDamage : IModifiableStat //auto-attack
 {
     public float Base { get; set; }
     public float Current { get; set; }

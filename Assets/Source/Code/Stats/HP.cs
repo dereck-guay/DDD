@@ -6,7 +6,7 @@ using UnityEngine;
 using Miscellaneous;
 using Interfaces;
 
-public class HP : IModifiableStat, IRegenerativeStat
+public class HP : IModifiableStat
 {
     float @base;
     float current;

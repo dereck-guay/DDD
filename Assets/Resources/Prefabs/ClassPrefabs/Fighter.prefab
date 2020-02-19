@@ -158,12 +158,6 @@ GameObject:
   m_Component:
   - component: {fileID: 7654609879356970206}
   - component: {fileID: 6049392572040121324}
-  - component: {fileID: 6894155751317530503}
-  - component: {fileID: 1432812096717526944}
-  - component: {fileID: 1017499781085396915}
-  - component: {fileID: 8339176304915168106}
-  - component: {fileID: 7214768641437415050}
-  - component: {fileID: 4591664962739972994}
   - component: {fileID: 981901871628974245}
   m_Layer: 0
   m_Name: Fighter
@@ -205,87 +199,19 @@ MonoBehaviour:
   rayCastHitLayers:
     serializedVersion: 2
     m_Bits: 0
+  statsInit:
+    attackDamage: 0
+    attackSpeed: 0
+    maxHp: 0
+    hpRegen: 0
+    maxMana: 0
+    manaRegen: 0
+    range: 0
+    speed: 0
   inputs: 
   spellLocked: 0
-  slamRange: 0
---- !u!114 &6894155751317530503
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7780825930841027337}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7141f91011bb2df4791faca5751d0711, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  Name: Auto-Attack Damage
---- !u!114 &1432812096717526944
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7780825930841027337}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 899b5c911bf75b5469a8fddac826ef7a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  Name: Attack Speed
---- !u!114 &1017499781085396915
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7780825930841027337}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4708e87c88404d348b3ae9f69303006b, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  Name: HP
---- !u!114 &8339176304915168106
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7780825930841027337}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2a9eb8152e219534e9a3becf29b57adb, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  Name: Mana
---- !u!114 &7214768641437415050
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7780825930841027337}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 38f06a408945bb141a62a77fddf75e00, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  Name: Speed
---- !u!114 &4591664962739972994
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7780825930841027337}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 19c4e8e7f6f391742877d28ac5d974a5, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  Name: XP
+  slam:
+    range: 0
 --- !u!54 &981901871628974245
 Rigidbody:
   m_ObjectHideFlags: 0

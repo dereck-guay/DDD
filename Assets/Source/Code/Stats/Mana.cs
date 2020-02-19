@@ -5,7 +5,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using Miscellaneous;
 using Interfaces;
-public class Mana
+public class Mana : IModifiableStat
 {
     float currentMana;
     float maxMana;

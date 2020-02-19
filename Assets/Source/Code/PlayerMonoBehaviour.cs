@@ -7,7 +7,8 @@ public abstract class PlayerMonoBehaviour : MonoBehaviour
 {
     public LayerMask selectableEntities;
     public LayerMask rayCastHitLayers;
-
+    public Stats stats;
+    
     protected bool IsOnCooldown(Type spellComponent) => GetComponent(spellComponent) != null;
 
     protected Vector3 GetMouseDirection() =>
