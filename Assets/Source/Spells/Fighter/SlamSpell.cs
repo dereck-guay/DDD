@@ -12,14 +12,14 @@ public class SlamSpell : MonoBehaviour
     private int playerLevel;
     private bool isActive;
 
-    public void Cast()
+    public void Cast(int level)
     {
         Debug.Log("ÉPIC SLAM DUNK");
 
         if (position.magnitude >= range)
             position = position.normalized * range;
 
-        playerLevel = GetComponent<XP>().Level;
+        playerLevel = level;
         isActive = true;
     }
 

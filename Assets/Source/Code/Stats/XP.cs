@@ -7,11 +7,38 @@ using Miscellaneous;
 using Interfaces;
 public class XP
 {
-    public float Current { get; set; }
-    public int Level { get; } // Level is going to be calculated with xp, can't be set.
-
+    int level;
+    int maxLevel = 4;
+    readonly float[] requiredXPPerLevel = new float[] { 1,2,3 };
+    public float Current { get; private set; }
+    public int Level
+    {
+        get { return level; }
+        private set
+        {
+            if (value > maxLevel)
+                Debug.Log("Player is already max level.");
+            else
+                level = value;
+        }
+    }
+    public XP()
+    {
+        Current = 0;
+        Level = 1;
+    }
+    void AddXP(float value)
+    {
+        if (Current + value > requiredXPPerLevel[Level - 1])
+        {
+            ++Level;
+            Current += requiredXPPerLevel[Level];
+            value -= requiredXPPerLevel[Level];
+            AddXP(value);
+        }
+        else { Current += value; }
+    }
     public string Name = "XP";
-    public void AddXP(float xpAmount) => Current += xpAmount;
     public override string ToString()
     {
         StringBuilder sb = new StringBuilder();
