@@ -6,7 +6,7 @@ using UnityEngine;
 using Miscellaneous;
 using Interfaces;
 
-public class AtkSpeedComponent : MonoBehaviour, IModifiableStat
+public class AtkSpeed
 {
     float baseAtkSpeed;
     public float Base
@@ -21,9 +21,13 @@ public class AtkSpeedComponent : MonoBehaviour, IModifiableStat
     }
     public float Current { get; set; }
     public string Name = "Attack Speed";
+    public AtkSpeed(float atkSpeedBase)
+    {
+        Base = atkSpeedBase;
+        Current = atkSpeedBase;
+    }
     public void ApplyModifier(float modifier) => Current *= modifier;
     public void EndModifier(float modifier) => Current /= modifier;
-    public void ApplyStats(float iBase) => Base = iBase;
     public override string ToString()
     {
         StringBuilder sb = new StringBuilder();

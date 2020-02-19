@@ -19,7 +19,7 @@ public class SlamSpell : MonoBehaviour
         if (position.magnitude >= range)
             position = position.normalized * range;
 
-        playerLevel = GetComponent<XPComponent>().Level;
+        playerLevel = GetComponent<XP>().Level;
         isActive = true;
     }
 

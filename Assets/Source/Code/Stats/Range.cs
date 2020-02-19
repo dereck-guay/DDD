@@ -1,22 +1,20 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
-using System.Text;
-using System;
 using UnityEngine;
-using Miscellaneous;
-using Interfaces;
-public class SpeedComponent : MonoBehaviour, IModifiableStat
+using System.Text;
+
+public class Range
 {
     public float Base { get; set; }
     public float Current { get; set; }
-    public string Name = "Speed";
+    public string Name = "Range";
+    public Range(float rangeBase)
+    {
+        Base = rangeBase;
+        Current = rangeBase;
+    }
     public void ApplyModifier(float modifier) => Current *= modifier;
     public void EndModifier(float modifier) => Current /= modifier;
-    public void ApplyStats(float iBase)
-    {
-        Base = iBase;
-        Current = iBase;
-    }
     public override string ToString()
     {
         StringBuilder sb = new StringBuilder();

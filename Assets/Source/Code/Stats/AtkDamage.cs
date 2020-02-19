@@ -6,13 +6,17 @@ using Miscellaneous;
 using Interfaces;
 
 
-public class AtkDamageComponent : MonoBehaviour, IModifiableStat //auto-attack
+public class AtkDamage //auto-attack
 {
     public float Base { get; set; }
     public float Current { get; set; }
     public string Name = "Auto-Attack Damage";
+    public AtkDamage(float damageBase)
+    {
+        Base = damageBase;
+        Current = damageBase;
+    }
     public void ApplyModifier(float modifier) => Current *= modifier;
-    public void ApplyStats(float iBase) => Base = iBase;
     public void EndModifier(float modifier) => Current /= modifier;
     public override string ToString()
     {

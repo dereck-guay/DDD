@@ -15,8 +15,8 @@ public class SlowSpell : MonoBehaviour
 
     public void Cast()
     {
-        target.GetComponent<SpeedComponent>().ApplyModifier(slowValue);
-        playerLevel = GetComponent<XPComponent>().Level;
+        target.GetComponent<Speed>().ApplyModifier(slowValue);
+        playerLevel = GetComponent<XP>().Level;
         isActive = true;
     }
 
@@ -26,7 +26,7 @@ public class SlowSpell : MonoBehaviour
             Destroy(this);
         else if(currentLifeTime >= effectDurations[playerLevel] && isActive)
         {
-            target.GetComponent<SpeedComponent>().EndModifier(slowValue);
+            target.GetComponent<Speed>().EndModifier(slowValue);
             isActive = false;
         }
 

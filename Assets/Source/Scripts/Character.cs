@@ -23,12 +23,12 @@ public class Character : MonoBehaviour
     }
     public Spell[] Spells;
 
-    public AtkSpeedComponent AtkSpeed;
-    public AtkDamageComponent AtkDamage;
-    public HPComponent HP;
-    public ManaComponent Mana;
-    public SpeedComponent Speed;
-    public XPComponent XP;
+    public AtkSpeed AtkSpeed;
+    public AtkDamage AtkDamage;
+    public HP HP;
+    public Mana Mana;
+    public Speed Speed;
+    public XP XP;
 
     GameObject ClassPrefab;
     IModifiableStat[] ClassSpecificStats;

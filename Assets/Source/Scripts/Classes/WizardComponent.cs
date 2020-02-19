@@ -6,12 +6,12 @@ using Miscellaneous;
 using System.Text;
 using Interfaces;
 
-[RequireComponent(typeof(AtkDamageComponent))]
-[RequireComponent(typeof(AtkSpeedComponent))]
-[RequireComponent(typeof(HPComponent))]
-[RequireComponent(typeof(ManaComponent))]
-[RequireComponent(typeof(SpeedComponent))]
-[RequireComponent(typeof(XPComponent))]
+[RequireComponent(typeof(AtkDamage))]
+[RequireComponent(typeof(AtkSpeed))]
+[RequireComponent(typeof(HP))]
+[RequireComponent(typeof(Mana))]
+[RequireComponent(typeof(Speed))]
+[RequireComponent(typeof(XP))]
 public class WizardComponent : PlayerMonoBehaviour
 {
     public KeyCode[] inputs;
@@ -28,21 +28,21 @@ public class WizardComponent : PlayerMonoBehaviour
     public float slowValue;
 
     // Character Stats
-    private AtkSpeedComponent AtkSpeed;
-    private AtkDamageComponent AtkDamage;
-    private HPComponent HP;
-    private ManaComponent Mana;
-    private SpeedComponent Speed;
-    private XPComponent XP;
+    private AtkSpeed AtkSpeed;
+    private AtkDamage AtkDamage;
+    private HP HP;
+    private Mana Mana;
+    private Speed Speed;
+    private XP XP;
 
     private void Awake()
     {
-        AtkDamage = GetComponent<AtkDamageComponent>();
-        AtkSpeed = GetComponent<AtkSpeedComponent>();
-        HP = GetComponent<HPComponent>();
-        Mana = GetComponent<ManaComponent>();
-        Speed = GetComponent<SpeedComponent>();
-        XP = GetComponent<XPComponent>();
+        AtkDamage = GetComponent<AtkDamage>();
+        AtkSpeed = GetComponent<AtkSpeed>();
+        HP = GetComponent<HP>();
+        Mana = GetComponent<Mana>();
+        Speed = GetComponent<Speed>();
+        XP = GetComponent<XP>();
 
         keyBindings = new KeyBindings(
             new Action[]

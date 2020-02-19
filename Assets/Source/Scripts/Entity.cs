@@ -4,8 +4,11 @@ using UnityEngine;
 
 public class Entity : MonoBehaviour
 {
-    public HPComponent HP { get; protected set; }
-    
+    public AtkDamage AtkDamage { get; protected set; }
+    public AtkSpeed AtkSpeed { get; protected set; }
+    public HP HP { get; protected set; }
+    public Mana Mana { get; protected set; }
+    public Speed Speed { get; protected set; }
     void Start()
     {
         

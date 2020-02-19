@@ -16,7 +16,7 @@ public class SpellTester : MonoBehaviour, ICaster
 
     public Spell[] Spells => throw new System.NotImplementedException();
 
-    public ManaComponent Mana => throw new System.NotImplementedException();
+    public Mana Mana => throw new System.NotImplementedException();
 
     #region Methods
     public void CastSpell(Spell spell)
