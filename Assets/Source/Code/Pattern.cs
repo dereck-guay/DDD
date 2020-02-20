@@ -37,7 +37,9 @@ public struct Pattern
    }
 
    //turns the 4 bools in a 4 digits-long string
-   public override string ToString()
+   public override string ToString() => ToString(north, west, east, south);
+
+   public static string ToString(bool north, bool west, bool east, bool south)
    {
       return (north ? "1" : "0") + (west ? "1" : "0") + (east ? "1" : "0") + (south ? "1" : "0");
    }

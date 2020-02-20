@@ -25,7 +25,11 @@ public class WizardComponent : PlayerMonoBehaviour
 
     [Header("Inputs")]
     public KeyCode[] inputs;
-
+    [System.Serializable]
+    public class AutoAttack
+    {
+        public GameObject autoAttackPrefab;
+    };
     [System.Serializable]
     public class Fireball
     {
@@ -43,6 +47,7 @@ public class WizardComponent : PlayerMonoBehaviour
     };
 
     [Header("Spell Settings")]
+    public AutoAttack autoAttack;
     public Fireball fireball;
     public Slow slow;
     public Heal heal;
@@ -63,7 +68,19 @@ public class WizardComponent : PlayerMonoBehaviour
         keyBindings = new KeyBindings(
             new Action[]
             {
-                () => AutoAttack(),
+                () => {
+                    if (! IsOnCooldown(typeof(AutoAttackSpell)))
+                    {
+                        var target = GetEntityAtMousePosition();
+                        if (target && TargetIsWithinRange(target, stats.Range.Current))
+                        {
+                            var autoAttackSpell = gameObject.AddComponent<AutoAttackSpell>();
+                            autoAttackSpell.autoAttackPrefab = autoAttack.autoAttackPrefab;
+                            autoAttackSpell.target = target;
+                            autoAttackSpell.Cast(stats.AtkSpeed.Current, transform.position);
+                        }
+                    }
+                },
                 () => Move(Vector3.forward),
                 () => Move(Vector3.left),
                 () => Move(Vector3.back),
@@ -106,9 +123,6 @@ public class WizardComponent : PlayerMonoBehaviour
                     }
                 },
                 () => {
-                    Debug.Log("3");
-                },
-                () => {
                     Debug.Log("4");
                 }
             }, inputs
@@ -120,15 +134,13 @@ public class WizardComponent : PlayerMonoBehaviour
         transform.LookAt(transform.position + direction);
         transform.Translate(direction * stats.Speed.Current * Time.deltaTime, Space.World);
     }
+    bool TargetIsWithinRange(GameObject target, float range) => (target.transform.position - transform.position).magnitude < range;
 
-    private void AutoAttack()
+    private void Update()
     {
-        var target = GetEntityAtMousePosition();
-        if (target)
-        {
-            Debug.Log(target.transform.parent.gameObject.name);
-        }
+        var directionToLookAt = transform.position + GetMouseDirection();
+        directionToLookAt.y = transform.position.y;
+        transform.LookAt(directionToLookAt);
+        keyBindings.CallBindings();
     }
-
-    private void Update() => keyBindings.CallBindings();
 }
