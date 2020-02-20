@@ -6,7 +6,7 @@ public class FollowProjectile : MonoBehaviour
 {
     public Vector3 direction = Vector3.zero;
     public GameObject target;
-    public float speed = 5f;
+    public float speed;
 
     void Update()
     {

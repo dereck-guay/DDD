@@ -53,6 +53,7 @@ public class WizardComponent : PlayerMonoBehaviour
     public Heal heal;
 
     private KeyBindings keyBindings;
+    private Rigidbody rigidBody;
     private void Awake()
     {
         stats = new Stats(
@@ -71,7 +72,7 @@ public class WizardComponent : PlayerMonoBehaviour
                 () => {
                     if (! IsOnCooldown(typeof(AutoAttackSpell)))
                     {
-                        var target = GetEntityAtMousePosition();
+                        var target = GetEntityAtMousePosition().GetComponentInParent<Transform>().parent.gameObject;
                         if (target && TargetIsWithinRange(target, stats.Range.Current))
                         {
                             var autoAttackSpell = gameObject.AddComponent<AutoAttackSpell>();
@@ -128,6 +129,10 @@ public class WizardComponent : PlayerMonoBehaviour
             }, inputs
         );
     }
+    private void Start()
+    {
+        rigidBody = GetComponentInChildren<Rigidbody>();
+    }
 
     private void Move(Vector3 direction)
     {
@@ -141,6 +146,7 @@ public class WizardComponent : PlayerMonoBehaviour
         var directionToLookAt = transform.position + GetMouseDirection();
         directionToLookAt.y = transform.position.y;
         transform.LookAt(directionToLookAt);
+        rigidBody.velocity = Vector3.zero;
         keyBindings.CallBindings();
     }
 }

@@ -142,7 +142,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 18cb9d1fac03b3c4db23b3213196c8c2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  collisionLayers: 090000000a000000
+  collisionLayers: 09000000
+  triggerLayers: 0c000000
   collideEffect: {fileID: 3090400820553324667, guid: 21d902fbe46554945986244484e5471c,
     type: 3}
 --- !u!54 &7236893184038130240

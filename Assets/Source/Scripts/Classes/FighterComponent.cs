@@ -40,7 +40,7 @@ public class FighterComponent : PlayerMonoBehaviour
     public Slam slam;
 
     private KeyBindings keyBindings;
-
+    private Rigidbody rigidBody;
     private void Awake()
     {
         stats = new Stats(
@@ -74,10 +74,20 @@ public class FighterComponent : PlayerMonoBehaviour
             }, inputs
         );
     }
+    private void Start()
+    {
+        rigidBody = GetComponentInChildren<Rigidbody>();
+    }
     private void Update()
     {
-        if (! spellLocked)
+        if (!spellLocked)
+        {
+            var directionToLookAt = transform.position + GetMouseDirection();
+            directionToLookAt.y = transform.position.y;
+            transform.LookAt(directionToLookAt);
+            rigidBody.velocity = Vector3.zero;
             keyBindings.CallBindings();
+        }
     }
 
     private void Move(Vector3 direction)
