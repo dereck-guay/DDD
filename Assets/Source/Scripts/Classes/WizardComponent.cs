@@ -53,10 +53,9 @@ public class WizardComponent : PlayerMonoBehaviour
     public Heal heal;
 
     private KeyBindings keyBindings;
-    private Rigidbody rigidBody;
     private bool canAttack;
     private float timeSinceLastAttack;
-    private Collider colliderToAvoid;
+    private Rigidbody rigidbody;
     private float TimeSinceLastAttack
     {
         get { return timeSinceLastAttack; }
@@ -107,7 +106,6 @@ public class WizardComponent : PlayerMonoBehaviour
                     {
                         var fireballSpell = gameObject.AddComponent<FireballSpell>();
                         fireballSpell.fireballPrefab = fireball.fireballPrefab;
-                        fireballSpell.colliderToAvoid = colliderToAvoid;
                         fireballSpell.direction = GetMouseDirection();
                         fireballSpell.Cast(stats.XP.Level);
                         
@@ -149,9 +147,7 @@ public class WizardComponent : PlayerMonoBehaviour
     }
     private void Start()
     {
-        rigidBody = GetComponentInChildren<Rigidbody>();
-        colliderToAvoid = GetComponentInChildren<TriggerBodyComponent>().triggerCollider;
-        Debug.Log(colliderToAvoid);
+        rigidbody = GetComponentInChildren<Rigidbody>();
     }
 
     private void Move(Vector3 direction)
@@ -165,7 +161,7 @@ public class WizardComponent : PlayerMonoBehaviour
     {
         DirectCharacter();
         TimeSinceLastAttack += Time.deltaTime;
-        rigidBody.velocity = Vector3.zero; //Stop rigidbodies from moving the character
+        rigidbody.velocity = Vector3.zero; //Stop rigidbodies from moving the character
         keyBindings.CallBindings();
     }
     void DirectCharacter() //make the character face the direction of the mouse

@@ -6,7 +6,6 @@ public class FireballSpell : MonoBehaviour
 {
     public Vector3 direction;
     public GameObject fireballPrefab;
-    public Collider colliderToAvoid;
 
     private float[] cooldowns = { 3f, 2f, 1f };
     public float currentLifeTime;
@@ -16,7 +15,6 @@ public class FireballSpell : MonoBehaviour
     {
         var spawnPosition = transform.position + 1.5f * direction;
         var fireball = Instantiate(fireballPrefab, spawnPosition, Quaternion.identity);
-        fireball.GetComponent<FireballCollision>().colliderToAvoid = colliderToAvoid;
         fireball.GetComponent<MoveTowardsDirection>().direction = direction;
         spellLevel = level;
     }
