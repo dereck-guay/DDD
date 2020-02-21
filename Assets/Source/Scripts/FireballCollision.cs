@@ -7,15 +7,18 @@ public class FireballCollision : MonoBehaviour
     public int[] collisionLayers;
     public int[] triggerLayers;
     public ParticleSystem collideEffect;
+    public Collider colliderToAvoid;
     private void OnTriggerEnter(Collider other)
     {
-        if (TriggersApropriateLayer(other.gameObject.layer))
+        if (TriggersApropriateLayer(other.gameObject.layer) && other != colliderToAvoid)
             Explode();
+        Debug.Log(other);
+        Debug.Log(other.gameObject.layer);
     }
     private void OnCollisionEnter(Collision collision)
     {
-        if (CollidesWithApropriateLayer(collision.collider.gameObject.layer))
-            Explode();
+        //if (CollidesWithApropriateLayer(collision.collider.gameObject.layer) && collision.collider != colliderToAvoid)
+            //Explode();
     }
     private void Explode()
     {

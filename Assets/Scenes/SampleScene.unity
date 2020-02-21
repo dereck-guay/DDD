@@ -786,6 +786,16 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 3939576513167422918, guid: b3a55247596b7ee4cbe346ea4a417ead,
+        type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4430119355430481879, guid: b3a55247596b7ee4cbe346ea4a417ead,
+        type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 4780941119235396184, guid: b3a55247596b7ee4cbe346ea4a417ead,
         type: 3}
       propertyPath: m_AnchorMax.x
@@ -877,7 +887,8 @@ PrefabInstance:
       propertyPath: statsInit.attackSpeed
       value: 0.64
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 4430119355430481879, guid: b3a55247596b7ee4cbe346ea4a417ead, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: b3a55247596b7ee4cbe346ea4a417ead, type: 3}
 --- !u!1 &1252478508
 GameObject:

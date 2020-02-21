@@ -54,6 +54,19 @@ public class WizardComponent : PlayerMonoBehaviour
 
     private KeyBindings keyBindings;
     private Rigidbody rigidBody;
+    private bool canAttack;
+    private float timeSinceLastAttack;
+    private Collider colliderToAvoid;
+    private float TimeSinceLastAttack
+    {
+        get { return timeSinceLastAttack; }
+        set
+        {
+            if(value > 1/stats.AtkSpeed.Current)
+                canAttack = true;
+            timeSinceLastAttack = value;
+        }
+    }
     private void Awake()
     {
         stats = new Stats(
@@ -66,19 +79,22 @@ public class WizardComponent : PlayerMonoBehaviour
                 statsInit.range,
                 statsInit.speed
         );
+        canAttack = true;
+        TimeSinceLastAttack = 0;
         keyBindings = new KeyBindings(
             new Action[]
             {
                 () => {
-                    if (! IsOnCooldown(typeof(AutoAttackSpell)))
+                    if (canAttack)
                     {
-                        var target = GetEntityAtMousePosition().GetComponentInParent<Transform>().parent.gameObject;
-                        if (target && TargetIsWithinRange(target, stats.Range.Current))
+                        var target = GetEntityAtMousePosition();
+                        if (target.GetComponentInParent<Transform>().parent.gameObject && TargetIsWithinRange(target, stats.Range.Current))
                         {
                             var autoAttackSpell = gameObject.AddComponent<AutoAttackSpell>();
                             autoAttackSpell.autoAttackPrefab = autoAttack.autoAttackPrefab;
-                            autoAttackSpell.target = target;
+                            autoAttackSpell.target = target.GetComponentInParent<Transform>().parent.gameObject;
                             autoAttackSpell.Cast(stats.AtkSpeed.Current, transform.position);
+                            canAttack = false; 
                         }
                     }
                 },
@@ -91,8 +107,10 @@ public class WizardComponent : PlayerMonoBehaviour
                     {
                         var fireballSpell = gameObject.AddComponent<FireballSpell>();
                         fireballSpell.fireballPrefab = fireball.fireballPrefab;
+                        fireballSpell.colliderToAvoid = colliderToAvoid;
                         fireballSpell.direction = GetMouseDirection();
                         fireballSpell.Cast(stats.XP.Level);
+                        
                     }
                 },
                 () => {
@@ -132,6 +150,8 @@ public class WizardComponent : PlayerMonoBehaviour
     private void Start()
     {
         rigidBody = GetComponentInChildren<Rigidbody>();
+        colliderToAvoid = GetComponentInChildren<TriggerBodyComponent>().triggerCollider;
+        Debug.Log(colliderToAvoid);
     }
 
     private void Move(Vector3 direction)
@@ -143,10 +163,15 @@ public class WizardComponent : PlayerMonoBehaviour
 
     private void Update()
     {
+        DirectCharacter();
+        TimeSinceLastAttack += Time.deltaTime;
+        rigidBody.velocity = Vector3.zero; //Stop rigidbodies from moving the character
+        keyBindings.CallBindings();
+    }
+    void DirectCharacter() //make the character face the direction of the mouse
+    {
         var directionToLookAt = transform.position + GetMouseDirection();
         directionToLookAt.y = transform.position.y;
         transform.LookAt(directionToLookAt);
-        rigidBody.velocity = Vector3.zero;
-        keyBindings.CallBindings();
     }
 }

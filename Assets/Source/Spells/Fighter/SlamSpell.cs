@@ -14,7 +14,6 @@ public class SlamSpell : MonoBehaviour
 
     public void Cast(int level)
     {
-        Debug.Log("ÉPIC SLAM DUNK");
 
         if (position.magnitude >= range)
             position = position.normalized * range;
