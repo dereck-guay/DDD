@@ -87,12 +87,13 @@ public class WizardComponent : PlayerMonoBehaviour
                     if (canAttack)
                     {
                         var target = GetEntityAtMousePosition();
-                        if (target.GetComponentInParent<Transform>().parent.gameObject && TargetIsWithinRange(target, stats.Range.Current))
+                        if (target && TargetIsWithinRange(target, stats.Range.Current))
                         {
                             var autoAttackSpell = gameObject.AddComponent<AutoAttackSpell>();
                             autoAttackSpell.autoAttackPrefab = autoAttack.autoAttackPrefab;
                             autoAttackSpell.target = target.GetComponentInParent<Transform>().parent.gameObject;
                             autoAttackSpell.Cast(stats.AtkSpeed.Current, transform.position);
+                            TimeSinceLastAttack = 0;
                             canAttack = false; 
                         }
                     }

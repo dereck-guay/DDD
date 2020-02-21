@@ -7,7 +7,7 @@ public class FireballSpell : MonoBehaviour
     public Vector3 direction;
     public GameObject fireballPrefab;
 
-    private float[] cooldowns = { 3f, 2f, 1f };
+    private readonly float[] cooldowns = { 3f, 2f, 1f };
     public float currentLifeTime;
     private int spellLevel;
 
@@ -21,7 +21,7 @@ public class FireballSpell : MonoBehaviour
 
     void Update()
     {
-        if (currentLifeTime >= cooldowns[spellLevel])
+        if (currentLifeTime >= cooldowns[spellLevel - 1])
             Destroy(this);
 
         currentLifeTime += Time.deltaTime;

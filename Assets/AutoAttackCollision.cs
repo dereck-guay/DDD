@@ -5,7 +5,7 @@ using UnityEngine;
 public class AutoAttackCollision : MonoBehaviour
 {
     public int[] collsionLayers;
-    private void OnCollisionEntre(Collider other)
+    private void OnTriggerEnter(Collider other)
     {
         if (CollidesWithAppropriateLayer(other.gameObject.layer))
             Destroy(gameObject);
@@ -14,11 +14,7 @@ public class AutoAttackCollision : MonoBehaviour
     {
         foreach (var layer in collsionLayers)
             if (layer == GOLayer)
-            {
-                Debug.Log("Allo esit de mongole?");
                 return true;
-            }
-
         return false;
     }
 }
