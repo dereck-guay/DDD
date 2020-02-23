@@ -11,6 +11,8 @@ namespace DungeonGeneration
    {
       static void Main(string[] args)
       {
+         
+
          int mapSize = 9;
 
          var map = new Map(mapSize);

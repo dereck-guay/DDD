@@ -35,7 +35,7 @@ namespace DungeonGeneration
          using (var sr = new StreamReader(RandomFile(isBossRoom)))
             fileData = sr.ReadToEnd();
 
-         var roomData = fileData.Replace('\r', ' ').Split(new char[] { '\t', '\n' });
+         var roomData = fileData.Replace("\r\n", "").TrimEnd('\t').Split('\t');
 
          for (byte b = 0; b < TileNumber; b++)
             roomLayout[b % Width, b / Width] = int.Parse(roomData[b]);

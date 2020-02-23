@@ -8,21 +8,9 @@ public class MapComponent : MonoBehaviour
 
    Map mapModel;
 
-   void Awake()
-   {
-      mapModel = new Map(mapSize);
-   }
-   // Start is called before the first frame update
-   void Start()
-   {
-      Instantiate();
-   }
+   void Awake() => mapModel = new Map(mapSize);
+   void Start() => Instantiate();
 
-   // Update is called once per frame
-   void Update()
-   {
-      
-   }
    public void Instantiate()
    {
       int posX, posY;

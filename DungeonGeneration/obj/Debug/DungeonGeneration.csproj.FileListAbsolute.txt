@@ -11,3 +11,10 @@ G:\Users\Yan-Éric\Desktop\Projet SIM\DungeonGeneration\obj\Debug\DungeonGenerat
 G:\Users\Yan-Éric\Desktop\Projet SIM\DungeonGeneration\obj\Debug\DungeonGeneration.csproj.CoreCompileInputs.cache
 G:\Users\Yan-Éric\Desktop\Projet SIM\DungeonGeneration\obj\Debug\DungeonGeneration.exe
 G:\Users\Yan-Éric\Desktop\Projet SIM\DungeonGeneration\obj\Debug\DungeonGeneration.pdb
+G:\Users\Yan-Éric\Desktop\DDD\DungeonGeneration\bin\Debug\DungeonGeneration.exe.config
+G:\Users\Yan-Éric\Desktop\DDD\DungeonGeneration\bin\Debug\DungeonGeneration.exe
+G:\Users\Yan-Éric\Desktop\DDD\DungeonGeneration\bin\Debug\DungeonGeneration.pdb
+G:\Users\Yan-Éric\Desktop\DDD\DungeonGeneration\obj\Debug\DungeonGeneration.csprojAssemblyReference.cache
+G:\Users\Yan-Éric\Desktop\DDD\DungeonGeneration\obj\Debug\DungeonGeneration.csproj.CoreCompileInputs.cache
+G:\Users\Yan-Éric\Desktop\DDD\DungeonGeneration\obj\Debug\DungeonGeneration.exe
+G:\Users\Yan-Éric\Desktop\DDD\DungeonGeneration\obj\Debug\DungeonGeneration.pdb

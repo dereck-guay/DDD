@@ -8,21 +8,10 @@ public class RoomComponent : MonoBehaviour
    const string MapPath = "Prefabs\\MapPrefabs";
 
    public Room roomModel;
-
-   //Object testWall;
+   
    Object[] prefabs;
 
-   void Awake()
-   {
-      prefabs = Resources.LoadAll(MapPath);
-      //testWall = (GameObject)Resources.Load("Prefabs\\MapPrefabs\\Wall");  //TEMP
-   }
-
-   // Start is called before the first frame update
-   void Start()
-   {
-      
-   }
+   void Awake() => prefabs = Resources.LoadAll(MapPath);
 
    public void Instantiate(int posX, int posY)
    {

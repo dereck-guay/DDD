@@ -9,26 +9,24 @@ using UnityEngine.UI;
 public struct Tile
 {
    public int Value { get; }
-   public string Name { get => texture.name; }
-   Texture texture;
+   public string Name { get => Sprite.name; }
+   public Sprite Sprite { get; }
 
-   public Tile(int valueI, Texture textureI)
+   public Tile(int valueI, Sprite spriteI)
    {
       Value = valueI;
-      texture = textureI;
+      Sprite = spriteI;
    }
 }
 
 public class RoomEditorComponent : MonoBehaviour
 {
    Tile[] tiles;
-
-   Tile currentTile;
-   public Tile CurrentTile { get => currentTile; }
+   public Tile CurrentTile { get; private set; }
 
    public string patternsPath, tilesPath;
 
-   public Button saveButton;
+   public Button saveButton, clearButton;
    public Toggle bossRoomToggle,
                  northToggle,
                  westToggle,
@@ -38,18 +36,24 @@ public class RoomEditorComponent : MonoBehaviour
 
    public TileMapEditorComponent tileMapEditor;
 
-   void Awake() => GenerateTiles(Resources.LoadAll<Texture>(tilesPath));
+   void Awake()
+   {
+      GenerateTiles(Resources.LoadAll<Sprite>(tilesPath));
+      CurrentTile = tiles[0];
+   }
 
    void Start()
    {
-      tileSelector.onValueChanged.AddListener(delegate { currentTile = tiles[tileSelector.value]; });
-      tileSelector.onValueChanged.AddListener(delegate { Debug.Log(CurrentTile.Value); });
+      tileSelector.onValueChanged.AddListener(delegate { CurrentTile = tiles[tileSelector.value]; });
       tileSelector.AddOptions(tiles.Select(tile => tile.Name).ToList());
 
       saveButton.onClick.AddListener(Save);
+      clearButton.onClick.AddListener(Clear);
+
+      Clear();
    }
 
-   void GenerateTiles(Texture[] sprites)
+   void GenerateTiles(Sprite[] sprites)
    {
       tiles = new Tile[sprites.Length];
 
@@ -59,11 +63,19 @@ public class RoomEditorComponent : MonoBehaviour
 
    void Save()
    {
-      using (var sw = new StreamWriter(SerializePath()))
+      var folder = SerializePath();
+
+      using (var sw = new StreamWriter(Path.Combine(folder, Directory.GetFiles(folder).Length.ToString())))
       {
          sw.Write(tileMapEditor.SerializeLayout());
          sw.Flush();
       }
+   }
+
+   void Clear()
+   {
+      tileMapEditor.Fill(tiles[0], false);
+      tileMapEditor.Fill(tiles[3], true);
    }
 
    string SerializePath()
