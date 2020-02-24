@@ -7,8 +7,6 @@ namespace Interfaces
 {
     public interface IPlayableClass : ICaster
     {
-        DictionaryCreator<Spell> SpellDictionary { get; }
-        IModifiableStat[] ClassStats { get; }
     }
     public interface IRegenerativeStat
     {
@@ -28,7 +26,5 @@ namespace Interfaces
     }
     public interface ICaster
     {
-        Spell[] Spells { get; }
-        Mana Mana { get; }
     }
 }
