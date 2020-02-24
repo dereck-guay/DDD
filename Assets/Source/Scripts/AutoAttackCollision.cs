@@ -8,7 +8,11 @@ public class AutoAttackCollision : MonoBehaviour
     private void OnTriggerEnter(Collider other)
     {
         if (CollidesWithAppropriateLayer(other.gameObject.layer))
+        {
             Destroy(gameObject);
+            other.GetComponentInParent<Stats>().HP.TakeDamage(4f);
+            Debug.Log(other.GetComponentInParent<Stats>().gameObject.GetComponent<PlayerMonoBehaviour>().name);
+        }
     }
     private bool CollidesWithAppropriateLayer(int GOLayer)
     {

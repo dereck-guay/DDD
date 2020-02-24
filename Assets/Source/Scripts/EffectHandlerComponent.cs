@@ -8,11 +8,11 @@ public class EffectHandlerComponent : MonoBehaviour
 
     public void ApplyEffect(int statIndex, float value)
     {
-        player.stats.ModifiableStats[statIndex].ApplyModifier(value);
+        player.entityStats.ModifiableStats[statIndex].ApplyModifier(value);
     }
 
     public void EndEffect(int statIndex, float value)
     {
-        player.stats.ModifiableStats[statIndex].EndModifier(value);
+        player.entityStats.ModifiableStats[statIndex].EndModifier(value);
     }
 }

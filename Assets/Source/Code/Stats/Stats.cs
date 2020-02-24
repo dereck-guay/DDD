@@ -5,7 +5,7 @@ using Interfaces;
 using Miscellaneous;
 
 [System.Serializable]
-public class Stats
+public class Stats : MonoBehaviour
 {
     public AtkDamage AtkDamage { get; private set; }
     public AtkSpeed AtkSpeed { get; private set; }
@@ -15,7 +15,7 @@ public class Stats
     public Speed Speed { get; private set; }
     public XP XP { get; private set; }
     public DictionaryCreator<IModifiableStat> ModifiableStats;
-    public Stats(float damageBase, float atkSpeedBase, float hPBase, float hPRegen, float manaBase, float manaRegen, float rangeBase, float speedBase)
+    public void ApplyStats(float damageBase, float atkSpeedBase, float hPBase, float hPRegen, float manaBase, float manaRegen, float rangeBase, float speedBase)
     {
         AtkDamage = new AtkDamage(damageBase);
         AtkSpeed = new AtkSpeed(atkSpeedBase);
@@ -34,9 +34,9 @@ public class Stats
         };
         ModifiableStats = new DictionaryCreator<IModifiableStat>(stats);
     }
-    public void Regen(float elaspedTime)
+    public void Update()
     {
-        HP.Regen(elaspedTime);
-        Mana.Regen(elaspedTime);
+        HP.Regen(Time.deltaTime);
+        Mana.Regen(Time.deltaTime);
     }
 }

@@ -160,6 +160,7 @@ GameObject:
   - component: {fileID: 6049392572040121324}
   - component: {fileID: 4561635763135994034}
   - component: {fileID: 981901871628974245}
+  - component: {fileID: 4266059329144098438}
   m_Layer: 0
   m_Name: Fighter
   m_TagString: Untagged
@@ -200,6 +201,7 @@ MonoBehaviour:
   rayCastHitLayers:
     serializedVersion: 2
     m_Bits: 0
+  stats: {fileID: 0}
   statsInit:
     attackDamage: 0
     attackSpeed: 0
@@ -242,3 +244,15 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 112
   m_CollisionDetection: 0
+--- !u!114 &4266059329144098438
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7780825930841027337}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 98537faed382937468f7b1f86ef62938, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

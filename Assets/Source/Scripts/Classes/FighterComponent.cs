@@ -5,7 +5,7 @@ using UnityEngine;
 using Miscellaneous;
 using System.Text;
 using Interfaces;
-
+[RequireComponent(typeof(Stats))]
 public class FighterComponent : PlayerMonoBehaviour
 {
     [System.Serializable]
@@ -43,16 +43,6 @@ public class FighterComponent : PlayerMonoBehaviour
     private Rigidbody rigidBody;
     private void Awake()
     {
-        stats = new Stats(
-            statsInit.attackDamage,
-            statsInit.attackSpeed,
-            statsInit.maxHp,
-            statsInit.hpRegen,
-            statsInit.maxMana,
-            statsInit.manaRegen,
-            statsInit.range,
-            statsInit.speed
-        );
         keyBindings = new KeyBindings(
             new Action[]
             {
@@ -66,7 +56,7 @@ public class FighterComponent : PlayerMonoBehaviour
                         var slamSpell = gameObject.AddComponent<SlamSpell>();
                         slamSpell.range = slam.range;
                         slamSpell.position = GetMousePositionOn2DPlane();
-                        slamSpell.Cast(stats.XP.Level);
+                        slamSpell.Cast(entityStats.XP.Level);
                         // Pour pas que le player puisse bouger pendant l'ainimation du spell
                         // spellLocked = true;
                     }
@@ -77,6 +67,8 @@ public class FighterComponent : PlayerMonoBehaviour
     private void Start()
     {
         rigidBody = GetComponentInChildren<Rigidbody>();
+        entityStats = GetComponent<Stats>();
+        entityStats.ApplyStats(statsInit.attackDamage, statsInit.attackSpeed, statsInit.maxHp, statsInit.hpRegen, statsInit.maxMana, statsInit.manaRegen, statsInit.range, statsInit.speed);
     }
     private void Update()
     {
@@ -93,6 +85,6 @@ public class FighterComponent : PlayerMonoBehaviour
     private void Move(Vector3 direction)
     {
         transform.LookAt(transform.position + direction);
-        transform.Translate(direction * stats.Speed.Current * Time.deltaTime, Space.World);
+        transform.Translate(direction * entityStats.Speed.Current * Time.deltaTime, Space.World);
     }
 }

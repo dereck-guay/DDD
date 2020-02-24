@@ -5,6 +5,7 @@ using UnityEngine;
 using Miscellaneous;
 using System.Text;
 using Interfaces;
+[RequireComponent(typeof(Stats))]
 public class WizardComponent : PlayerMonoBehaviour
 {
     [System.Serializable]
@@ -41,6 +42,11 @@ public class WizardComponent : PlayerMonoBehaviour
         public float slowValue;
     };
     [System.Serializable]
+    public class RayOfFrost
+    {
+        public GameObject rayOfFrostPrefab;
+    };
+    [System.Serializable]
     public class Heal
     {
         public float[] healValues;
@@ -50,36 +56,26 @@ public class WizardComponent : PlayerMonoBehaviour
     public AutoAttack autoAttack;
     public Fireball fireball;
     public Slow slow;
+    public RayOfFrost rayOfFrost;
     public Heal heal;
 
     private KeyBindings keyBindings;
     private bool canAttack;
     private float timeSinceLastAttack;
     private Rigidbody rigidbody;
-    private float TimeSinceLastAttack
+    private Stats entityStats;
+    
+    private float GetTimeSinceLastAttack()
+    { return timeSinceLastAttack; }
+    private void SetTimeSinceLastAttack(float value)
     {
-        get { return timeSinceLastAttack; }
-        set
-        {
-            if(value > 1/stats.AtkSpeed.Current)
-                canAttack = true;
-            timeSinceLastAttack = value;
-        }
+        if (value > 1 / entityStats.AtkSpeed.Current)
+            canAttack = true;
+        timeSinceLastAttack = value;
     }
     private void Awake()
     {
-        stats = new Stats(
-                statsInit.attackDamage,
-                statsInit.attackSpeed,
-                statsInit.maxHp,
-                statsInit.hpRegen,
-                statsInit.maxMana,
-                statsInit.manaRegen,
-                statsInit.range,
-                statsInit.speed
-        );
         canAttack = true;
-        TimeSinceLastAttack = 0;
         keyBindings = new KeyBindings(
             new Action[]
             {
@@ -87,13 +83,13 @@ public class WizardComponent : PlayerMonoBehaviour
                     if (canAttack)
                     {
                         var target = GetEntityAtMousePosition();
-                        if (target && TargetIsWithinRange(target, stats.Range.Current))
+                        if (target && TargetIsWithinRange(target, entityStats.Range.Current))
                         {
                             var autoAttackSpell = gameObject.AddComponent<AutoAttackSpell>();
                             autoAttackSpell.autoAttackPrefab = autoAttack.autoAttackPrefab;
                             autoAttackSpell.target = target.GetComponentInParent<Transform>().parent.gameObject;
-                            autoAttackSpell.Cast(stats.AtkSpeed.Current, transform.position);
-                            TimeSinceLastAttack = 0;
+                            autoAttackSpell.Cast(entityStats.AtkSpeed.Current, transform.position);
+                            SetTimeSinceLastAttack(0) ;
                             canAttack = false; 
                         }
                     }
@@ -108,7 +104,7 @@ public class WizardComponent : PlayerMonoBehaviour
                         var fireballSpell = gameObject.AddComponent<FireballSpell>();
                         fireballSpell.fireballPrefab = fireball.fireballPrefab;
                         fireballSpell.direction = GetMouseDirection();
-                        fireballSpell.Cast(stats.XP.Level);
+                        fireballSpell.Cast(entityStats.XP.Level);
                         
                     }
                 },
@@ -122,7 +118,7 @@ public class WizardComponent : PlayerMonoBehaviour
                             // Get parent object because the collider is in the body of the character.
                             slowSpell.target = target.transform.parent.gameObject;
                             slowSpell.slowValue = slow.slowValue;
-                            slowSpell.Cast(stats.XP.Level);
+                            slowSpell.Cast(entityStats.XP.Level);
                         } else { Destroy(target); }
                     }
                 },
@@ -136,7 +132,7 @@ public class WizardComponent : PlayerMonoBehaviour
                             // Get parent object because the collider is in the body of the character.
                             healSpell.target = target.transform.parent.gameObject;
                             healSpell.healValue = heal.healValues;
-                            healSpell.Cast(stats.XP.Level);
+                            healSpell.Cast(entityStats.XP.Level);
                         } else { Destroy(target); }
                     }
                 },
@@ -148,20 +144,24 @@ public class WizardComponent : PlayerMonoBehaviour
     }
     private void Start()
     {
+        
         rigidbody = GetComponentInChildren<Rigidbody>();
+        entityStats = GetComponent<Stats>();
+        entityStats.ApplyStats(statsInit.attackDamage, statsInit.attackSpeed, statsInit.maxHp, statsInit.hpRegen, statsInit.maxMana, statsInit.manaRegen, statsInit.range, statsInit.speed);
+        SetTimeSinceLastAttack(0);
     }
 
     private void Move(Vector3 direction)
     {
         transform.LookAt(transform.position + direction);
-        transform.Translate(direction * stats.Speed.Current * Time.deltaTime, Space.World);
+        transform.Translate(direction * entityStats.Speed.Current * Time.deltaTime, Space.World);
     }
     bool TargetIsWithinRange(GameObject target, float range) => (target.transform.position - transform.position).magnitude < range;
 
     private void Update()
     {
         DirectCharacter();
-        TimeSinceLastAttack += Time.deltaTime;
+        SetTimeSinceLastAttack(GetTimeSinceLastAttack() + Time.deltaTime);
         rigidbody.velocity = Vector3.zero; //Stop rigidbodies from moving the character
         keyBindings.CallBindings();
     }
