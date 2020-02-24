@@ -70,6 +70,7 @@ public class FighterComponent : PlayerMonoBehaviour
         entityStats = GetComponent<Stats>();
         entityStats.ApplyStats(statsInit.attackDamage, statsInit.attackSpeed, statsInit.maxHp, statsInit.hpRegen, statsInit.maxMana, statsInit.manaRegen, statsInit.range, statsInit.speed);
     }
+
     private void Update()
     {
         if (!spellLocked)

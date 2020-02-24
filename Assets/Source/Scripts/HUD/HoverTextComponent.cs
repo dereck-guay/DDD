@@ -4,7 +4,7 @@ using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
-public class HoverText : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
+public class HoverTextComponent : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
 {
     public GameObject childImage;
     void Start() => childImage.SetActive(false);

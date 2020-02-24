@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class XPBar : MonoBehaviour
+public class XPBarComponent : MonoBehaviour
 {
     public Slider xpSlider;
     public Gradient gradient;

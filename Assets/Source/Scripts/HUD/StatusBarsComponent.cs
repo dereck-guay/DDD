@@ -1,9 +1,10 @@
-﻿using System.Collections;
+﻿using Enums;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class StatusBars : MonoBehaviour
+public class StatusBarsComponent : MonoBehaviour
 {
     public Slider statusSlider;
     public Gradient gradient;
@@ -16,6 +17,7 @@ public class StatusBars : MonoBehaviour
 
         fill.color = gradient.Evaluate(1f);
     }
+
     public void SetCurrent(float amount)
     {
         statusSlider.value = amount;
