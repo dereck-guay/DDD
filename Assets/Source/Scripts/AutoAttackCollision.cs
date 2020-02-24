@@ -5,12 +5,13 @@ using UnityEngine;
 public class AutoAttackCollision : MonoBehaviour
 {
     public int[] collsionLayers;
+    public float damage;
     private void OnTriggerEnter(Collider other)
     {
         if (CollidesWithAppropriateLayer(other.gameObject.layer))
         {
             Destroy(gameObject);
-            other.GetComponentInParent<Stats>().HP.TakeDamage(4f);
+            other.GetComponentInParent<Stats>().HP.TakeDamage(damage);
             Debug.Log(other.GetComponentInParent<Stats>().gameObject.GetComponent<PlayerMonoBehaviour>().name);
         }
     }

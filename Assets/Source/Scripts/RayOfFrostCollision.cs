@@ -2,22 +2,19 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class FireballCollision : MonoBehaviour
+public class RayOfFrostCollision : MonoBehaviour
 {
     public int[] collisionLayers;
-    public float damage;
     public ParticleSystem collideEffect;
     private void OnCollisionEnter(Collision collision)
     {
         if (CollidesWithApropriateLayer(collision.collider.gameObject.layer))
             Explode(collision.collider.gameObject);
     }
-    private void Explode(GameObject target)
+    private void Explode(GameObject gameObject)
     {
         Destroy(gameObject);
         Instantiate(collideEffect as ParticleSystem, transform.position, Quaternion.identity);
-        if (target.transform.parent.gameObject)
-            target.GetComponentInParent<Stats>().HP.TakeDamage(damage);
     }
 
     private bool CollidesWithApropriateLayer(int GOLayer)
@@ -28,5 +25,4 @@ public class FireballCollision : MonoBehaviour
 
         return false;
     }
-
 }

@@ -9,6 +9,7 @@ public class AutoAttackSpell : MonoBehaviour
 
     public float currentLifeTime = 0;
     float atkSpeed;
+    public float damage;
 
     public void Cast(float atkSpeedI, Vector3 casterPosition)
     {
@@ -16,6 +17,7 @@ public class AutoAttackSpell : MonoBehaviour
         var spawnPosition = transform.position + 0.2f * targetDirection; 
         var autoAttack = Instantiate(autoAttackPrefab, spawnPosition, Quaternion.identity);
         autoAttack.GetComponent<FollowProjectile>().target = target;
+        autoAttack.GetComponent<AutoAttackCollision>().damage = damage;
         atkSpeed = atkSpeedI;
     }
 

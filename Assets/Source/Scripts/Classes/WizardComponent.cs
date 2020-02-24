@@ -35,6 +35,7 @@ public class WizardComponent : PlayerMonoBehaviour
     public class Fireball
     {
         public GameObject fireballPrefab;
+        public float manaCost;
     };
     [System.Serializable]
     public class Slow
@@ -63,7 +64,6 @@ public class WizardComponent : PlayerMonoBehaviour
     private bool canAttack;
     private float timeSinceLastAttack;
     private Rigidbody rigidbody;
-    private Stats entityStats;
     
     private float GetTimeSinceLastAttack()
     { return timeSinceLastAttack; }
@@ -87,6 +87,7 @@ public class WizardComponent : PlayerMonoBehaviour
                         {
                             var autoAttackSpell = gameObject.AddComponent<AutoAttackSpell>();
                             autoAttackSpell.autoAttackPrefab = autoAttack.autoAttackPrefab;
+                            autoAttackSpell.damage = entityStats.AtkDamage.Current;
                             autoAttackSpell.target = target.GetComponentInParent<Transform>().parent.gameObject;
                             autoAttackSpell.Cast(entityStats.AtkSpeed.Current, transform.position);
                             SetTimeSinceLastAttack(0) ;
@@ -99,7 +100,7 @@ public class WizardComponent : PlayerMonoBehaviour
                 () => Move(Vector3.back),
                 () => Move(Vector3.right),
                 () => {
-                   if (! IsOnCooldown(typeof(FireballSpell)))
+                   if (! IsOnCooldown(typeof(FireballSpell)) && CanCast(fireball.manaCost))
                     {
                         var fireballSpell = gameObject.AddComponent<FireballSpell>();
                         fireballSpell.fireballPrefab = fireball.fireballPrefab;
@@ -142,6 +143,9 @@ public class WizardComponent : PlayerMonoBehaviour
             }, inputs
         );
     }
+
+    private bool CanCast(float manaCost) => entityStats.Mana.Current > manaCost;
+
     private void Start()
     {
         

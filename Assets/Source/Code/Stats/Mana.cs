@@ -16,8 +16,13 @@ public class Mana : IModifiableStat
         get { return currentMana; }
         set
         {
-            if (value < 0)
+            if (value <= 0)
+            {
                 value = 0;
+            }
+            if (value > maxMana)
+                value = maxMana;
+
             currentMana = value;
         }
     }
@@ -26,8 +31,8 @@ public class Mana : IModifiableStat
         get { return maxMana; }
         set
         {
-            if (value < 1)
-                value = 1;
+            if (value < 0)
+                throw new ArgumentException("MaxMana cannot be smaller than zero");
             maxMana = value;
         }
     }
@@ -37,6 +42,7 @@ public class Mana : IModifiableStat
         Current = manaBase;
         ManaRegen = manaRegen;
     }
+
     public string Name = "Mana";
     public void UseMana(float manaUsed) => Current -= manaUsed;
     public void ApplyModifier(float modifier) => ManaRegen *= modifier;

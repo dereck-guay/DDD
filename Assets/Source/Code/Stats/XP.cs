@@ -8,7 +8,7 @@ using Interfaces;
 public class XP
 {
     int level;
-    int maxLevel = 4;
+    const int MaxLevel = 4;
     readonly float[] requiredXPPerLevel = new float[] { 1,2,3 };
     public float Current { get; private set; }
     public int Level
@@ -16,7 +16,7 @@ public class XP
         get { return level; }
         private set
         {
-            if (value > maxLevel)
+            if (value > MaxLevel)
                 Debug.Log("Player is already max level.");
             else
                 level = value;
