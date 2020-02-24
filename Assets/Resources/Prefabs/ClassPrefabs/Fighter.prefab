@@ -95,75 +95,6 @@ CapsuleCollider:
   m_Height: 2
   m_Direction: 1
   m_Center: {x: 0, y: 0, z: 0}
-<<<<<<< HEAD
---- !u!1 &6348395757141408186
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 4891065719508266255}
-  - component: {fileID: 2932222918494911216}
-  - component: {fileID: 3778573521585846797}
-  m_Layer: 0
-  m_Name: EventSystem
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &4891065719508266255
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6348395757141408186}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: -0.15863472, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
-  m_Father: {fileID: 7654609879356970206}
-  m_RootOrder: 2
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &2932222918494911216
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6348395757141408186}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 76c392e42b5098c458856cdf6ecaaaa1, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_FirstSelected: {fileID: 0}
-  m_sendNavigationEvents: 1
-  m_DragThreshold: 10
---- !u!114 &3778573521585846797
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6348395757141408186}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4f231c4fb786f3946a6b90b886c48677, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_HorizontalAxis: Horizontal
-  m_VerticalAxis: Vertical
-  m_SubmitButton: Submit
-  m_CancelButton: Cancel
-  m_InputActionsPerSecond: 10
-  m_RepeatDelay: 0.5
-  m_ForceModuleActive: 0
-=======
->>>>>>> f197a015701e74ba94567213f3102ba1fce6fe97
 --- !u!1 &7243640169185111925
 GameObject:
   m_ObjectHideFlags: 0
@@ -227,9 +158,8 @@ GameObject:
   m_Component:
   - component: {fileID: 7654609879356970206}
   - component: {fileID: 6049392572040121324}
-  - component: {fileID: 4561635763135994034}
   - component: {fileID: 981901871628974245}
-  - component: {fileID: 4266059329144098438}
+  - component: {fileID: 2016967929930888168}
   m_Layer: 0
   m_Name: Fighter
   m_TagString: Untagged
@@ -249,11 +179,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4676277268715582991}
-<<<<<<< HEAD
-  - {fileID: 2431378827425052682}
-  - {fileID: 4891065719508266255}
-=======
->>>>>>> f197a015701e74ba94567213f3102ba1fce6fe97
+  - {fileID: 2658168424552643614}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -275,11 +201,7 @@ MonoBehaviour:
   rayCastHitLayers:
     serializedVersion: 2
     m_Bits: 0
-<<<<<<< HEAD
   entityStats: {fileID: 0}
-=======
-  stats: {fileID: 0}
->>>>>>> f197a015701e74ba94567213f3102ba1fce6fe97
   statsInit:
     attackDamage: 0
     attackSpeed: 0
@@ -288,24 +210,11 @@ MonoBehaviour:
     maxMana: 0
     manaRegen: 0
     range: 0
-    speed: 30
+    speed: 0
   inputs: 
   spellLocked: 0
   slam:
     range: 0
---- !u!114 &4561635763135994034
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7780825930841027337}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5cd2e3005b2a344479108480710813ba, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  player: {fileID: 6049392572040121324}
 --- !u!54 &981901871628974245
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -316,13 +225,13 @@ Rigidbody:
   serializedVersion: 2
   m_Mass: 1
   m_Drag: 0
-  m_AngularDrag: 10
+  m_AngularDrag: 0.05
   m_UseGravity: 1
-  m_IsKinematic: 1
+  m_IsKinematic: 0
   m_Interpolate: 0
   m_Constraints: 112
   m_CollisionDetection: 0
---- !u!114 &4266059329144098438
+--- !u!114 &2016967929930888168
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -334,8 +243,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 98537faed382937468f7b1f86ef62938, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-<<<<<<< HEAD
---- !u!1001 &1813758613776607253
+--- !u!1001 &2050699038650035201
 PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
@@ -484,11 +392,9 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 9f8fb1814cf6d0848af4e58b3f787e53, type: 3}
---- !u!224 &2431378827425052682 stripped
+--- !u!224 &2658168424552643614 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 4077514614192394271, guid: 9f8fb1814cf6d0848af4e58b3f787e53,
     type: 3}
-  m_PrefabInstance: {fileID: 1813758613776607253}
+  m_PrefabInstance: {fileID: 2050699038650035201}
   m_PrefabAsset: {fileID: 0}
-=======
->>>>>>> f197a015701e74ba94567213f3102ba1fce6fe97
