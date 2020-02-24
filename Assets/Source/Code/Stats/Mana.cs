@@ -17,11 +17,15 @@ public class Mana : IModifiableStat
         set
         {
             if (value <= 0)
-            {
                 value = 0;
+            else if (value < Current)
+                OnUse?.Invoke(Current - value);
+            else if (value > Current)
+            {
+                if (value > Base)
+                    value = Base;
+                OnRegen?.Invoke(value - Current);
             }
-            if (value > maxMana)
-                value = maxMana;
 
             currentMana = value;
         }
@@ -44,6 +48,8 @@ public class Mana : IModifiableStat
     }
 
     public string Name = "Mana";
+    public Action<float> OnUse { get; set; }
+    public Action<float> OnRegen { get; set; }
     public void UseMana(float manaUsed) => Current -= manaUsed;
     public void ApplyModifier(float modifier) => ManaRegen *= modifier;
     public void EndModifier(float modifier) => ManaRegen /= modifier;

@@ -246,6 +246,7 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 256
   entityStats: {fileID: 0}
+  camera: {fileID: 0}
   statsInit:
     attackDamage: 5
     attackSpeed: 0.6
@@ -255,6 +256,9 @@ MonoBehaviour:
     manaRegen: 5
     range: 30
     speed: 20
+  statusBars:
+  - {fileID: 505219490259787623}
+  - {fileID: 505219490363880905}
   inputs: 430100007700000061000000730000006400000031000000320000003300000034000000
   autoAttack:
     autoAttackPrefab: {fileID: 7241867996618809226, guid: c1097aa1f5e92a344a8ba365cb5fdcad,
@@ -793,3 +797,27 @@ RectTransform:
     type: 3}
   m_PrefabInstance: {fileID: 4581528078250042217}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &505219490259787623 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 4077514615680646158, guid: 9f8fb1814cf6d0848af4e58b3f787e53,
+    type: 3}
+  m_PrefabInstance: {fileID: 4581528078250042217}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 10bda2d43c9192142b9b5535ffc5ae52, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &505219490363880905 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 4077514614708655776, guid: 9f8fb1814cf6d0848af4e58b3f787e53,
+    type: 3}
+  m_PrefabInstance: {fileID: 4581528078250042217}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 10bda2d43c9192142b9b5535ffc5ae52, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

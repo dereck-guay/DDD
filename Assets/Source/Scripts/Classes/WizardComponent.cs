@@ -8,7 +8,7 @@ using Interfaces;
 [RequireComponent(typeof(Stats))]
 public class WizardComponent : PlayerMonoBehaviour
 {
-    public Camera camera;
+    public  Camera camera;
 
     [System.Serializable]
     public class StatsInit
@@ -25,6 +25,8 @@ public class WizardComponent : PlayerMonoBehaviour
     };
     [Header("Stats")]
     public StatsInit statsInit;
+
+    public StatusBarsComponent[] statusBars;
 
     [Header("Inputs")]
     public KeyCode[] inputs;
@@ -43,16 +45,19 @@ public class WizardComponent : PlayerMonoBehaviour
     public class Slow
     {
         public float slowValue;
+        public float manaCost;
     };
     [System.Serializable]
     public class RayOfFrost
     {
         public GameObject rayOfFrostPrefab;
+        public float manaCost;
     };
     [System.Serializable]
     public class Heal
     {
         public float[] healValues;
+        public float manaCost;
     };
 
     [Header("Spell Settings")]
@@ -102,17 +107,17 @@ public class WizardComponent : PlayerMonoBehaviour
                 () => Move(Vector3.back),
                 () => Move(Vector3.right),
                 () => {
-                   if (! IsOnCooldown(typeof(FireballSpell)) && CanCast(fireball.manaCost))
+                   if (CanCast(fireball.manaCost, typeof(FireballSpell)))
                     {
+                        entityStats.Mana.UseMana(fireball.manaCost);
                         var fireballSpell = gameObject.AddComponent<FireballSpell>();
                         fireballSpell.fireballPrefab = fireball.fireballPrefab;
                         fireballSpell.direction = GetMouseDirection();
                         fireballSpell.Cast(entityStats.XP.Level);
-                        
                     }
                 },
                 () => {
-                    if (! IsOnCooldown(typeof(SlowSpell)))
+                    if (CanCast(slow.manaCost, typeof(SlowSpell)))
                     {
                         var slowSpell = gameObject.AddComponent<SlowSpell>();
                         var target = GetEntityAtMousePosition();
@@ -126,7 +131,7 @@ public class WizardComponent : PlayerMonoBehaviour
                     }
                 },
                 () => {
-                    if (! IsOnCooldown(typeof(HealSpell)))
+                    if (CanCast(heal.manaCost, typeof(HealSpell)))
                     {
                         var healSpell = gameObject.AddComponent<HealSpell>();
                         var target = GetEntityAtMousePosition();
@@ -146,8 +151,6 @@ public class WizardComponent : PlayerMonoBehaviour
         );
     }
 
-    private bool CanCast(float manaCost) => entityStats.Mana.Current > manaCost;
-
     private void Start()
     {
         
@@ -155,27 +158,40 @@ public class WizardComponent : PlayerMonoBehaviour
         entityStats = GetComponent<Stats>();
         entityStats.ApplyStats(statsInit.attackDamage, statsInit.attackSpeed, statsInit.maxHp, statsInit.hpRegen, statsInit.maxMana, statsInit.manaRegen, statsInit.range, statsInit.speed);
         SetTimeSinceLastAttack(0);
-    }
 
-    private void Move(Vector3 direction)
-    {
-        var displacement = direction * entityStats.Speed.Current * Time.deltaTime;
-        transform.Translate(displacement, Space.World);
-        camera.transform.Translate(displacement, Space.World);
+        statusBars[0].SetMax(entityStats.HP.Base);
+        statusBars[1].SetMax(entityStats.Mana.Base);
+        entityStats.HP.OnTakeDamage += damage => statusBars[0].SetCurrent(entityStats.HP.Current);
+        entityStats.HP.OnHeal += regen => statusBars[0].SetCurrent(entityStats.HP.Current);
+        entityStats.Mana.OnUse += manaCost => statusBars[1].SetCurrent(entityStats.Mana.Current);
+        entityStats.Mana.OnRegen += manaCost => statusBars[1].SetCurrent(entityStats.Mana.Current);
     }
-    bool TargetIsWithinRange(GameObject target, float range) => (target.transform.position - transform.position).magnitude < range;
-
     private void Update()
     {
         DirectCharacter();
         SetTimeSinceLastAttack(GetTimeSinceLastAttack() + Time.deltaTime);
         rigidbody.velocity = Vector3.zero; //Stop rigidbodies from moving the character
         keyBindings.CallBindings();
+        entityStats.Regen();
     }
+
+    private void Move(Vector3 direction)
+    {
+        var displacement = direction * entityStats.Speed.Current * Time.deltaTime;
+        transform.Translate(displacement, Space.World);
+        camera.transform.Translate(displacement, Space.World); // Moves the camera the same amount.
+    }
+
     void DirectCharacter() //make the character face the direction of the mouse
     {
         var directionToLookAt = transform.position + GetMouseDirection();
         directionToLookAt.y = transform.position.y;
         transform.LookAt(directionToLookAt);
     }
+
+    private bool TargetIsWithinRange(GameObject target, float range) =>
+       (target.transform.position - transform.position).magnitude < range;
+
+    private bool CanCast(float manaCost, Type spell) =>
+        entityStats.Mana.Current > manaCost && !IsOnCooldown(spell);
 }

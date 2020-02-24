@@ -4,7 +4,6 @@ using UnityEngine;
 using Interfaces;
 using Miscellaneous;
 
-[System.Serializable]
 public class Stats : MonoBehaviour
 {
     public AtkDamage AtkDamage { get; private set; }
@@ -34,7 +33,7 @@ public class Stats : MonoBehaviour
         };
         ModifiableStats = new DictionaryCreator<IModifiableStat>(stats);
     }
-    public void Update()
+    public void Regen()
     {
         HP.Regen(Time.deltaTime);
         Mana.Regen(Time.deltaTime);
