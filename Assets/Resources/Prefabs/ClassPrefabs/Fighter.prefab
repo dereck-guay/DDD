@@ -95,6 +95,7 @@ CapsuleCollider:
   m_Height: 2
   m_Direction: 1
   m_Center: {x: 0, y: 0, z: 0}
+<<<<<<< HEAD
 --- !u!1 &6348395757141408186
 GameObject:
   m_ObjectHideFlags: 0
@@ -161,6 +162,8 @@ MonoBehaviour:
   m_InputActionsPerSecond: 10
   m_RepeatDelay: 0.5
   m_ForceModuleActive: 0
+=======
+>>>>>>> f197a015701e74ba94567213f3102ba1fce6fe97
 --- !u!1 &7243640169185111925
 GameObject:
   m_ObjectHideFlags: 0
@@ -246,8 +249,11 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4676277268715582991}
+<<<<<<< HEAD
   - {fileID: 2431378827425052682}
   - {fileID: 4891065719508266255}
+=======
+>>>>>>> f197a015701e74ba94567213f3102ba1fce6fe97
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -269,7 +275,11 @@ MonoBehaviour:
   rayCastHitLayers:
     serializedVersion: 2
     m_Bits: 0
+<<<<<<< HEAD
   entityStats: {fileID: 0}
+=======
+  stats: {fileID: 0}
+>>>>>>> f197a015701e74ba94567213f3102ba1fce6fe97
   statsInit:
     attackDamage: 0
     attackSpeed: 0
@@ -324,6 +334,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 98537faed382937468f7b1f86ef62938, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+<<<<<<< HEAD
 --- !u!1001 &1813758613776607253
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -479,3 +490,5 @@ RectTransform:
     type: 3}
   m_PrefabInstance: {fileID: 1813758613776607253}
   m_PrefabAsset: {fileID: 0}
+=======
+>>>>>>> f197a015701e74ba94567213f3102ba1fce6fe97

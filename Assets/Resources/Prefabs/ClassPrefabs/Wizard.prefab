@@ -210,8 +210,12 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 2932816997147429042}
+<<<<<<< HEAD
   - {fileID: 8792471585791737690}
   - {fileID: 226542258023912030}
+=======
+  - {fileID: 4780941120070613947}
+>>>>>>> f197a015701e74ba94567213f3102ba1fce6fe97
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -233,7 +237,11 @@ MonoBehaviour:
   rayCastHitLayers:
     serializedVersion: 2
     m_Bits: 256
+<<<<<<< HEAD
   entityStats: {fileID: 0}
+=======
+  stats: {fileID: 0}
+>>>>>>> f197a015701e74ba94567213f3102ba1fce6fe97
   statsInit:
     attackDamage: 0
     attackSpeed: 0
@@ -252,8 +260,11 @@ MonoBehaviour:
       type: 3}
   slow:
     slowValue: 0.8
+<<<<<<< HEAD
   rayOfFrost:
     rayOfFrostPrefab: {fileID: 0}
+=======
+>>>>>>> f197a015701e74ba94567213f3102ba1fce6fe97
   heal:
     healValues: []
 --- !u!114 &-642070748268803513
@@ -587,6 +598,7 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
+<<<<<<< HEAD
 --- !u!1 &8432164322683736145
 GameObject:
   m_ObjectHideFlags: 0
@@ -654,6 +666,9 @@ MonoBehaviour:
   m_RepeatDelay: 0.5
   m_ForceModuleActive: 0
 --- !u!1001 &4797212810900811589
+=======
+--- !u!1001 &8849412113643023268
+>>>>>>> f197a015701e74ba94567213f3102ba1fce6fe97
 PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
@@ -802,9 +817,17 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 9f8fb1814cf6d0848af4e58b3f787e53, type: 3}
+<<<<<<< HEAD
 --- !u!224 &8792471585791737690 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 4077514614192394271, guid: 9f8fb1814cf6d0848af4e58b3f787e53,
     type: 3}
   m_PrefabInstance: {fileID: 4797212810900811589}
+=======
+--- !u!224 &4780941120070613947 stripped
+RectTransform:
+  m_CorrespondingSourceObject: {fileID: 4077514614192394271, guid: 9f8fb1814cf6d0848af4e58b3f787e53,
+    type: 3}
+  m_PrefabInstance: {fileID: 8849412113643023268}
+>>>>>>> f197a015701e74ba94567213f3102ba1fce6fe97
   m_PrefabAsset: {fileID: 0}
