@@ -8,6 +8,8 @@ using Interfaces;
 [RequireComponent(typeof(Stats))]
 public class WizardComponent : PlayerMonoBehaviour
 {
+    public Camera camera;
+
     [System.Serializable]
     public class StatsInit
     {
@@ -157,8 +159,9 @@ public class WizardComponent : PlayerMonoBehaviour
 
     private void Move(Vector3 direction)
     {
-        transform.LookAt(transform.position + direction);
-        transform.Translate(direction * entityStats.Speed.Current * Time.deltaTime, Space.World);
+        var displacement = direction * entityStats.Speed.Current * Time.deltaTime;
+        transform.Translate(displacement, Space.World);
+        camera.transform.Translate(displacement, Space.World);
     }
     bool TargetIsWithinRange(GameObject target, float range) => (target.transform.position - transform.position).magnitude < range;
 
