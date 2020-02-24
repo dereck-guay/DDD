@@ -64,8 +64,9 @@ public class RoomEditorComponent : MonoBehaviour
    void Save()
    {
       var folder = SerializePath();
+      var fileName = Directory.GetFiles(folder).Where(s => s[s.Length - 1] != 'a').ToArray().Length.ToString();
 
-      using (var sw = new StreamWriter(Path.Combine(folder, Directory.GetFiles(folder).Length.ToString())))
+      using (var sw = new StreamWriter(Path.Combine(folder, fileName)))
       {
          sw.Write(tileMapEditor.SerializeLayout());
          sw.Flush();
@@ -75,7 +76,8 @@ public class RoomEditorComponent : MonoBehaviour
    void Clear()
    {
       tileMapEditor.Fill(tiles[0], false);
-      tileMapEditor.Fill(tiles[3], true);
+      if (!bossRoomToggle.isOn)
+         tileMapEditor.Fill(tiles[1], true);
    }
 
    string SerializePath()

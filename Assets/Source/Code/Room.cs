@@ -11,8 +11,8 @@ public class Room
    int[,] roomLayout;
    Transform map;
 
-   public const int Width = 11,
-                    Length = 9;
+   public const int Width = 17,
+                    Length = 11;
    const int TileNumber = Width * Length;
 
    const string PatternsPath = "DungeonGeneration\\patterns",  //TEMP
