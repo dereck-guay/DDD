@@ -197,21 +197,21 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   selectableEntities:
     serializedVersion: 2
-    m_Bits: 0
+    m_Bits: 1024
   rayCastHitLayers:
     serializedVersion: 2
-    m_Bits: 0
+    m_Bits: 256
   entityStats: {fileID: 0}
   statsInit:
-    attackDamage: 0
-    attackSpeed: 0
-    maxHp: 0
-    hpRegen: 0
-    maxMana: 0
-    manaRegen: 0
-    range: 0
-    speed: 0
-  inputs: 
+    attackDamage: 15
+    attackSpeed: 0.9
+    maxHp: 150
+    hpRegen: 10
+    maxMana: 50
+    manaRegen: 5
+    range: 5
+    speed: 25
+  inputs: 7700000061000000730000006400000031000000
   spellLocked: 0
   slam:
     range: 0

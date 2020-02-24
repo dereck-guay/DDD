@@ -247,25 +247,32 @@ MonoBehaviour:
     m_Bits: 256
   entityStats: {fileID: 0}
   statsInit:
-    attackDamage: 0
-    attackSpeed: 0
-    maxHp: 0
-    hpRegen: 0
-    maxMana: 0
-    manaRegen: 0
-    range: 0
-    speed: 0
+    attackDamage: 5
+    attackSpeed: 0.6
+    maxHp: 100
+    hpRegen: 5
+    maxMana: 50
+    manaRegen: 5
+    range: 30
+    speed: 20
   inputs: 430100007700000061000000730000006400000031000000320000003300000034000000
   autoAttack:
-    autoAttackPrefab: {fileID: 0}
+    autoAttackPrefab: {fileID: 7241867996618809226, guid: c1097aa1f5e92a344a8ba365cb5fdcad,
+      type: 3}
   fireball:
-    fireballPrefab: {fileID: 0}
+    fireballPrefab: {fileID: 3649683291444178571, guid: d094952558deb094c859cab0eb697499,
+      type: 3}
+    manaCost: 10
   slow:
-    slowValue: 0
+    slowValue: 0.2
   rayOfFrost:
-    rayOfFrostPrefab: {fileID: 0}
+    rayOfFrostPrefab: {fileID: 9001681064244344938, guid: 8d3b89fb0b1a6d44bb683fb36603abc2,
+      type: 3}
   heal:
-    healValues: []
+    healValues:
+    - 10
+    - 20
+    - 35
 --- !u!54 &6085515682664728954
 Rigidbody:
   m_ObjectHideFlags: 0
