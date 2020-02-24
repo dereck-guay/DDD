@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using UnityEngine;
 
-//Room is a 11x9 space (including walls)
+//Room is a 17x11 space (including walls)
 public class Room
 {
    int[,] roomLayout;
@@ -15,8 +15,8 @@ public class Room
                     Length = 11;
    const int TileNumber = Width * Length;
 
-   const string PatternsPath = "DungeonGeneration\\patterns",  //TEMP
-                BossPath = "boss_rooms";
+   const string PatternsPath = "Assets\\Patterns",
+                 BossPath = "BossRooms";
 
    public Pattern Pattern { get; }
 
@@ -51,7 +51,7 @@ public class Room
 
       path1 = Path.Combine(path1, Pattern.ToString());
 
-      int fileCount = Directory.GetFiles(path1).Length;
+      int fileCount = Directory.GetFiles(path1).Where(s => s[s.Length - 1] != 'a').ToArray().Length;
 
       string path2 = Random.Range(0, fileCount).ToString();
 
