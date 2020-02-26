@@ -6,6 +6,7 @@ using UnityEngine.UI;
 
 public class StatusBarsComponent : MonoBehaviour
 {
+    public Text barText;
     public Slider statusSlider;
     public Gradient gradient;
     public Image fill;
@@ -13,15 +14,13 @@ public class StatusBarsComponent : MonoBehaviour
     public void SetMax(float amount)
     {
         statusSlider.maxValue = amount;
-        statusSlider.value = amount;
-
-        fill.color = gradient.Evaluate(1f);
+        SetCurrent(amount);
     }
 
     public void SetCurrent(float amount)
     {
+        barText.text = amount.ToString("0 / ") + statusSlider.maxValue;
         statusSlider.value = amount;
-
         fill.color = gradient.Evaluate(statusSlider.normalizedValue);
     }
 }

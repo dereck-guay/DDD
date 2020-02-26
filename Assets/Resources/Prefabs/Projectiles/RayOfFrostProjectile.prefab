@@ -134,9 +134,8 @@ MonoBehaviour:
   m_GameObject: {fileID: 9001681064244344938}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 883709d9c8f24a34b92addb845344fc4, type: 3}
+  m_Script: {fileID: 11500000, guid: f56de1d20ad002e4fb3593e37c188814, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  direction: {x: 0, y: 0, z: 0}
-  movementSpeed: 50
-  lifeTime: 5
+  collisionLayers: 090000000a000000
+  collideEffect: {fileID: 0}
