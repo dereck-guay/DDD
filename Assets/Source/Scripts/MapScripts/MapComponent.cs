@@ -27,11 +27,11 @@ public class MapComponent : MonoBehaviour
                 if (mapModel.HasRoom(j, i))
                 {
                     room = new GameObject("Room" + (i * mapModel.MapSize + j));
-                    trueRoom = Instantiate(room, new Vector3(posY, 0, posX), Quaternion.identity, transform);
+                    trueRoom = Instantiate(room, new Vector3(posX, 0, -posY), Quaternion.identity, transform); //(posY, 0, posX)
                     Destroy(room);
 
                     trueRoom.AddComponent<RoomComponent>().roomModel = mapModel[j, i];
-                    trueRoom.GetComponent<RoomComponent>().Instantiate(posX, posY);
+                    trueRoom.GetComponent<RoomComponent>().Instantiate();
                 }
             }
         }

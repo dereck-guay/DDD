@@ -183,7 +183,7 @@ public class WizardComponent : PlayerMonoBehaviour
         camera.transform.position = new Vector3(
             transform.position.x,
             camera.transform.position.y,
-            transform.position.z - 3
+            transform.position.z - 5
         ); // Moves the camera according to the player.
     }
 
