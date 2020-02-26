@@ -10,7 +10,6 @@ public class AutoAttackCollision : CollisionMonoBehaviour
     {
         if (CollidesWithAppropriateLayer(other.gameObject.layer, collisionLayers))
         {
-            Debug.Log("Collide with: " + other.name);
             Destroy(gameObject);
             
             if (CollidesWithAppropriateLayer(other.gameObject.layer, damageLayers))

@@ -155,7 +155,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 45832867b51ab32408ff709e9ed5c412, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  collsionLayers: 090000000a000000
+  collisionLayers: 090000000a000000
+  damageLayers: 
   damage: 0
 --- !u!135 &1030380207765292720
 SphereCollider:
