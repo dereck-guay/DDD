@@ -179,7 +179,7 @@ public class WizardComponent : PlayerMonoBehaviour
     {
         var displacement = direction * entityStats.Speed.Current * Time.deltaTime;
         transform.Translate(displacement, Space.World);
-        camera.transform.Translate(displacement, Space.World); // Moves the camera the same amount.
+        //camera.transform.Translate(displacement, Space.World); // Moves the camera the same amount.
     }
 
     void DirectCharacter() //make the character face the direction of the mouse

@@ -17,8 +17,8 @@ public class FireballSpell : MonoBehaviour
         spellLevel = level;
         var spawnPosition = transform.position + 1.5f * direction;
         var fireball = Instantiate(fireballPrefab, spawnPosition, Quaternion.identity);
-        fireball.GetComponent<MoveTowardsDirection>().direction = direction;
-        fireball.GetComponent<FireballCollision>().damage = damage[spellLevel - 1];
+        fireball.GetComponent<StraightProjectile>().direction = direction;
+        //fireball.GetComponent<FireballCollision>().damage = damage[spellLevel - 1];
     }
 
     void Update()

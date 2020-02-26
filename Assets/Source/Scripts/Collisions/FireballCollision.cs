@@ -2,14 +2,13 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class FireballCollision : MonoBehaviour
+public class FireballCollision : CollisionMonoBehaviour
 {
-    public int[] collisionLayers;
     public float damage;
     public ParticleSystem collideEffect;
     private void OnCollisionEnter(Collision collision)
     {
-        if (CollidesWithApropriateLayer(collision.collider.gameObject.layer))
+        if (CollidesWithAppropriateLayer(collision.collider.gameObject.layer, collisionLayers))
             Explode(collision.collider.gameObject);
     }
     private void Explode(GameObject target)
@@ -19,14 +18,4 @@ public class FireballCollision : MonoBehaviour
         if (target.transform.parent.gameObject)
             target.GetComponentInParent<Stats>().HP.TakeDamage(damage);
     }
-
-    private bool CollidesWithApropriateLayer(int GOLayer)
-    {
-        foreach (var layer in collisionLayers)
-            if (layer == GOLayer)
-                return true;
-
-        return false;
-    }
-
 }
