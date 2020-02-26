@@ -1002,6 +1002,22 @@ PrefabInstance:
       propertyPath: statsInit.hpRegen
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 8654396917311496859, guid: b3a55247596b7ee4cbe346ea4a417ead,
+        type: 3}
+      propertyPath: statsInit.maxMana
+      value: 100
+      objectReference: {fileID: 0}
+    - target: {fileID: 8654396917311496859, guid: b3a55247596b7ee4cbe346ea4a417ead,
+        type: 3}
+      propertyPath: statsInit.manaRegen
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 8654396917311496859, guid: b3a55247596b7ee4cbe346ea4a417ead,
+        type: 3}
+      propertyPath: fireball.fireballPrefab
+      value: 
+      objectReference: {fileID: 3649683291444178571, guid: d094952558deb094c859cab0eb697499,
+        type: 3}
     - target: {fileID: 8792471585486317790, guid: b3a55247596b7ee4cbe346ea4a417ead,
         type: 3}
       propertyPath: m_AnchorMax.x
