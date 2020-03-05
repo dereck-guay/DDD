@@ -172,8 +172,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   collisionLayers: 090000000a000000
-  damageLayers: 
-  damage: 100
+  damageLayers: 0a000000
+  damage: 10
   collideEffect: {fileID: 3090400820553324667, guid: 21d902fbe46554945986244484e5471c,
     type: 3}
 --- !u!1 &4545619279745448475

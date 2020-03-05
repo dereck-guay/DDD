@@ -18,7 +18,9 @@ public class FireballCollision : CollisionMonoBehaviour
         
         Destroy(gameObject);
         Instantiate(collideEffect as ParticleSystem, transform.position, Quaternion.identity);
-        if (CollidesWithAppropriateLayer(target.transform.parent.gameObject.layer, damageLayers))
-            target.GetComponentInParent<Stats>().HP.TakeDamage(damage);
-    }
+        //if (CollidesWithAppropriateLayer(target.transform.parent.gameObject.layer, damageLayers))
+        if (CollidesWithAppropriateLayer(target.layer, damageLayers))
+            //target.GetComponentInParent<Stats>().HP.TakeDamage(damage);
+            target.GetComponent<Stats>().HP.TakeDamage(damage);
+   }
 }
