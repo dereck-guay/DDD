@@ -204,6 +204,7 @@ GameObject:
   - component: {fileID: 8654396917311496859}
   - component: {fileID: 6085515682664728954}
   - component: {fileID: 8901199347473482789}
+  - component: {fileID: 8661829748720666854}
   m_Layer: 10
   m_Name: Wizard
   m_TagString: Untagged
@@ -273,6 +274,8 @@ MonoBehaviour:
   rayOfFrost:
     rayOfFrostPrefab: {fileID: 9001681064244344938, guid: 8d3b89fb0b1a6d44bb683fb36603abc2,
       type: 3}
+    icePatchPrefab: {fileID: 8820669169490225209, guid: 6a49104af0f225547a75318fa8663928,
+      type: 3}
     manaCost: 0
   heal:
     healValues:
@@ -308,6 +311,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 98537faed382937468f7b1f86ef62938, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &8661829748720666854
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2594412224279639478}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5cd2e3005b2a344479108480710813ba, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  player: {fileID: 8654396917311496859}
 --- !u!1 &2598700908319044755
 GameObject:
   m_ObjectHideFlags: 0

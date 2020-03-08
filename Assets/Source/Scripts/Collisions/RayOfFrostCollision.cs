@@ -13,6 +13,6 @@ public class RayOfFrostCollision : CollisionMonoBehaviour
     private void Explode(GameObject target)
     {
         Destroy(gameObject);
-        //Instantiate(collideEffect as ParticleSystem, transform.position, Quaternion.identity);
+        Instantiate(collideEffect as ParticleSystem, transform.position, Quaternion.identity);
     }
 }

@@ -51,6 +51,7 @@ public class WizardComponent : PlayerMonoBehaviour
     public class RayOfFrost
     {
         public GameObject rayOfFrostPrefab;
+        public GameObject icePatchPrefab;
         public float manaCost;
     };
     [System.Serializable]
@@ -145,7 +146,15 @@ public class WizardComponent : PlayerMonoBehaviour
                     }
                 },
                 () => {
-                    Debug.Log("4");
+                    if (CanCast(rayOfFrost.manaCost, typeof(RayOfFrostSpell)))
+                    {
+                        entityStats.Mana.UseMana(fireball.manaCost);
+                        var rayOfFrostSpell = gameObject.AddComponent<RayOfFrostSpell>();
+                        rayOfFrostSpell.rayOfFrostPrefab = rayOfFrost.rayOfFrostPrefab;
+                        rayOfFrostSpell.icePatchPrefab = rayOfFrost.icePatchPrefab;
+                        rayOfFrostSpell.direction = GetMouseDirection();
+                        rayOfFrostSpell.Cast(entityStats.XP.Level);
+                    }
                 },
                 () => { entityStats.HP.TakeDamage(1); }
             }, inputs
@@ -180,11 +189,11 @@ public class WizardComponent : PlayerMonoBehaviour
     {
         var displacement = direction * entityStats.Speed.Current * Time.deltaTime;
         transform.Translate(displacement, Space.World);
-        camera.transform.position = new Vector3(
-            transform.position.x,
-            camera.transform.position.y,
-            transform.position.z - 5
-        ); // Moves the camera according to the player.
+        //camera.transform.position = new Vector3(
+            //transform.position.x,
+            //camera.transform.position.y,
+            //transform.position.z - 5
+        //); // Moves the camera according to the player.
     }
 
     void DirectCharacter() //make the character face the direction of the mouse

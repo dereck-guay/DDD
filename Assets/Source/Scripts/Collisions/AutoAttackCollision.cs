@@ -6,14 +6,14 @@ public class AutoAttackCollision : CollisionMonoBehaviour
 {
     public int[] damageLayers;
     public float damage;
-    private void OnTriggerEnter(Collider other)
+    private void OnCollisionEnter(Collision collision)
     {
-        if (CollidesWithAppropriateLayer(other.gameObject.layer, collisionLayers))
+        if (CollidesWithAppropriateLayer(collision.collider.gameObject.layer, collisionLayers))
         {
             Destroy(gameObject);
-            
-            if (CollidesWithAppropriateLayer(other.gameObject.layer, damageLayers))
-                other.GetComponentInParent<Stats>().HP.TakeDamage(damage);
+
+            if (CollidesWithAppropriateLayer(collision.collider.gameObject.layer, damageLayers))
+                collision.collider.GetComponentInParent<Stats>().HP.TakeDamage(damage);
         }
     }
 }
