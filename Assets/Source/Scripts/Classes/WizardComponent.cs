@@ -8,7 +8,7 @@ using Interfaces;
 [RequireComponent(typeof(Stats))]
 public class WizardComponent : PlayerMonoBehaviour
 {
-    public  Camera camera;
+    public Camera camera;
 
     [System.Serializable]
     public class StatsInit
@@ -189,12 +189,12 @@ public class WizardComponent : PlayerMonoBehaviour
     {
         var displacement = direction * entityStats.Speed.Current * Time.deltaTime;
         transform.Translate(displacement, Space.World);
-        //camera.transform.position = new Vector3(
-            //transform.position.x,
-            //camera.transform.position.y,
-            //transform.position.z - 5
-        //); // Moves the camera according to the player.
-    }
+        camera.transform.position = new Vector3(
+            transform.position.x,
+            camera.transform.position.y,
+            transform.position.z - 5
+        ); // Moves the camera according to the player.
+   }
 
     void DirectCharacter() //make the character face the direction of the mouse
     {
