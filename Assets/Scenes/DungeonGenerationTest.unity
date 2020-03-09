@@ -339,7 +339,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 37fe1cb7f45725a4d8a747de9f121fae, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  mapSize: 7
+  mapSize: 10
 --- !u!114 &1129303427 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 505219491624551413, guid: b3a55247596b7ee4cbe346ea4a417ead,
