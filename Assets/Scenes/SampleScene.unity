@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 705507994}
-  m_IndirectSpecularColor: {r: 0.44657898, g: 0.4964133, b: 0.5748178, a: 1}
+  m_IndirectSpecularColor: {r: 0.4465782, g: 0.49641252, b: 0.5748167, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -404,7 +404,7 @@ PrefabInstance:
     - target: {fileID: 7654609879356970206, guid: a65c66f2c830f2047ad216e6b547ed78,
         type: 3}
       propertyPath: m_RootOrder
-      value: 7
+      value: 6
       objectReference: {fileID: 0}
     - target: {fileID: 7654609879356970206, guid: a65c66f2c830f2047ad216e6b547ed78,
         type: 3}
@@ -787,7 +787,7 @@ Transform:
   m_LocalScale: {x: 9.0992, y: 4, z: 2}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 6
+  m_RootOrder: 7
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &1200731263
 PrefabInstance:
@@ -1069,6 +1069,11 @@ PrefabInstance:
       propertyPath: inputs.Array.data[4]
       value: 275
       objectReference: {fileID: 0}
+    - target: {fileID: 8654396917311496859, guid: b3a55247596b7ee4cbe346ea4a417ead,
+        type: 3}
+      propertyPath: camera
+      value: 
+      objectReference: {fileID: 963194227}
     - target: {fileID: 8792471585486317790, guid: b3a55247596b7ee4cbe346ea4a417ead,
         type: 3}
       propertyPath: m_AnchorMax.x
