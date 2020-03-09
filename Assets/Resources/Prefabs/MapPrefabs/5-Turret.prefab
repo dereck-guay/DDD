@@ -147,10 +147,10 @@ MonoBehaviour:
   - {fileID: 4675083662248047486}
   - {fileID: 8067663797981901407}
   - {fileID: 7464988937139619808}
-  projectile: {fileID: 3649683291444178571, guid: d094952558deb094c859cab0eb697499,
+  projectile: {fileID: 4768180493271869857, guid: cf40c1f291791c640bad2003ac7c4ba0,
     type: 3}
-  delay: 5
-  power: 2
+  delay: 2
+  power: 4
 --- !u!1 &3269458922365159830
 GameObject:
   m_ObjectHideFlags: 0

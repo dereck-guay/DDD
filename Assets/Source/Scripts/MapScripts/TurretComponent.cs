@@ -13,7 +13,6 @@ public class TurretComponent : MonoBehaviour
 
    GameObject instantiatedProjectile;
 
-   // Update is called once per frame
    void Update()
    {
       elapsedTime += Time.deltaTime;
