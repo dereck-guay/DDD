@@ -8,6 +8,7 @@ using Interfaces;
 [RequireComponent(typeof(Stats))]
 public class FighterComponent : PlayerMonoBehaviour
 {
+    public float CurrentSpeed;
     [System.Serializable]
     public class StatsInit
     {
@@ -81,6 +82,7 @@ public class FighterComponent : PlayerMonoBehaviour
             rigidBody.velocity = Vector3.zero;
             keyBindings.CallBindings();
         }
+        CurrentSpeed = entityStats.Speed.Current;
     }
 
     private void Move(Vector3 direction)
