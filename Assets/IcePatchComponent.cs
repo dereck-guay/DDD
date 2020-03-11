@@ -8,7 +8,13 @@ public class IcePatchComponent : CollisionMonoBehaviour
     private float currentLifeTime;
     public float maxLifeTime;
     public float slowValue;
+    private MonoBehaviour IcePatchManager;
     public List<Collider> playersInContact;
+    private int counter = 1;
+    private void Start()
+    {
+        //IcePatchManager = Get
+    }
     void Update()
     {
         if (currentLifeTime >= maxLifeTime)
@@ -29,8 +35,14 @@ public class IcePatchComponent : CollisionMonoBehaviour
     }
     private void OnTriggerStay(Collider other)
     {
+        
+    }
+    private void OnTriggerEnter(Collider other)
+    {
         if (CollidesWithAppropriateLayer(other.gameObject.layer, collisionLayers) && !playersInContact.Contains(other))
         {
+            Debug.Log(playersInContact.Contains(other));
+            ++counter;
             Debug.Log(other.gameObject);
             playersInContact.Add(other);
             Effect(true, other);

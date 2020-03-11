@@ -17,7 +17,7 @@ public class RayOfFrostSpell : MonoBehaviour
     {
         var spawnPosition = transform.position + 1.5f * direction;
         rayOfFrost = Instantiate(rayOfFrostPrefab, spawnPosition, Quaternion.identity);
-        rayOfFrost.GetComponent<IcePatchCreatorComponent>().timeBetweenIcePatches = lengthOfPatch / rayOfFrost.GetComponent<StraightProjectile>().speed;
+        rayOfFrost.GetComponent<IcePatchManagerComponent>().timeBetweenIcePatches = 1;
         rayOfFrost.GetComponent<StraightProjectile>().direction = direction;
         spellLevel = level;
     }
