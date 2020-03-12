@@ -8,6 +8,11 @@ public class HoverTextComponent : MonoBehaviour, IPointerEnterHandler, IPointerE
 {
     public GameObject childImage;
     void Start() => childImage.SetActive(false);
+    private void Update()
+    {
+        if (PauseMenuComponent.GameIsPaused == true)
+            childImage.SetActive(false);
+    }
 
     //Detects if the Cursor starts to pass over the GameObject
     public void OnPointerEnter(PointerEventData pointerEventData) =>
