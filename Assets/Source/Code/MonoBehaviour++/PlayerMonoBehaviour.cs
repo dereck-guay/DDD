@@ -16,6 +16,9 @@ public abstract class PlayerMonoBehaviour : MonoBehaviour
     protected Vector3 GetMouseDirection() =>
         (GetMousePositionOn2DPlane() - transform.position).normalized;
 
+    //------------------------------
+    // NE VIENS PAS DE NOUS
+    //
     protected Vector3 GetMousePositionOn2DPlane()
     {
         var position = Vector3.zero;
@@ -27,6 +30,8 @@ public abstract class PlayerMonoBehaviour : MonoBehaviour
 
         return position;
     }
+    //
+    //-------------------------------
 
     protected GameObject GetEntityAtMousePosition()
     {

@@ -2,27 +2,17 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class RayOfFrostCollision : MonoBehaviour
+public class RayOfFrostCollision : CollisionMonoBehaviour
 {
-    public int[] collisionLayers;
     public ParticleSystem collideEffect;
     private void OnCollisionEnter(Collision collision)
     {
-        if (CollidesWithApropriateLayer(collision.collider.gameObject.layer))
+        if (CollidesWithAppropriateLayer(collision.collider.gameObject.layer, collisionLayers))
             Explode(collision.collider.gameObject);
     }
-    private void Explode(GameObject gameObject)
+    private void Explode(GameObject target)
     {
         Destroy(gameObject);
         Instantiate(collideEffect as ParticleSystem, transform.position, Quaternion.identity);
-    }
-
-    private bool CollidesWithApropriateLayer(int GOLayer)
-    {
-        foreach (var layer in collisionLayers)
-            if (layer == GOLayer)
-                return true;
-
-        return false;
     }
 }

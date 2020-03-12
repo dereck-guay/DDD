@@ -361,6 +361,11 @@ PrefabInstance:
       propertyPath: m_IsTrigger
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 7243640169185111925, guid: a65c66f2c830f2047ad216e6b547ed78,
+        type: 3}
+      propertyPath: m_Layer
+      value: 8
+      objectReference: {fileID: 0}
     - target: {fileID: 7654609879356970206, guid: a65c66f2c830f2047ad216e6b547ed78,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -399,7 +404,7 @@ PrefabInstance:
     - target: {fileID: 7654609879356970206, guid: a65c66f2c830f2047ad216e6b547ed78,
         type: 3}
       propertyPath: m_RootOrder
-      value: 7
+      value: 6
       objectReference: {fileID: 0}
     - target: {fileID: 7654609879356970206, guid: a65c66f2c830f2047ad216e6b547ed78,
         type: 3}
@@ -782,7 +787,7 @@ Transform:
   m_LocalScale: {x: 9.0992, y: 4, z: 2}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 6
+  m_RootOrder: 7
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &1200731263
 PrefabInstance:
@@ -953,6 +958,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8654396917311496859, guid: b3a55247596b7ee4cbe346ea4a417ead,
         type: 3}
+      propertyPath: inputs.Array.size
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 8654396917311496859, guid: b3a55247596b7ee4cbe346ea4a417ead,
+        type: 3}
       propertyPath: statsInit.speed
       value: 20
       objectReference: {fileID: 0}
@@ -1010,7 +1020,7 @@ PrefabInstance:
     - target: {fileID: 8654396917311496859, guid: b3a55247596b7ee4cbe346ea4a417ead,
         type: 3}
       propertyPath: statsInit.manaRegen
-      value: 10
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 8654396917311496859, guid: b3a55247596b7ee4cbe346ea4a417ead,
         type: 3}
@@ -1018,6 +1028,52 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 3649683291444178571, guid: d094952558deb094c859cab0eb697499,
         type: 3}
+    - target: {fileID: 8654396917311496859, guid: b3a55247596b7ee4cbe346ea4a417ead,
+        type: 3}
+      propertyPath: fireball.manaCost
+      value: 50
+      objectReference: {fileID: 0}
+    - target: {fileID: 8654396917311496859, guid: b3a55247596b7ee4cbe346ea4a417ead,
+        type: 3}
+      propertyPath: inputs.Array.data[9]
+      value: 32
+      objectReference: {fileID: 0}
+    - target: {fileID: 8654396917311496859, guid: b3a55247596b7ee4cbe346ea4a417ead,
+        type: 3}
+      propertyPath: statsInit.attackDamage
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 8654396917311496859, guid: b3a55247596b7ee4cbe346ea4a417ead,
+        type: 3}
+      propertyPath: rayOfFrost.icePatchPrefab
+      value: 
+      objectReference: {fileID: 8820669169490225209, guid: 6a49104af0f225547a75318fa8663928,
+        type: 3}
+    - target: {fileID: 8654396917311496859, guid: b3a55247596b7ee4cbe346ea4a417ead,
+        type: 3}
+      propertyPath: inputs.Array.data[1]
+      value: 273
+      objectReference: {fileID: 0}
+    - target: {fileID: 8654396917311496859, guid: b3a55247596b7ee4cbe346ea4a417ead,
+        type: 3}
+      propertyPath: inputs.Array.data[2]
+      value: 276
+      objectReference: {fileID: 0}
+    - target: {fileID: 8654396917311496859, guid: b3a55247596b7ee4cbe346ea4a417ead,
+        type: 3}
+      propertyPath: inputs.Array.data[3]
+      value: 274
+      objectReference: {fileID: 0}
+    - target: {fileID: 8654396917311496859, guid: b3a55247596b7ee4cbe346ea4a417ead,
+        type: 3}
+      propertyPath: inputs.Array.data[4]
+      value: 275
+      objectReference: {fileID: 0}
+    - target: {fileID: 8654396917311496859, guid: b3a55247596b7ee4cbe346ea4a417ead,
+        type: 3}
+      propertyPath: camera
+      value: 
+      objectReference: {fileID: 963194227}
     - target: {fileID: 8792471585486317790, guid: b3a55247596b7ee4cbe346ea4a417ead,
         type: 3}
       propertyPath: m_AnchorMax.x
@@ -1264,6 +1320,7 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+<<<<<<< HEAD
 --- !u!1001 &3041410308430020929
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1452,3 +1509,5 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 9f13d8739bbf87546bf20fc436ffc6b9, type: 3}
+=======
+>>>>>>> a24d15e870a79e1a77c56010cfaadcbf695772d7

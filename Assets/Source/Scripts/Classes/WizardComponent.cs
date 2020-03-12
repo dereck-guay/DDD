@@ -6,9 +6,10 @@ using Miscellaneous;
 using System.Text;
 using Interfaces;
 [RequireComponent(typeof(Stats))]
+[RequireComponent(typeof(Rigidbody))]
 public class WizardComponent : PlayerMonoBehaviour
 {
-    public  Camera camera;
+    public Camera camera;
 
     [System.Serializable]
     public class StatsInit
@@ -51,6 +52,7 @@ public class WizardComponent : PlayerMonoBehaviour
     public class RayOfFrost
     {
         public GameObject rayOfFrostPrefab;
+        public GameObject icePatchPrefab;
         public float manaCost;
     };
     [System.Serializable]
@@ -145,16 +147,24 @@ public class WizardComponent : PlayerMonoBehaviour
                     }
                 },
                 () => {
-                    Debug.Log("4");
-                }
+                    if (CanCast(rayOfFrost.manaCost, typeof(RayOfFrostSpell)))
+                    {
+                        entityStats.Mana.UseMana(fireball.manaCost);
+                        var rayOfFrostSpell = gameObject.AddComponent<RayOfFrostSpell>();
+                        rayOfFrostSpell.rayOfFrostPrefab = rayOfFrost.rayOfFrostPrefab;
+                        rayOfFrostSpell.icePatchPrefab = rayOfFrost.icePatchPrefab;
+                        rayOfFrostSpell.direction = GetMouseDirection();
+                        rayOfFrostSpell.Cast(entityStats.XP.Level);
+                    }
+                },
+                () => { entityStats.HP.TakeDamage(1); }
             }, inputs
         );
     }
 
     private void Start()
     {
-        
-        rigidbody = GetComponentInChildren<Rigidbody>();
+        rigidbody = GetComponent<Rigidbody>();
         entityStats = GetComponent<Stats>();
         entityStats.ApplyStats(statsInit.attackDamage, statsInit.attackSpeed, statsInit.maxHp, statsInit.hpRegen, statsInit.maxMana, statsInit.manaRegen, statsInit.range, statsInit.speed);
         SetTimeSinceLastAttack(0);
@@ -170,16 +180,25 @@ public class WizardComponent : PlayerMonoBehaviour
     {
         DirectCharacter();
         SetTimeSinceLastAttack(GetTimeSinceLastAttack() + Time.deltaTime);
-        rigidbody.velocity = Vector3.zero; //Stop rigidbodies from moving the character
+        //rigidbody.velocity = Vector3.zero; //Stop rigidbodies from moving the character
         keyBindings.CallBindings();
         entityStats.Regen();
-    }
+
+        camera.transform.position = new Vector3(
+            transform.position.x,
+            camera.transform.position.y,
+            transform.position.z - 5
+        ); // Moves the camera according to the player.
+   }
 
     private void Move(Vector3 direction)
     {
-        var displacement = direction * entityStats.Speed.Current * Time.deltaTime;
-        transform.Translate(displacement, Space.World);
-        camera.transform.Translate(displacement, Space.World); // Moves the camera the same amount.
+      //var displacement = direction * entityStats.Speed.Current * Time.deltaTime;
+      //transform.Translate(displacement, Space.World);
+
+      rigidbody.AddForce(direction * entityStats.Speed.Current * Time.deltaTime); //Sqrt?
+
+        
     }
 
     void DirectCharacter() //make the character face the direction of the mouse

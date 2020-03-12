@@ -2,11 +2,12 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+[RequireComponent(typeof(Rigidbody))]
 public class StraightProjectile : MonoBehaviour
 {
-    public Vector3 direction = Vector3.zero;
-    public float speed = 5f;
+    public Vector3 direction = Vector3.forward;
+    public float speed = 50f;
 
-    void Update() =>
-        transform.Translate(direction * speed * Time.deltaTime);
+    private void Start() =>
+        GetComponent<Rigidbody>().AddForce(direction * speed);
 }

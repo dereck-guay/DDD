@@ -2,24 +2,18 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class AutoAttackCollision : MonoBehaviour
+public class AutoAttackCollision : CollisionMonoBehaviour
 {
-    public int[] collsionLayers;
+    public int[] damageLayers;
     public float damage;
-    private void OnTriggerEnter(Collider other)
+    private void OnCollisionEnter(Collision collision)
     {
-        if (CollidesWithAppropriateLayer(other.gameObject.layer))
+        if (CollidesWithAppropriateLayer(collision.collider.gameObject.layer, collisionLayers))
         {
             Destroy(gameObject);
-            other.GetComponentInParent<Stats>().HP.TakeDamage(damage);
-            Debug.Log(other.GetComponentInParent<Stats>().gameObject.GetComponent<PlayerMonoBehaviour>().name);
+
+            if (CollidesWithAppropriateLayer(collision.collider.gameObject.layer, damageLayers))
+                collision.collider.GetComponentInParent<Stats>().HP.TakeDamage(damage);
         }
-    }
-    private bool CollidesWithAppropriateLayer(int GOLayer)
-    {
-        foreach (var layer in collsionLayers)
-            if (layer == GOLayer)
-                return true;
-        return false;
     }
 }

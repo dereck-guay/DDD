@@ -2,31 +2,24 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class FireballCollision : MonoBehaviour
+public class FireballCollision : CollisionMonoBehaviour
 {
-    public int[] collisionLayers;
-    public float damage;
-    public ParticleSystem collideEffect;
-    private void OnCollisionEnter(Collision collision)
-    {
-        if (CollidesWithApropriateLayer(collision.collider.gameObject.layer))
-            Explode(collision.collider.gameObject);
-    }
-    private void Explode(GameObject target)
-    {
-        Destroy(gameObject);
-        Instantiate(collideEffect as ParticleSystem, transform.position, Quaternion.identity);
-        if (target.transform.parent.gameObject)
-            target.GetComponentInParent<Stats>().HP.TakeDamage(damage);
-    }
+   public int[] damageLayers;
+   public float damage;
+   public ParticleSystem collideEffect;
 
-    private bool CollidesWithApropriateLayer(int GOLayer)
-    {
-        foreach (var layer in collisionLayers)
-            if (layer == GOLayer)
-                return true;
+   private void OnCollisionEnter(Collision collision)
+   {
+      if (CollidesWithAppropriateLayer(collision.gameObject.layer, collisionLayers))
+         Explode(collision.gameObject);
+   }
 
-        return false;
-    }
+   private void Explode(GameObject target)
+   {
 
+      Destroy(gameObject);
+      Instantiate(collideEffect as ParticleSystem, transform.position, Quaternion.identity);
+      if (CollidesWithAppropriateLayer(target.layer, damageLayers))
+         target.GetComponent<Stats>().HP.TakeDamage(damage);
+   }
 }
