@@ -44,7 +44,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a05cdc91075d86f4b8858d0a585601d2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  enemies: []
+  enemies:
+  - enemy: {fileID: 5276026005832429939, guid: 48974d5869b3ff74691aaf84509d5560, type: 3}
+    weight: 10
+  - enemy: {fileID: 7921532287817296517, guid: 473628460e69f19428dd4a5cd50a870e, type: 3}
+    weight: 5
+  - enemy: {fileID: 5746207725368477638, guid: fdeed52521e29f048950bc97ab00e799, type: 3}
+    weight: 1
   delay: 300
   maxEnemyCount: 5
   enemyLayer: 14

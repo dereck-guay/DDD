@@ -7,7 +7,7 @@ using UnityEngine;
 public class EnemyData
 {
    public GameObject enemy;
-   public float weight;
+   public float weight = 1;
 }
 
 [RequireComponent(typeof(SphereCollider))]
@@ -15,7 +15,7 @@ public class SpawnerComponent : MonoBehaviour
 {
    public EnemyData[] enemies;
    public float delay;
-   public int maxEnemyCount;
+   public int maxEnemyCount = 3;
    public int enemyLayer;
    public int playerLayer;
 
@@ -46,15 +46,28 @@ public class SpawnerComponent : MonoBehaviour
       }
    }
 
-   void Spawn()
-   {
-      Debug.Log("Enemy spawned");
-   }
+   void Spawn() => Instantiate(enemies[GetRandomEnemyIndex()].enemy, transform.position, Quaternion.identity);
 
    void TrySpawn()
    {
       if (enemiesInArea.Count < maxEnemyCount && nbPlayersInArea == 0)
          Spawn();
+   }
+
+   private int GetRandomEnemyIndex()
+   {
+      float value = Random.Range(0, totalWeight);
+      int index = 0;
+
+      while (true)
+      {
+         value -= enemies[index].weight;
+
+         if (value < 0)
+            return index;
+
+         index++;
+      }
    }
 
    private void OnTriggerEnter(Collider other)
