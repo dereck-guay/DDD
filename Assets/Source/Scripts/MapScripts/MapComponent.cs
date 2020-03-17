@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEditor.AI;
 
 public class MapComponent : MonoBehaviour
 {
@@ -9,14 +10,19 @@ public class MapComponent : MonoBehaviour
 
    Map mapModel;
 
-   void Awake() => mapModel = new Map(mapSize);
+   void Awake()
+   {
+      mapModel = new Map(mapSize);
+   }
+
    void Start()
    {
       //Scales the floor to the side of the map.
       float floorScaleFactor = (2 * mapSize + 3) / 10f;
       floorPlane.transform.localScale = new Vector3(Room.Width, 0, Room.Length) * floorScaleFactor;
 
-      Instantiate(); 
+      Instantiate();
+      NavMeshBuilder.BuildNavMesh();
    }
 
    public void Instantiate()

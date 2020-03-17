@@ -948,6 +948,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 695880186142212080}
     m_Modifications:
+    - target: {fileID: 2949087291329714831, guid: 19e9f9bd9657f474eae1fc9c9eea8aae,
+        type: 3}
+      propertyPath: m_NavMeshLayer
+      value: 3
+      objectReference: {fileID: 0}
     - target: {fileID: 6512050241125172284, guid: 19e9f9bd9657f474eae1fc9c9eea8aae,
         type: 3}
       propertyPath: m_Name
