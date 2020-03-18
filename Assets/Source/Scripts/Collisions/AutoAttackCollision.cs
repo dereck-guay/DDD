@@ -13,7 +13,7 @@ public class AutoAttackCollision : CollisionMonoBehaviour
             Destroy(gameObject);
 
             if (CollidesWithAppropriateLayer(collision.collider.gameObject.layer, damageLayers))
-                collision.collider.GetComponentInParent<Stats>().HP.TakeDamage(damage);
+                collision.collider.GetComponent<Stats>().HP.TakeDamage(damage);
         }
     }
 }
