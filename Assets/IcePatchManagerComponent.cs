@@ -4,7 +4,7 @@ using UnityEngine;
 using System.Linq;
 
 public class IcePatchManagerComponent : MonoBehaviour
-{
+{/*
     public GameObject icePatchPrefab;
     public float timeBetweenIcePatches;
     private float timeSinceLastIcePatch;
@@ -23,5 +23,5 @@ public class IcePatchManagerComponent : MonoBehaviour
             timeSinceLastIcePatch -= timeBetweenIcePatches;
         }
         timeSinceLastIcePatch += Time.deltaTime;
-    }
+    }*/
 }

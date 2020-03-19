@@ -1,52 +1,77 @@
 ﻿using Enums;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 public class IcePatchComponent : CollisionMonoBehaviour
 {
-    private float currentLifeTime;
-    public float maxLifeTime;
+    public BoxCollider triggerZone;
+    public GameObject projectile;
+    public PlayerMonoBehaviour player;
     public float slowValue;
-    private MonoBehaviour IcePatchManager;
-    public List<Collider> playersInContact;
-    private int counter = 1;
+
+    private Collider[] playerColliders;
+    private float yPos;
+    private float xPos;
+    private const float xAndYSize = 1;
+    private Vector3 oldPos;
+    private Vector3 newPos;
+    private List<Vector3> averageDeltaPos;
+    private Vector3 newDeltaPos;
+    private bool needToCaculateAverage = true;
     private void Start()
     {
-        //IcePatchManager = Get
+        playerColliders = player.GetComponents<Collider>();
+        triggerZone = gameObject.AddComponent<BoxCollider>();
+        gameObject.transform.parent.LookAt(projectile.GetComponent<StraightProjectile>().direction);
+        triggerZone.isTrigger = true;
+        averageDeltaPos = new List<Vector3>();
     }
-    void Update()
+    private void Update()
     {
-        if (currentLifeTime >= maxLifeTime)
+        if (projectile)
         {
-            foreach (var c in playersInContact)
-                Effect(false, c);
-            Destroy(gameObject);
+            newPos = projectile.transform.localPosition;
+            var deltaPos = newPos - oldPos;
+            Recenter(deltaPos);
+            Enlarge(deltaPos);
+            oldPos = newPos;
+            averageDeltaPos.Add(deltaPos);
         }
-        currentLifeTime += Time.deltaTime;
+        else
+        {
+            if (needToCaculateAverage)
+            {
+                CalculateAverage();
+                needToCaculateAverage = false;
+            }
+            Recenter(newDeltaPos);
+            Shrink();
+            if (IsTooSmall(triggerZone.size, 0.001f))
+                Destroy(gameObject);
+        }
     }
+    void CalculateAverage()
+    {
+        //https://stackoverflow.com/questions/33170643/finding-the-average-of-vectors-in-a-list
+        //---------------------------------------
+        newDeltaPos = new Vector3(averageDeltaPos.Average(e => e.x), averageDeltaPos.Average(e => e.y), averageDeltaPos.Average(e => e.z));
+        //---------------------------------------
+    }
+    bool IsTooSmall(Vector3 v, float f) => v.z < f;
+    void Recenter(Vector3 deltaPos) => triggerZone.center = new Vector3(xPos, yPos, triggerZone.center.z + Mathf.Sqrt(Mathf.Pow(deltaPos.x, 2) + Mathf.Pow(deltaPos.z, 2)) / 2);
+    void Enlarge(Vector3 deltaPos) => triggerZone.size = new Vector3(xAndYSize, xAndYSize, triggerZone.size.z + Mathf.Sqrt(Mathf.Pow(deltaPos.x, 2) + Mathf.Pow(deltaPos.z, 2)));
+    void Shrink() => triggerZone.size = new Vector3(xAndYSize, xAndYSize, triggerZone.size.z - Mathf.Sqrt(Mathf.Pow(newDeltaPos.x, 2) + Mathf.Pow(newDeltaPos.z, 2)));
     private void OnTriggerExit(Collider other)
     {
-        if (CollidesWithAppropriateLayer(other.gameObject.layer, collisionLayers) && playersInContact.Contains(other))
-        {
-            playersInContact.Remove(other);
+        if (CollidesWithAppropriateLayer(other.gameObject.layer, collisionLayers) && !playerColliders.Contains(other))
             Effect(false, other);
-        }
-    }
-    private void OnTriggerStay(Collider other)
-    {
-        
     }
     private void OnTriggerEnter(Collider other)
     {
-        if (CollidesWithAppropriateLayer(other.gameObject.layer, collisionLayers) && !playersInContact.Contains(other))
-        {
-            Debug.Log(playersInContact.Contains(other));
-            ++counter;
-            Debug.Log(other.gameObject);
-            playersInContact.Add(other);
+        if (CollidesWithAppropriateLayer(other.gameObject.layer, collisionLayers) && !playerColliders.Contains(other))
             Effect(true, other);
-        }
     }
     private void Effect(bool activate, Collider other)
     {

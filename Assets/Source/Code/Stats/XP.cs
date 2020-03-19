@@ -13,7 +13,10 @@ public class XP
     public float Current { get; private set; }
     public int Level
     {
-        get { return level; }
+        get 
+        {
+            return level;
+        }
         private set
         {
             if (value > MaxLevel)

@@ -7,21 +7,30 @@ public class RayOfFrostSpell : MonoBehaviour
     public Vector3 direction;
     public GameObject rayOfFrostPrefab;
     public GameObject icePatchPrefab;
-    public float lengthOfPatch = 1;
+    public float slowValue;
 
     private readonly float[] cooldowns = { 6f, 5f, 4f };
     public float currentLifeTime;
     private int spellLevel;
     private GameObject rayOfFrost;
-    public void Cast(int level)
+    public void Cast(int level, PlayerMonoBehaviour player)
     {
+        Debug.Log(direction);
         var spawnPosition = transform.position + 1.5f * direction;
         rayOfFrost = Instantiate(rayOfFrostPrefab, spawnPosition, Quaternion.identity);
-        rayOfFrost.GetComponent<IcePatchManagerComponent>().timeBetweenIcePatches = 1;
         rayOfFrost.GetComponent<StraightProjectile>().direction = direction;
+        var icePatch = Instantiate(icePatchPrefab, transform.position, Quaternion.identity);
+        icePatch.transform.LookAt(direction);
+        IcePatchComponent icePatchComponent = icePatch.GetComponentInChildren<IcePatchComponent>();
+        icePatchComponent.projectile = rayOfFrost;
+        icePatchComponent.player = player;
+        icePatchComponent.slowValue = slowValue;
         spellLevel = level;
     }
-
+    private void Start()
+    {
+        spellLevel = 1;
+    }
     void Update()
     {
         if (currentLifeTime >= cooldowns[spellLevel - 1])

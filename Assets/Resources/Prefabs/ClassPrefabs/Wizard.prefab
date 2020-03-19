@@ -353,7 +353,7 @@ MonoBehaviour:
   rayOfFrost:
     rayOfFrostPrefab: {fileID: 9001681064244344938, guid: 8d3b89fb0b1a6d44bb683fb36603abc2,
       type: 3}
-    icePatchPrefab: {fileID: 8820669169490225209, guid: 6a49104af0f225547a75318fa8663928,
+    icePatchPrefab: {fileID: 4032612692900335009, guid: 75310a70c1b97fa438a3bdd3a16dc80d,
       type: 3}
     manaCost: 0
   heal:

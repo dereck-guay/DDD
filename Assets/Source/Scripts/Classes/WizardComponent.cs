@@ -54,6 +54,7 @@ public class WizardComponent : PlayerMonoBehaviour
         public GameObject rayOfFrostPrefab;
         public GameObject icePatchPrefab;
         public float manaCost;
+        public float slowValue;
     };
     [System.Serializable]
     public class Heal
@@ -153,8 +154,9 @@ public class WizardComponent : PlayerMonoBehaviour
                         var rayOfFrostSpell = gameObject.AddComponent<RayOfFrostSpell>();
                         rayOfFrostSpell.rayOfFrostPrefab = rayOfFrost.rayOfFrostPrefab;
                         rayOfFrostSpell.icePatchPrefab = rayOfFrost.icePatchPrefab;
+                        rayOfFrostSpell.slowValue = rayOfFrost.slowValue;
                         rayOfFrostSpell.direction = GetMouseDirection();
-                        rayOfFrostSpell.Cast(entityStats.XP.Level);
+                        rayOfFrostSpell.Cast(entityStats.XP.Level, this);
                     }
                 },
                 () => { entityStats.HP.TakeDamage(1); }

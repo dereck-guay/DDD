@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 705507994}
-  m_IndirectSpecularColor: {r: 0.4465782, g: 0.49641252, b: 0.5748167, a: 1}
+  m_IndirectSpecularColor: {r: 0.44657898, g: 0.4964133, b: 0.5748178, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -290,6 +290,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Radius
       value: 0.6
+      objectReference: {fileID: 0}
+    - target: {fileID: 4676277268715582991, guid: a65c66f2c830f2047ad216e6b547ed78,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -5.11
       objectReference: {fileID: 0}
     - target: {fileID: 5368996978949867535, guid: a65c66f2c830f2047ad216e6b547ed78,
         type: 3}
@@ -901,6 +906,11 @@ PrefabInstance:
       propertyPath: m_Enabled
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 3939576513167422918, guid: b3a55247596b7ee4cbe346ea4a417ead,
+        type: 3}
+      propertyPath: m_IsTrigger
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 4430119355430481879, guid: b3a55247596b7ee4cbe346ea4a417ead,
         type: 3}
       propertyPath: m_Enabled
@@ -1047,7 +1057,7 @@ PrefabInstance:
         type: 3}
       propertyPath: rayOfFrost.icePatchPrefab
       value: 
-      objectReference: {fileID: 8820669169490225209, guid: 6a49104af0f225547a75318fa8663928,
+      objectReference: {fileID: 4032612692900335009, guid: 75310a70c1b97fa438a3bdd3a16dc80d,
         type: 3}
     - target: {fileID: 8654396917311496859, guid: b3a55247596b7ee4cbe346ea4a417ead,
         type: 3}
