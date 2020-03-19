@@ -10,20 +10,7 @@ using Interfaces;
 public class WizardComponent : PlayerMonoBehaviour
 {
     public Camera camera;
-
-    [System.Serializable]
-    public class StatsInit
-    {
-        public float attackDamage;
-        public float attackSpeed;
-        public float maxHp;
-        public float hpRegen;
-        public float maxMana;
-        public float manaRegen;
-        public float range;
-        public float speed;
-
-    };
+       
     [Header("Stats")]
     public StatsInit statsInit;
 
@@ -98,7 +85,7 @@ public class WizardComponent : PlayerMonoBehaviour
                             var autoAttackSpell = gameObject.AddComponent<AutoAttackSpell>();
                             autoAttackSpell.autoAttackPrefab = autoAttack.autoAttackPrefab;
                             autoAttackSpell.damage = entityStats.AtkDamage.Current;
-                            autoAttackSpell.target = target.GetComponentInParent<Transform>().parent.gameObject;
+                            autoAttackSpell.target = target.GetComponent<Transform>().gameObject;
                             autoAttackSpell.Cast(entityStats.AtkSpeed.Current, transform.position);
                             SetTimeSinceLastAttack(0) ;
                             canAttack = false; 

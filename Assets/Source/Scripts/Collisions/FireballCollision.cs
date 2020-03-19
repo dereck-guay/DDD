@@ -16,7 +16,6 @@ public class FireballCollision : CollisionMonoBehaviour
 
    private void Explode(GameObject target)
    {
-
       Destroy(gameObject);
       Instantiate(collideEffect as ParticleSystem, transform.position, Quaternion.identity);
       if (CollidesWithAppropriateLayer(target.layer, damageLayers))

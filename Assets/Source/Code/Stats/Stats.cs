@@ -4,6 +4,19 @@ using UnityEngine;
 using Interfaces;
 using Miscellaneous;
 
+[System.Serializable]
+public class StatsInit
+{
+    public float attackDamage;
+    public float attackSpeed;
+    public float maxHp;
+    public float hpRegen;
+    public float maxMana;
+    public float manaRegen;
+    public float range;
+    public float speed;
+};
+
 public class Stats : MonoBehaviour
 {
     public AtkDamage AtkDamage { get; private set; }

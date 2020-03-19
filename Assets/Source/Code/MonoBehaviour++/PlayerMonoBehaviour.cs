@@ -5,7 +5,7 @@ using UnityEngine;
 
 public abstract class PlayerMonoBehaviour : MonoBehaviour
 {
-    public LayerMask selectableEntities;
+    public List<LayerMask> selectableEntities;
     public LayerMask rayCastHitLayers;
 
     [HideInInspector]
@@ -38,8 +38,9 @@ public abstract class PlayerMonoBehaviour : MonoBehaviour
         Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
         RaycastHit hit;
 
-        if (Physics.Raycast(ray, out hit, Mathf.Infinity, selectableEntities))
-            return hit.collider.gameObject;
+        foreach (var layer in selectableEntities)
+            if (Physics.Raycast(ray, out hit, Mathf.Infinity, layer))
+                return hit.collider.gameObject;
 
         return null;
     }
