@@ -10,7 +10,7 @@ public class FireballSpell : MonoBehaviour
     private readonly float[] cooldowns = { 3f, 2f, 1f };
     private readonly float[] damage = { 4f, 5f, 7f };
     public float currentLifeTime;
-    private int spellLevel;
+    private int spellLevel = 1;
     private GameObject fireball;
 
     public void Cast(int level)

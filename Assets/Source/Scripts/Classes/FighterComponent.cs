@@ -9,6 +9,8 @@ using Interfaces;
 public class FighterComponent : PlayerMonoBehaviour
 {
     public float CurrentSpeed;
+    public float CurrentAtkSpeed;
+    public float CurrentHPRegen;
 
     #region Stuff for inspector
     [System.Serializable]
@@ -101,10 +103,17 @@ public class FighterComponent : PlayerMonoBehaviour
                     }
                 },
                 () =>{
-                    if(!IsOnCooldown(typeof(RageSpell)))
+                    if(!IsOnCooldown(typeof(RageSpell)) && !IsOnCooldown(typeof(TakeABreatherSpell)))
                     {
                         var rageSpell = gameObject.AddComponent<RageSpell>();
                         rageSpell.Cast(entityStats.XP.Level);
+                    }
+                },
+                () =>{
+                    if (!IsOnCooldown(typeof(RageSpell)) && !IsOnCooldown(typeof(TakeABreatherSpell)))
+                    {
+                        var takeABreatherSpell = gameObject.AddComponent<TakeABreatherSpell>();
+                        takeABreatherSpell.Cast(entityStats.XP.Level);
                     }
                 }
             }, inputs
@@ -128,6 +137,8 @@ public class FighterComponent : PlayerMonoBehaviour
             keyBindings.CallBindings();
         }
         CurrentSpeed = entityStats.Speed.Current;
+        CurrentAtkSpeed = entityStats.AtkSpeed.Current;
+        CurrentHPRegen = entityStats.HP.HPRegen;
     }
 
     private void Move(Vector3 direction)

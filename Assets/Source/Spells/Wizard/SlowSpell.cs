@@ -11,7 +11,7 @@ public class SlowSpell : MonoBehaviour
 
     private float[] cooldowns = { 10f, 9f, 8f };
     public float currentLifeTime;
-    private int playerLevel;
+    private int playerLevel = 1;
     private bool isActive;
 
     public void Cast(int level)

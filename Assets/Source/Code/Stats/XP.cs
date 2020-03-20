@@ -8,7 +8,7 @@ using Interfaces;
 public class XP
 {
     int level;
-    const int MaxLevel = 4;
+    const int MaxLevel = 3;
     readonly float[] requiredXPPerLevel = new float[] { 1,2,3 };
     public float Current { get; private set; }
     public int Level

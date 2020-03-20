@@ -133,6 +133,7 @@ public class WizardComponent : PlayerMonoBehaviour
                             // Get parent object because the collider is in the body of the character.
                             healSpell.target = target.transform.parent.gameObject;
                             healSpell.healValue = heal.healValues;
+                            Debug.Log(entityStats.XP.Level);
                             healSpell.Cast(entityStats.XP.Level);
                         } else { Destroy(target); }
                     }

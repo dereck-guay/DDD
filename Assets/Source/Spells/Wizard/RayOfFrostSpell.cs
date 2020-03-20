@@ -11,7 +11,7 @@ public class RayOfFrostSpell : MonoBehaviour
 
     private readonly float[] cooldowns = { 6f, 5f, 4f };
     public float currentLifeTime;
-    private int spellLevel;
+    private int spellLevel = 1;
     private GameObject rayOfFrost;
     public void Cast(int level, PlayerMonoBehaviour player)
     {
@@ -25,10 +25,6 @@ public class RayOfFrostSpell : MonoBehaviour
         icePatchComponent.player = player;
         icePatchComponent.slowValue = slowValue;
         spellLevel = level;
-    }
-    private void Start()
-    {
-        spellLevel = 1;
     }
     void Update()
     {
