@@ -44,4 +44,9 @@ public abstract class PlayerMonoBehaviour : MonoBehaviour
 
         return null;
     }
+
+    protected bool TargetIsWithinRange(GameObject target, float range) =>
+       (target.transform.position - transform.position).magnitude < range;
+    protected bool CanCast(float manaCost, Type spell) =>
+        entityStats.Mana.Current > manaCost && !IsOnCooldown(spell);
 }

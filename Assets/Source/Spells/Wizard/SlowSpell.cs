@@ -25,7 +25,7 @@ public class SlowSpell : MonoBehaviour
 
     private void Update()
     {
-        if (currentLifeTime >= cooldowns[playerLevel])
+        if (currentLifeTime >= cooldowns[playerLevel - 1])
             Destroy(this);
         else if(currentLifeTime >= effectDurations[playerLevel] && isActive)
         {

@@ -10,7 +10,8 @@ using Interfaces;
 public class WizardComponent : PlayerMonoBehaviour
 {
     public Camera camera;
-       
+
+    #region Stuff for inspector
     [Header("Stats")]
     public StatsInit statsInit;
 
@@ -56,12 +57,10 @@ public class WizardComponent : PlayerMonoBehaviour
     public Slow slow;
     public RayOfFrost rayOfFrost;
     public Heal heal;
-
-    private KeyBindings keyBindings;
+    #endregion
+    #region Auto-attack stuff
     private bool canAttack;
     private float timeSinceLastAttack;
-    private Rigidbody rigidbody;
-    
     private float GetTimeSinceLastAttack()
     { return timeSinceLastAttack; }
     private void SetTimeSinceLastAttack(float value)
@@ -70,6 +69,10 @@ public class WizardComponent : PlayerMonoBehaviour
             canAttack = true;
         timeSinceLastAttack = value;
     }
+    #endregion
+
+    private KeyBindings keyBindings;
+    private Rigidbody rigidbody;
     private void Awake()
     {
         canAttack = true;
@@ -182,24 +185,15 @@ public class WizardComponent : PlayerMonoBehaviour
 
     private void Move(Vector3 direction)
     {
-      //var displacement = direction * entityStats.Speed.Current * Time.deltaTime;
-      //transform.Translate(displacement, Space.World);
+        //var displacement = direction * entityStats.Speed.Current * Time.deltaTime;
+        //transform.Translate(displacement, Space.World);
 
-      rigidbody.AddForce(direction * entityStats.Speed.Current * Time.deltaTime); //Sqrt?
-
-        
+        rigidbody.AddForce(direction * entityStats.Speed.Current * Time.deltaTime); //Sqrt?
     }
-
     void DirectCharacter() //make the character face the direction of the mouse
     {
         var directionToLookAt = transform.position + GetMouseDirection();
         directionToLookAt.y = transform.position.y;
         transform.LookAt(directionToLookAt);
     }
-
-    private bool TargetIsWithinRange(GameObject target, float range) =>
-       (target.transform.position - transform.position).magnitude < range;
-
-    private bool CanCast(float manaCost, Type spell) =>
-        entityStats.Mana.Current > manaCost && !IsOnCooldown(spell);
 }

@@ -337,19 +337,20 @@ MonoBehaviour:
     manaCost: 10
   slow:
     slowValue: 0.2
-    manaCost: 0
+    manaCost: 10
   rayOfFrost:
     rayOfFrostPrefab: {fileID: 9001681064244344938, guid: 8d3b89fb0b1a6d44bb683fb36603abc2,
       type: 3}
     icePatchPrefab: {fileID: 4032612692900335009, guid: 75310a70c1b97fa438a3bdd3a16dc80d,
       type: 3}
-    manaCost: 0
+    manaCost: 10
+    slowValue: 0.2
   heal:
     healValues:
     - 10
     - 20
     - 35
-    manaCost: 0
+    manaCost: 10
 --- !u!54 &6085515682664728954
 Rigidbody:
   m_ObjectHideFlags: 0

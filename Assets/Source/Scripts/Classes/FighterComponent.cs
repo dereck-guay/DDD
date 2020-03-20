@@ -9,6 +9,8 @@ using Interfaces;
 public class FighterComponent : PlayerMonoBehaviour
 {
     public float CurrentSpeed;
+
+    #region Stuff for inspector
     [System.Serializable]
     public class StatsInit
     {
@@ -28,6 +30,11 @@ public class FighterComponent : PlayerMonoBehaviour
     [Header("Inputs")]
     public KeyCode[] inputs;
 
+    [System.Serializable]
+    public class AutoAttack
+    {
+        public GameObject autoAttackPrefab;
+    };
     [HideInInspector]
     public bool spellLocked = false;
 
@@ -38,7 +45,21 @@ public class FighterComponent : PlayerMonoBehaviour
     };
 
     [Header("Spell Settings")]
+    public AutoAttack autoAttack;
     public Slam slam;
+    #endregion
+    #region Auto-attack stuff
+    private bool canAttack;
+    private float timeSinceLastAttack;
+    private float GetTimeSinceLastAttack()
+    { return timeSinceLastAttack; }
+    private void SetTimeSinceLastAttack(float value)
+    {
+        if (value > 1 / entityStats.AtkSpeed.Current)
+            canAttack = true;
+        timeSinceLastAttack = value;
+    }
+    #endregion
 
     private KeyBindings keyBindings;
     private Rigidbody rigidBody;
@@ -47,6 +68,23 @@ public class FighterComponent : PlayerMonoBehaviour
         keyBindings = new KeyBindings(
             new Action[]
             {
+                () => {
+                    if (canAttack)
+                    {
+                        //A changer pour un melee auto-attack
+                        var target = GetEntityAtMousePosition();
+                        if (target && TargetIsWithinRange(target, entityStats.Range.Current))
+                        {
+                            var autoAttackSpell = gameObject.AddComponent<AutoAttackSpell>();
+                            autoAttackSpell.autoAttackPrefab = autoAttack.autoAttackPrefab;
+                            autoAttackSpell.damage = entityStats.AtkDamage.Current;
+                            autoAttackSpell.target = target.GetComponent<Transform>().gameObject;
+                            autoAttackSpell.Cast(entityStats.AtkSpeed.Current, transform.position);
+                            SetTimeSinceLastAttack(0) ;
+                            canAttack = false;
+                        }
+                    }
+                },
                 () => Move(Vector3.forward),
                 () => Move(Vector3.left),
                 () => Move(Vector3.back),
@@ -60,6 +98,13 @@ public class FighterComponent : PlayerMonoBehaviour
                         slamSpell.Cast(entityStats.XP.Level);
                         // Pour pas que le player puisse bouger pendant l'ainimation du spell
                         // spellLocked = true;
+                    }
+                },
+                () =>{
+                    if(!IsOnCooldown(typeof(RageSpell)))
+                    {
+                        var rageSpell = gameObject.AddComponent<RageSpell>();
+                        rageSpell.Cast(entityStats.XP.Level);
                     }
                 }
             }, inputs
