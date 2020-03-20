@@ -48,6 +48,8 @@ MonoBehaviour:
   projectile: {fileID: 0}
   player: {fileID: 0}
   slowValue: 0
+  yPos: 0
+  xPos: 0
 --- !u!1 &4032612692900335009
 GameObject:
   m_ObjectHideFlags: 0

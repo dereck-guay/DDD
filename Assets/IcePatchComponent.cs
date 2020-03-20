@@ -12,8 +12,8 @@ public class IcePatchComponent : CollisionMonoBehaviour
     public float slowValue;
 
     private Collider[] playerColliders;
-    private float yPos;
-    private float xPos;
+    public float yPos;
+    public float xPos;
     private const float xAndYSize = 1;
     private Vector3 oldPos;
     private Vector3 newPos;
@@ -24,9 +24,9 @@ public class IcePatchComponent : CollisionMonoBehaviour
     {
         playerColliders = player.GetComponents<Collider>();
         triggerZone = gameObject.AddComponent<BoxCollider>();
-        gameObject.transform.parent.LookAt(projectile.GetComponent<StraightProjectile>().direction);
         triggerZone.isTrigger = true;
         averageDeltaPos = new List<Vector3>();
+        oldPos = projectile.transform.position;
     }
     private void Update()
     {
@@ -48,7 +48,7 @@ public class IcePatchComponent : CollisionMonoBehaviour
             }
             Recenter(newDeltaPos);
             Shrink();
-            if (IsTooSmall(triggerZone.size, 0.001f))
+            if (triggerZone.size.z < 0.001f)
                 Destroy(gameObject);
         }
     }
@@ -59,7 +59,6 @@ public class IcePatchComponent : CollisionMonoBehaviour
         newDeltaPos = new Vector3(averageDeltaPos.Average(e => e.x), averageDeltaPos.Average(e => e.y), averageDeltaPos.Average(e => e.z));
         //---------------------------------------
     }
-    bool IsTooSmall(Vector3 v, float f) => v.z < f;
     void Recenter(Vector3 deltaPos) => triggerZone.center = new Vector3(xPos, yPos, triggerZone.center.z + Mathf.Sqrt(Mathf.Pow(deltaPos.x, 2) + Mathf.Pow(deltaPos.z, 2)) / 2);
     void Enlarge(Vector3 deltaPos) => triggerZone.size = new Vector3(xAndYSize, xAndYSize, triggerZone.size.z + Mathf.Sqrt(Mathf.Pow(deltaPos.x, 2) + Mathf.Pow(deltaPos.z, 2)));
     void Shrink() => triggerZone.size = new Vector3(xAndYSize, xAndYSize, triggerZone.size.z - Mathf.Sqrt(Mathf.Pow(newDeltaPos.x, 2) + Mathf.Pow(newDeltaPos.z, 2)));

@@ -106,7 +106,7 @@ GameObject:
   - component: {fileID: 2260074990542247508}
   - component: {fileID: 1294695191794227174}
   - component: {fileID: 2546178124072813771}
-  m_Layer: 10
+  m_Layer: 8
   m_Name: MousePositionPlane
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -197,12 +197,15 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   selectableEntities:
-    serializedVersion: 2
-    m_Bits: 1024
+  - serializedVersion: 2
+    m_Bits: 0
+  - serializedVersion: 2
+    m_Bits: 0
   rayCastHitLayers:
     serializedVersion: 2
     m_Bits: 256
   entityStats: {fileID: 0}
+  CurrentSpeed: 0
   statsInit:
     attackDamage: 15
     attackSpeed: 0.9
@@ -230,7 +233,7 @@ Rigidbody:
   m_UseGravity: 1
   m_IsKinematic: 0
   m_Interpolate: 0
-  m_Constraints: 112
+  m_Constraints: 116
   m_CollisionDetection: 0
 --- !u!114 &2016967929930888168
 MonoBehaviour:

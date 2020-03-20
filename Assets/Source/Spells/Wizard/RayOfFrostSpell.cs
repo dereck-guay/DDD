@@ -15,12 +15,11 @@ public class RayOfFrostSpell : MonoBehaviour
     private GameObject rayOfFrost;
     public void Cast(int level, PlayerMonoBehaviour player)
     {
-        Debug.Log(direction);
         var spawnPosition = transform.position + 1.5f * direction;
         rayOfFrost = Instantiate(rayOfFrostPrefab, spawnPosition, Quaternion.identity);
         rayOfFrost.GetComponent<StraightProjectile>().direction = direction;
-        var icePatch = Instantiate(icePatchPrefab, transform.position, Quaternion.identity);
-        icePatch.transform.LookAt(direction);
+        var icePatch = Instantiate(icePatchPrefab, transform.position + 1.4f * direction, Quaternion.identity);
+        icePatch.transform.LookAt(rayOfFrost.transform);
         IcePatchComponent icePatchComponent = icePatch.GetComponentInChildren<IcePatchComponent>();
         icePatchComponent.projectile = rayOfFrost;
         icePatchComponent.player = player;
