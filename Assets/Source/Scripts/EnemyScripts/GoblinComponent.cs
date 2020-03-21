@@ -6,40 +6,41 @@ using UnityEngine;
 [RequireComponent(typeof(TargetingAIComponent))]
 public class GoblinComponent : MonoBehaviour
 {
-   Stats stats;
-   TargetingAIComponent targetAI;
-   public StatsInit statsInit;
-   
-   public float knockback;
-   float cooldown = 0;
+    Stats stats;
+    TargetingAIComponent targetAI;
+    public StatsInit statsInit;
 
-   void Start()
-   {
-      stats = GetComponent<Stats>();
-      stats.ApplyStats(statsInit.attackDamage, statsInit.attackSpeed, statsInit.maxHp, statsInit.hpRegen, statsInit.maxMana, statsInit.manaRegen, statsInit.range, statsInit.speed);
+    public float knockback;
+    float cooldown = 0;
 
-      targetAI = GetComponent<TargetingAIComponent>();
+    void Start()
+    {
+        stats = GetComponent<Stats>();
+        stats.ApplyStats(statsInit.attackDamage, statsInit.attackSpeed, statsInit.maxHp, statsInit.hpRegen, statsInit.maxMana, statsInit.manaRegen, statsInit.range, statsInit.speed);
 
-      stats.HP.OnDeath += delegate { Destroy(gameObject); };
-   }
+        targetAI = GetComponent<TargetingAIComponent>();
 
-   void Update()
-   {
-      cooldown += Time.deltaTime;
+        stats.HP.OnDeath += delegate { Destroy(gameObject); };
+        stats.Speed.OnSpeedChanged += (float newSpeed) => targetAI.agent.speed = newSpeed;
+    }
 
-      if (targetAI.HasTarget && cooldown > stats.AtkSpeed.Current)
-         if (Vector3.Distance(targetAI.targetsInRange[0].position, transform.position) < stats.Range.Current)
-         {
-            Attack(targetAI.targetsInRange[0]);
-            cooldown = 0;
-         }
-   }
+    void Update()
+    {
+        cooldown += Time.deltaTime;
 
-   void Attack(Transform target)
-   {
-      Debug.Log(target);
-      target.GetComponent<Stats>().HP.TakeDamage(stats.AtkDamage.Current);
-      target.GetComponent<Rigidbody>().AddForce((target.position - transform.position).normalized * knockback);
-   }
-   
+        if (targetAI.HasTarget && cooldown > stats.AtkSpeed.Current)
+            if (Vector3.Distance(targetAI.targetsInRange[0].position, transform.position) < stats.Range.Current)
+            {
+                Attack(targetAI.targetsInRange[0]);
+                cooldown = 0;
+            }
+    }
+
+    void Attack(Transform target)
+    {
+        Debug.Log(target);
+        target.GetComponent<Stats>().HP.TakeDamage(stats.AtkDamage.Current);
+        target.GetComponent<Rigidbody>().AddForce((target.position - transform.position).normalized * knockback);
+    }
+
 }

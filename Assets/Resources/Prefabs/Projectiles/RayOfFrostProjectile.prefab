@@ -127,7 +127,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f56de1d20ad002e4fb3593e37c188814, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  collisionLayers: 090000000a000000
+  collisionLayers: 090000000a0000000e000000
   collideEffect: {fileID: 3090400820553324667, guid: 21d902fbe46554945986244484e5471c,
     type: 3}
 --- !u!54 &8261601110815986675
@@ -181,7 +181,7 @@ TrailRenderer:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 9001681064244344938}
-  m_Enabled: 1
+  m_Enabled: 0
   m_CastShadows: 1
   m_ReceiveShadows: 1
   m_DynamicOccludee: 1

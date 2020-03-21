@@ -10,7 +10,8 @@ public class TargetingAIComponent : MonoBehaviour
    public int targetLayer;
    [HideInInspector]
    public List<Transform> targetsInRange;
-   NavMeshAgent agent;
+   [HideInInspector]
+   public NavMeshAgent agent;
    public SphereCollider detectionRange;
 
    public bool HasTarget { get => targetsInRange.Count != 0; }

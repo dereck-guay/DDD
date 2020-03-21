@@ -4,12 +4,25 @@ using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 
+[System.Serializable]
+public class Delay
+{
+    public float min, max;
+    [HideInInspector]
+    public float currentDelay;
+}
+
 public class IcePatchComponent : CollisionMonoBehaviour
 {
     public BoxCollider triggerZone;
     public GameObject projectile;
     public PlayerMonoBehaviour player;
     public float slowValue;
+
+    public Delay delayBetweenPatches;
+    public GameObject icePatch;
+    public float groundLevel = 0;
+    float icePatchCooldown = 0;
 
     private Collider[] playerColliders;
     public float yPos;
@@ -27,6 +40,7 @@ public class IcePatchComponent : CollisionMonoBehaviour
         triggerZone.isTrigger = true;
         averageDeltaPos = new List<Vector3>();
         oldPos = projectile.transform.position;
+        delayBetweenPatches.currentDelay = Random.Range(delayBetweenPatches.max, delayBetweenPatches.min);
     }
     private void Update()
     {
@@ -38,6 +52,16 @@ public class IcePatchComponent : CollisionMonoBehaviour
             Enlarge(deltaPos);
             oldPos = newPos;
             averageDeltaPos.Add(deltaPos);
+            
+            icePatchCooldown += Time.deltaTime;
+            if (icePatchCooldown >= delayBetweenPatches.currentDelay)
+            {
+                icePatchCooldown -= delayBetweenPatches.currentDelay;
+                
+                var currentIcePatch = Instantiate(icePatch, new Vector3(projectile.transform.position.x, groundLevel, projectile.transform.position.z), Quaternion.identity);
+
+                delayBetweenPatches.currentDelay = Random.Range(delayBetweenPatches.max, delayBetweenPatches.min);
+            }
         }
         else
         {
