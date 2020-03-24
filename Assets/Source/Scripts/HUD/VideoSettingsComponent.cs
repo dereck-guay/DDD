@@ -34,10 +34,12 @@ public class VideoSettingsComponent : MonoBehaviour
         vsyncDropdown.value = QualitySettings.vSyncCount;
         vsyncDropdown.RefreshShownValue();
     }
+
     private void Update()
     {
         SetFPS((int)fpsSlider.value);
     }
+
     public void SetResolution(int resolutionIndex)
     {
         Resolution resolution = resolutions[resolutionIndex];
