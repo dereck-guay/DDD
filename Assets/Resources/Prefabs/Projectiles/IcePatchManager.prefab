@@ -9,7 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4032612692213136278}
-  - component: {fileID: 8683202853426872117}
+  - component: {fileID: 4982811125270560830}
   m_Layer: 0
   m_Name: Trigger
   m_TagString: Untagged
@@ -31,7 +31,7 @@ Transform:
   m_Father: {fileID: 4032612692900335015}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &8683202853426872117
+--- !u!114 &4982811125270560830
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -45,18 +45,18 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   collisionLayers: 0a0000000e000000
   triggerZone: {fileID: 0}
-  projectile: {fileID: 0}
+  projectile: {fileID: 9001681064244344938, guid: 8d3b89fb0b1a6d44bb683fb36603abc2,
+    type: 3}
   player: {fileID: 0}
-  slowValue: 0
-  delayBetweenPatches:
-    min: 0.001
-    max: 0.002
-    currentDelay: 0
+  slowValue: 0.6
+  lifeSpan: 5
+  spacingBetweenPatches:
+    min: 0.5
+    max: 1
+    currentSpacing: 0
   icePatch: {fileID: 2953877870955346358, guid: e8185738b3a128a42956dac372f5c692,
     type: 3}
   groundLevel: 0
-  yPos: 0
-  xPos: 0
 --- !u!1 &4032612692900335009
 GameObject:
   m_ObjectHideFlags: 0
@@ -67,7 +67,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4032612692900335015}
   m_Layer: 0
-  m_Name: TriggerManager
+  m_Name: IcePatchManager
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

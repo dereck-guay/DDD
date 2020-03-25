@@ -22,6 +22,7 @@ public class GoblinComponent : MonoBehaviour
 
         stats.HP.OnDeath += delegate { Destroy(gameObject); };
         stats.Speed.OnSpeedChanged += (float newSpeed) => targetAI.agent.speed = newSpeed;
+        stats.Speed.OnSpeedChanged += (float newSpeed) => Debug.Log($"New speed is {newSpeed}");
     }
 
     void Update()

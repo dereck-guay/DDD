@@ -144,7 +144,7 @@ public class WizardComponent : PlayerMonoBehaviour
                         entityStats.Mana.UseMana(fireball.manaCost);
                         var rayOfFrostSpell = gameObject.AddComponent<RayOfFrostSpell>();
                         rayOfFrostSpell.rayOfFrostPrefab = rayOfFrost.rayOfFrostPrefab;
-                        rayOfFrostSpell.icePatchPrefab = rayOfFrost.icePatchPrefab;
+                        rayOfFrostSpell.icePatchManagerPrefab = rayOfFrost.icePatchPrefab;
                         rayOfFrostSpell.slowValue = rayOfFrost.slowValue;
                         rayOfFrostSpell.direction = GetMouseDirection();
                         rayOfFrostSpell.Cast(entityStats.XP.Level, this);

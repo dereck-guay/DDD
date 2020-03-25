@@ -6,7 +6,7 @@ public class RayOfFrostSpell : MonoBehaviour
 {
     public Vector3 direction;
     public GameObject rayOfFrostPrefab;
-    public GameObject icePatchPrefab;
+    public GameObject icePatchManagerPrefab;
     public float slowValue;
 
     private readonly float[] cooldowns = { 6f, 5f, 4f };
@@ -16,14 +16,14 @@ public class RayOfFrostSpell : MonoBehaviour
     public void Cast(int level, PlayerMonoBehaviour player)
     {
         var spawnPosition = transform.position + 1.5f * direction;
-        rayOfFrost = Instantiate(rayOfFrostPrefab, spawnPosition, Quaternion.identity);
+        rayOfFrost = Instantiate(rayOfFrostPrefab, spawnPosition, player.transform.rotation); //Changed Quaternion.identity for player rotation  ~Yan
         rayOfFrost.GetComponent<StraightProjectile>().direction = direction;
-        var icePatch = Instantiate(icePatchPrefab, transform.position + 1.4f * direction, Quaternion.identity);
-        icePatch.transform.LookAt(rayOfFrost.transform);
-        IcePatchComponent icePatchComponent = icePatch.GetComponentInChildren<IcePatchComponent>();
-        icePatchComponent.projectile = rayOfFrost;
-        icePatchComponent.player = player;
-        icePatchComponent.slowValue = slowValue;
+        var icePatchManager = Instantiate(icePatchManagerPrefab, transform.position + 1.4f * direction, Quaternion.identity);
+        icePatchManager.transform.LookAt(rayOfFrost.transform);
+        IcePatchManagerComponent icePatchManagerComponent = icePatchManager.GetComponentInChildren<IcePatchManagerComponent>();
+        icePatchManagerComponent.projectile = rayOfFrost;
+        icePatchManagerComponent.player = player;
+        icePatchManagerComponent.slowValue = slowValue;
         spellLevel = level;
     }
     void Update()
