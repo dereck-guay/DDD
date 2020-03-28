@@ -16,11 +16,9 @@ public class SlowSpell : MonoBehaviour
 
     public void Cast(int level)
     {
-        Debug.Log(target.GetComponentInParent<EffectHandlerComponent>().player.entityStats.Speed.Current);
         target.GetComponent<EffectHandlerComponent>().ApplyEffect((int)ModifiableStats.Speed, slowValue);
         playerLevel = level;
         isActive = true;
-        Debug.Log(target.GetComponent<EffectHandlerComponent>().player.entityStats.Speed.Current);
     }
 
     private void Update()

@@ -79,19 +79,20 @@ public class IcePatchManagerComponent : CollisionMonoBehaviour
                 spacingBetweenPatches.currentSpacing = Random.Range(spacingBetweenPatches.max, spacingBetweenPatches.min);
             }
         }
-        //!!!!!ERR0R!!!!!
-        //If the projectile is destroyed when instantiated, "averageDeltaPos" is empty (null)
         else
         {
-            if (needToCaculateAverage)
+            if (needToCaculateAverage && averageDeltaPos.Count != 0)
             {
+                Debug.Log("calculating average");
                 CalculateAverage();
                 needToCaculateAverage = false;
             }
+            else if (newDeltaPos == Vector3.zero)
+                triggerZone.size = Vector3.zero;
             Recenter(newDeltaPos);
             Shrink();
             if (triggerZone.size.z < 0.001f)
-                Destroy(gameObject); //!!!!! Object isn't destroyed properly !!!!!
+                Destroy(gameObject.transform.parent.gameObject);
         }
     }
     void CalculateAverage()
@@ -101,7 +102,6 @@ public class IcePatchManagerComponent : CollisionMonoBehaviour
         newDeltaPos = new Vector3(averageDeltaPos.Average(e => e.x), averageDeltaPos.Average(e => e.y), averageDeltaPos.Average(e => e.z));
         //---------------------------------------
     }
-    //!!!!! Trigger zone isn't parallel to the ground !!!!!
     void Recenter(Vector3 deltaPos) => triggerZone.center = new Vector3(xPos, yPos, triggerZone.center.z + Mathf.Sqrt(Mathf.Pow(deltaPos.x, 2) + Mathf.Pow(deltaPos.z, 2)) / 2);
     void Enlarge(Vector3 deltaPos) => triggerZone.size = new Vector3(xAndYSize, xAndYSize, triggerZone.size.z + Mathf.Sqrt(Mathf.Pow(deltaPos.x, 2) + Mathf.Pow(deltaPos.z, 2)));
     void Shrink() => triggerZone.size = new Vector3(xAndYSize, xAndYSize, triggerZone.size.z - Mathf.Sqrt(Mathf.Pow(newDeltaPos.x, 2) + Mathf.Pow(newDeltaPos.z, 2)));

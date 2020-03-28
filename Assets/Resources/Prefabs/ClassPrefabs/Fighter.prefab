@@ -206,6 +206,8 @@ MonoBehaviour:
     m_Bits: 256
   entityStats: {fileID: 0}
   CurrentSpeed: 0
+  CurrentAtkSpeed: 0
+  CurrentHPRegen: 0
   statsInit:
     attackDamage: 15
     attackSpeed: 0.9
@@ -217,6 +219,8 @@ MonoBehaviour:
     speed: 25
   inputs: 7700000061000000730000006400000031000000
   spellLocked: 0
+  autoAttack:
+    autoAttackPrefab: {fileID: 0}
   slam:
     range: 0
 --- !u!54 &981901871628974245

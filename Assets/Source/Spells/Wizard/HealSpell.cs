@@ -15,9 +15,7 @@ public class HealSpell : MonoBehaviour
     public void Cast(int level)
     {
         playerLevel = level;
-        Debug.Log(playerLevel);
         target.GetComponent<PlayerMonoBehaviour>().entityStats.HP.Heal(healValue[playerLevel - 1]);
-        Debug.Log($"Character has been healed for {healValue[playerLevel - 1]}");
     }
 
     private void Update()

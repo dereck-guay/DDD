@@ -117,7 +117,8 @@ public class WizardComponent : PlayerMonoBehaviour
                         if (target) // target != null
                         {
                             // Get parent object because the collider is in the body of the character.
-                            slowSpell.target = target.transform.parent.gameObject;
+                            //Apparemment non, donc je le laisse comme ca
+                            slowSpell.target = target.gameObject;
                             slowSpell.slowValue = slow.slowValue;
                             slowSpell.Cast(entityStats.XP.Level);
                         } else { Destroy(target); }
@@ -130,10 +131,10 @@ public class WizardComponent : PlayerMonoBehaviour
                         var target = GetEntityAtMousePosition();
                         if (target) // target != null
                         {
-                            // Get parent object because the collider is in the body of the character.
-                            healSpell.target = target.transform.parent.gameObject;
+                            // Get parent object because the collider is in the body of the character. 
+                            //Apparemment non, donc je le laisse comme ca
+                            healSpell.target = target.gameObject;
                             healSpell.healValue = heal.healValues;
-                            Debug.Log(entityStats.XP.Level);
                             healSpell.Cast(entityStats.XP.Level);
                         } else { Destroy(target); }
                     }
