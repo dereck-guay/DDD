@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 2932816997147429042}
   - component: {fileID: 575024535165606836}
   - component: {fileID: 1153569227027046771}
+  - component: {fileID: 778277210184075431}
   m_Layer: 10
   m_Name: Body
   m_TagString: Untagged
@@ -81,6 +82,20 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
+--- !u!136 &778277210184075431
+CapsuleCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1191110277266146945}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  m_Radius: 0.5
+  m_Height: 2
+  m_Direction: 1
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &1867997613260664488
 GameObject:
   m_ObjectHideFlags: 0
@@ -268,7 +283,6 @@ GameObject:
   - component: {fileID: 6085515682664728954}
   - component: {fileID: 8901199347473482789}
   - component: {fileID: 8661829748720666854}
-  - component: {fileID: 3908642492518862724}
   m_Layer: 10
   m_Name: Wizard
   m_TagString: Untagged
@@ -310,9 +324,13 @@ MonoBehaviour:
     m_Bits: 1024
   - serializedVersion: 2
     m_Bits: 16384
+  - serializedVersion: 2
+    m_Bits: 32768
   rayCastHitLayers:
     serializedVersion: 2
     m_Bits: 256
+  characterParts:
+    body: {fileID: 1191110277266146945}
   entityStats: {fileID: 0}
   camera: {fileID: 0}
   statsInit:
@@ -392,20 +410,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   player: {fileID: 8654396917311496859}
---- !u!136 &3908642492518862724
-CapsuleCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2594412224279639478}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  m_Radius: 0.5
-  m_Height: 2
-  m_Direction: 1
-  m_Center: {x: 0, y: 1, z: 0}
 --- !u!1 &2598700908319044755
 GameObject:
   m_ObjectHideFlags: 0

@@ -30,7 +30,7 @@ public class IcePatchManagerComponent : CollisionMonoBehaviour
             rayOrientation;
     //------------------------------------
 
-    private Collider[] playerColliders;
+    private CapsuleCollider playerCollider;
     private float currentLifeTime = 0;
     private float yPos;
     private float xPos;
@@ -42,7 +42,7 @@ public class IcePatchManagerComponent : CollisionMonoBehaviour
     private bool needToCaculateAverage = true;
     private void Start()
     {
-        playerColliders = player.GetComponents<Collider>();
+        playerCollider = player.gameObject.GetComponentInChildren<CapsuleCollider>();
         triggerZone = gameObject.AddComponent<BoxCollider>();
         triggerZone.isTrigger = true;
         averageDeltaPos = new List<Vector3>();
@@ -107,15 +107,14 @@ public class IcePatchManagerComponent : CollisionMonoBehaviour
     void Shrink() => triggerZone.size = new Vector3(xAndYSize, xAndYSize, triggerZone.size.z - Mathf.Sqrt(Mathf.Pow(newDeltaPos.x, 2) + Mathf.Pow(newDeltaPos.z, 2)));
     private void OnTriggerExit(Collider other)
     {
-        if (CollidesWithAppropriateLayer(other.gameObject.layer, collisionLayers) && !playerColliders.Contains(other))
+        if (CollidesWithAppropriateLayer(other.gameObject.layer, collisionLayers) && playerCollider != other)
             Effect(false, other);
     }
     private void OnTriggerEnter(Collider other)
     {
-        if (CollidesWithAppropriateLayer(other.gameObject.layer, collisionLayers) && !playerColliders.Contains(other))
+        if (CollidesWithAppropriateLayer(other.gameObject.layer, collisionLayers) && playerCollider != other)
         {
             Effect(true, other);
-            Debug.Log("An enemy has been slowed");
         }
     }
     private void Effect(bool activate, Collider other)
@@ -125,4 +124,5 @@ public class IcePatchManagerComponent : CollisionMonoBehaviour
         else
             other.gameObject.GetComponentInParent<EffectHandlerComponent>().EndEffect((int)ModifiableStats.Speed, slowValue);
     }
+
 }

@@ -5,6 +5,7 @@ using UnityEngine;
 using Miscellaneous;
 using System.Text;
 using Interfaces;
+using System.Linq;
 [RequireComponent(typeof(Stats))]
 public class FighterComponent : PlayerMonoBehaviour
 {
@@ -37,6 +38,11 @@ public class FighterComponent : PlayerMonoBehaviour
     {
         public GameObject autoAttackPrefab;
     };
+    [System.Serializable]
+    public class Shield
+    {
+        public GameObject shieldObject;
+    };
     [HideInInspector]
     public bool spellLocked = false;
 
@@ -49,6 +55,7 @@ public class FighterComponent : PlayerMonoBehaviour
     [Header("Spell Settings")]
     public AutoAttack autoAttack;
     public Slam slam;
+    public Shield shield;
     #endregion
     #region Auto-attack stuff
     private bool canAttack;
@@ -73,15 +80,13 @@ public class FighterComponent : PlayerMonoBehaviour
                 () => {
                     if (canAttack)
                     {
-                        //A changer pour un melee auto-attack
-                        var target = GetEntityAtMousePosition();
-                        if (target && TargetIsWithinRange(target, entityStats.Range.Current))
+                        if (!IsOnCooldown(typeof(MeleeAutoAttackSpell)))
                         {
-                            var autoAttackSpell = gameObject.AddComponent<AutoAttackSpell>();
+                            Debug.Log("You cast autoAttack");
+                            var autoAttackSpell = gameObject.AddComponent<MeleeAutoAttackSpell>();
                             autoAttackSpell.autoAttackPrefab = autoAttack.autoAttackPrefab;
                             autoAttackSpell.damage = entityStats.AtkDamage.Current;
-                            autoAttackSpell.target = target.GetComponent<Transform>().gameObject;
-                            autoAttackSpell.Cast(entityStats.AtkSpeed.Current, transform.position);
+                            autoAttackSpell.Cast(entityStats.AtkSpeed.Current, transform.position, GetMouseDirection());
                             SetTimeSinceLastAttack(0) ;
                             canAttack = false;
                         }
@@ -115,12 +120,22 @@ public class FighterComponent : PlayerMonoBehaviour
                         var takeABreatherSpell = gameObject.AddComponent<TakeABreatherSpell>();
                         takeABreatherSpell.Cast(entityStats.XP.Level);
                     }
+                },
+                () =>{
+                    if (!IsOnCooldown(typeof(ShieldSpell)))
+                    {
+                        var shieldSpell = gameObject.AddComponent<ShieldSpell>();
+                        shieldSpell.shield = shield.shieldObject;
+                        shieldSpell.bodyToChange = characterParts.body;
+                        shieldSpell.Cast(entityStats.XP.Level);
+                    }
                 }
             }, inputs
         );
     }
     private void Start()
     {
+        shield.shieldObject.SetActive(false);
         rigidBody = GetComponentInChildren<Rigidbody>();
         entityStats = GetComponent<Stats>();
         entityStats.ApplyStats(statsInit.attackDamage, statsInit.attackSpeed, statsInit.maxHp, statsInit.hpRegen, statsInit.maxMana, statsInit.manaRegen, statsInit.range, statsInit.speed);
@@ -128,6 +143,7 @@ public class FighterComponent : PlayerMonoBehaviour
 
     private void Update()
     {
+        SetTimeSinceLastAttack(GetTimeSinceLastAttack() + Time.deltaTime);
         if (!spellLocked)
         {
             var directionToLookAt = transform.position + GetMouseDirection();

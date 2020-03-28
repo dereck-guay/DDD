@@ -83,9 +83,9 @@ public class WizardComponent : PlayerMonoBehaviour
                     if (canAttack)
                     {
                         var target = GetEntityAtMousePosition();
-                        if (target && TargetIsWithinRange(target, entityStats.Range.Current))
+                        if (ExistsAndIsntSelf(target) && TargetIsWithinRange(target, entityStats.Range.Current))
                         {
-                            var autoAttackSpell = gameObject.AddComponent<AutoAttackSpell>();
+                            var autoAttackSpell = gameObject.AddComponent<RangedAutoAttackSpell>();
                             autoAttackSpell.autoAttackPrefab = autoAttack.autoAttackPrefab;
                             autoAttackSpell.damage = entityStats.AtkDamage.Current;
                             autoAttackSpell.target = target.GetComponent<Transform>().gameObject;
@@ -112,31 +112,27 @@ public class WizardComponent : PlayerMonoBehaviour
                 () => {
                     if (CanCast(slow.manaCost, typeof(SlowSpell)))
                     {
-                        var slowSpell = gameObject.AddComponent<SlowSpell>();
                         var target = GetEntityAtMousePosition();
-                        if (target) // target != null
+                        if (ExistsAndIsntSelf(target))
                         {
-                            // Get parent object because the collider is in the body of the character.
-                            //Apparemment non, donc je le laisse comme ca
-                            slowSpell.target = target.gameObject;
+                            var slowSpell = gameObject.AddComponent<SlowSpell>();
+                            slowSpell.target = target.transform.parent.gameObject;
                             slowSpell.slowValue = slow.slowValue;
-                            slowSpell.Cast(entityStats.XP.Level);
-                        } else { Destroy(target); }
+                            slowSpell.Cast(entityStats.XP.Level); 
+                        }
                     }
                 },
                 () => {
                     if (CanCast(heal.manaCost, typeof(HealSpell)))
                     {
-                        var healSpell = gameObject.AddComponent<HealSpell>();
                         var target = GetEntityAtMousePosition();
-                        if (target) // target != null
+                        if (target)
                         {
-                            // Get parent object because the collider is in the body of the character. 
-                            //Apparemment non, donc je le laisse comme ca
-                            healSpell.target = target.gameObject;
+                            var healSpell = gameObject.AddComponent<HealSpell>();
+                            healSpell.target = target.transform.parent.gameObject;
                             healSpell.healValue = heal.healValues;
                             healSpell.Cast(entityStats.XP.Level);
-                        } else { Destroy(target); }
+                        }
                     }
                 },
                 () => {
@@ -174,7 +170,6 @@ public class WizardComponent : PlayerMonoBehaviour
     {
         DirectCharacter();
         SetTimeSinceLastAttack(GetTimeSinceLastAttack() + Time.deltaTime);
-        //rigidbody.velocity = Vector3.zero; //Stop rigidbodies from moving the character
         keyBindings.CallBindings();
         entityStats.Regen();
 
@@ -198,4 +193,5 @@ public class WizardComponent : PlayerMonoBehaviour
         directionToLookAt.y = transform.position.y;
         transform.LookAt(directionToLookAt);
     }
+    
 }

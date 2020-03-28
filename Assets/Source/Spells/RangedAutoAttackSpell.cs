@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class AutoAttackSpell : MonoBehaviour
+public class RangedAutoAttackSpell : MonoBehaviour
 {
     public GameObject target;
     public GameObject autoAttackPrefab;

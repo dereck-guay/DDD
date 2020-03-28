@@ -8,9 +8,9 @@ public class RayOfFrostCollision : CollisionMonoBehaviour
     private void OnCollisionEnter(Collision collision)
     {
         if (CollidesWithAppropriateLayer(collision.collider.gameObject.layer, collisionLayers))
-            Explode(collision.collider.gameObject);
+            Explode();
     }
-    private void Explode(GameObject target)
+    private void Explode()
     {
         Destroy(gameObject);
         Instantiate(collideEffect as ParticleSystem, transform.position, Quaternion.identity);
