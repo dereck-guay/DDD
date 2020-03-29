@@ -56,6 +56,6 @@ public abstract class PlayerMonoBehaviour : EntityMonoBehaviour
        (target.transform.position - transform.position).magnitude < range;
     protected bool CanCast(float manaCost, Type spell) =>
         entityStats.Mana.Current > manaCost && !IsOnCooldown(spell);
-    protected bool ExistsAndIsntSelf(GameObject target) => target && target != characterParts.body;
-    protected bool ExistsAndIsSelf(GameObject target) => target && target == characterParts.body;
+    protected bool ExistsAndIsntSelf(GameObject target) => target && target != this.gameObject;
+    protected bool ExistsAndIsSelf(GameObject target) => target && target == this.gameObject;
 }

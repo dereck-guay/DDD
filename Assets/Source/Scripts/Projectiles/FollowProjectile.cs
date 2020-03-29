@@ -18,6 +18,7 @@ public class FollowProjectile : MonoBehaviour
         RecalculateDirection();
         rb.velocity = Vector3.zero;
         rb.AddForce(direction * speed);
+        rb.gameObject.transform.LookAt(target.transform);
     }
 
     private void RecalculateDirection() =>

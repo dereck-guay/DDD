@@ -14,6 +14,7 @@ public class MeleeAutoAttackSpell : MonoBehaviour
     {
         var spawnPosition = casterPosition;
         var autoAttack = Instantiate(autoAttackPrefab, spawnPosition, Quaternion.identity);
+        directionToLookAt.y = 0;
         autoAttack.transform.LookAt(casterPosition + directionToLookAt);
         autoAttack.GetComponentInChildren<AutoAttackCollision>().damage = damage;
         atkSpeed = atkSpeedI;

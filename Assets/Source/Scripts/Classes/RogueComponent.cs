@@ -6,8 +6,8 @@ using Miscellaneous;
 using System.Text;
 using Interfaces;
 using System.Linq;
-[RequireComponent(typeof(Stats))]
-public class FighterComponent : PlayerMonoBehaviour
+
+public class RogueComponent : PlayerMonoBehaviour
 {
     public Camera camera;
 
@@ -36,24 +36,19 @@ public class FighterComponent : PlayerMonoBehaviour
     {
         public GameObject autoAttackPrefab;
     };
-    [System.Serializable]
-    public class Shield
-    {
-        public GameObject shieldObject;
-    };
     [HideInInspector]
     public bool spellLocked = false;
 
-    
+
     [System.Serializable]
-    public class Slam {
-        public float range;
+    public class StunningBlade
+    {
+        public GameObject stunningBladePrefab;
     };
 
     [Header("Spell Settings")]
     public AutoAttack autoAttack;
-    public Slam slam;
-    public Shield shield;
+    public StunningBlade stunningBlade;
     #endregion
     #region Auto-attack stuff
     private bool canAttack;
@@ -67,7 +62,6 @@ public class FighterComponent : PlayerMonoBehaviour
         timeSinceLastAttack = value;
     }
     #endregion
-
     private KeyBindings keyBindings;
     private Rigidbody rigidBody;
     private void Awake()
@@ -78,12 +72,14 @@ public class FighterComponent : PlayerMonoBehaviour
                 () => {
                     if (canAttack)
                     {
-                        if (!IsOnCooldown(typeof(MeleeAutoAttackSpell)))
+                        var target = GetEntityAtMousePosition();
+                        if (ExistsAndIsntSelf(target) && TargetIsWithinRange(target, entityStats.Range.Current))
                         {
-                            var autoAttackSpell = gameObject.AddComponent<MeleeAutoAttackSpell>();
+                            var autoAttackSpell = gameObject.AddComponent<RangedAutoAttackSpell>();
                             autoAttackSpell.autoAttackPrefab = autoAttack.autoAttackPrefab;
                             autoAttackSpell.damage = entityStats.AtkDamage.Current;
-                            autoAttackSpell.Cast(entityStats.AtkSpeed.Current, transform.position, GetMouseDirection());
+                            autoAttackSpell.target = target.GetComponent<Transform>().gameObject;
+                            autoAttackSpell.Cast(entityStats.AtkSpeed.Current, transform.position);
                             SetTimeSinceLastAttack(0) ;
                             canAttack = false;
                         }
@@ -94,12 +90,12 @@ public class FighterComponent : PlayerMonoBehaviour
                 () => Move(Vector3.back),
                 () => Move(Vector3.right),
                 () => {
-                    if (! IsOnCooldown(typeof(SlamSpell)))
+                    if (! IsOnCooldown(typeof(StunningBladeSpell)))
                     {
-                        var slamSpell = gameObject.AddComponent<SlamSpell>();
-                        slamSpell.range = slam.range;
-                        slamSpell.position = GetMousePositionOn2DPlane();
-                        slamSpell.Cast(entityStats.XP.Level);
+                        var stunningBladeSpell = gameObject.AddComponent<StunningBladeSpell>();
+                        stunningBladeSpell.direction = GetMouseDirection();
+                        stunningBladeSpell.stunningBladePrefab = stunningBlade.stunningBladePrefab;
+                        stunningBladeSpell.Cast(entityStats.XP.Level);
                         // Pour pas que le player puisse bouger pendant l'ainimation du spell
                         // spellLocked = true;
                     }
@@ -119,13 +115,13 @@ public class FighterComponent : PlayerMonoBehaviour
                     }
                 },
                 () =>{
-                    if (!IsOnCooldown(typeof(ShieldSpell)))
-                    {
-                        var shieldSpell = gameObject.AddComponent<ShieldSpell>();
-                        shieldSpell.shield = shield.shieldObject;
-                        shieldSpell.bodyToChange = characterParts.body;
-                        shieldSpell.Cast(entityStats.XP.Level);
-                    }
+                    //if (!IsOnCooldown(typeof(ShieldSpell)))
+                    //{
+                    //    var shieldSpell = gameObject.AddComponent<ShieldSpell>();
+                    //    shieldSpell.shield = shield.shieldObject;
+                    //    shieldSpell.bodyToChange = characterParts.body;
+                    //    shieldSpell.Cast(entityStats.XP.Level);
+                    //}
                 }
             }, inputs
         );
@@ -133,7 +129,6 @@ public class FighterComponent : PlayerMonoBehaviour
     private void Start()
     {
         isStunned = false;
-        shield.shieldObject.SetActive(false);
         rigidBody = GetComponentInChildren<Rigidbody>();
         entityStats = GetComponent<Stats>();
         entityStats.ApplyStats(statsInit.attackDamage, statsInit.attackSpeed, statsInit.maxHp, statsInit.hpRegen, statsInit.maxMana, statsInit.manaRegen, statsInit.range, statsInit.speed);
@@ -143,7 +138,7 @@ public class FighterComponent : PlayerMonoBehaviour
     private void Update()
     {
         SetTimeSinceLastAttack(GetTimeSinceLastAttack() + Time.deltaTime);
-        if (!(isStunned && spellLocked))
+        if (!isStunned)
         {
             DirectCharacter();
             keyBindings.CallBindings();
@@ -159,7 +154,7 @@ public class FighterComponent : PlayerMonoBehaviour
 
     private void Move(Vector3 direction)
     {
-        if(!isStunned)
+        if (!isStunned)
             rigidBody.AddForce(direction * entityStats.Speed.Current * Time.deltaTime * 100f);
     }
     void DirectCharacter() //make the character face the direction of the mouse

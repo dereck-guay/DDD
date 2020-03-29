@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 2865121310332508693}
   - component: {fileID: 919464205111242731}
   - component: {fileID: 108115682724150644}
-  m_Layer: 0
+  m_Layer: 13
   m_Name: Sphere
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -92,7 +92,7 @@ GameObject:
   - component: {fileID: -3747796933485952537}
   - component: {fileID: 1030380207765292720}
   - component: {fileID: -6626522858627567415}
-  m_Layer: 0
+  m_Layer: 13
   m_Name: WizardAutoAttack
   m_TagString: Untagged
   m_Icon: {fileID: 0}

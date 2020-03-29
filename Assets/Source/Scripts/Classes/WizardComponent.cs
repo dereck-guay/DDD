@@ -72,7 +72,7 @@ public class WizardComponent : PlayerMonoBehaviour
     #endregion
 
     private KeyBindings keyBindings;
-    private Rigidbody rigidbody;
+    private Rigidbody rigidBody;
     private void Awake()
     {
         canAttack = true;
@@ -116,7 +116,7 @@ public class WizardComponent : PlayerMonoBehaviour
                         if (ExistsAndIsntSelf(target))
                         {
                             var slowSpell = gameObject.AddComponent<SlowSpell>();
-                            slowSpell.target = target.transform.parent.gameObject;
+                            slowSpell.target = target;
                             slowSpell.slowValue = slow.slowValue;
                             slowSpell.Cast(entityStats.XP.Level); 
                         }
@@ -129,7 +129,7 @@ public class WizardComponent : PlayerMonoBehaviour
                         if (target)
                         {
                             var healSpell = gameObject.AddComponent<HealSpell>();
-                            healSpell.target = target.transform.parent.gameObject;
+                            healSpell.target = target;
                             healSpell.healValue = heal.healValues;
                             healSpell.Cast(entityStats.XP.Level);
                         }
@@ -154,7 +154,8 @@ public class WizardComponent : PlayerMonoBehaviour
 
     private void Start()
     {
-        rigidbody = GetComponent<Rigidbody>();
+        isStunned = false;
+        rigidBody = GetComponent<Rigidbody>();
         entityStats = GetComponent<Stats>();
         entityStats.ApplyStats(statsInit.attackDamage, statsInit.attackSpeed, statsInit.maxHp, statsInit.hpRegen, statsInit.maxMana, statsInit.manaRegen, statsInit.range, statsInit.speed);
         SetTimeSinceLastAttack(0);
@@ -168,9 +169,12 @@ public class WizardComponent : PlayerMonoBehaviour
     }
     private void Update()
     {
-        DirectCharacter();
         SetTimeSinceLastAttack(GetTimeSinceLastAttack() + Time.deltaTime);
-        keyBindings.CallBindings();
+        if (!isStunned)
+        {
+            DirectCharacter();
+            keyBindings.CallBindings();
+        }
         entityStats.Regen();
 
         camera.transform.position = new Vector3(
@@ -182,10 +186,8 @@ public class WizardComponent : PlayerMonoBehaviour
 
     private void Move(Vector3 direction)
     {
-        //var displacement = direction * entityStats.Speed.Current * Time.deltaTime;
-        //transform.Translate(displacement, Space.World);
-
-        rigidbody.AddForce(direction * entityStats.Speed.Current * Time.deltaTime); //Sqrt?
+        if(!isStunned)
+            rigidBody.AddForce(direction * entityStats.Speed.Current * Time.deltaTime * 100f);
     }
     void DirectCharacter() //make the character face the direction of the mouse
     {

@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 7146095698220022154}
   - component: {fileID: 4060477867601155620}
   - component: {fileID: 1175483528277129750}
-  m_Layer: 0
+  m_Layer: 13
   m_Name: IcePatchPrefab
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -74,7 +74,7 @@ GameObject:
   - component: {fileID: 8223930242794494511}
   - component: {fileID: 3746681552612209172}
   - component: {fileID: 975916406603665329}
-  m_Layer: 0
+  m_Layer: 13
   m_Name: Plane
   m_TagString: Untagged
   m_Icon: {fileID: 0}

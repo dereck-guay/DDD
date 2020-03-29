@@ -83,7 +83,6 @@ public class IcePatchManagerComponent : CollisionMonoBehaviour
         {
             if (needToCaculateAverage && averageDeltaPos.Count != 0)
             {
-                Debug.Log("calculating average");
                 CalculateAverage();
                 needToCaculateAverage = false;
             }

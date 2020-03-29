@@ -7,4 +7,5 @@ public abstract class EntityMonoBehaviour : MonoBehaviour
 {
     [HideInInspector]
     public Stats entityStats;
+    public bool isStunned;
 }
