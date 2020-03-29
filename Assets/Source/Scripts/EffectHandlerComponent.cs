@@ -4,15 +4,15 @@ using UnityEngine;
 
 public class EffectHandlerComponent : MonoBehaviour
 {
-    public PlayerMonoBehaviour player;
+    public EntityMonoBehaviour entity;
 
     public void ApplyEffect(int statIndex, float value)
     {
-        player.entityStats.ModifiableStats[statIndex].ApplyModifier(value);
+        entity.entityStats.ModifiableStats[statIndex].ApplyModifier(value);
     }
 
     public void EndEffect(int statIndex, float value)
     {
-        player.entityStats.ModifiableStats[statIndex].EndModifier(value);
+        entity.entityStats.ModifiableStats[statIndex].EndModifier(value);
     }
 }

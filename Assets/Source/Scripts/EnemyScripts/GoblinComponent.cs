@@ -4,9 +4,8 @@ using UnityEngine;
 
 [RequireComponent(typeof(Stats))]
 [RequireComponent(typeof(TargetingAIComponent))]
-public class GoblinComponent : MonoBehaviour
+public class GoblinComponent : EntityMonoBehaviour
 {
-    Stats stats;
     TargetingAIComponent targetAI;
     public StatsInit statsInit;
 
@@ -15,22 +14,22 @@ public class GoblinComponent : MonoBehaviour
 
     void Start()
     {
-        stats = GetComponent<Stats>();
-        stats.ApplyStats(statsInit.attackDamage, statsInit.attackSpeed, statsInit.maxHp, statsInit.hpRegen, statsInit.maxMana, statsInit.manaRegen, statsInit.range, statsInit.speed);
+        entityStats = GetComponent<Stats>();
+        entityStats.ApplyStats(statsInit.attackDamage, statsInit.attackSpeed, statsInit.maxHp, statsInit.hpRegen, statsInit.maxMana, statsInit.manaRegen, statsInit.range, statsInit.speed);
 
         targetAI = GetComponent<TargetingAIComponent>();
 
-        stats.HP.OnDeath += delegate { Destroy(gameObject); };
-        stats.Speed.OnSpeedChanged += (float newSpeed) => targetAI.agent.speed = newSpeed;
-        stats.Speed.OnSpeedChanged += (float newSpeed) => Debug.Log($"New speed is {newSpeed}");
+        entityStats.HP.OnDeath += delegate { Destroy(gameObject); };
+        entityStats.Speed.OnSpeedChanged += (float newSpeed) => targetAI.agent.speed = newSpeed;
+        entityStats.Speed.OnSpeedChanged += (float newSpeed) => Debug.Log($"New speed is {newSpeed}");
     }
 
     void Update()
     {
         cooldown += Time.deltaTime;
 
-        if (targetAI.HasTarget && cooldown > stats.AtkSpeed.Current)
-            if (Vector3.Distance(targetAI.targetsInRange[0].position, transform.position) < stats.Range.Current)
+        if (targetAI.HasTarget && cooldown > entityStats.AtkSpeed.Current)
+            if (Vector3.Distance(targetAI.targetsInRange[0].position, transform.position) < entityStats.Range.Current)
             {
                 Attack(targetAI.targetsInRange[0]);
                 cooldown = 0;
@@ -40,7 +39,7 @@ public class GoblinComponent : MonoBehaviour
     void Attack(Transform target)
     {
         Debug.Log(target);
-        target.GetComponent<Stats>().HP.TakeDamage(stats.AtkDamage.Current);
+        target.GetComponent<Stats>().HP.TakeDamage(entityStats.AtkDamage.Current);
         target.GetComponent<Rigidbody>().AddForce((target.position - transform.position).normalized * knockback);
     }
 

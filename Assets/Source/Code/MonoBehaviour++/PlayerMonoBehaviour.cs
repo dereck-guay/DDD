@@ -3,7 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public abstract class PlayerMonoBehaviour : MonoBehaviour
+public abstract class PlayerMonoBehaviour : EntityMonoBehaviour
 {
     public List<LayerMask> selectableEntities;
     public LayerMask rayCastHitLayers;
@@ -17,9 +17,6 @@ public abstract class PlayerMonoBehaviour : MonoBehaviour
 
     [Header("Character Parts")]
     public CharacterParts characterParts;
-
-    [HideInInspector]
-    public Stats entityStats;
 
     protected bool IsOnCooldown(Type spellComponent) => GetComponent(spellComponent) != null;
 

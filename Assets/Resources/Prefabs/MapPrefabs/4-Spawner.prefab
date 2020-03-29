@@ -51,7 +51,7 @@ MonoBehaviour:
     weight: 5
   - enemy: {fileID: 5746207725368477638, guid: fdeed52521e29f048950bc97ab00e799, type: 3}
     weight: 1
-  delay: 300
+  delay: 60
   maxEnemyCount: 5
   enemyLayer: 14
   playerLayer: 10

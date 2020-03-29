@@ -4,7 +4,6 @@ using UnityEngine;
 using UnityEngine.AI;
 
 [RequireComponent(typeof(NavMeshAgent))]
-[RequireComponent(typeof(SphereCollider))]
 public class TargetingAIComponent : MonoBehaviour
 {
    public int targetLayer;
@@ -20,7 +19,6 @@ public class TargetingAIComponent : MonoBehaviour
    {
       targetsInRange = new List<Transform>(4);
       agent = GetComponent<NavMeshAgent>();
-      detectionRange = GetComponent<SphereCollider>();
       detectionRange.isTrigger = true;
    }
 
