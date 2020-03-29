@@ -100,8 +100,6 @@ public class FighterComponent : PlayerMonoBehaviour
                         slamSpell.range = slam.range;
                         slamSpell.position = GetMousePositionOn2DPlane();
                         slamSpell.Cast(entityStats.XP.Level);
-                        // Pour pas que le player puisse bouger pendant l'ainimation du spell
-                        // spellLocked = true;
                     }
                 },
                 () =>{
