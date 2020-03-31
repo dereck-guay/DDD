@@ -6,28 +6,11 @@ using Miscellaneous;
 using System.Text;
 using Interfaces;
 using System.Linq;
-[RequireComponent(typeof(Stats))]
 public class FighterComponent : PlayerMonoBehaviour
 {
     public Camera camera;
 
     #region Stuff for inspector
-    [System.Serializable]
-    public class StatsInit
-    {
-        public float attackDamage;
-        public float attackSpeed;
-        public float maxHp;
-        public float hpRegen;
-        public float maxMana;
-        public float manaRegen;
-        public float range;
-        public float speed;
-
-    };
-    [Header("Stats")]
-    public StatsInit statsInit;
-
     [Header("Inputs")]
     public KeyCode[] inputs;
 
@@ -130,11 +113,12 @@ public class FighterComponent : PlayerMonoBehaviour
     }
     private void Start()
     {
+        entityStats = GetComponent<Stats>();
+        entityStats.ApplyStats(statsInit);
         isStunned = false;
+
         shield.shieldObject.SetActive(false);
         rigidBody = GetComponentInChildren<Rigidbody>();
-        entityStats = GetComponent<Stats>();
-        entityStats.ApplyStats(statsInit.attackDamage, statsInit.attackSpeed, statsInit.maxHp, statsInit.hpRegen, statsInit.maxMana, statsInit.manaRegen, statsInit.range, statsInit.speed);
         SetTimeSinceLastAttack(0);
     }
 

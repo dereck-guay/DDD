@@ -27,14 +27,14 @@ public class Stats : MonoBehaviour
     public Speed Speed { get; private set; }
     public XP XP { get; private set; }
     public DictionaryCreator<IModifiableStat> ModifiableStats;
-    public void ApplyStats(float damageBase, float atkSpeedBase, float hPBase, float hPRegen, float manaBase, float manaRegen, float rangeBase, float speedBase)
+    public void ApplyStats(StatsInit statsInit)
     {
-        AtkDamage = new AtkDamage(damageBase);
-        AtkSpeed = new AtkSpeed(atkSpeedBase);
-        HP = new HP(hPBase, hPRegen);
-        Mana = new Mana(manaBase, manaRegen);
-        Range = new Range(rangeBase);
-        Speed = new Speed(speedBase);
+        AtkDamage = new AtkDamage(statsInit.attackDamage);
+        AtkSpeed = new AtkSpeed(statsInit.attackSpeed);
+        HP = new HP(statsInit.maxHp, statsInit.hpRegen);
+        Mana = new Mana(statsInit.maxMana, statsInit.manaRegen);
+        Range = new Range(statsInit.range);
+        Speed = new Speed(statsInit.speed);
         XP = new XP();
         var stats = new IModifiableStat[]
         {

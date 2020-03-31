@@ -5,16 +5,12 @@ using UnityEngine;
 using Miscellaneous;
 using System.Text;
 using Interfaces;
-[RequireComponent(typeof(Stats))]
 [RequireComponent(typeof(Rigidbody))]
 public class WizardComponent : PlayerMonoBehaviour
 {
     public Camera camera;
 
     #region Stuff for inspector
-    [Header("Stats")]
-    public StatsInit statsInit;
-
     public StatusBarsComponent[] statusBars;
 
     [Header("Inputs")]
@@ -154,10 +150,11 @@ public class WizardComponent : PlayerMonoBehaviour
 
     private void Start()
     {
-        isStunned = false;
-        rigidBody = GetComponent<Rigidbody>();
         entityStats = GetComponent<Stats>();
-        entityStats.ApplyStats(statsInit.attackDamage, statsInit.attackSpeed, statsInit.maxHp, statsInit.hpRegen, statsInit.maxMana, statsInit.manaRegen, statsInit.range, statsInit.speed);
+        entityStats.ApplyStats(statsInit);
+        isStunned = false;
+
+        rigidBody = GetComponent<Rigidbody>();
         SetTimeSinceLastAttack(0);
 
         statusBars[0].SetMax(entityStats.HP.Base);
