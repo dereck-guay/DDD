@@ -16,7 +16,6 @@ public class BeholderComponent : EntityMonoBehaviour
     {
         entityStats = GetComponent<Stats>();
         entityStats.ApplyStats(statsInit);
-        isStunned = false;
 
         targetAI = GetComponent<TargetingAIComponent>();
         isSlowingTarget = false;

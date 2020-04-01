@@ -115,7 +115,6 @@ public class FighterComponent : PlayerMonoBehaviour
     {
         entityStats = GetComponent<Stats>();
         entityStats.ApplyStats(statsInit);
-        isStunned = false;
 
         shield.shieldObject.SetActive(false);
         rigidBody = GetComponentInChildren<Rigidbody>();
@@ -125,7 +124,7 @@ public class FighterComponent : PlayerMonoBehaviour
     private void Update()
     {
         SetTimeSinceLastAttack(GetTimeSinceLastAttack() + Time.deltaTime);
-        if (!(isStunned && spellLocked))
+        if (!(IsStunned && spellLocked))
         {
             DirectCharacter();
             keyBindings.CallBindings();
@@ -141,7 +140,7 @@ public class FighterComponent : PlayerMonoBehaviour
 
     private void Move(Vector3 direction)
     {
-        if(!isStunned)
+        if(!IsStunned)
             rigidBody.AddForce(direction * entityStats.Speed.Current * Time.deltaTime * 100f);
     }
     void DirectCharacter() //make the character face the direction of the mouse

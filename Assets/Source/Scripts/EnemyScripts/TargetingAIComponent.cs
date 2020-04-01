@@ -12,6 +12,8 @@ public class TargetingAIComponent : MonoBehaviour
    [HideInInspector]
    public NavMeshAgent agent;
    public SphereCollider detectionRange;
+    [HideInInspector]
+    public bool isStunned;
 
    public bool HasTarget { get => targetsInRange.Count != 0; }
 
@@ -24,7 +26,7 @@ public class TargetingAIComponent : MonoBehaviour
 
    void Update()
    {
-      if (HasTarget)
+      if (HasTarget && !isStunned)
          agent.SetDestination(targetsInRange[0].position);
       else
          agent.SetDestination(transform.position);

@@ -152,7 +152,6 @@ public class WizardComponent : PlayerMonoBehaviour
     {
         entityStats = GetComponent<Stats>();
         entityStats.ApplyStats(statsInit);
-        isStunned = false;
 
         rigidBody = GetComponent<Rigidbody>();
         SetTimeSinceLastAttack(0);
@@ -167,7 +166,7 @@ public class WizardComponent : PlayerMonoBehaviour
     private void Update()
     {
         SetTimeSinceLastAttack(GetTimeSinceLastAttack() + Time.deltaTime);
-        if (!isStunned)
+        if (!IsStunned)
         {
             DirectCharacter();
             keyBindings.CallBindings();
@@ -183,7 +182,7 @@ public class WizardComponent : PlayerMonoBehaviour
 
     private void Move(Vector3 direction)
     {
-        if(!isStunned)
+        if(!IsStunned)
             rigidBody.AddForce(direction * entityStats.Speed.Current * Time.deltaTime * 100f);
     }
     void DirectCharacter() //make the character face the direction of the mouse

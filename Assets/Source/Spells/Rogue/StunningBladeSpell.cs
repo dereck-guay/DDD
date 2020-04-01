@@ -32,21 +32,21 @@ public class StunningBladeSpell : MonoBehaviour
         if (hasContacted)
         {
             if (target)
-                target.isStunned = true;
+                target.IsStunned = true;
             stunHasBegun = true;
             hasContacted = false;
         }
         if (currentLifeTime >= cooldowns[spellLevel - 1])
         {
-            if (target && target.isStunned)
-                target.isStunned = false;
+            if (target && target.IsStunned)
+                target.IsStunned = false;
             Destroy(stunningBlade);
             Destroy(this);
         }
         if (stunDuration > stunDurations[spellLevel - 1])
         {
             if(target)
-                target.isStunned = false;
+                target.IsStunned = false;
         }
         currentLifeTime += Time.deltaTime;
     }

@@ -14,19 +14,19 @@ public class GoblinComponent : EntityMonoBehaviour
     {
         entityStats = GetComponent<Stats>();
         entityStats.ApplyStats(statsInit);
-        isStunned = false;
 
         targetAI = GetComponent<TargetingAIComponent>();
 
         entityStats.HP.OnDeath += delegate { Destroy(gameObject); };
         entityStats.Speed.OnSpeedChanged += (float newSpeed) => targetAI.agent.speed = newSpeed;
+        OnStunChanged += isStunned => targetAI.isStunned = isStunned;
     }
 
     void Update()
     {
         cooldown += Time.deltaTime;
 
-        if (targetAI.HasTarget && cooldown > entityStats.AtkSpeed.Current)
+        if (targetAI.HasTarget && cooldown > entityStats.AtkSpeed.Current && !IsStunned)
             if (Vector3.Distance(targetAI.targetsInRange[0].position, transform.position) < entityStats.Range.Current)
             {
                 Attack(targetAI.targetsInRange[0]);
