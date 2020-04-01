@@ -3,27 +3,28 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public struct ActiveEffect
+public class ActiveEffect
 {
     public EffectHandlerComponent Target { get; private set; }
     public ModifiableStats Stat { get; private set; }
     public float Modifier { get; private set; }
-    public float MaxDuration { get; private set; }
-    public float CurrentDuration { get; private set; }
+    float maxDuration;
+    float currentDuration;
 
     public ActiveEffect(EffectHandlerComponent targetI, ModifiableStats statI, float modifierI, float maxDurationI)
     {
         Target = targetI;
         Stat = statI;
         Modifier = modifierI;
-        MaxDuration = maxDurationI;
-        CurrentDuration = 0;
+        maxDuration = maxDurationI;
+        currentDuration = 0;
     }
 
     public bool UpdateActiveEffect(float elapsedTime)
     {
-        CurrentDuration += elapsedTime;
-        return CurrentDuration > MaxDuration;
+        currentDuration += elapsedTime;
+        Debug.Log($"{currentDuration} / {maxDuration}");
+        return currentDuration > maxDuration;
     }
 }
 
@@ -81,10 +82,17 @@ public class BeholderComponent : EnemyMonoBehaviour
     void EndAllActiveEffects()
     {
         foreach (var e in activeEffects)
+        {
             EndActiveEffect(e);
+            activeEffects.Remove(e);
+        }
     }
 
     void EndActiveEffect(ActiveEffect effect) => effect.Target.EndEffect((int)effect.Stat, effect.Modifier);
 
-    public void AddActiveEffect(ActiveEffect effect) => activeEffects.Add(effect);
+    public void AddActiveEffect(ActiveEffect effect)
+    {
+        activeEffects.Add(effect);
+        effect.Target.ApplyEffect((int)effect.Stat, effect.Modifier);
+    }
 }

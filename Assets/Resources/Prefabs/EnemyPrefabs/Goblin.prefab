@@ -607,7 +607,7 @@ MonoBehaviour:
     manaRegen: 0
     range: 1
     speed: 3.5
-  knockback: 2000
+  knockback: 500
 --- !u!54 &8061069262770656121
 Rigidbody:
   m_ObjectHideFlags: 0
