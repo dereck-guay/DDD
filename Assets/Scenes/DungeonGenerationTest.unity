@@ -611,6 +611,12 @@ MonoBehaviour:
     layer2: 13
   - layer1: 12
     layer2: 14
+  - layer1: 16
+    layer2: 16
+  - layer1: 12
+    layer2: 16
+  - layer1: 14
+    layer2: 16
 --- !u!4 &1454502436
 Transform:
   m_ObjectHideFlags: 0

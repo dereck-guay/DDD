@@ -8,10 +8,7 @@ public class TurretComponent : MonoBehaviour
    public GameObject projectile;
 
    public float delay;
-   public float power;
    float elapsedTime = 0;
-
-   GameObject instantiatedProjectile;
 
    void Update()
    {
@@ -21,11 +18,7 @@ public class TurretComponent : MonoBehaviour
       {
          elapsedTime -= delay;
          foreach (var exit in exits)
-         {
-            instantiatedProjectile = Instantiate(projectile, exit.transform.position, exit.transform.rotation);
-            instantiatedProjectile.transform.localScale = Vector3.one / 4;
-            instantiatedProjectile.GetComponent<Rigidbody>().AddForce(instantiatedProjectile.transform.forward * power);
-         }
+            Instantiate(projectile, exit.transform.position, exit.transform.rotation);
       }
    }
 }

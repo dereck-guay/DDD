@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 [RequireComponent(typeof(TargetingAIComponent))]
-public class GoblinComponent : EntityMonoBehaviour
+public class GoblinComponent : EnemyMonoBehaviour
 {
     TargetingAIComponent targetAI;
 
@@ -17,27 +17,19 @@ public class GoblinComponent : EntityMonoBehaviour
 
         targetAI = GetComponent<TargetingAIComponent>();
 
-        entityStats.HP.OnDeath += delegate { Destroy(gameObject); };
-        entityStats.Speed.OnSpeedChanged += (float newSpeed) => targetAI.agent.speed = newSpeed;
+        entityStats.HP.OnDeath += () => Destroy(gameObject);
+        entityStats.Speed.OnSpeedChanged += newSpeed => targetAI.agent.speed = newSpeed;
         OnStunChanged += isStunned => targetAI.isStunned = isStunned;
     }
 
-    void Update()
-    {
-        cooldown += Time.deltaTime;
+    void Update() => TryCastAttack(targetAI, ref cooldown);
 
-        if (targetAI.HasTarget && cooldown > entityStats.AtkSpeed.Current && !IsStunned)
-            if (Vector3.Distance(targetAI.targetsInRange[0].position, transform.position) < entityStats.Range.Current)
-            {
-                Attack(targetAI.targetsInRange[0]);
-                cooldown = 0;
-            }
-    }
-
-    void Attack(Transform target)
+    protected override void Attack(Transform target)
     {
         target.GetComponent<Stats>().HP.TakeDamage(entityStats.AtkDamage.Current);
         target.GetComponent<Rigidbody>().AddForce((target.position - transform.position).normalized * knockback);
+        Debug.Log((target.position - transform.position).normalized);
+        Debug.Log(target);
     }
 
 }

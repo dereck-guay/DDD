@@ -1533,7 +1533,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7188672722690776393}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 1, z: 0}
+  m_LocalPosition: {x: 0, y: 0.75, z: 0}
   m_LocalScale: {x: 0.75, y: 0.75, z: 0.75}
   m_Children:
   - {fileID: 5248682382752266286}
@@ -1745,15 +1745,15 @@ MonoBehaviour:
   entityStats: {fileID: 0}
   statsInit:
     attackDamage: 20
-    attackSpeed: 5
+    attackSpeed: 3
     maxHp: 10
     hpRegen: 0
     maxMana: 30
     manaRegen: 1
     range: 8
     speed: 2
-  isStunned: 0
-  projectiles: []
+  projectile: {fileID: 5380225086048190211, guid: 66529456c9fde734ab6b687f73d35ae4,
+    type: 3}
   exit: {fileID: 5915807953252482617}
 --- !u!195 &4261458341160807573
 NavMeshAgent:
@@ -1793,6 +1793,7 @@ MonoBehaviour:
   targetsInRange: []
   agent: {fileID: 0}
   detectionRange: {fileID: 1640204439669655752}
+  isStunned: 0
 --- !u!114 &3421612734758723579
 MonoBehaviour:
   m_ObjectHideFlags: 0

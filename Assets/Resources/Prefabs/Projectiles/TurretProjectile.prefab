@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 681779461200782260}
   - component: {fileID: 3983338034783790020}
   - component: {fileID: 3787632927388681644}
-  m_Layer: 13
+  m_Layer: 16
   m_Name: TurretProjectile
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -29,7 +29,7 @@ Transform:
   m_GameObject: {fileID: 4768180493271869857}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 0.4, y: 0.4, z: 0.4}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 572581962302090112}
   m_Father: {fileID: 0}
@@ -62,7 +62,7 @@ SphereCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Radius: 0.5
+  m_Radius: 0.1
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!114 &3983338034783790020
 MonoBehaviour:
@@ -77,7 +77,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   direction: {x: 0, y: 0, z: 0}
-  speed: 10
+  speed: 4
 --- !u!114 &3787632927388681644
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -105,7 +105,7 @@ GameObject:
   - component: {fileID: 572581962302090112}
   - component: {fileID: 3297310130101966680}
   - component: {fileID: 9052325766672360845}
-  m_Layer: 13
+  m_Layer: 16
   m_Name: Sphere
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -121,7 +121,7 @@ Transform:
   m_GameObject: {fileID: 7193290988237893201}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 0.2, y: 0.2, z: 0.2}
   m_Children: []
   m_Father: {fileID: 2299982777018151911}
   m_RootOrder: 0

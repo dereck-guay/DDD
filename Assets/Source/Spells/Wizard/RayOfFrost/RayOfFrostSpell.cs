@@ -17,7 +17,6 @@ public class RayOfFrostSpell : MonoBehaviour
     {
         var spawnPosition = transform.position + 1.5f * direction;
         rayOfFrost = Instantiate(rayOfFrostPrefab, spawnPosition, player.transform.rotation); //Changed Quaternion.identity for player rotation  ~Yan
-        rayOfFrost.GetComponent<StraightProjectile>().direction = direction;
         var icePatchManager = Instantiate(icePatchManagerPrefab, new Vector3(transform.position.x + 1.4f * direction.x, spawnPosition.y, transform.position.z + 1.4f * direction.z), Quaternion.identity);
         icePatchManager.transform.LookAt(rayOfFrost.transform);
         IcePatchManagerComponent icePatchManagerComponent = icePatchManager.GetComponentInChildren<IcePatchManagerComponent>();

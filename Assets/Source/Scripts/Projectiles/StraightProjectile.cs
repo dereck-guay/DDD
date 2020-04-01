@@ -9,5 +9,5 @@ public class StraightProjectile : MonoBehaviour
     public float speed = 50f;
 
     private void Start() =>
-        GetComponent<Rigidbody>().AddForce(direction * speed);
+        GetComponent<Rigidbody>().AddForce(transform.forward * speed);
 }

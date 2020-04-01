@@ -22,7 +22,6 @@ public class StunningBladeSpell : MonoBehaviour
         var spawnPosition = transform.position + 1.5f * direction;
         stunningBlade = Instantiate(stunningBladePrefab, spawnPosition, transform.rotation);
         stunningBlade.GetComponent<StunningBladeCollision>().stunningBladeSpell = this;
-        stunningBlade.GetComponent<StraightProjectile>().direction = direction;
     }
 
     void Update()

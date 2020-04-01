@@ -1,30 +1,35 @@
-﻿using System;
+﻿using Enums;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 public class BeholderCollisionComponent : CollisionMonoBehaviour
 {
-    Action<Stats>[] Effects = new Action<Stats>[]
-    {
-        (stats) => { stats.HP.TakeDamage(damage); },
-        (stats) => {}  //Slow is in BeholderComponent
-    };
+    Action<EffectHandlerComponent>[] effects;
 
     public int[] damageLayers;
-    public static float damage;
-    public static float slowFactor;
+    public float damage;    
+    public float effectBaseModifier;    
+    public float effectBaseDuration;
     public float maxDuration;
-    [HideInInspector]
-    public BeholderComponent caster;   //Manages effects durations
-    
+
+    static BeholderComponent caster;   //Manages effects durations
+
     float currentTime;
     Vector3 baseScale;
 
     private void Start()
     {
-        baseScale = gameObject.transform.localScale;        
-    }     
+        baseScale = gameObject.transform.localScale;
+        effects = new Action<EffectHandlerComponent>[]
+        {
+            (eHandler) => { eHandler.GetComponent<Stats>().HP.TakeDamage(damage); },
+            (eHandler) => { caster.AddActiveEffect(new ActiveEffect(eHandler, ModifiableStats.Speed, effectBaseModifier, effectBaseDuration)); },
+            (eHandler) => { caster.AddActiveEffect(new ActiveEffect(eHandler, ModifiableStats.Speed, effectBaseModifier / 2, effectBaseDuration / 2)); },
+            (eHandler) => { caster.AddActiveEffect(new ActiveEffect(eHandler, ModifiableStats.HPRegen, effectBaseModifier / 4, effectBaseDuration)); }
+        };
+    }
 
     private void OnCollisionEnter(Collision collision)
     {
@@ -34,7 +39,7 @@ public class BeholderCollisionComponent : CollisionMonoBehaviour
         {
             Destroy(gameObject);
             if (CollidesWithAppropriateLayer(target.layer, damageLayers))
-                target.GetComponent<Stats>().HP.TakeDamage(damage);
+                ApplyRandomEffect(target.GetComponent<EffectHandlerComponent>());
         }
     }
 
@@ -48,8 +53,8 @@ public class BeholderCollisionComponent : CollisionMonoBehaviour
             Destroy(gameObject);
     }
 
-    void GiveRandomEffect(Stats targetStats)
-    {
+    public void SetCaster(BeholderComponent casterI) => caster = casterI;
 
-    }
+    void ApplyRandomEffect(EffectHandlerComponent target) =>
+        effects[UnityEngine.Random.Range(0, effects.Length)].Invoke(target);
 }
