@@ -9,11 +9,10 @@ public class RayOfFrostSpell : MonoBehaviour
     public GameObject icePatchManagerPrefab;
     public float slowValue;
 
-    private readonly float[] cooldowns = { 6f, 5f, 4f };
+    public float cooldown;
     public float currentLifeTime;
-    private int spellLevel = 1;
     private GameObject rayOfFrost;
-    public void Cast(int level, PlayerMonoBehaviour player)
+    public void Cast(PlayerMonoBehaviour player)
     {
         var spawnPosition = transform.position + 1.5f * direction;
         rayOfFrost = Instantiate(rayOfFrostPrefab, spawnPosition, player.transform.rotation); //Changed Quaternion.identity for player rotation  ~Yan
@@ -23,11 +22,10 @@ public class RayOfFrostSpell : MonoBehaviour
         icePatchManagerComponent.projectile = rayOfFrost;
         icePatchManagerComponent.player = player;
         icePatchManagerComponent.slowValue = slowValue;
-        spellLevel = level;
     }
     void Update()
     {
-        if (currentLifeTime >= cooldowns[spellLevel - 1])
+        if (currentLifeTime >= cooldown)
         {
             Destroy(this);
             Destroy(rayOfFrost);

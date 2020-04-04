@@ -7,18 +7,16 @@ public class StunningBladeSpell : MonoBehaviour
     public Vector3 direction;
     public GameObject stunningBladePrefab;
 
-    private readonly float[] cooldowns = { 7f, 5f, 4f };
-    private readonly float[] stunDurations = { 2f, 3f, 3.5f };
-    public float currentLifeTime;
-    private int spellLevel = 1;
-    private GameObject stunningBlade;
+    public float cooldown = 1;
+    public float effectDuration = 1;
+    private float currentLifeTime;
     public bool hasContacted = false;
     public EntityMonoBehaviour target;
+    private GameObject stunningBlade;
     private bool stunHasBegun;
     public float stunDuration;
-    public void Cast(int level)
+    public void Cast()
     {
-        spellLevel = level;
         var spawnPosition = transform.position + 1.5f * direction;
         stunningBlade = Instantiate(stunningBladePrefab, spawnPosition, transform.rotation);
         stunningBlade.GetComponent<StunningBladeCollision>().stunningBladeSpell = this;
@@ -35,14 +33,14 @@ public class StunningBladeSpell : MonoBehaviour
             stunHasBegun = true;
             hasContacted = false;
         }
-        if (currentLifeTime >= cooldowns[spellLevel - 1])
+        if (currentLifeTime >= cooldown)
         {
             if (target && target.IsStunned)
                 target.IsStunned = false;
             Destroy(stunningBlade);
             Destroy(this);
         }
-        if (stunDuration > stunDurations[spellLevel - 1])
+        if (stunDuration > effectDuration)
         {
             if(target)
                 target.IsStunned = false;

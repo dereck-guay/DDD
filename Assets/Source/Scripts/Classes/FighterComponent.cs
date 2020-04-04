@@ -20,22 +20,39 @@ public class FighterComponent : PlayerMonoBehaviour
         public GameObject autoAttackPrefab;
     };
     [System.Serializable]
+    public class Slam 
+    {
+        public float range;
+    };
+    [System.Serializable]
+    public class Rage
+    {
+        public float[] cooldowns;
+        public float[] atkSpeedValues;
+    };
+    [System.Serializable]
+    public class TakeABreather
+    {
+        public float[] cooldowns;
+        public float[] regenValues;
+    };
+    [System.Serializable]
     public class Shield
     {
         public GameObject shieldObject;
+        public float[] cooldowns;
+        public float[] effectiveTimes;
     };
-    [HideInInspector]
-    public bool spellLocked = false;
+    
 
     
-    [System.Serializable]
-    public class Slam {
-        public float range;
-    };
+    
 
     [Header("Spell Settings")]
     public AutoAttack autoAttack;
     public Slam slam;
+    public Rage rage;
+    public TakeABreather takeABreather;
     public Shield shield;
     #endregion
     #region Auto-attack stuff
@@ -50,7 +67,8 @@ public class FighterComponent : PlayerMonoBehaviour
         timeSinceLastAttack = value;
     }
     #endregion
-
+    [HideInInspector]
+    public bool spellLocked = false;
     private KeyBindings keyBindings;
     private Rigidbody rigidBody;
     private void Awake()
@@ -89,14 +107,18 @@ public class FighterComponent : PlayerMonoBehaviour
                     if(!IsOnCooldown(typeof(RageSpell)) && !IsOnCooldown(typeof(TakeABreatherSpell)))
                     {
                         var rageSpell = gameObject.AddComponent<RageSpell>();
-                        rageSpell.Cast(entityStats.XP.Level);
+                        rageSpell.cooldown = rage.cooldowns[entityStats.XP.Level - 1];
+                        rageSpell.atkSpeedValue = rage.atkSpeedValues[entityStats.XP.Level - 1];
+                        rageSpell.Cast();
                     }
                 },
                 () =>{
                     if (!IsOnCooldown(typeof(RageSpell)) && !IsOnCooldown(typeof(TakeABreatherSpell)))
                     {
                         var takeABreatherSpell = gameObject.AddComponent<TakeABreatherSpell>();
-                        takeABreatherSpell.Cast(entityStats.XP.Level);
+                        takeABreatherSpell.cooldown = takeABreather.cooldowns[entityStats.XP.Level - 1];
+                        takeABreatherSpell.regenValue = takeABreather.regenValues[entityStats.XP.Level - 1];
+                        takeABreatherSpell.Cast();
                     }
                 },
                 () =>{
@@ -105,7 +127,9 @@ public class FighterComponent : PlayerMonoBehaviour
                         var shieldSpell = gameObject.AddComponent<ShieldSpell>();
                         shieldSpell.shield = shield.shieldObject;
                         shieldSpell.bodyToChange = characterParts.body;
-                        shieldSpell.Cast(entityStats.XP.Level);
+                        shieldSpell.cooldown = shield.cooldowns[entityStats.XP.Level - 1];
+                        shieldSpell.effectiveTime = shield.effectiveTimes[entityStats.XP.Level - 1];
+                        shieldSpell.Cast();
                     }
                 }
             }, inputs

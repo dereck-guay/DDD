@@ -7,25 +7,23 @@ public class SlowSpell : MonoBehaviour
 {
     public GameObject target;
     public float slowValue;
-    public float[] effectDurations = { 2f, 4f, 6f };
+    public float effectDuration;
 
-    private float[] cooldowns = { 10f, 9f, 8f };
+    public float cooldown = 10f;
     public float currentLifeTime;
-    private int playerLevel = 1;
     private bool isActive;
 
-    public void Cast(int level)
+    public void Cast()
     {
         target.GetComponent<EffectHandlerComponent>().ApplyEffect((int)ModifiableStats.Speed, slowValue);
-        playerLevel = level;
         isActive = true;
     }
 
     private void Update()
     {
-        if (currentLifeTime >= cooldowns[playerLevel - 1])
+        if (currentLifeTime >= cooldown)
             Destroy(this);
-        else if(currentLifeTime >= effectDurations[playerLevel] && isActive)
+        else if(currentLifeTime >= effectDuration && isActive)
         {
             target.GetComponent<EffectHandlerComponent>().EndEffect((int)ModifiableStats.Speed, slowValue);
             isActive = false;

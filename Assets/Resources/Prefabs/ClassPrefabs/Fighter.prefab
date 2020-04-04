@@ -263,7 +263,15 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   entityStats: {fileID: 0}
-  isStunned: 0
+  statsInit:
+    attackDamage: 15
+    attackSpeed: 0.9
+    maxHp: 150
+    hpRegen: 10
+    maxMana: 50
+    manaRegen: 5
+    range: 5
+    speed: 25
   selectableEntities:
   - serializedVersion: 2
     m_Bits: 1024
@@ -277,24 +285,41 @@ MonoBehaviour:
   characterParts:
     body: {fileID: 3327950002639287408}
   camera: {fileID: 0}
-  statsInit:
-    attackDamage: 15
-    attackSpeed: 0.9
-    maxHp: 150
-    hpRegen: 10
-    maxMana: 50
-    manaRegen: 5
-    range: 5
-    speed: 25
   inputs: 430100007700000061000000730000006400000031000000320000003300000034000000
-  spellLocked: 0
   autoAttack:
     autoAttackPrefab: {fileID: 405955550181731434, guid: aac1e7f679631db488ae156993deaa8f,
       type: 3}
   slam:
     range: 0
+  rage:
+    cooldowns:
+    - 10
+    - 9
+    - 8
+    atkSpeedValues:
+    - 2
+    - 2.5
+    - 3
+  takeABreather:
+    cooldowns:
+    - 10
+    - 9
+    - 8
+    regenValues:
+    - 2
+    - 2.5
+    - 3
   shield:
     shieldObject: {fileID: 5592215202980429576}
+    cooldowns:
+    - 10
+    - 9
+    - 8
+    effectiveTimes:
+    - 2
+    - 3
+    - 4
+  spellLocked: 0
 --- !u!54 &981901871628974245
 Rigidbody:
   m_ObjectHideFlags: 0

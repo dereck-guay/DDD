@@ -306,7 +306,15 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   entityStats: {fileID: 0}
-  isStunned: 0
+  statsInit:
+    attackDamage: 5
+    attackSpeed: 0.6
+    maxHp: 100
+    hpRegen: 5
+    maxMana: 50
+    manaRegen: 5
+    range: 30
+    speed: 30
   selectableEntities:
   - serializedVersion: 2
     m_Bits: 1024
@@ -320,15 +328,6 @@ MonoBehaviour:
   characterParts:
     body: {fileID: 1191110277266146945}
   camera: {fileID: 0}
-  statsInit:
-    attackDamage: 5
-    attackSpeed: 0.6
-    maxHp: 100
-    hpRegen: 5
-    maxMana: 50
-    manaRegen: 5
-    range: 30
-    speed: 30
   statusBars:
   - {fileID: 505219490259787623}
   - {fileID: 505219490363880905}
@@ -340,9 +339,25 @@ MonoBehaviour:
     fireballPrefab: {fileID: 3649683291444178571, guid: d094952558deb094c859cab0eb697499,
       type: 3}
     manaCost: 10
+    cooldowns:
+    - 3
+    - 2
+    - 1
+    damage:
+    - 4
+    - 5
+    - 7
   slow:
     slowValue: 0.2
     manaCost: 10
+    cooldowns:
+    - 4
+    - 3
+    - 2
+    effectDurations:
+    - 2
+    - 4
+    - 6
   rayOfFrost:
     rayOfFrostPrefab: {fileID: 9001681064244344938, guid: 8d3b89fb0b1a6d44bb683fb36603abc2,
       type: 3}
@@ -350,12 +365,20 @@ MonoBehaviour:
       type: 3}
     manaCost: 10
     slowValue: 0.2
+    cooldowns:
+    - 6
+    - 5
+    - 4
   heal:
     healValues:
     - 10
     - 20
     - 35
     manaCost: 10
+    cooldowns:
+    - 10
+    - 9
+    - 8
 --- !u!54 &6085515682664728954
 Rigidbody:
   m_ObjectHideFlags: 0

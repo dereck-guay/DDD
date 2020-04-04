@@ -28,6 +28,8 @@ public class RogueComponent : PlayerMonoBehaviour
     public class StunningBlade
     {
         public GameObject stunningBladePrefab;
+        public float[] cooldowns = { 7f, 5f, 4f };
+        public float[] effectDurations = { 2f, 3f, 3.5f };
     };
 
     [Header("Spell Settings")]
@@ -79,23 +81,23 @@ public class RogueComponent : PlayerMonoBehaviour
                         var stunningBladeSpell = gameObject.AddComponent<StunningBladeSpell>();
                         stunningBladeSpell.direction = GetMouseDirection();
                         stunningBladeSpell.stunningBladePrefab = stunningBlade.stunningBladePrefab;
-                        stunningBladeSpell.Cast(entityStats.XP.Level);
-                        // Pour pas que le player puisse bouger pendant l'ainimation du spell
-                        // spellLocked = true;
+                        stunningBladeSpell.cooldown = stunningBlade.cooldowns[entityStats.XP.Level - 1];
+                        stunningBladeSpell.effectDuration = stunningBlade.effectDurations[entityStats.XP.Level - 1];
+                        stunningBladeSpell.Cast();
                     }
                 },
                 () =>{
                     if(!IsOnCooldown(typeof(RageSpell)) && !IsOnCooldown(typeof(TakeABreatherSpell)))
                     {
                         var rageSpell = gameObject.AddComponent<RageSpell>();
-                        rageSpell.Cast(entityStats.XP.Level);
+                        //rageSpell.Cast(entityStats.XP.Level);
                     }
                 },
                 () =>{
                     if (!IsOnCooldown(typeof(RageSpell)) && !IsOnCooldown(typeof(TakeABreatherSpell)))
                     {
                         var takeABreatherSpell = gameObject.AddComponent<TakeABreatherSpell>();
-                        takeABreatherSpell.Cast(entityStats.XP.Level);
+                        //takeABreatherSpell.Cast(entityStats.XP.Level);
                     }
                 },
                 () =>{

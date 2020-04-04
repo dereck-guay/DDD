@@ -25,12 +25,23 @@ public class WizardComponent : PlayerMonoBehaviour
     {
         public GameObject fireballPrefab;
         public float manaCost;
+        public float[] cooldowns;
+        public float[] damage;
     };
     [System.Serializable]
     public class Slow
     {
-        public float slowValue;
         public float manaCost;
+        public float slowValue;
+        public float[] cooldowns;
+        public float[] effectDurations;
+    };
+    [System.Serializable]
+    public class Heal
+    {
+        public float manaCost;
+        public float[] cooldowns;
+        public float[] healValues;
     };
     [System.Serializable]
     public class RayOfFrost
@@ -39,20 +50,15 @@ public class WizardComponent : PlayerMonoBehaviour
         public GameObject icePatchPrefab;
         public float manaCost;
         public float slowValue;
-    };
-    [System.Serializable]
-    public class Heal
-    {
-        public float[] healValues;
-        public float manaCost;
+        public float[] cooldowns;
     };
 
     [Header("Spell Settings")]
     public AutoAttack autoAttack;
     public Fireball fireball;
     public Slow slow;
-    public RayOfFrost rayOfFrost;
     public Heal heal;
+    public RayOfFrost rayOfFrost;
     #endregion
     #region Auto-attack stuff
     private bool canAttack;
@@ -102,7 +108,9 @@ public class WizardComponent : PlayerMonoBehaviour
                         var fireballSpell = gameObject.AddComponent<FireballSpell>();
                         fireballSpell.fireballPrefab = fireball.fireballPrefab;
                         fireballSpell.direction = GetMouseDirection();
-                        fireballSpell.Cast(entityStats.XP.Level);
+                        fireballSpell.cooldown = fireball.cooldowns[entityStats.XP.Level - 1];
+                        fireballSpell.damage = fireball.damage[entityStats.XP.Level - 1];
+                        fireballSpell.Cast();
                     }
                 },
                 () => {
@@ -114,7 +122,8 @@ public class WizardComponent : PlayerMonoBehaviour
                             var slowSpell = gameObject.AddComponent<SlowSpell>();
                             slowSpell.target = target;
                             slowSpell.slowValue = slow.slowValue;
-                            slowSpell.Cast(entityStats.XP.Level); 
+                            slowSpell.cooldown = slow.cooldowns[entityStats.XP.Level - 1];
+                            slowSpell.Cast(); 
                         }
                     }
                 },
@@ -126,8 +135,9 @@ public class WizardComponent : PlayerMonoBehaviour
                         {
                             var healSpell = gameObject.AddComponent<HealSpell>();
                             healSpell.target = target;
-                            healSpell.healValue = heal.healValues;
-                            healSpell.Cast(entityStats.XP.Level);
+                            healSpell.healValue = heal.healValues[entityStats.XP.Level];
+                            healSpell.cooldown = heal.cooldowns[entityStats.XP.Level];
+                            healSpell.Cast();
                         }
                     }
                 },
@@ -140,7 +150,8 @@ public class WizardComponent : PlayerMonoBehaviour
                         rayOfFrostSpell.icePatchManagerPrefab = rayOfFrost.icePatchPrefab;
                         rayOfFrostSpell.slowValue = rayOfFrost.slowValue;
                         rayOfFrostSpell.direction = GetMouseDirection();
-                        rayOfFrostSpell.Cast(entityStats.XP.Level, this);
+                        rayOfFrostSpell.cooldown = rayOfFrost.cooldowns[entityStats.XP.Level - 1];
+                        rayOfFrostSpell.Cast(this);
                     }
                 },
                 () => { entityStats.HP.TakeDamage(1); }

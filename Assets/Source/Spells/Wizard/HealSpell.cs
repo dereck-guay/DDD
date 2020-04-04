@@ -6,21 +6,17 @@ using Enums;
 public class HealSpell : MonoBehaviour
 {
     public GameObject target;
-    public float[] healValue;
+    public float healValue;
 
-    private float[] cooldowns = { 10f, 9f, 8f };
+    public float cooldown;
     public float currentLifeTime;
-    private int playerLevel = 1;
 
-    public void Cast(int level)
-    {
-        playerLevel = level;
-        target.GetComponent<PlayerMonoBehaviour>().entityStats.HP.Heal(healValue[playerLevel - 1]);
-    }
+    public void Cast() =>
+        target.GetComponent<PlayerMonoBehaviour>().entityStats.HP.Heal(healValue);
 
     private void Update()
     {
-        if (currentLifeTime >= cooldowns[playerLevel - 1])
+        if (currentLifeTime >= cooldown)
             Destroy(this);
 
         currentLifeTime += Time.deltaTime;
