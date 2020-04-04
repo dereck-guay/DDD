@@ -34,7 +34,6 @@ public class PauseMenuComponent : MonoBehaviour
         Time.timeScale = 1f;
         GameIsPaused = false;
         resumeBtn.transform.localScale = Vector3.one;
-        //resumeBtn.GetComponentInChildren<Button>().transform.localScale += new Vector3(-.1f, -.1f, -.1f);
     }
     
     public void Pause()

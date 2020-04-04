@@ -8,21 +8,51 @@ public class AudioMenuComponent : MonoBehaviour
 {
     public AudioMixer audioMixer;
     public Slider masterVolumeControl;
-    //private float currentVol;
+    public Slider effectsVolumeControl;
+    public Slider musicVolumeControl;
 
-    //private void Start()
-    //{
-    //    SetVolume(.75f);
-    //}
-    //private void Update()
-    //{
-    //}
-
-    public void SetVolume(float volume)
+    private void Start()
     {
-        //float volume = masterVolumeControl.value;
+        //SetMasterVolume(.75f);
+        masterVolumeControl.value = PlayerPrefs.GetFloat("MasterVolume");
+        effectsVolumeControl.value = PlayerPrefs.GetFloat("EffectsVolume");
+        musicVolumeControl.value = PlayerPrefs.GetFloat("MusicVolume");
+    }
+
+    public void Save()
+    {
+        PlayerPrefs.SetFloat("MasterVolume", masterVolumeControl.value);
+        PlayerPrefs.SetFloat("EffectsVolume", effectsVolumeControl.value);
+        PlayerPrefs.SetFloat("MusicVolume", musicVolumeControl.value);
+        PlayerPrefs.Save();
+    }
+
+    public void SetMasterVolume(float volume)
+    {
         audioMixer.SetFloat("masterVol", Mathf.Log10(volume) * 20);
-        //masterVolumeControl.GetComponentInChildren<Text>().text = (Mathf.Log10(volume) * 20).ToString();
-        //PlayerPrefs.SetFloat("masterVol", volume);
+        masterVolumeControl.value = volume;
+        masterVolumeControl.GetComponentInChildren<Text>().text = (Mathf.FloorToInt(volume * 100) + "%").ToString();
+
+        audioMixer.SetFloat("effectsVol", Mathf.Log10(volume) * 20);
+        effectsVolumeControl.value = volume;
+        effectsVolumeControl.GetComponentInChildren<Text>().text = (Mathf.FloorToInt(volume * 100) + "%").ToString();
+
+        audioMixer.SetFloat("musicVol", Mathf.Log10(volume) * 20);
+        musicVolumeControl.value = volume;
+        musicVolumeControl.GetComponentInChildren<Text>().text = (Mathf.FloorToInt(volume * 100) + "%").ToString();
+    }
+
+    public void SetEffectsVolume(float volume)
+    {
+        audioMixer.SetFloat("effectsVol", Mathf.Log10(volume) * 20);
+        effectsVolumeControl.value = volume;
+        effectsVolumeControl.GetComponentInChildren<Text>().text = (Mathf.FloorToInt(volume * 100) + "%").ToString();
+    }
+
+    public void SetMusicVolume(float volume)
+    {
+        audioMixer.SetFloat("musicVol", Mathf.Log10(volume) * 20);
+        musicVolumeControl.value = volume;
+        musicVolumeControl.GetComponentInChildren<Text>().text = (Mathf.FloorToInt(volume * 100) + "%").ToString();
     }
 }
