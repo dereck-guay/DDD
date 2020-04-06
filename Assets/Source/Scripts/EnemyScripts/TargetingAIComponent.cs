@@ -3,16 +3,25 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
 
+[System.Serializable]
+public class AreaCostsData
+{
+    public int areaIndex;
+    public float areaCost = 1;
+}
+
 [RequireComponent(typeof(Rigidbody))]
 [RequireComponent(typeof(NavMeshAgent))]
 public class TargetingAIComponent : MonoBehaviour
 {
     public int targetLayer;
+    public SphereCollider detectionRange;
+    public AreaCostsData[] areaCosts;
+
     [HideInInspector]
     public List<Transform> targetsInRange;
     [HideInInspector]
     public NavMeshAgent agent;
-    public SphereCollider detectionRange;
     [HideInInspector]
     public bool isStunned;
     [HideInInspector]
@@ -20,10 +29,16 @@ public class TargetingAIComponent : MonoBehaviour
 
     public bool HasTarget { get => targetsInRange.Count != 0; }
 
+    void Awake()
+    {
+        agent = GetComponent<NavMeshAgent>();
+        foreach (var a in areaCosts)
+            agent.SetAreaCost(a.areaIndex, a.areaCost);
+    }
+
     void Start()
     {
         targetsInRange = new List<Transform>(4);
-        agent = GetComponent<NavMeshAgent>();
         detectionRange.isTrigger = true;
     }
 
