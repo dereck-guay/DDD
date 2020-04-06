@@ -148,7 +148,7 @@ public class FighterComponent : PlayerMonoBehaviour
     private void Update()
     {
         SetTimeSinceLastAttack(GetTimeSinceLastAttack() + Time.deltaTime);
-        if (!(IsStunned && spellLocked))
+        if (!(IsStunned || spellLocked))
         {
             DirectCharacter();
             keyBindings.CallBindings();

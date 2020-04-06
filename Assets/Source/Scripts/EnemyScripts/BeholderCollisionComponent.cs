@@ -55,6 +55,9 @@ public class BeholderCollisionComponent : CollisionMonoBehaviour
 
     public void SetCaster(BeholderComponent casterI) => caster = casterI;
 
-    void ApplyRandomEffect(EffectHandlerComponent target) =>
-        effects[UnityEngine.Random.Range(0, effects.Length)].Invoke(target);
+    void ApplyRandomEffect(EffectHandlerComponent target)
+    {
+        if (caster)
+            effects[UnityEngine.Random.Range(0, effects.Length)].Invoke(target);
+    }
 }

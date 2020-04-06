@@ -17,6 +17,8 @@ public abstract class EnemyMonoBehaviour : EntityMonoBehaviour
     }
     protected virtual void TryCastAttack(ref float cooldown)
     {
+        cooldown += Time.deltaTime;
+
         if (cooldown > entityStats.AtkSpeed.Current)
         {
             Attack(null);

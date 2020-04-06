@@ -306,7 +306,15 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   entityStats: {fileID: 0}
-  isStunned: 0
+  statsInit:
+    attackDamage: 5
+    attackSpeed: 0.6
+    maxHp: 100
+    hpRegen: 5
+    maxMana: 50
+    manaRegen: 5
+    range: 30
+    speed: 30
   selectableEntities:
   - serializedVersion: 2
     m_Bits: 1024
@@ -320,18 +328,9 @@ MonoBehaviour:
   characterParts:
     body: {fileID: 1191110277266146945}
   camera: {fileID: 0}
-  statsInit:
-    attackDamage: 5
-    attackSpeed: 0.6
-    maxHp: 100
-    hpRegen: 5
-    maxMana: 50
-    manaRegen: 5
-    range: 30
-    speed: 30
   statusBars:
-  - {fileID: 0}
-  - {fileID: 0}
+  - {fileID: 1232096846618532077}
+  - {fileID: 1665371593489779862}
   inputs: 430100007700000061000000730000006400000031000000320000003300000034000000
   autoAttack:
     autoAttackPrefab: {fileID: 7241867996618809226, guid: c1097aa1f5e92a344a8ba365cb5fdcad,
@@ -340,9 +339,35 @@ MonoBehaviour:
     fireballPrefab: {fileID: 3649683291444178571, guid: d094952558deb094c859cab0eb697499,
       type: 3}
     manaCost: 10
+    cooldowns:
+    - 3
+    - 2
+    - 1
+    damage:
+    - 4
+    - 5
+    - 7
   slow:
-    slowValue: 0.2
     manaCost: 10
+    slowValue: 0.2
+    cooldowns:
+    - 4
+    - 3
+    - 2
+    effectDurations:
+    - 2
+    - 4
+    - 6
+  heal:
+    manaCost: 10
+    cooldowns:
+    - 10
+    - 9
+    - 8
+    healValues:
+    - 10
+    - 20
+    - 35
   rayOfFrost:
     rayOfFrostPrefab: {fileID: 9001681064244344938, guid: 8d3b89fb0b1a6d44bb683fb36603abc2,
       type: 3}
@@ -350,12 +375,10 @@ MonoBehaviour:
       type: 3}
     manaCost: 10
     slowValue: 0.2
-  heal:
-    healValues:
-    - 10
-    - 20
-    - 35
-    manaCost: 10
+    cooldowns:
+    - 6
+    - 5
+    - 4
 --- !u!54 &6085515682664728954
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -856,3 +879,27 @@ RectTransform:
     type: 3}
   m_PrefabInstance: {fileID: 3233717756337908374}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &1232096846618532077 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 4465654000640291451, guid: 4d40e6e297deb4b4a9d2274b45359ff8,
+    type: 3}
+  m_PrefabInstance: {fileID: 3233717756337908374}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 10bda2d43c9192142b9b5535ffc5ae52, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &1665371593489779862 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 4322593137992721920, guid: 4d40e6e297deb4b4a9d2274b45359ff8,
+    type: 3}
+  m_PrefabInstance: {fileID: 3233717756337908374}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 10bda2d43c9192142b9b5535ffc5ae52, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

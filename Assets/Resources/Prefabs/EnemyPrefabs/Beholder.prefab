@@ -1517,7 +1517,7 @@ GameObject:
   - component: {fileID: 2671991059611664734}
   - component: {fileID: 5100493950668417532}
   - component: {fileID: 9188573286844323495}
-  - component: {fileID: 2374693951302801210}
+  - component: {fileID: 8406583014475011380}
   m_Layer: 14
   m_Name: Base
   m_TagString: Untagged
@@ -1598,19 +1598,20 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
---- !u!135 &2374693951302801210
-SphereCollider:
+--- !u!114 &8406583014475011380
+MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7188672722690776393}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
   m_Enabled: 1
-  serializedVersion: 2
-  m_Radius: 0.6
-  m_Center: {x: 0, y: 0, z: 0}
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: aee079877551fed42b0748207901f71a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  amplitude: 0.1
+  period: 2
 --- !u!1 &7340834314768479241
 GameObject:
   m_ObjectHideFlags: 0
@@ -1704,9 +1705,9 @@ GameObject:
   - component: {fileID: 4261458341160807573}
   - component: {fileID: 7782441075031235674}
   - component: {fileID: 3421612734758723579}
-  - component: {fileID: 1886491575994914276}
   - component: {fileID: 8043523213224340370}
   - component: {fileID: 137201509344403643}
+  - component: {fileID: 3275609120821199997}
   m_Layer: 14
   m_Name: Beholder
   m_TagString: Untagged
@@ -1807,20 +1808,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   entity: {fileID: 3736167442148246453}
---- !u!114 &1886491575994914276
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7921532287817296517}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: aee079877551fed42b0748207901f71a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  amplitude: 0.1
-  period: 2
 --- !u!114 &8043523213224340370
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1849,6 +1836,19 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 116
   m_CollisionDetection: 0
+--- !u!135 &3275609120821199997
+SphereCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7921532287817296517}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Radius: 0.5
+  m_Center: {x: 0, y: 0.6, z: 0}
 --- !u!1 &8925624137069997984
 GameObject:
   m_ObjectHideFlags: 0
