@@ -27,6 +27,9 @@ public class TargetingAIComponent : MonoBehaviour
     [HideInInspector]
     public bool isStopped;
 
+    bool hasWalkingAnimation;
+    WalkingAnimationComponent walkingAnimation;
+
     public bool HasTarget { get => targetsInRange.Count != 0; }
 
     void Awake()
@@ -40,14 +43,22 @@ public class TargetingAIComponent : MonoBehaviour
     {
         targetsInRange = new List<Transform>(4);
         detectionRange.isTrigger = true;
+
+        hasWalkingAnimation = TryGetComponent(out walkingAnimation);
     }
 
     void Update()
     {
         if (HasTarget && !isStunned && !isStopped)
+        {
             agent.SetDestination(targetsInRange[0].position);
+            walkingAnimation?.Walk();
+        }
         else
+        {
             agent.SetDestination(transform.position);
+            walkingAnimation?.Stop();
+        }
     }
 
     private void OnTriggerEnter(Collider other)

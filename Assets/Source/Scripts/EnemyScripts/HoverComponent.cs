@@ -8,13 +8,13 @@ public class HoverComponent : MonoBehaviour
     public float amplitude = 1;
     public float period = 1;
     float baseHeight;
-    float elapsedTime = 0;
+    float time = 0;
 
     void Start() => baseHeight = transform.localPosition.y;
 
     void Update()
     {
-        elapsedTime += Time.deltaTime;
-        transform.localPosition = new Vector3(transform.localPosition.x, baseHeight + amplitude * Mathf.Sin(elapsedTime * BasePeriod / period), transform.localPosition.z);
+        time = (time + Time.deltaTime) % period;
+        transform.localPosition = new Vector3(transform.localPosition.x, baseHeight + amplitude * Mathf.Sin(time * BasePeriod / period), transform.localPosition.z);
     }
 }
