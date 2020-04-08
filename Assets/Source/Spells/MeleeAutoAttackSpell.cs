@@ -10,10 +10,10 @@ public class MeleeAutoAttackSpell : MonoBehaviour
     float atkSpeed;
     public float damage;
 
-    public void Cast(float atkSpeedI, Vector3 casterPosition, Vector3 directionToLookAt)
+    public void Cast(float atkSpeedI, Vector3 casterPosition, Vector3 directionToLookAt, Transform transform)
     {
         var spawnPosition = casterPosition;
-        var autoAttack = Instantiate(autoAttackPrefab, spawnPosition, Quaternion.identity);
+        var autoAttack = Instantiate(autoAttackPrefab, spawnPosition, Quaternion.identity, transform);
         directionToLookAt.y = 0;
         autoAttack.transform.LookAt(casterPosition + directionToLookAt);
         autoAttack.GetComponentInChildren<AutoAttackCollision>().damage = damage;

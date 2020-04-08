@@ -119,6 +119,7 @@ public class WizardComponent : PlayerMonoBehaviour
                         var target = GetEntityAtMousePosition();
                         if (ExistsAndIsntSelf(target))
                         {
+                            entityStats.Mana.UseMana(slow.manaCost);
                             var slowSpell = gameObject.AddComponent<SlowSpell>();
                             slowSpell.target = target;
                             slowSpell.slowValue = slow.slowValue;
@@ -133,6 +134,7 @@ public class WizardComponent : PlayerMonoBehaviour
                         var target = GetEntityAtMousePosition();
                         if (target)
                         {
+                            entityStats.Mana.UseMana(heal.manaCost);
                             var healSpell = gameObject.AddComponent<HealSpell>();
                             healSpell.target = target;
                             healSpell.healValue = heal.healValues[entityStats.XP.Level];
@@ -144,7 +146,7 @@ public class WizardComponent : PlayerMonoBehaviour
                 () => {
                     if (CanCast(rayOfFrost.manaCost, typeof(RayOfFrostSpell)))
                     {
-                        entityStats.Mana.UseMana(fireball.manaCost);
+                        entityStats.Mana.UseMana(rayOfFrost.manaCost);
                         var rayOfFrostSpell = gameObject.AddComponent<RayOfFrostSpell>();
                         rayOfFrostSpell.rayOfFrostPrefab = rayOfFrost.rayOfFrostPrefab;
                         rayOfFrostSpell.icePatchManagerPrefab = rayOfFrost.icePatchPrefab;
