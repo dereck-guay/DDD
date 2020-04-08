@@ -485,6 +485,7 @@ GameObject:
   - component: {fileID: 695880186142212080}
   - component: {fileID: 8910744265902526719}
   - component: {fileID: 5615927951151883573}
+  - component: {fileID: 6629898413145667570}
   m_Layer: 0
   m_Name: 2-Hazard
   m_TagString: Untagged
@@ -546,6 +547,22 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 1, y: 0.2, z: 1}
   m_Center: {x: 0, y: 0.1, z: 0}
+--- !u!114 &6629898413145667570
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5442374934852509467}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1e3fdca004f2d45fe8abbed571a8abd5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_OverrideArea: 1
+  m_Area: 3
+  m_IgnoreFromBuild: 0
+  m_AffectedAgents: 00000000466f31ca
 --- !u!1 &5560660732624970896
 GameObject:
   m_ObjectHideFlags: 0

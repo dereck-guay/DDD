@@ -102,20 +102,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   entityStats: {fileID: 0}
-  isStunned: 0
-  selectableEntities:
-  - serializedVersion: 2
-    m_Bits: 1024
-  - serializedVersion: 2
-    m_Bits: 16384
-  - serializedVersion: 2
-    m_Bits: 32768
-  rayCastHitLayers:
-    serializedVersion: 2
-    m_Bits: 256
-  characterParts:
-    body: {fileID: 6635251231188629254}
-  camera: {fileID: 0}
   statsInit:
     attackDamage: 10
     attackSpeed: 1
@@ -125,6 +111,19 @@ MonoBehaviour:
     manaRegen: 5
     range: 25
     speed: 30
+  selectableEntities:
+  - serializedVersion: 2
+    m_Bits: 1024
+  - serializedVersion: 2
+    m_Bits: 16384
+  - serializedVersion: 2
+    m_Bits: 32768
+  rayCastHitLayer:
+    serializedVersion: 2
+    m_Bits: 256
+  characterParts:
+    body: {fileID: 6635251231188629254}
+  camera: {fileID: 0}
   inputs: 430100007700000061000000730000006400000031000000320000003300000034000000
   spellLocked: 0
   autoAttack:
@@ -133,6 +132,14 @@ MonoBehaviour:
   stunningBlade:
     stunningBladePrefab: {fileID: 5211548123859151994, guid: 1a0cd0d3b3de2d84181e9027deec2358,
       type: 3}
+    cooldowns:
+    - 7
+    - 5
+    - 4
+    effectDurations:
+    - 2
+    - 3
+    - 3.5
 --- !u!54 &9194678902668655571
 Rigidbody:
   m_ObjectHideFlags: 0

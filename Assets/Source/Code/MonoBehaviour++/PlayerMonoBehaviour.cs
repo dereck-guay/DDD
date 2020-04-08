@@ -6,7 +6,7 @@ using UnityEngine;
 public abstract class PlayerMonoBehaviour : EntityMonoBehaviour
 {
     public List<LayerMask> selectableEntities;
-    public LayerMask rayCastHitLayers;
+    public LayerMask rayCastHitLayer;
 
     [Serializable]
     public class CharacterParts
@@ -32,7 +32,7 @@ public abstract class PlayerMonoBehaviour : EntityMonoBehaviour
         Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
         RaycastHit hit;
 
-        if (Physics.Raycast(ray, out hit, Mathf.Infinity, rayCastHitLayers))
+        if (Physics.Raycast(ray, out hit, Mathf.Infinity, rayCastHitLayer))
             position = hit.point;
 
         return position;
