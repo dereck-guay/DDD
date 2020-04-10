@@ -15,6 +15,9 @@ public class FollowProjectile : MonoBehaviour
 
     void Update()
     {
+        if (!target)
+            Destroy(gameObject);
+
         RecalculateDirection();
         rb.velocity = Vector3.zero;
         rb.AddForce(direction * speed);

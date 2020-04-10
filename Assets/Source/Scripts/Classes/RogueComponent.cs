@@ -28,13 +28,22 @@ public class RogueComponent : PlayerMonoBehaviour
     public class StunningBlade
     {
         public GameObject stunningBladePrefab;
+        public float manaCost;
         public float[] cooldowns = { 7f, 5f, 4f };
         public float[] effectDurations = { 2f, 3f, 3.5f };
     };
+    [System.Serializable]
+    public class Dash
+    {
+        public float manaCost;
+        public float[] cooldowns = { 4f, 3f, 2f };
+        public float dashMultiplier;
+    }
 
     [Header("Spell Settings")]
     public AutoAttack autoAttack;
     public StunningBlade stunningBlade;
+    public Dash dash;
     #endregion
     #region Auto-attack stuff
     private bool canAttack;
@@ -50,6 +59,7 @@ public class RogueComponent : PlayerMonoBehaviour
     #endregion
     private KeyBindings keyBindings;
     private Rigidbody rigidBody;
+    private bool isDashing;
     private void Awake()
     {
         keyBindings = new KeyBindings(
@@ -76,7 +86,7 @@ public class RogueComponent : PlayerMonoBehaviour
                 () => Move(Vector3.back),
                 () => Move(Vector3.right),
                 () => {
-                    if (! IsOnCooldown(typeof(StunningBladeSpell)))
+                    if (CanCast(stunningBlade.manaCost, typeof(StunningBladeSpell)))
                     {
                         var stunningBladeSpell = gameObject.AddComponent<StunningBladeSpell>();
                         stunningBladeSpell.direction = GetMouseDirection();
@@ -87,10 +97,12 @@ public class RogueComponent : PlayerMonoBehaviour
                     }
                 },
                 () =>{
-                    if(!IsOnCooldown(typeof(RageSpell)) && !IsOnCooldown(typeof(TakeABreatherSpell)))
+                    if(CanCast(dash.manaCost, typeof(DashSpell)))
                     {
-                        var rageSpell = gameObject.AddComponent<RageSpell>();
-                        //rageSpell.Cast(entityStats.XP.Level);
+                        var dashSpell = gameObject.AddComponent<DashSpell>();
+                        dashSpell.cooldown = dash.cooldowns[entityStats.XP.Level];
+                        dashSpell.player = this;
+                        dashSpell.Cast(GetMouseDirection(), dash.dashMultiplier);
                     }
                 },
                 () =>{
@@ -140,7 +152,7 @@ public class RogueComponent : PlayerMonoBehaviour
 
     private void Move(Vector3 direction)
     {
-        if (!IsStunned)
+        if (!IsStunned && !isDashing)
             rigidBody.AddForce(direction * entityStats.Speed.Current * Time.deltaTime * 100f);
     }
     void DirectCharacter() //make the character face the direction of the mouse

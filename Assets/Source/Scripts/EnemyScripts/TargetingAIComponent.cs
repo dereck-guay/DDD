@@ -3,44 +3,73 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
 
+[System.Serializable]
+public class AreaCostsData
+{
+    public int areaIndex;
+    public float areaCost = 1;
+}
+
+[RequireComponent(typeof(Rigidbody))]
 [RequireComponent(typeof(NavMeshAgent))]
 public class TargetingAIComponent : MonoBehaviour
 {
-   public int targetLayer;
-   [HideInInspector]
-   public List<Transform> targetsInRange;
-   [HideInInspector]
-   public NavMeshAgent agent;
-   public SphereCollider detectionRange;
+    public int targetLayer;
+    public SphereCollider detectionRange;
+    public AreaCostsData[] areaCosts;
+
+    [HideInInspector]
+    public List<Transform> targetsInRange;
+    [HideInInspector]
+    public NavMeshAgent agent;
     [HideInInspector]
     public bool isStunned;
+    [HideInInspector]
+    public bool isStopped;
 
-   public bool HasTarget { get => targetsInRange.Count != 0; }
+    bool hasWalkingAnimation;
+    WalkingAnimationComponent walkingAnimation;
 
-   void Start()
-   {
-      targetsInRange = new List<Transform>(4);
-      agent = GetComponent<NavMeshAgent>();
-      detectionRange.isTrigger = true;
-   }
+    public bool HasTarget { get => targetsInRange.Count != 0; }
 
-   void Update()
-   {
-      if (HasTarget && !isStunned)
-         agent.SetDestination(targetsInRange[0].position);
-      else
-         agent.SetDestination(transform.position);
-   }
+    void Awake()
+    {
+        agent = GetComponent<NavMeshAgent>();
+        foreach (var a in areaCosts)
+            agent.SetAreaCost(a.areaIndex, a.areaCost);
+    }
 
-   private void OnTriggerEnter(Collider other)
-   {
-      if (other.gameObject.layer == targetLayer)
-         targetsInRange.Add(other.transform);
-   }
+    void Start()
+    {
+        targetsInRange = new List<Transform>(4);
+        detectionRange.isTrigger = true;
 
-   private void OnTriggerExit(Collider other)
-   {
-      if (targetsInRange.Contains(other.transform))
-         targetsInRange.Remove(other.transform);
-   }
+        hasWalkingAnimation = TryGetComponent(out walkingAnimation);
+    }
+
+    void Update()
+    {
+        if (HasTarget && !isStunned && !isStopped)
+        {
+            agent.SetDestination(targetsInRange[0].position);
+            walkingAnimation?.Walk();
+        }
+        else
+        {
+            agent.SetDestination(transform.position);
+            walkingAnimation?.Stop();
+        }
+    }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.gameObject.layer == targetLayer)
+            targetsInRange.Add(other.transform);
+    }
+
+    private void OnTriggerExit(Collider other)
+    {
+        if (targetsInRange.Contains(other.transform))
+            targetsInRange.Remove(other.transform);
+    }
 }

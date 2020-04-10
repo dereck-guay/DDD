@@ -530,7 +530,7 @@ NavMeshAgent:
   m_GameObject: {fileID: 5276026005832429939}
   m_Enabled: 1
   m_AgentTypeID: 0
-  m_Radius: 0.5
+  m_Radius: 0.6
   m_Speed: 3.5
   m_Acceleration: 8
   avoidancePriority: 50
@@ -556,10 +556,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   targetLayer: 10
+  detectionRange: {fileID: 5641126673835042648}
+  areaCosts:
+  - areaIndex: 3
+    areaCost: 10
   targetsInRange: []
   agent: {fileID: 0}
-  detectionRange: {fileID: 5641126673835042648}
   isStunned: 0
+  isStopped: 0
 --- !u!65 &2017448970091845825
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -607,7 +611,7 @@ MonoBehaviour:
     manaRegen: 0
     range: 1
     speed: 3.5
-  knockback: 500
+  knockback: 1000
 --- !u!54 &8061069262770656121
 Rigidbody:
   m_ObjectHideFlags: 0

@@ -22,6 +22,7 @@ public class FighterComponent : PlayerMonoBehaviour
     [System.Serializable]
     public class Slam 
     {
+        public float manaCost;
         public float range;
         public float shockWaveRadius;
         public float damage;
@@ -31,18 +32,21 @@ public class FighterComponent : PlayerMonoBehaviour
     [System.Serializable]
     public class Rage
     {
+        public float manaCost;
         public float[] cooldowns;
         public float[] atkSpeedValues;
     };
     [System.Serializable]
     public class TakeABreather
     {
+        public float manaCost;
         public float[] cooldowns;
         public float[] regenValues;
     };
     [System.Serializable]
     public class Shield
     {
+        public float manaCost;
         public GameObject shieldObject;
         public float[] cooldowns;
         public float[] effectiveTimes;
@@ -84,15 +88,12 @@ public class FighterComponent : PlayerMonoBehaviour
                 () => {
                     if (canAttack)
                     {
-                        if (!IsOnCooldown(typeof(MeleeAutoAttackSpell)))
-                        {
-                            var autoAttackSpell = gameObject.AddComponent<MeleeAutoAttackSpell>();
-                            autoAttackSpell.autoAttackPrefab = autoAttack.autoAttackPrefab;
-                            autoAttackSpell.damage = entityStats.AtkDamage.Current;
-                            autoAttackSpell.Cast(entityStats.AtkSpeed.Current, transform.position, GetMouseDirection());
-                            SetTimeSinceLastAttack(0) ;
-                            canAttack = false;
-                        }
+                        var autoAttackSpell = gameObject.AddComponent<MeleeAutoAttackSpell>();
+                        autoAttackSpell.autoAttackPrefab = autoAttack.autoAttackPrefab;
+                        autoAttackSpell.damage = entityStats.AtkDamage.Current;
+                        autoAttackSpell.Cast(entityStats.AtkSpeed.Current, transform.position, GetMouseDirection(), transform);
+                        SetTimeSinceLastAttack(0) ;
+                        canAttack = false;
                     }
                 },
                 () => Move(Vector3.forward),
@@ -100,7 +101,7 @@ public class FighterComponent : PlayerMonoBehaviour
                 () => Move(Vector3.back),
                 () => Move(Vector3.right),
                 () => {
-                    if (! IsOnCooldown(typeof(SlamSpell)))
+                    if (CanCast(slam.manaCost, typeof(SlamSpell)))
                     {
                         var slamSpell = gameObject.AddComponent<SlamSpell>();
                         slamSpell.range = slam.range;
@@ -113,7 +114,7 @@ public class FighterComponent : PlayerMonoBehaviour
                     }
                 },
                 () =>{
-                    if(!IsOnCooldown(typeof(RageSpell)) && !IsOnCooldown(typeof(TakeABreatherSpell)))
+                    if(CanCast(rage.manaCost, typeof(Rage)) && !IsOnCooldown(typeof(TakeABreatherSpell)))
                     {
                         var rageSpell = gameObject.AddComponent<RageSpell>();
                         rageSpell.cooldown = rage.cooldowns[entityStats.XP.Level - 1];
@@ -122,7 +123,7 @@ public class FighterComponent : PlayerMonoBehaviour
                     }
                 },
                 () =>{
-                    if (!IsOnCooldown(typeof(RageSpell)) && !IsOnCooldown(typeof(TakeABreatherSpell)))
+                    if (!IsOnCooldown(typeof(RageSpell)) && CanCast(takeABreather.manaCost, typeof(TakeABreather)))
                     {
                         var takeABreatherSpell = gameObject.AddComponent<TakeABreatherSpell>();
                         takeABreatherSpell.cooldown = takeABreather.cooldowns[entityStats.XP.Level - 1];
@@ -131,7 +132,7 @@ public class FighterComponent : PlayerMonoBehaviour
                     }
                 },
                 () =>{
-                    if (!IsOnCooldown(typeof(ShieldSpell)))
+                    if (CanCast(shield.manaCost, typeof(ShieldSpell)))
                     {
                         var shieldSpell = gameObject.AddComponent<ShieldSpell>();
                         shieldSpell.shield = shield.shieldObject;
