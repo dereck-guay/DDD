@@ -23,6 +23,10 @@ public class FighterComponent : PlayerMonoBehaviour
     public class Slam 
     {
         public float range;
+        public float shockWaveRadius;
+        public float damage;
+        public float knockbackForce;
+        public LayerMask hitLayers;
     };
     [System.Serializable]
     public class Rage
@@ -67,6 +71,7 @@ public class FighterComponent : PlayerMonoBehaviour
         timeSinceLastAttack = value;
     }
     #endregion
+
     [HideInInspector]
     public bool spellLocked = false;
     private KeyBindings keyBindings;
@@ -99,7 +104,11 @@ public class FighterComponent : PlayerMonoBehaviour
                     {
                         var slamSpell = gameObject.AddComponent<SlamSpell>();
                         slamSpell.range = slam.range;
-                        slamSpell.position = GetMousePositionOn2DPlane();
+                        slamSpell.shockWaveRadius = slam.shockWaveRadius;
+                        slamSpell.hitLayers = slam.hitLayers;
+                        slamSpell.damage = slam.damage;
+                        slamSpell.knockbackForce = slam.knockbackForce;
+                        slamSpell.landingPosition = GetMousePositionOn2DPlane();
                         slamSpell.Cast(entityStats.XP.Level);
                     }
                 },
@@ -148,7 +157,7 @@ public class FighterComponent : PlayerMonoBehaviour
     private void Update()
     {
         SetTimeSinceLastAttack(GetTimeSinceLastAttack() + Time.deltaTime);
-        if (!(IsStunned && spellLocked))
+        if (!(IsStunned || spellLocked))
         {
             DirectCharacter();
             keyBindings.CallBindings();
@@ -167,7 +176,9 @@ public class FighterComponent : PlayerMonoBehaviour
         if(!IsStunned)
             rigidBody.AddForce(direction * entityStats.Speed.Current * Time.deltaTime * 100f);
     }
-    void DirectCharacter() //make the character face the direction of the mouse
+
+    // Makes the character face the direction of the mouse
+    void DirectCharacter() 
     {
         var directionToLookAt = transform.position + GetMouseDirection();
         directionToLookAt.y = transform.position.y;
