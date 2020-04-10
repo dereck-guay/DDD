@@ -10,7 +10,7 @@ public class VideoSettingsComponent : MonoBehaviour
     public Dropdown vsyncDropdown;
     public Slider fpsSlider;
     Resolution[] resolutions;
-
+    
     void Start()
     {
         resolutions = Screen.resolutions;

@@ -89,7 +89,7 @@ GameObject:
   - component: {fileID: 3570821206671446992}
   - component: {fileID: 6170879726928933530}
   m_Layer: 5
-  m_Name: HealingImage
+  m_Name: SlamImage
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -165,7 +165,7 @@ GameObject:
   - component: {fileID: 3837833205740036487}
   - component: {fileID: 1451514113912529351}
   m_Layer: 5
-  m_Name: Heal
+  m_Name: Slam
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -184,12 +184,12 @@ RectTransform:
   m_Children:
   - {fileID: 6124107944287454779}
   - {fileID: 591703453227942189}
-  m_Father: {fileID: 7818285506592805511}
-  m_RootOrder: 4
+  m_Father: {fileID: 6792534402678874784}
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 50, y: -364.5}
+  m_AnchoredPosition: {x: 49.399994, y: 2.6799622}
   m_SizeDelta: {x: 80, y: 80}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &6002999979989297826
@@ -240,8 +240,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e73178a2337a1f2489b605fcb1b6f154, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  cooldownTime: 60
-  mask: {fileID: 4649427972936058670}
+  fireballMask: {fileID: 0}
+  frostMask: {fileID: 0}
+  healMask: {fileID: 0}
+  slowMask: {fileID: 0}
 --- !u!114 &1451514113912529351
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -753,6 +755,62 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
+--- !u!1 &2522887343667984573
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 6792534402678874784}
+  - component: {fileID: 6809845176965675147}
+  m_Layer: 5
+  m_Name: Area
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &6792534402678874784
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2522887343667984573}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children:
+  - {fileID: 7900479479258276661}
+  - {fileID: 6909415911974570832}
+  - {fileID: 4524010124921670572}
+  - {fileID: 4586664801543359636}
+  m_Father: {fileID: 7818285506592805511}
+  m_RootOrder: 3
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: 0.6000061, y: -367.18}
+  m_SizeDelta: {x: 362.1, y: 86.36}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &6809845176965675147
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2522887343667984573}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 34cdb00be5a1d8c41811441245b22569, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  slamMask: {fileID: 4649427972936058670}
+  rageMask: {fileID: 675000936401861521}
+  breatherMask: {fileID: 7301233225657542527}
+  shieldMask: {fileID: 2161902296778794905}
 --- !u!1 &3312125101032041567
 GameObject:
   m_ObjectHideFlags: 0
@@ -838,7 +896,7 @@ GameObject:
   - component: {fileID: 3174636866880619841}
   - component: {fileID: 7181751567483255919}
   m_Layer: 5
-  m_Name: SlownessText
+  m_Name: BreatherText
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1086,10 +1144,7 @@ RectTransform:
   - {fileID: 3368623723515017715}
   - {fileID: 8497588711775331321}
   - {fileID: 8235660780359063501}
-  - {fileID: 7900479479258276661}
-  - {fileID: 6909415911974570832}
-  - {fileID: 4524010124921670572}
-  - {fileID: 4586664801543359636}
+  - {fileID: 6792534402678874784}
   - {fileID: 5028937565618679296}
   m_Father: {fileID: 0}
   m_RootOrder: 0
@@ -1171,7 +1226,7 @@ GameObject:
   - component: {fileID: 5039159146344589823}
   - component: {fileID: 2792046419743877490}
   m_Layer: 5
-  m_Name: RayOfFrostImage
+  m_Name: RageImage
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1245,7 +1300,7 @@ GameObject:
   - component: {fileID: 3776106180475149500}
   - component: {fileID: 2987239824054761528}
   m_Layer: 5
-  m_Name: RFImage
+  m_Name: RImage
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1540,7 +1595,7 @@ GameObject:
   - component: {fileID: 4818034338254080951}
   - component: {fileID: 7318073681187131657}
   m_Layer: 5
-  m_Name: Frost
+  m_Name: Rage
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1559,12 +1614,12 @@ RectTransform:
   m_Children:
   - {fileID: 8206359911836421360}
   - {fileID: 5205392567695596162}
-  m_Father: {fileID: 7818285506592805511}
-  m_RootOrder: 5
+  m_Father: {fileID: 6792534402678874784}
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -140, y: -364.5}
+  m_AnchoredPosition: {x: -140.59995, y: 2.6799622}
   m_SizeDelta: {x: 80, y: 80}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &8897675415657265111
@@ -1615,8 +1670,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e73178a2337a1f2489b605fcb1b6f154, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  cooldownTime: 60
-  mask: {fileID: 675000936401861521}
+  fireballMask: {fileID: 0}
+  frostMask: {fileID: 0}
+  healMask: {fileID: 0}
+  slowMask: {fileID: 0}
 --- !u!114 &7318073681187131657
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2295,7 +2352,7 @@ GameObject:
   - component: {fileID: 7846176675393537956}
   - component: {fileID: 4454666536731890810}
   m_Layer: 5
-  m_Name: Slowness
+  m_Name: TakeABreather
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2314,12 +2371,12 @@ RectTransform:
   m_Children:
   - {fileID: 1880478894239924266}
   - {fileID: 893738156203485089}
-  m_Father: {fileID: 7818285506592805511}
-  m_RootOrder: 6
+  m_Father: {fileID: 6792534402678874784}
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 140, y: -364.5}
+  m_AnchoredPosition: {x: 139.39993, y: 2.6799622}
   m_SizeDelta: {x: 80, y: 80}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &5021796759983200604
@@ -2370,8 +2427,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e73178a2337a1f2489b605fcb1b6f154, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  cooldownTime: 60
-  mask: {fileID: 7301233225657542527}
+  fireballMask: {fileID: 0}
+  frostMask: {fileID: 0}
+  healMask: {fileID: 0}
+  slowMask: {fileID: 0}
 --- !u!114 &4454666536731890810
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2470,7 +2529,7 @@ GameObject:
   - component: {fileID: 7425924332123237632}
   - component: {fileID: 676465175156816041}
   m_Layer: 5
-  m_Name: SImage
+  m_Name: BImage
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2562,7 +2621,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 7818285506592805511}
-  m_RootOrder: 7
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &8594102992833205274
 MonoBehaviour:
@@ -2683,7 +2742,7 @@ GameObject:
   - component: {fileID: 7342754140893278599}
   - component: {fileID: 7330415729466996989}
   m_Layer: 5
-  m_Name: SlownessButton
+  m_Name: BreatherButton
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2830,7 +2889,7 @@ GameObject:
   - component: {fileID: 1461657675659494402}
   - component: {fileID: 8626601447383388173}
   m_Layer: 5
-  m_Name: ExplosiveFireballText
+  m_Name: RageText
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2907,7 +2966,7 @@ GameObject:
   - component: {fileID: 66983280160679074}
   - component: {fileID: 1928925948495397843}
   m_Layer: 5
-  m_Name: HealingText
+  m_Name: SlamText
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -3005,12 +3064,12 @@ RectTransform:
   m_Children:
   - {fileID: 3287017539935916877}
   - {fileID: 490353561500244769}
-  m_Father: {fileID: 7818285506592805511}
-  m_RootOrder: 3
+  m_Father: {fileID: 6792534402678874784}
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -50, y: -364.5}
+  m_AnchoredPosition: {x: -50.600006, y: 2.6799622}
   m_SizeDelta: {x: 80, y: 80}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &8397224107041757464
@@ -3061,8 +3120,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e73178a2337a1f2489b605fcb1b6f154, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  cooldownTime: 60
-  mask: {fileID: 2161902296778794905}
+  fireballMask: {fileID: 0}
+  frostMask: {fileID: 0}
+  healMask: {fileID: 0}
+  slowMask: {fileID: 0}
 --- !u!114 &885103464757700249
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3235,7 +3296,7 @@ GameObject:
   - component: {fileID: 8464436813513035727}
   - component: {fileID: 4652800517331244819}
   m_Layer: 5
-  m_Name: HImage
+  m_Name: SImage
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

@@ -13,7 +13,6 @@ public class AudioMenuComponent : MonoBehaviour
 
     private void Start()
     {
-        //SetMasterVolume(.75f);
         masterVolumeControl.value = PlayerPrefs.GetFloat("MasterVolume");
         effectsVolumeControl.value = PlayerPrefs.GetFloat("EffectsVolume");
         musicVolumeControl.value = PlayerPrefs.GetFloat("MusicVolume");
@@ -30,29 +29,18 @@ public class AudioMenuComponent : MonoBehaviour
     public void SetMasterVolume(float volume)
     {
         audioMixer.SetFloat("masterVol", Mathf.Log10(volume) * 20);
-        masterVolumeControl.value = volume;
         masterVolumeControl.GetComponentInChildren<Text>().text = (Mathf.FloorToInt(volume * 100) + "%").ToString();
-
-        audioMixer.SetFloat("effectsVol", Mathf.Log10(volume) * 20);
-        effectsVolumeControl.value = volume;
-        effectsVolumeControl.GetComponentInChildren<Text>().text = (Mathf.FloorToInt(volume * 100) + "%").ToString();
-
-        audioMixer.SetFloat("musicVol", Mathf.Log10(volume) * 20);
-        musicVolumeControl.value = volume;
-        musicVolumeControl.GetComponentInChildren<Text>().text = (Mathf.FloorToInt(volume * 100) + "%").ToString();
     }
 
     public void SetEffectsVolume(float volume)
     {
         audioMixer.SetFloat("effectsVol", Mathf.Log10(volume) * 20);
-        effectsVolumeControl.value = volume;
         effectsVolumeControl.GetComponentInChildren<Text>().text = (Mathf.FloorToInt(volume * 100) + "%").ToString();
     }
 
     public void SetMusicVolume(float volume)
     {
         audioMixer.SetFloat("musicVol", Mathf.Log10(volume) * 20);
-        musicVolumeControl.value = volume;
         musicVolumeControl.GetComponentInChildren<Text>().text = (Mathf.FloorToInt(volume * 100) + "%").ToString();
     }
 }
