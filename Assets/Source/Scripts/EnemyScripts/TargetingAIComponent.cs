@@ -24,11 +24,9 @@ public class TargetingAIComponent : MonoBehaviour
     public NavMeshAgent agent;
     [HideInInspector]
     public bool isStunned;
-    [HideInInspector]
-    public bool isStopped;
-
-    bool hasWalkingAnimation;
+    
     WalkingAnimationComponent walkingAnimation;
+    WanderingAIComponent wanderingAI;
 
     public bool HasTarget { get => targetsInRange.Count != 0; }
 
@@ -41,35 +39,53 @@ public class TargetingAIComponent : MonoBehaviour
 
     void Start()
     {
+        enabled = false;
+
         targetsInRange = new List<Transform>(4);
         detectionRange.isTrigger = true;
-
-        hasWalkingAnimation = TryGetComponent(out walkingAnimation);
+        TryGetComponent(out walkingAnimation);
+        TryGetComponent(out wanderingAI);
     }
 
     void Update()
     {
-        if (HasTarget && !isStunned && !isStopped)
+        if (!isStunned)
         {
-            agent.SetDestination(targetsInRange[0].position);
-            walkingAnimation?.Walk();
-        }
-        else
-        {
-            agent.SetDestination(transform.position);
-            walkingAnimation?.Stop();
+            if (HasTarget)
+                agent.SetDestination(targetsInRange[0].position);
+            else
+            {
+                enabled = false;
+                wanderingAI?.Go();
+            }
         }
     }
 
     private void OnTriggerEnter(Collider other)
     {
         if (other.gameObject.layer == targetLayer)
+        {
             targetsInRange.Add(other.transform);
+            enabled = true;
+        }
     }
 
     private void OnTriggerExit(Collider other)
     {
         if (targetsInRange.Contains(other.transform))
             targetsInRange.Remove(other.transform);
+    }
+
+    private void OnEnable()
+    {
+        agent.enabled = true;
+        walkingAnimation?.Walk();
+        wanderingAI?.Stop();
+    }
+
+    private void OnDisable()
+    {
+        agent.enabled = false;
+        walkingAnimation?.Stop();
     }
 }

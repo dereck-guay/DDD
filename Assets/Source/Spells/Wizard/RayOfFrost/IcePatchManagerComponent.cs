@@ -4,14 +4,6 @@ using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 
-[System.Serializable]
-public class Spacing
-{
-    public float min, max;
-    [HideInInspector]
-    public float currentSpacing;
-}
-
 public class IcePatchManagerComponent : CollisionMonoBehaviour
 {
     public BoxCollider triggerZone;
@@ -22,7 +14,7 @@ public class IcePatchManagerComponent : CollisionMonoBehaviour
 
     //Ice patches generation
     //------------------------------------
-    public Spacing spacingBetweenPatches;
+    public FloatInterval spacingBetweenPatches;
     public GameObject icePatch;
     public float groundLevel = 0;
     float distanceCovered = 0;
@@ -48,7 +40,6 @@ public class IcePatchManagerComponent : CollisionMonoBehaviour
         averageDeltaPos = new List<Vector3>();
 
         startingPosition = projectile.transform.position;
-        spacingBetweenPatches.currentSpacing = Random.Range(spacingBetweenPatches.max, spacingBetweenPatches.min);
         rayOrientation = projectile.transform.forward;
 
         oldPos = startingPosition;
@@ -70,13 +61,11 @@ public class IcePatchManagerComponent : CollisionMonoBehaviour
                 averageDeltaPos.Add(deltaPos);
             }
 
-            while (distanceCovered + spacingBetweenPatches.currentSpacing < (newPos - startingPosition).magnitude)
+            while (distanceCovered + spacingBetweenPatches.NewRandomValue() < (newPos - startingPosition).magnitude)
             {
-                distanceCovered += spacingBetweenPatches.currentSpacing;
+                distanceCovered += spacingBetweenPatches.Current;
 
                 Instantiate(icePatch, startingPosition + rayOrientation * distanceCovered, Quaternion.identity).GetComponent<IcePatchComponent>().lifeSpan = lifeSpan;
-
-                spacingBetweenPatches.currentSpacing = Random.Range(spacingBetweenPatches.max, spacingBetweenPatches.min);
             }
         }
         else

@@ -52,7 +52,7 @@ public class GolemComponent : EnemyMonoBehaviour
     protected override void Attack(Transform target)
     {
         charging = true;
-        targetAI.isStopped = true;
+        targetAI.enabled = false;
         walkingAnimation?.Stop();
     }
 
@@ -64,7 +64,7 @@ public class GolemComponent : EnemyMonoBehaviour
         {
             core.material.color = coreDefaultColor;
             charging = false;
-            targetAI.isStopped = false;
+            targetAI.enabled = true;
             currentChargeTime = 0;
             Instantiate(laserPrefab, exit.position, exit.rotation).GetComponent<LaserCollisionComponent>().damage = entityStats.AtkDamage.Current;
             walkingAnimation?.Walk();

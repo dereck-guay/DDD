@@ -52,6 +52,7 @@ public class BeholderComponent : EnemyMonoBehaviour
         entityStats.HP.OnDeath += () => Destroy(gameObject);
         entityStats.HP.OnDeath += () => EndAllActiveEffects();
         entityStats.Speed.OnSpeedChanged += newSpeed => targetAI.agent.speed = newSpeed;
+        OnStunChanged += isStunned => targetAI.isStunned = isStunned;
     }
 
     void Update()
