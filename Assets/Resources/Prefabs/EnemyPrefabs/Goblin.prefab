@@ -670,6 +670,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 890687e926c738c4db63916831603e2b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  staysNearSpawn: 0
+  radius: 5
+  delay:
+    min: 3
+    max: 5
+  agent: {fileID: 0}
+  isStunned: 0
 --- !u!65 &2017448970091845825
 BoxCollider:
   m_ObjectHideFlags: 0

@@ -1708,6 +1708,7 @@ GameObject:
   - component: {fileID: 8043523213224340370}
   - component: {fileID: 137201509344403643}
   - component: {fileID: 3275609120821199997}
+  - component: {fileID: 5812048747211750468}
   m_Layer: 14
   m_Name: Beholder
   m_TagString: Untagged
@@ -1791,11 +1792,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   targetLayer: 10
+  detectionRange: {fileID: 1640204439669655752}
+  areaCosts: []
   targetsInRange: []
   agent: {fileID: 0}
-  detectionRange: {fileID: 1640204439669655752}
   isStunned: 0
-  isStopped: 0
 --- !u!114 &3421612734758723579
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1850,6 +1851,25 @@ SphereCollider:
   serializedVersion: 2
   m_Radius: 0.5
   m_Center: {x: 0, y: 0.6, z: 0}
+--- !u!114 &5812048747211750468
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7921532287817296517}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 890687e926c738c4db63916831603e2b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  staysNearSpawn: 1
+  radius: 15
+  delay:
+    min: 7
+    max: 10
+  agent: {fileID: 0}
+  isStunned: 0
 --- !u!1 &8925624137069997984
 GameObject:
   m_ObjectHideFlags: 0
