@@ -46,11 +46,13 @@ public class HP : IModifiableStat
             //Debug.Log($"New hp is {Current}");
         }
     }
+    public bool IsInvulnerable { get; set; }
     public HP(float hPBase, float hPRegen)
     {
         Base = hPBase;
         Current = hPBase;
         HPRegen = hPRegen;
+        IsInvulnerable = false;
         OnTakeDamage += (float damage) => Debug.Log($"target has taken {damage} damage");
         OnDeath += () => Debug.Log("target has died");
         //OnHeal += (float heal) => Debug.Log($"target has healed {heal}");
@@ -59,7 +61,11 @@ public class HP : IModifiableStat
     public Action OnDeath { get; set; }
     public Action<float> OnTakeDamage { get; set; }
     public Action<float> OnHeal { get; set; }
-    public void TakeDamage(float damage) => Current -= damage;
+    public void TakeDamage(float damage)
+    {
+        if(!IsInvulnerable)
+            Current -= damage;
+    }
     public void Heal(float hPToHeal) => Current += hPToHeal;
     public void Regen(float time)
     {

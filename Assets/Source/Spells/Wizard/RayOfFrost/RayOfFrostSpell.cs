@@ -2,15 +2,12 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class RayOfFrostSpell : MonoBehaviour
+public class RayOfFrostSpell : SpellMonoBehavior
 {
     public Vector3 direction;
     public GameObject rayOfFrostPrefab;
     public GameObject icePatchManagerPrefab;
     public float slowValue;
-
-    public float cooldown;
-    public float currentLifeTime;
     private GameObject rayOfFrost;
     public void Cast(PlayerMonoBehaviour player)
     {

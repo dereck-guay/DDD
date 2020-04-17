@@ -3,23 +3,25 @@ using System.Collections.Generic;
 using UnityEngine;
 using Enums;
 
-public class ShieldSpell : SpellMonoBehavior
+public class SmokeScreenSpell : SpellMonoBehavior
 {
-    public float effectiveTime = 1;
+    public ParticleSystem smoke;
     public GameObject player;
-    public GameObject shield;
+    public float smokeDuration = 1;
+    private bool smokeIsOn;
     public void Cast()
     {
+        Instantiate(smoke as ParticleSystem, player.transform);
         player.GetComponent<Stats>().HP.IsInvulnerable = true;
-        shield.SetActive(true);
+        smokeIsOn = true;
     }
 
     private void Update()
     {
-        if (currentLifeTime >= effectiveTime && shield.activeSelf)
+        if (currentLifeTime >= smokeDuration && smokeIsOn)
         {
             player.GetComponent<Stats>().HP.IsInvulnerable = false;
-            shield.SetActive(false);
+            smokeIsOn = false;
         }
         if (currentLifeTime >= cooldown)
             Destroy(this);

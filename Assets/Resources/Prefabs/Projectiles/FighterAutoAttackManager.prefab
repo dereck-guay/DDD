@@ -107,7 +107,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 45832867b51ab32408ff709e9ed5c412, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  collisionLayers: 0a0000000e0000000f000000
+  collisionLayers: 0a0000000e000000
   damageLayers: 0a0000000e000000
   damage: 0
 --- !u!1 &405955550181731434
