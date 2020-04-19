@@ -70,4 +70,6 @@ public class Room
       }
       return sb.ToString();
    }
+
+    public string GetShape() => Pattern.ToString();
 }

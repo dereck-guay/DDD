@@ -5,26 +5,38 @@ using UnityEngine;
 
 public class RoomComponent : MonoBehaviour
 {
-   const string MapPath = "Prefabs\\MapPrefabs";
+    const string MapPath = "Prefabs\\MapPrefabs";
+    readonly string[] DeadEnds = { "0001", "0010", "0100", "1000" };
 
-   public Room roomModel;
-   
-   Object[] prefabs;
+    public Room roomModel;
 
-   void Awake() => prefabs = Resources.LoadAll(MapPath);
+    Object[] prefabs;
+    public bool IsValidRespawnPoint { get; private set; }
 
-   public void Instantiate()
-   {
-      GameObject tile;
+    void Awake() => prefabs = Resources.LoadAll(MapPath);
 
-      for (int i = 0; i < Room.Length; i++)
-         for (int j = 0; j < Room.Width; j++)
-         {
-            tile = (GameObject)Instantiate(prefabs[roomModel[j, i]], transform);
-            tile.transform.localPosition = new Vector3(j - Room.Width / 2, 0, -i + Room.Length / 2);
+    public void InstantiateRoom()
+    {
+        GameObject tile;
 
-            if (roomModel[j, i] == 0 && Random.value > 0.99f)
-               Instantiate((GameObject)prefabs[prefabs.Length - 1], tile.transform).transform.localPosition = Vector3.zero;
-         }
-   }
+        for (int i = 0; i < Room.Length; i++)
+            for (int j = 0; j < Room.Width; j++)
+            {
+                tile = (GameObject)Instantiate(prefabs[roomModel[j, i]], transform);
+                tile.transform.localPosition = new Vector3(j - Room.Width / 2, 0, -i + Room.Length / 2);
+
+                if (roomModel[j, i] == 0 && Random.value > 0.99f)
+                    Instantiate((GameObject)prefabs[prefabs.Length - 1], tile.transform).transform.localPosition = Vector3.zero;
+            }
+
+        //Dead end => valid respawn point
+        var shape = roomModel.GetShape();
+
+        foreach (var s in DeadEnds)
+            if (shape == s)
+            {
+                IsValidRespawnPoint = true;
+                break;
+            }
+    }
 }

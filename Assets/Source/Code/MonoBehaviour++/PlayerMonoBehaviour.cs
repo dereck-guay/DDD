@@ -7,6 +7,9 @@ public abstract class PlayerMonoBehaviour : EntityMonoBehaviour
 {
     public List<LayerMask> selectableEntities;
     public LayerMask rayCastHitLayer;
+    public RespawnManagerComponent respawnManager;
+
+    public StatusBarsComponent[] statusBars;
 
     [Serializable]
     public class CharacterParts
@@ -51,6 +54,13 @@ public abstract class PlayerMonoBehaviour : EntityMonoBehaviour
 
         return null;
     }
+
+    public void Respawn(Vector3 respawnPoint)
+    {
+        transform.position = respawnPoint;
+        entityStats.HP.Heal(entityStats.HP.Base);
+        statusBars[0].SetCurrent(entityStats.HP.Current);
+    } 
 
     protected bool TargetIsWithinRange(GameObject target, float range) =>
        (target.transform.position - transform.position).magnitude < range;

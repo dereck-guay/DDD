@@ -9,6 +9,7 @@ public class MapComponent : MonoBehaviour
     public int mapSize;
     public GameObject floorPlane;
     public NavMeshSurface[] navMeshSurfaces;
+    public RespawnManagerComponent respawnManager;
 
     Map mapModel;
 
@@ -23,17 +24,17 @@ public class MapComponent : MonoBehaviour
         float floorScaleFactor = (2 * mapSize + 3) / 10f;
         floorPlane.transform.localScale = new Vector3(Room.Width, 0, Room.Length) * floorScaleFactor;
 
-        Instantiate();
-        //NavMeshBuilder.BuildNavMesh();
+        InstantiateMap();
 
         foreach (var s in navMeshSurfaces)
             s.BuildNavMesh();
     }
 
-    public void Instantiate()
+    public void InstantiateMap()
     {
         int posX, posY;
         GameObject room, trueRoom;
+        RoomComponent currentRoom;
 
         for (int i = 0; i < mapModel.MapSize; i++)
         {
@@ -46,11 +47,16 @@ public class MapComponent : MonoBehaviour
                 if (mapModel.HasRoom(j, i))
                 {
                     room = new GameObject("Room" + (i * mapModel.MapSize + j));
-                    trueRoom = Instantiate(room, new Vector3(posX, 0, -posY), Quaternion.identity, transform); //(posY, 0, posX)
+                    trueRoom = Instantiate(room, new Vector3(posX, 0, -posY), Quaternion.identity, transform);
                     Destroy(room);
 
-                    trueRoom.AddComponent<RoomComponent>().roomModel = mapModel[j, i];
-                    trueRoom.GetComponent<RoomComponent>().Instantiate();
+                    currentRoom = trueRoom.AddComponent<RoomComponent>();
+
+                    currentRoom.roomModel = mapModel[j, i];
+                    currentRoom.InstantiateRoom();
+
+                    if (currentRoom.IsValidRespawnPoint)
+                        respawnManager.AddRespawnPoint(currentRoom.transform.position);
                 }
             }
         }
