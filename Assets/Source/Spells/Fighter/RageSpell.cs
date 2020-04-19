@@ -3,12 +3,9 @@ using System.Collections.Generic;
 using UnityEngine;
 using Enums;
 
-public class RageSpell : MonoBehaviour
+public class RageSpell : SpellMonoBehavior
 {
-    public float cooldown = 1;
     public float atkSpeedValue = 1;
-
-    private float currentLifeTime;
     public void Cast() =>
         GetComponent<EffectHandlerComponent>().ApplyEffect((int)ModifiableStats.AtkSpeed, atkSpeedValue);
 

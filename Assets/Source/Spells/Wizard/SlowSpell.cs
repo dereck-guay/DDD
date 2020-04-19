@@ -3,14 +3,11 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class SlowSpell : MonoBehaviour
+public class SlowSpell : SpellMonoBehavior
 {
     public GameObject target;
     public float slowValue;
     public float effectDuration;
-
-    public float cooldown = 10f;
-    public float currentLifeTime;
     private bool isActive;
 
     public void Cast()

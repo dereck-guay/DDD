@@ -2,19 +2,16 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class StunningBladeSpell : MonoBehaviour
+public class StunningBladeSpell : SpellMonoBehavior
 {
     public Vector3 direction;
     public GameObject stunningBladePrefab;
-
-    public float cooldown = 1;
     public float effectDuration = 1;
-    private float currentLifeTime;
     public bool hasContacted = false;
     public EntityMonoBehaviour target;
+    private float stunDuration;
     private GameObject stunningBlade;
     private bool stunHasBegun;
-    public float stunDuration;
     public void Cast()
     {
         var spawnPosition = transform.position + 1.5f * direction;

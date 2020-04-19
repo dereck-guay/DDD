@@ -43,7 +43,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e41f57b3080e7c541b2d8022dafa93d8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  collisionLayers: 0a0000000e0000000f000000
+  collisionLayers: 0a0000000e000000
   triggerZone: {fileID: 0}
   projectile: {fileID: 9001681064244344938, guid: 8d3b89fb0b1a6d44bb683fb36603abc2,
     type: 3}
@@ -53,7 +53,6 @@ MonoBehaviour:
   spacingBetweenPatches:
     min: 0.5
     max: 1
-    currentSpacing: 0
   icePatch: {fileID: 2953877870955346358, guid: e8185738b3a128a42956dac372f5c692,
     type: 3}
   groundLevel: 0

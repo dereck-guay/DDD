@@ -15,7 +15,7 @@ public class RogueComponent : PlayerMonoBehaviour
     [Header("Inputs")]
     public KeyCode[] inputs;
 
-    [System.Serializable]
+    [Serializable]
     public class AutoAttack
     {
         public GameObject autoAttackPrefab;
@@ -24,7 +24,7 @@ public class RogueComponent : PlayerMonoBehaviour
     public bool spellLocked = false;
 
 
-    [System.Serializable]
+    [Serializable]
     public class StunningBlade
     {
         public GameObject stunningBladePrefab;
@@ -32,18 +32,28 @@ public class RogueComponent : PlayerMonoBehaviour
         public float[] cooldowns = { 7f, 5f, 4f };
         public float[] effectDurations = { 2f, 3f, 3.5f };
     };
-    [System.Serializable]
+    [Serializable]
     public class Dash
     {
         public float manaCost;
         public float[] cooldowns = { 4f, 3f, 2f };
         public float dashMultiplier;
-    }
+    };
+    [Serializable]
+    public class SmokeScreen
+    {
+        public ParticleSystem smoke;
+        public float manaCost;
+        public float[] cooldowns = { 4f, 3f, 2f };
+        public float smokeDuration;
+    };
 
     [Header("Spell Settings")]
     public AutoAttack autoAttack;
     public StunningBlade stunningBlade;
     public Dash dash;
+    public SmokeScreen smokeScreen;
+
     #endregion
     #region Auto-attack stuff
     private bool canAttack;
@@ -106,10 +116,14 @@ public class RogueComponent : PlayerMonoBehaviour
                     }
                 },
                 () =>{
-                    if (!IsOnCooldown(typeof(RageSpell)) && !IsOnCooldown(typeof(TakeABreatherSpell)))
+                    if (CanCast(smokeScreen.manaCost, typeof(SmokeScreenSpell)))
                     {
-                        var takeABreatherSpell = gameObject.AddComponent<TakeABreatherSpell>();
-                        //takeABreatherSpell.Cast(entityStats.XP.Level);
+                        var smokeScreenSpell = gameObject.AddComponent<SmokeScreenSpell>();
+                        smokeScreenSpell.cooldown = smokeScreen.cooldowns[entityStats.XP.Level - 1];
+                        smokeScreenSpell.player = gameObject;
+                        smokeScreenSpell.smoke = smokeScreen.smoke;
+                        smokeScreenSpell.smokeDuration = smokeScreen.smokeDuration;
+                        smokeScreenSpell.Cast();
                     }
                 },
                 () =>{

@@ -132,6 +132,7 @@ MonoBehaviour:
   stunningBlade:
     stunningBladePrefab: {fileID: 5211548123859151994, guid: 1a0cd0d3b3de2d84181e9027deec2358,
       type: 3}
+    manaCost: 0
     cooldowns:
     - 7
     - 5
@@ -140,6 +141,21 @@ MonoBehaviour:
     - 2
     - 3
     - 3.5
+  dash:
+    manaCost: 0
+    cooldowns:
+    - 4
+    - 3
+    - 2
+    dashMultiplier: 500
+  smokeScreen:
+    smoke: {fileID: 1167492641000204102, guid: 67dc278534538214dae8cf60c75d2cb6, type: 3}
+    manaCost: 0
+    cooldowns:
+    - 9
+    - 7
+    - 6
+    smokeDuration: 0
 --- !u!54 &9194678902668655571
 Rigidbody:
   m_ObjectHideFlags: 0

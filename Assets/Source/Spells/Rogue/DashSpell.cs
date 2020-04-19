@@ -2,12 +2,9 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class DashSpell : MonoBehaviour
+public class DashSpell : SpellMonoBehavior
 {
-    public float cooldown = 1;
     public PlayerMonoBehaviour player;
-    private float currentLifeTime;
-    private float effectDuration;
     public void Cast(Vector3 direction, float multiplier)
     {
         player.gameObject.AddComponent<StraightProjectile>().direction = direction;

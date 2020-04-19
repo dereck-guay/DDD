@@ -3,7 +3,8 @@
 --- !u!78 &1
 TagManager:
   serializedVersion: 2
-  tags: []
+  tags:
+  - Keybind
   layers:
   - Default
   - TransparentFX
@@ -20,7 +21,7 @@ TagManager:
   - Hole
   - Projectile
   - Enemies
-  - Invulnerable
+  - 
   - EnemyProjectile
   - 
   - 

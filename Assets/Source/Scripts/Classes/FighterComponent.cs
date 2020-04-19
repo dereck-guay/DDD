@@ -14,36 +14,37 @@ public class FighterComponent : PlayerMonoBehaviour
     [Header("Inputs")]
     public KeyCode[] inputs;
 
-    [System.Serializable]
+    [Serializable]
     public class AutoAttack
     {
         public GameObject autoAttackPrefab;
     };
-    [System.Serializable]
+    [Serializable]
     public class Slam 
     {
         public float manaCost;
+        public float[] cooldowns;
         public float range;
         public float shockWaveRadius;
         public float damage;
         public float knockbackForce;
         public LayerMask hitLayers;
     };
-    [System.Serializable]
+    [Serializable]
     public class Rage
     {
         public float manaCost;
         public float[] cooldowns;
         public float[] atkSpeedValues;
     };
-    [System.Serializable]
+    [Serializable]
     public class TakeABreather
     {
         public float manaCost;
         public float[] cooldowns;
         public float[] regenValues;
     };
-    [System.Serializable]
+    [Serializable]
     public class Shield
     {
         public float manaCost;
@@ -110,7 +111,8 @@ public class FighterComponent : PlayerMonoBehaviour
                         slamSpell.damage = slam.damage;
                         slamSpell.knockbackForce = slam.knockbackForce;
                         slamSpell.landingPosition = GetMousePositionOn2DPlane();
-                        slamSpell.Cast(entityStats.XP.Level);
+                        slamSpell.cooldown = slam.cooldowns[entityStats.XP.Level - 1];
+                        slamSpell.Cast();
                     }
                 },
                 () =>{
@@ -136,7 +138,7 @@ public class FighterComponent : PlayerMonoBehaviour
                     {
                         var shieldSpell = gameObject.AddComponent<ShieldSpell>();
                         shieldSpell.shield = shield.shieldObject;
-                        shieldSpell.bodyToChange = characterParts.body;
+                        shieldSpell.player = gameObject;
                         shieldSpell.cooldown = shield.cooldowns[entityStats.XP.Level - 1];
                         shieldSpell.effectiveTime = shield.effectiveTimes[entityStats.XP.Level - 1];
                         shieldSpell.Cast();

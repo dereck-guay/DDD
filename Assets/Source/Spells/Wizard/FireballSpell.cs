@@ -2,14 +2,11 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class FireballSpell : MonoBehaviour
+public class FireballSpell : SpellMonoBehavior
 {
     public Vector3 direction;
     public GameObject fireballPrefab;
-
-    public float cooldown;
     public float damage;
-    public float currentLifeTime;
     private GameObject fireball;
 
     public void Cast()

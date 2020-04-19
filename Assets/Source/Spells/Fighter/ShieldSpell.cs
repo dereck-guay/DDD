@@ -3,24 +3,22 @@ using System.Collections.Generic;
 using UnityEngine;
 using Enums;
 
-public class ShieldSpell : MonoBehaviour
+public class ShieldSpell : SpellMonoBehavior
 {
-    public float cooldown = 1;
     public float effectiveTime = 1;
-    public GameObject bodyToChange;
+    public GameObject player;
     public GameObject shield;
-    private float currentLifeTime;
     public void Cast()
     {
-        bodyToChange.layer = (int)Layers.Invulnerable;
+        player.GetComponent<Stats>().HP.IsInvulnerable = true;
         shield.SetActive(true);
     }
 
     private void Update()
     {
-        if (currentLifeTime >= effectiveTime)
+        if (currentLifeTime >= effectiveTime && shield.activeSelf)
         {
-            bodyToChange.layer = (int)Layers.Players;
+            player.GetComponent<Stats>().HP.IsInvulnerable = false;
             shield.SetActive(false);
         }
         if (currentLifeTime >= cooldown)

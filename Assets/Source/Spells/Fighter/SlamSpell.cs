@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class SlamSpell : MonoBehaviour
+public class SlamSpell : SpellMonoBehavior
 {
     public float range;
     public float shockWaveRadius;
@@ -12,9 +12,7 @@ public class SlamSpell : MonoBehaviour
 
     public Vector3 landingPosition;
 
-    private float[] cooldowns = { 10f, 9f, 8f };
-    public float currentLifeTime;
-    private int playerLevel = 1;
+    
     private bool hasLanded = false;
     private float initialY;
 
@@ -52,20 +50,18 @@ public class SlamSpell : MonoBehaviour
     }
     #endregion
 
-    public void Cast(int level)
+    public void Cast()
     {
         // Locks player movement.
         GetComponent<FighterComponent>().spellLocked = true;
         if (landingPosition.magnitude >= range)
             landingPosition = landingPosition.normalized * range;
-
-        playerLevel = level;
         SetupJump();
     }
 
     private void Update()
     {
-        if (currentLifeTime >= cooldowns[playerLevel])
+        if (currentLifeTime >= cooldown)
             Destroy(this);
 
         // Mouvement projectile vers la position

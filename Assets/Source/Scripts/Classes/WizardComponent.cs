@@ -14,12 +14,12 @@ public class WizardComponent : PlayerMonoBehaviour
 
     [Header("Inputs")]
     public KeyCode[] inputs;
-    [System.Serializable]
+    [Serializable]
     public class AutoAttack
     {
         public GameObject autoAttackPrefab;
     };
-    [System.Serializable]
+    [Serializable]
     public class Fireball
     {
         public GameObject fireballPrefab;
@@ -27,7 +27,7 @@ public class WizardComponent : PlayerMonoBehaviour
         public float[] cooldowns;
         public float[] damage;
     };
-    [System.Serializable]
+    [Serializable]
     public class Slow
     {
         public float manaCost;
@@ -35,14 +35,14 @@ public class WizardComponent : PlayerMonoBehaviour
         public float[] cooldowns;
         public float[] effectDurations;
     };
-    [System.Serializable]
+    [Serializable]
     public class Heal
     {
         public float manaCost;
         public float[] cooldowns;
         public float[] healValues;
     };
-    [System.Serializable]
+    [Serializable]
     public class RayOfFrost
     {
         public GameObject rayOfFrostPrefab;

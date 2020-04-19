@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
+using System.Linq;
 
 [System.Serializable]
 public class AreaCostsData
@@ -63,7 +64,7 @@ public class TargetingAIComponent : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.gameObject.layer == targetLayer)
+        if (targetLayer == other.gameObject.layer)
         {
             targetsInRange.Add(other.transform);
             enabled = true;
