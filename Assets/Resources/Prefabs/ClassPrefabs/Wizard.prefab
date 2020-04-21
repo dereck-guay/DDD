@@ -321,16 +321,17 @@ MonoBehaviour:
   - serializedVersion: 2
     m_Bits: 16384
   - serializedVersion: 2
-    m_Bits: 32768
+    m_Bits: 131072
   rayCastHitLayer:
     serializedVersion: 2
     m_Bits: 256
-  characterParts:
-    body: {fileID: 1191110277266146945}
-  camera: {fileID: 0}
+  respawnManager: {fileID: 0}
   statusBars:
   - {fileID: 1232096846618532077}
   - {fileID: 1665371593489779862}
+  characterParts:
+    body: {fileID: 1191110277266146945}
+  camera: {fileID: 0}
   inputs: 430100007700000061000000730000006400000031000000320000003300000034000000
   autoAttack:
     autoAttackPrefab: {fileID: 7241867996618809226, guid: c1097aa1f5e92a344a8ba365cb5fdcad,

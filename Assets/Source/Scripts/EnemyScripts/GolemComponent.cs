@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+[RequireComponent(typeof(WanderingAIComponent))]
 [RequireComponent(typeof(TargetingAIComponent))]
 public class GolemComponent : EnemyMonoBehaviour
 {
@@ -11,6 +12,7 @@ public class GolemComponent : EnemyMonoBehaviour
     public GameObject laserPrefab;
     public Transform exit;
     TargetingAIComponent targetAI;
+    WanderingAIComponent wanderAI;
     WalkingAnimationComponent walkingAnimation;
 
     float cooldown = 0;
@@ -29,10 +31,12 @@ public class GolemComponent : EnemyMonoBehaviour
 
         TryGetComponent(out walkingAnimation);
         targetAI = GetComponent<TargetingAIComponent>();
+        wanderAI = GetComponent<WanderingAIComponent>();
 
         entityStats.HP.OnDeath += () => Destroy(gameObject);
         entityStats.Speed.OnSpeedChanged += newSpeed => targetAI.agent.speed = newSpeed;
         OnStunChanged += isStunned => targetAI.isStunned = isStunned;
+        OnStunChanged += isStunned => wanderAI.isStunned = isStunned;
     }
     
     void Update()

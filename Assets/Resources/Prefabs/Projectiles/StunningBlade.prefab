@@ -330,8 +330,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4fd44293ba3f9a349a624744cb89573c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  collisionLayers: 090000000a0000000e000000
-  stunLayers: 0a0000000e000000
+  collisionLayers: 090000000a0000000e00000011000000
+  stunLayers: 0a0000000e00000011000000
   collideEffect: {fileID: 3774589032407249723, guid: e2feca95612420446a4627109f9f3622,
     type: 3}
   stunningBladeSpell: {fileID: 0}

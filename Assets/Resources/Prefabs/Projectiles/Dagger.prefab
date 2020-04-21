@@ -141,8 +141,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ea3ea000fc609354ca1c32849dd5d2e0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  collisionLayers: 0a0000000e000000
-  damageLayers: 0a0000000e000000
+  collisionLayers: 0a0000000e00000011000000
+  damageLayers: 0a0000000e00000011000000
   damage: 5
   maxLifeTime: 0.3
 --- !u!65 &6314079749899212509

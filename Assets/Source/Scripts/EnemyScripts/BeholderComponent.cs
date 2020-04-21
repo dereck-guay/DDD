@@ -28,10 +28,13 @@ public class ActiveEffect
     }
 }
 
+[RequireComponent(typeof(WanderingAIComponent))]
 [RequireComponent(typeof(TargetingAIComponent))]
 public class BeholderComponent : EnemyMonoBehaviour
 {
     TargetingAIComponent targetAI;
+    WanderingAIComponent wanderAI;
+
     public GameObject projectile;
     public Transform exit;
     
@@ -47,12 +50,14 @@ public class BeholderComponent : EnemyMonoBehaviour
         activeEffects = new List<ActiveEffect>(4);
 
         targetAI = GetComponent<TargetingAIComponent>();
+        wanderAI = GetComponent<WanderingAIComponent>();
         Debug.Assert(projectile.GetComponent<BeholderCollisionComponent>());
 
         entityStats.HP.OnDeath += () => Destroy(gameObject);
         entityStats.HP.OnDeath += () => EndAllActiveEffects();
         entityStats.Speed.OnSpeedChanged += newSpeed => targetAI.agent.speed = newSpeed;
         OnStunChanged += isStunned => targetAI.isStunned = isStunned;
+        OnStunChanged += isStunned => wanderAI.isStunned = isStunned;
     }
 
     void Update()

@@ -52,7 +52,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: aee079877551fed42b0748207901f71a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  amplitude: 0.1
+  amplitude: 0.05
   period: 2
 --- !u!1 &107465000092074842
 GameObject:
@@ -2060,7 +2060,10 @@ GameObject:
   - component: {fileID: 7811645889783684323}
   - component: {fileID: 4084490467117642224}
   - component: {fileID: 3871440573363497293}
-  m_Layer: 0
+  - component: {fileID: 8398181796334416060}
+  - component: {fileID: 576841844682769085}
+  - component: {fileID: 7641843800066957252}
+  m_Layer: 17
   m_Name: Dave
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2152,6 +2155,56 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 1, y: 2, z: 0.6}
   m_Center: {x: 0, y: 1, z: 0}
+--- !u!114 &8398181796334416060
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2844790470273402503}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 98537faed382937468f7b1f86ef62938, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &576841844682769085
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2844790470273402503}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5cd2e3005b2a344479108480710813ba, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  entity: {fileID: 7641843800066957252}
+--- !u!114 &7641843800066957252
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2844790470273402503}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b03b2c01a30394441bbbedb7751ef328, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  entityStats: {fileID: 0}
+  statsInit:
+    attackDamage: 10
+    attackSpeed: 10
+    maxHp: 5000
+    hpRegen: 0
+    maxMana: 0
+    manaRegen: 0
+    range: 0
+    speed: 4
+  damageMultiplier: 2
+  atkSpeedMultiplier: 0.3
+  speedMultiplier: 1.5
 --- !u!1 &2875893904447291451
 GameObject:
   m_ObjectHideFlags: 0

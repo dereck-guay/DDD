@@ -142,8 +142,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 45832867b51ab32408ff709e9ed5c412, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  collisionLayers: 090000000a0000000e000000
-  damageLayers: 0a0000000e000000
+  collisionLayers: 090000000a0000000e00000011000000
+  damageLayers: 0a0000000e00000011000000
   damage: 1
 --- !u!65 &5907599346368380953
 BoxCollider:
