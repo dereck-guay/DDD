@@ -648,7 +648,7 @@ PrefabInstance:
     - target: {fileID: 7641843800066957252, guid: 622253fd38a7d9649abf64fb0f88a1f0,
         type: 3}
       propertyPath: m_Enabled
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7684135597788278721, guid: 622253fd38a7d9649abf64fb0f88a1f0,
         type: 3}
@@ -869,6 +869,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8765bce8657aab648be629dc2cc6d804, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  respawnDelay: 3
 --- !u!1 &895542939
 GameObject:
   m_ObjectHideFlags: 0
@@ -1149,7 +1150,7 @@ PrefabInstance:
     - target: {fileID: 8633011052796710514, guid: b3a55247596b7ee4cbe346ea4a417ead,
         type: 3}
       propertyPath: m_Enabled
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8654396917311496859, guid: b3a55247596b7ee4cbe346ea4a417ead,
         type: 3}
