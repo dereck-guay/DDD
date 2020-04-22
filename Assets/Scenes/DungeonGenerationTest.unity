@@ -271,7 +271,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 2
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 50, y: -30, z: 0}
 --- !u!1001 &532570054
 PrefabInstance:
@@ -339,6 +339,16 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Dave
+      objectReference: {fileID: 0}
+    - target: {fileID: 7641843800066957252, guid: 622253fd38a7d9649abf64fb0f88a1f0,
+        type: 3}
+      propertyPath: statsInit.maxHp
+      value: 200
+      objectReference: {fileID: 0}
+    - target: {fileID: 7641843800066957252, guid: 622253fd38a7d9649abf64fb0f88a1f0,
+        type: 3}
+      propertyPath: speedMultiplier
+      value: 3
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 622253fd38a7d9649abf64fb0f88a1f0, type: 3}
@@ -883,23 +893,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   framerate: 120
-  ignoreLayersCollisions:
-  - layer1: 13
-    layer2: 13
-  - layer1: 14
-    layer2: 14
-  - layer1: 10
-    layer2: 14
-  - layer1: 12
-    layer2: 13
-  - layer1: 12
-    layer2: 14
-  - layer1: 16
-    layer2: 16
-  - layer1: 12
-    layer2: 16
-  - layer1: 14
-    layer2: 16
 --- !u!4 &1454502436
 Transform:
   m_ObjectHideFlags: 0

@@ -28,6 +28,8 @@ public class WanderingAIComponent : MonoBehaviour
         agent = GetComponent<NavMeshAgent>();
         TryGetComponent(out walkingAnimation);
         spawnPosition = transform.position;
+
+        //StartCoroutine("TestForNavMesh");
     }
 
     // Update is called once per frame
@@ -68,6 +70,17 @@ public class WanderingAIComponent : MonoBehaviour
             yield return null;
         }
         while (agent.remainingDistance > DistanceBufferMultiplier * distance);
+    }
+
+    IEnumerator TestForNavMesh()
+    {
+        NavMeshHit navMeshHit;
+        while (true)
+        {
+            yield return new WaitUntil(() => !agent.isOnNavMesh);
+            agent.FindClosestEdge(out navMeshHit);
+            agent.Warp(navMeshHit.position);
+        }
     }
 
     public void Go()
