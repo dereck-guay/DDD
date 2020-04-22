@@ -56,18 +56,21 @@ public class RingAttackComponent : MonoBehaviour
 
         float theta;
         GameObject currentExit;
+        GameObject exit = new GameObject("Exit");
 
         for (int i = 0; i < nbOfProjectiles; i++)
         {
             theta = i * 2 * Mathf.PI / nbOfProjectiles;
 
-            currentExit = Instantiate(new GameObject(), transform);
+            currentExit = Instantiate(exit, transform);
 
             currentExit.transform.forward = RadiusVector(theta);
             currentExit.transform.localPosition = ringDistance * currentExit.transform.forward;
 
             exitPoints[i] = currentExit;
         }
+
+        Destroy(exit);
     }
 
     Vector3 RadiusVector(float theta) => new Vector3(Mathf.Cos(theta), 0, Mathf.Sin(theta));
