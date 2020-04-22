@@ -175,7 +175,7 @@ public class WizardComponent : PlayerMonoBehaviour
         entityStats.Mana.OnUse += manaCost => statusBars[1].SetCurrent(entityStats.Mana.Current);
         entityStats.Mana.OnRegen += manaCost => statusBars[1].SetCurrent(entityStats.Mana.Current);
 
-        entityStats.HP.OnDeath += () => Respawn(respawnManager.GetRandomRespawnPoint());
+        entityStats.HP.OnDeath += () => Respawn();
     }
     private void Update()
     {

@@ -23,7 +23,6 @@ public class ActiveEffect
     public bool UpdateActiveEffect(float elapsedTime)
     {
         currentDuration += elapsedTime;
-        Debug.Log($"{currentDuration} / {maxDuration}");
         return currentDuration > maxDuration;
     }
 }

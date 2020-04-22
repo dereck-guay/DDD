@@ -55,12 +55,22 @@ public abstract class PlayerMonoBehaviour : EntityMonoBehaviour
         return null;
     }
 
-    public void Respawn(Vector3 respawnPoint)
+    IEnumerator CoRespawn(Vector3 respawnPoint)
     {
-        transform.position = respawnPoint;
+        IsStunned = true;
+        transform.Translate(20 * Vector3.down);
+
+        yield return new WaitForSeconds(respawnManager.respawnDelay);
+
         entityStats.HP.Heal(entityStats.HP.Base);
         statusBars[0].SetCurrent(entityStats.HP.Current);
-    } 
+
+        transform.position = respawnPoint;
+
+        IsStunned = false;
+    }
+    public void Respawn(Vector3 respawnPoint) => StartCoroutine("CoRespawn", respawnPoint);
+    public void Respawn() => Respawn(respawnManager.GetRandomRespawnPoint());
 
     protected bool TargetIsWithinRange(GameObject target, float range) =>
        (target.transform.position - transform.position).magnitude < range;

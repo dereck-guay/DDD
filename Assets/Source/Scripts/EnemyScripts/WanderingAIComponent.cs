@@ -63,7 +63,6 @@ public class WanderingAIComponent : MonoBehaviour
     IEnumerator SetDestination()
     {
         Vector3 destination;
-        Vector3 currentPosition = transform.position;
         float angle, distance;
         
         do
@@ -72,11 +71,16 @@ public class WanderingAIComponent : MonoBehaviour
             distance = Random.Range(staysNearSpawn ? 0 : radius / 2, radius);
             destination = (staysNearSpawn ? spawnPosition : transform.position) + new Vector3(Mathf.Cos(angle), transform.position.y, Mathf.Sin(angle)) * distance;
             agent.SetDestination(destination);
-            Debug.Log($"{transform.position} -> {destination}, isOnNavMesh : {agent.isOnNavMesh}");
 
             yield return new WaitWhile(() => agent.pathPending);
+
+            if (IsInvalidPath(agent.path))
+            {
+                agent.enabled = false;
+                agent.enabled = true;
+            }
         }
-        while (IsInvalidPath(agent.path)); //
+        while (agent.remainingDistance > DistanceBufferMultiplier * distance || agent.remainingDistance == 0);
     }
 
     //https://forum.unity.com/threads/solved-test-if-the-navmesh-agent-has-arrived-at-the-targeted-location.327753/

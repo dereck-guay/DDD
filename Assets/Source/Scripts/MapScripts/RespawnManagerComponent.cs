@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class RespawnManagerComponent : MonoBehaviour
 {
+    public float respawnDelay;
     List<Vector3> respawnPoints;
     
     void Awake() => respawnPoints = new List<Vector3>(4);

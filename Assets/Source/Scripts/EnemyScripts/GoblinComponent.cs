@@ -32,8 +32,6 @@ public class GoblinComponent : EnemyMonoBehaviour
     {
         target.GetComponent<Stats>().HP.TakeDamage(entityStats.AtkDamage.Current);
         target.GetComponent<Rigidbody>().AddForce((target.position - transform.position).normalized * knockback);
-        Debug.Log((target.position - transform.position).normalized);
-        Debug.Log(target);
     }
 
 }
