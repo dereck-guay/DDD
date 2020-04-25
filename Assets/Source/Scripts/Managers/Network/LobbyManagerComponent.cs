@@ -19,7 +19,6 @@ public class LobbyManagerComponent : MonoBehaviourPunCallbacks
         Debug.Log("Queued Up.");
     }
 
-
     public void CancelJoinRoom()
     {
         PhotonNetwork.LeaveRoom();
