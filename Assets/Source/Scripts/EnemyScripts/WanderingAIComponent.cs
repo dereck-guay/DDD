@@ -18,6 +18,8 @@ public class WanderingAIComponent : MonoBehaviour
     [HideInInspector]
     public bool isStunned;
 
+    float test;
+
     float cooldown = 0;
     Vector3 spawnPosition;
     WalkingAnimationComponent walkingAnimation;
@@ -28,6 +30,9 @@ public class WanderingAIComponent : MonoBehaviour
         agent = GetComponent<NavMeshAgent>();
         TryGetComponent(out walkingAnimation);
         spawnPosition = transform.position;
+
+        test = Time.time;
+        //StartCoroutine("TestForNavMesh");
     }
 
     // Update is called once per frame
@@ -59,16 +64,27 @@ public class WanderingAIComponent : MonoBehaviour
     {
         Vector3 destination;
         float angle, distance;
+        
         do
         {
             angle = Random.Range(0, 2 * Mathf.PI);
             distance = Random.Range(staysNearSpawn ? 0 : radius / 2, radius);
             destination = (staysNearSpawn ? spawnPosition : transform.position) + new Vector3(Mathf.Cos(angle), transform.position.y, Mathf.Sin(angle)) * distance;
             agent.SetDestination(destination);
-            yield return null;
+
+            yield return new WaitWhile(() => agent.pathPending);
+
+            if (IsInvalidPath(agent.path))
+            {
+                agent.enabled = false;
+                agent.enabled = true;
+            }
         }
-        while (agent.remainingDistance > DistanceBufferMultiplier * distance);
+        while (agent.remainingDistance > DistanceBufferMultiplier * distance || agent.remainingDistance == 0);
     }
+
+    //https://forum.unity.com/threads/solved-test-if-the-navmesh-agent-has-arrived-at-the-targeted-location.327753/
+    bool IsInvalidPath(NavMeshPath path) => path.status == NavMeshPathStatus.PathInvalid || path.status == NavMeshPathStatus.PathPartial;
 
     public void Go()
     {

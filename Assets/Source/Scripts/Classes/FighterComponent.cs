@@ -116,7 +116,7 @@ public class FighterComponent : PlayerMonoBehaviour
                     }
                 },
                 () =>{
-                    if(CanCast(rage.manaCost, typeof(Rage)) && !IsOnCooldown(typeof(TakeABreatherSpell)))
+                    if(CanCast(rage.manaCost, typeof(RageSpell)) && !IsOnCooldown(typeof(TakeABreatherSpell)))
                     {
                         var rageSpell = gameObject.AddComponent<RageSpell>();
                         rageSpell.cooldown = rage.cooldowns[entityStats.XP.Level - 1];
@@ -125,7 +125,7 @@ public class FighterComponent : PlayerMonoBehaviour
                     }
                 },
                 () =>{
-                    if (!IsOnCooldown(typeof(RageSpell)) && CanCast(takeABreather.manaCost, typeof(TakeABreather)))
+                    if (!IsOnCooldown(typeof(RageSpell)) && CanCast(takeABreather.manaCost, typeof(TakeABreatherSpell)))
                     {
                         var takeABreatherSpell = gameObject.AddComponent<TakeABreatherSpell>();
                         takeABreatherSpell.cooldown = takeABreather.cooldowns[entityStats.XP.Level - 1];
@@ -139,6 +139,7 @@ public class FighterComponent : PlayerMonoBehaviour
                         var shieldSpell = gameObject.AddComponent<ShieldSpell>();
                         shieldSpell.shield = shield.shieldObject;
                         shieldSpell.player = gameObject;
+                        Debug.Log(entityStats.XP.Level);
                         shieldSpell.cooldown = shield.cooldowns[entityStats.XP.Level - 1];
                         shieldSpell.effectiveTime = shield.effectiveTimes[entityStats.XP.Level - 1];
                         shieldSpell.Cast();

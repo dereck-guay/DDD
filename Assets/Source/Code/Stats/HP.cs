@@ -30,10 +30,12 @@ public class HP : IModifiableStat
             if (value <= 0)
             {
                 value = 0;
-                OnDeath?.Invoke();
+                //OnDeath?.Invoke();
             }
             else if (value < Current)
+            {
                 OnTakeDamage?.Invoke(Current - value);
+            }
             else if (value > Current)
             {
                 if (value > @base)
@@ -43,6 +45,9 @@ public class HP : IModifiableStat
             }
             
             current = value;
+
+            if (current == 0)
+                OnDeath?.Invoke();
             //Debug.Log($"New hp is {Current}");
         }
     }
@@ -52,9 +57,9 @@ public class HP : IModifiableStat
         Base = hPBase;
         Current = hPBase;
         HPRegen = hPRegen;
+        //OnTakeDamage += (float damage) => Debug.Log($"target has taken {damage} damage");
+        //OnDeath += () => Debug.Log("target has died");
         IsInvulnerable = false;
-        OnTakeDamage += (float damage) => Debug.Log($"target has taken {damage} damage");
-        OnDeath += () => Debug.Log("target has died");
         //OnHeal += (float heal) => Debug.Log($"target has healed {heal}");
     }
     public string Name = "HP";

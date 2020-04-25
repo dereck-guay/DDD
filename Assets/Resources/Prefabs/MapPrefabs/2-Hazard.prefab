@@ -486,7 +486,7 @@ GameObject:
   - component: {fileID: 8910744265902526719}
   - component: {fileID: 5615927951151883573}
   - component: {fileID: 6629898413145667570}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: 2-Hazard
   m_TagString: Untagged
   m_Icon: {fileID: 0}

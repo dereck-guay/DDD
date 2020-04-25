@@ -11,7 +11,6 @@ public class WizardComponent : PlayerMonoBehaviour
     public Camera camera;
 
     #region Stuff for inspector
-    public StatusBarsComponent[] statusBars;
 
     [Header("Inputs")]
     public KeyCode[] inputs;
@@ -175,6 +174,8 @@ public class WizardComponent : PlayerMonoBehaviour
         entityStats.HP.OnHeal += regen => statusBars[0].SetCurrent(entityStats.HP.Current);
         entityStats.Mana.OnUse += manaCost => statusBars[1].SetCurrent(entityStats.Mana.Current);
         entityStats.Mana.OnRegen += manaCost => statusBars[1].SetCurrent(entityStats.Mana.Current);
+
+        entityStats.HP.OnDeath += () => Respawn();
     }
     private void Update()
     {

@@ -47,12 +47,21 @@ public class RogueComponent : PlayerMonoBehaviour
         public float[] cooldowns = { 4f, 3f, 2f };
         public float smokeDuration;
     };
+    [Serializable]
+    public class FanOfKnives
+    {
+        public GameObject daggerPrefab;
+        public float manaCost;
+        public float[] cooldowns = { 4f, 3f, 2f };
+        public float damage;
+    }
 
     [Header("Spell Settings")]
     public AutoAttack autoAttack;
     public StunningBlade stunningBlade;
     public Dash dash;
     public SmokeScreen smokeScreen;
+    public FanOfKnives fanOfKnives;
 
     #endregion
     #region Auto-attack stuff
@@ -127,13 +136,15 @@ public class RogueComponent : PlayerMonoBehaviour
                     }
                 },
                 () =>{
-                    //if (!IsOnCooldown(typeof(ShieldSpell)))
-                    //{
-                    //    var shieldSpell = gameObject.AddComponent<ShieldSpell>();
-                    //    shieldSpell.shield = shield.shieldObject;
-                    //    shieldSpell.bodyToChange = characterParts.body;
-                    //    shieldSpell.Cast(entityStats.XP.Level);
-                    //}
+                    if (CanCast(fanOfKnives.manaCost, typeof(FanOfKnivesSpell)))
+                    {
+                        var fanOfKnivesSpell = gameObject.AddComponent<FanOfKnivesSpell>();
+                        fanOfKnivesSpell.cooldown = fanOfKnives.cooldowns[entityStats.XP.Level - 1];
+                        fanOfKnivesSpell.daggerPrebab = fanOfKnives.daggerPrefab;
+                        fanOfKnivesSpell.direction = GetMouseDirection();
+                        fanOfKnivesSpell.damage = fanOfKnives.damage;
+                        fanOfKnivesSpell.Cast();
+                    }
                 }
             }, inputs
         );

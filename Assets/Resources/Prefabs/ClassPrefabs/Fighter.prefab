@@ -278,10 +278,12 @@ MonoBehaviour:
   - serializedVersion: 2
     m_Bits: 16384
   - serializedVersion: 2
-    m_Bits: 32768
+    m_Bits: 131072
   rayCastHitLayer:
     serializedVersion: 2
     m_Bits: 256
+  respawnManager: {fileID: 0}
+  statusBars: []
   characterParts:
     body: {fileID: 3327950002639287408}
   camera: {fileID: 0}
@@ -290,14 +292,25 @@ MonoBehaviour:
     autoAttackPrefab: {fileID: 405955550181731434, guid: aac1e7f679631db488ae156993deaa8f,
       type: 3}
   slam:
+    manaCost: 0
+    cooldowns: []
     range: 0
+    shockWaveRadius: 0
+    damage: 0
+    knockbackForce: 0
+    hitLayers:
+      serializedVersion: 2
+      m_Bits: 0
   rage:
+    manaCost: 0
     cooldowns: []
     atkSpeedValues: []
   takeABreather:
+    manaCost: 0
     cooldowns: []
     regenValues: []
   shield:
+    manaCost: 0
     shieldObject: {fileID: 5592215202980429576}
     cooldowns: []
     effectiveTimes: []
