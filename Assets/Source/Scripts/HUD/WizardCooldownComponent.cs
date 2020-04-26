@@ -40,7 +40,10 @@ public class WizardCooldownComponent : MonoBehaviour
         if (nextFireTime == 0)
             nextFireTime = cooldownTime;
         if (nextFireTime <= 0)
+        {
             nextFireTime = 0;
+            fireballMask.fillAmount = 0;
+        }
         else if (nextFireTime > 0)
             nextFireTime -= Time.deltaTime;
     }
@@ -52,31 +55,40 @@ public class WizardCooldownComponent : MonoBehaviour
         if (nextFrostTime == 0)
             nextFrostTime = cooldownTime;
         if (nextFrostTime <= 0)
+        {
             nextFrostTime = 0;
+            frostMask.fillAmount = 0;
+        }
         else if (nextFrostTime > 0)
             nextFrostTime -= Time.deltaTime;
     }
 
     public void HealCooldown(float cooldownTime)
     {
-        frostMask.fillAmount = (nextHealTime / cooldownTime);
+        healMask.fillAmount = (nextHealTime / cooldownTime);
 
         if (nextHealTime == 0)
             nextHealTime = cooldownTime;
         if (nextHealTime <= 0)
+        {
             nextHealTime = 0;
+            healMask.fillAmount = 0;
+        }
         else if (nextHealTime > 0)
             nextHealTime -= Time.deltaTime;
     }
 
     public void SlowCooldown(float cooldownTime)
     {
-        frostMask.fillAmount = (nextSlowTime / cooldownTime);
+        slowMask.fillAmount = (nextSlowTime / cooldownTime);
 
         if (nextSlowTime == 0)
             nextSlowTime = cooldownTime;
         if (nextSlowTime <= 0)
+        {
             nextSlowTime = 0;
+            slowMask.fillAmount = 0;
+        }
         else if (nextSlowTime > 0)
             nextSlowTime -= Time.deltaTime;
     }

@@ -158,7 +158,6 @@ GameObject:
   - component: {fileID: 8320971418769711998}
   - component: {fileID: 6764458122844016314}
   - component: {fileID: 1548541513351753231}
-  - component: {fileID: 1985188633529612574}
   - component: {fileID: 4048743352677925883}
   m_Layer: 5
   m_Name: Slowness
@@ -224,20 +223,6 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
---- !u!114 &1985188633529612574
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1734030827054950251}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e73178a2337a1f2489b605fcb1b6f154, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  cooldownTime: 60
-  mask: {fileID: 4540766332817174664}
 --- !u!114 &4048743352677925883
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -336,7 +321,6 @@ GameObject:
   - component: {fileID: 1404387758482237370}
   - component: {fileID: 1934962835412664489}
   - component: {fileID: 1316742622187124725}
-  - component: {fileID: 609560775498288740}
   - component: {fileID: 1675210076784687852}
   m_Layer: 5
   m_Name: Heal
@@ -402,20 +386,6 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
---- !u!114 &609560775498288740
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3774636625864889725}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e73178a2337a1f2489b605fcb1b6f154, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  cooldownTime: 60
-  mask: {fileID: 8268460883059320946}
 --- !u!114 &1675210076784687852
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -890,7 +860,7 @@ GameObject:
   - component: {fileID: 4077514614192394265}
   - component: {fileID: 4077514614192394266}
   m_Layer: 5
-  m_Name: WizardHUD
+  m_Name: AlchemistHUD
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2814,7 +2784,6 @@ GameObject:
   - component: {fileID: 8669374428004932826}
   - component: {fileID: 4616420083139844175}
   - component: {fileID: 5998376671325873532}
-  - component: {fileID: 397715919052758426}
   - component: {fileID: 8422809408063912962}
   m_Layer: 5
   m_Name: Frost
@@ -2880,20 +2849,6 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
---- !u!114 &397715919052758426
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4263705338879835013}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e73178a2337a1f2489b605fcb1b6f154, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  cooldownTime: 60
-  mask: {fileID: 8506954243569558493}
 --- !u!114 &8422809408063912962
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3138,7 +3093,6 @@ GameObject:
   - component: {fileID: 4213957560823878006}
   - component: {fileID: 6169113588063517095}
   - component: {fileID: 1655152721363896873}
-  - component: {fileID: 409651191051532955}
   - component: {fileID: 4530790771920837956}
   m_Layer: 5
   m_Name: Fireball
@@ -3204,20 +3158,6 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
---- !u!114 &409651191051532955
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7624992794406320028}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e73178a2337a1f2489b605fcb1b6f154, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  cooldownTime: 60
-  mask: {fileID: 6320172963055258978}
 --- !u!114 &4530790771920837956
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -39,7 +39,10 @@ public class RogueCooldownComponent : MonoBehaviour
         if (nextDashTime == 0)
             nextDashTime = cooldownTime;
         if (nextDashTime <= 0)
+        {
             nextDashTime = 0;
+            dashMask.fillAmount = 0;
+        }
         else if (nextDashTime > 0)
             nextDashTime -= Time.deltaTime;
     }
@@ -51,7 +54,10 @@ public class RogueCooldownComponent : MonoBehaviour
         if (nextStunningTime == 0)
             nextStunningTime = cooldownTime;
         if (nextStunningTime <= 0)
+        {
             nextStunningTime = 0;
+            stunningMask.fillAmount = 0;
+        }
         else if (nextStunningTime > 0)
             nextStunningTime -= Time.deltaTime;
     }

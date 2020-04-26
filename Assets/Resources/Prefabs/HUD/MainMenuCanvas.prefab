@@ -2174,7 +2174,8 @@ GameObject:
   - component: {fileID: 7725532853411128976}
   - component: {fileID: 7413999314382217387}
   - component: {fileID: 3581892271075095210}
-  - component: {fileID: 7682898041698337064}
+  - component: {fileID: 4104300533275382145}
+  - component: {fileID: 6706420950639054821}
   m_Layer: 5
   m_Name: Fighter
   m_TagString: Untagged
@@ -2280,8 +2281,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 7413999314382217387}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
---- !u!114 &7682898041698337064
+      m_Calls:
+      - m_Target: {fileID: 6706420950639054821}
+        m_MethodName: LoadSceneOnClick
+        m_Mode: 5
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: DungeonGenerationTest
+          m_BoolArgument: 0
+        m_CallState: 2
+--- !u!114 &4104300533275382145
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -2290,9 +2302,24 @@ MonoBehaviour:
   m_GameObject: {fileID: 1590992779190574915}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 81da294eb1cbf0941beaa8df09c92f58, type: 3}
+  m_Script: {fileID: 11500000, guid: 3c97ecfda92d2244eb5df9f3e8a09927, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &6706420950639054821
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1590992779190574915}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cad1e0b637ce9d74bbc976f9edf1873a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  loadingScreen: {fileID: 7692794703514346455}
+  slider: {fileID: 6596421797959221845}
+  progressText: {fileID: 4812690911988810087}
 --- !u!1 &1618833201489401960
 GameObject:
   m_ObjectHideFlags: 0
@@ -2495,8 +2522,9 @@ GameObject:
   - component: {fileID: 5709778250978730815}
   - component: {fileID: 1122260623705787537}
   - component: {fileID: 8923723857465373839}
-  - component: {fileID: 1688709718892171106}
   - component: {fileID: 7651496104665727282}
+  - component: {fileID: 4548265699397742261}
+  - component: {fileID: 8630830371689319083}
   m_Layer: 5
   m_Name: Rogue
   m_TagString: Untagged
@@ -2560,18 +2588,6 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
---- !u!114 &1688709718892171106
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1696275323977832990}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 81da294eb1cbf0941beaa8df09c92f58, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &7651496104665727282
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2614,7 +2630,45 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 8923723857465373839}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 8630830371689319083}
+        m_MethodName: LoadSceneOnClick
+        m_Mode: 5
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: DungeonGenerationTest
+          m_BoolArgument: 0
+        m_CallState: 2
+--- !u!114 &4548265699397742261
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1696275323977832990}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3c97ecfda92d2244eb5df9f3e8a09927, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &8630830371689319083
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1696275323977832990}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cad1e0b637ce9d74bbc976f9edf1873a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  loadingScreen: {fileID: 7692794703514346455}
+  slider: {fileID: 6596421797959221845}
+  progressText: {fileID: 4812690911988810087}
 --- !u!1 &1725152590714383788
 GameObject:
   m_ObjectHideFlags: 0
@@ -4699,7 +4753,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0.25}
   m_AnchorMax: {x: 1, y: 0.75}
-  m_AnchoredPosition: {x: -0.000061035156, y: -0.000061035156}
+  m_AnchoredPosition: {x: 0, y: -0.000061035156}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &84600514781541715
@@ -5003,8 +5057,8 @@ GameObject:
   - component: {fileID: 6123839155237772857}
   - component: {fileID: 4504490321458507859}
   - component: {fileID: 3365881941366499548}
-  - component: {fileID: 4519907765337353338}
   - component: {fileID: 532955294620440271}
+  - component: {fileID: 3357145876111078487}
   m_Layer: 5
   m_Name: Wizard
   m_TagString: Untagged
@@ -5122,18 +5176,6 @@ MonoBehaviour:
           m_StringArgument: DungeonGenerationTest
           m_BoolArgument: 0
         m_CallState: 2
---- !u!114 &4519907765337353338
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3456001171715972359}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 81da294eb1cbf0941beaa8df09c92f58, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &532955294620440271
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5149,6 +5191,18 @@ MonoBehaviour:
   loadingScreen: {fileID: 7692794703514346455}
   slider: {fileID: 6596421797959221845}
   progressText: {fileID: 4812690911988810087}
+--- !u!114 &3357145876111078487
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3456001171715972359}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3c97ecfda92d2244eb5df9f3e8a09927, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &3477745934895183435
 GameObject:
   m_ObjectHideFlags: 0
@@ -5780,7 +5834,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: -0.000061035156, y: 0}
+  m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 10, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &6188326542167740674
@@ -7123,7 +7177,7 @@ GameObject:
   - component: {fileID: 5124042050387744653}
   - component: {fileID: 6596421797959221845}
   m_Layer: 5
-  m_Name: Slider
+  m_Name: LoadingBar
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -7148,8 +7202,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 279, y: 56}
+  m_AnchoredPosition: {x: 0, y: -330}
+  m_SizeDelta: {x: 1000, y: 60}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &6596421797959221845
 MonoBehaviour:
@@ -7689,7 +7743,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0.25}
   m_AnchorMax: {x: 1, y: 0.75}
-  m_AnchoredPosition: {x: -0.13000488, y: 0}
+  m_AnchoredPosition: {x: -0.12988281, y: 0}
   m_SizeDelta: {x: -10.26, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &5230953663187232193
@@ -9999,8 +10053,8 @@ GameObject:
   - component: {fileID: 6375939476197885579}
   - component: {fileID: 272630838939124708}
   - component: {fileID: 3615674659724685858}
-  - component: {fileID: 1847403450395450220}
   - component: {fileID: 6788198660834880859}
+  - component: {fileID: 6192027972506083396}
   m_Layer: 5
   m_Name: Alchemist
   m_TagString: Untagged
@@ -10064,18 +10118,6 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
---- !u!114 &1847403450395450220
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6584143153656047985}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 81da294eb1cbf0941beaa8df09c92f58, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &6788198660834880859
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -10119,6 +10161,18 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls: []
+--- !u!114 &6192027972506083396
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6584143153656047985}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3c97ecfda92d2244eb5df9f3e8a09927, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &6710484480002524709
 GameObject:
   m_ObjectHideFlags: 0
@@ -11241,6 +11295,7 @@ GameObject:
   m_Component:
   - component: {fileID: 6274508855748103820}
   - component: {fileID: 5094269313254392993}
+  - component: {fileID: 682742364932727603}
   m_Layer: 5
   m_Name: Area
   m_TagString: Untagged
@@ -11295,6 +11350,26 @@ MonoBehaviour:
   m_Spacing: {x: 100, y: 50}
   m_Constraint: 0
   m_ConstraintCount: 2
+--- !u!114 &682742364932727603
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7321157363203304495}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 261fdc69b22d77e4b94dc5eae7ca4126, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  characterList:
+  - {fileID: 7780825930841027337, guid: a65c66f2c830f2047ad216e6b547ed78, type: 3}
+  - {fileID: 2594412224279639478, guid: b3a55247596b7ee4cbe346ea4a417ead, type: 3}
+  - {fileID: 1855886320233541759, guid: 9ec79bee9db649f4290c8aaba9941af4, type: 3}
+  characterSelect:
+  - {fileID: 3581892271075095210}
+  - {fileID: 3365881941366499548}
+  - {fileID: 7651496104665727282}
 --- !u!1 &7327351286974680455
 GameObject:
   m_ObjectHideFlags: 0

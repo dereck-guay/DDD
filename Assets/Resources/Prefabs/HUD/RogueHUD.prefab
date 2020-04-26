@@ -11,7 +11,6 @@ GameObject:
   - component: {fileID: 9163960891467101977}
   - component: {fileID: 1007027616188861859}
   - component: {fileID: 1560956937294467203}
-  - component: {fileID: 3266579253714986906}
   - component: {fileID: 7545282697320719743}
   m_Layer: 5
   m_Name: StunningBlade
@@ -77,22 +76,6 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
---- !u!114 &3266579253714986906
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 354049041136632317}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e73178a2337a1f2489b605fcb1b6f154, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  fireballMask: {fileID: 0}
-  frostMask: {fileID: 0}
-  healMask: {fileID: 0}
-  slowMask: {fileID: 0}
 --- !u!114 &7545282697320719743
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -783,7 +766,6 @@ GameObject:
   - component: {fileID: 3345407746157697648}
   - component: {fileID: 6346346139690077857}
   - component: {fileID: 5295089897687081264}
-  - component: {fileID: 6573198187666222636}
   - component: {fileID: 8104949372966179805}
   m_Layer: 5
   m_Name: Frost
@@ -849,22 +831,6 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
---- !u!114 &6573198187666222636
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2307340112000077031}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e73178a2337a1f2489b605fcb1b6f154, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  fireballMask: {fileID: 0}
-  frostMask: {fileID: 0}
-  healMask: {fileID: 0}
-  slowMask: {fileID: 0}
 --- !u!114 &8104949372966179805
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1795,7 +1761,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   dashMask: {fileID: 6661089831864439023}
-  stunningMask: {fileID: 0}
+  stunningMask: {fileID: 360151487375318077}
 --- !u!1 &5721704769441255172
 GameObject:
   m_ObjectHideFlags: 0
@@ -2726,7 +2692,6 @@ GameObject:
   - component: {fileID: 3905534818737313041}
   - component: {fileID: 3402683883996112573}
   - component: {fileID: 8353544964313119443}
-  - component: {fileID: 4351811991980087756}
   - component: {fileID: 4230330404596594417}
   m_Layer: 5
   m_Name: Slowness
@@ -2792,22 +2757,6 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
---- !u!114 &4351811991980087756
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8133188682838508126}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e73178a2337a1f2489b605fcb1b6f154, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  fireballMask: {fileID: 0}
-  frostMask: {fileID: 0}
-  healMask: {fileID: 0}
-  slowMask: {fileID: 0}
 --- !u!114 &4230330404596594417
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3187,7 +3136,6 @@ GameObject:
   - component: {fileID: 6763389730065536727}
   - component: {fileID: 882329098744702854}
   - component: {fileID: 5174810728765741747}
-  - component: {fileID: 4250413844046485265}
   - component: {fileID: 6426405387095627762}
   m_Layer: 5
   m_Name: Dash
@@ -3253,22 +3201,6 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
---- !u!114 &4250413844046485265
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8879611691401123805}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e73178a2337a1f2489b605fcb1b6f154, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  fireballMask: {fileID: 0}
-  frostMask: {fileID: 0}
-  healMask: {fileID: 0}
-  slowMask: {fileID: 0}
 --- !u!114 &6426405387095627762
 MonoBehaviour:
   m_ObjectHideFlags: 0

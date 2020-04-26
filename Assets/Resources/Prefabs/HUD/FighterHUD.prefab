@@ -162,7 +162,6 @@ GameObject:
   - component: {fileID: 6909415911974570832}
   - component: {fileID: 6002999979989297826}
   - component: {fileID: 8627942284751403495}
-  - component: {fileID: 3837833205740036487}
   - component: {fileID: 1451514113912529351}
   m_Layer: 5
   m_Name: Slam
@@ -228,22 +227,6 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
---- !u!114 &3837833205740036487
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1160139713252232378}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e73178a2337a1f2489b605fcb1b6f154, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  fireballMask: {fileID: 0}
-  frostMask: {fileID: 0}
-  healMask: {fileID: 0}
-  slowMask: {fileID: 0}
 --- !u!114 &1451514113912529351
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1592,7 +1575,6 @@ GameObject:
   - component: {fileID: 4524010124921670572}
   - component: {fileID: 8897675415657265111}
   - component: {fileID: 8561778428933479939}
-  - component: {fileID: 4818034338254080951}
   - component: {fileID: 7318073681187131657}
   m_Layer: 5
   m_Name: Rage
@@ -1658,22 +1640,6 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
---- !u!114 &4818034338254080951
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5323067395964568373}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e73178a2337a1f2489b605fcb1b6f154, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  fireballMask: {fileID: 0}
-  frostMask: {fileID: 0}
-  healMask: {fileID: 0}
-  slowMask: {fileID: 0}
 --- !u!114 &7318073681187131657
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2349,7 +2315,6 @@ GameObject:
   - component: {fileID: 4586664801543359636}
   - component: {fileID: 5021796759983200604}
   - component: {fileID: 7672807866240325869}
-  - component: {fileID: 7846176675393537956}
   - component: {fileID: 4454666536731890810}
   m_Layer: 5
   m_Name: TakeABreather
@@ -2415,22 +2380,6 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
---- !u!114 &7846176675393537956
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6412377312244519033}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e73178a2337a1f2489b605fcb1b6f154, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  fireballMask: {fileID: 0}
-  frostMask: {fileID: 0}
-  healMask: {fileID: 0}
-  slowMask: {fileID: 0}
 --- !u!114 &4454666536731890810
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3042,7 +2991,6 @@ GameObject:
   - component: {fileID: 7900479479258276661}
   - component: {fileID: 8397224107041757464}
   - component: {fileID: 8312377330793857073}
-  - component: {fileID: 844424645133364490}
   - component: {fileID: 885103464757700249}
   m_Layer: 5
   m_Name: Shield
@@ -3108,22 +3056,6 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
---- !u!114 &844424645133364490
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8519346164533205220}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e73178a2337a1f2489b605fcb1b6f154, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  fireballMask: {fileID: 0}
-  frostMask: {fileID: 0}
-  healMask: {fileID: 0}
-  slowMask: {fileID: 0}
 --- !u!114 &885103464757700249
 MonoBehaviour:
   m_ObjectHideFlags: 0

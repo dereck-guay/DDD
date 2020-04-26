@@ -9,7 +9,7 @@ public class XPBarComponent : MonoBehaviour
     public Gradient gradient;
     public Image fill;
 
-    public void SetXP(float xp)
+    public void GainXP(int xp)
     {
         xpSlider.value = xp;
 
