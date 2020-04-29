@@ -12,16 +12,11 @@ public class BeholderCollisionComponent : CollisionMonoBehaviour
     public float damage;    
     public float effectBaseModifier;    
     public float effectBaseDuration;
-    public float maxDuration;
 
     static BeholderComponent caster;   //Manages effects durations
 
-    float currentTime;
-    Vector3 baseScale;
-
     private void Start()
     {
-        baseScale = gameObject.transform.localScale;
         effects = new Action<EffectHandlerComponent>[]
         {
             (eHandler) => { eHandler.GetComponent<Stats>().HP.TakeDamage(damage); },
@@ -41,16 +36,6 @@ public class BeholderCollisionComponent : CollisionMonoBehaviour
             if (CollidesWithAppropriateLayer(target.layer, damageLayers))
                 ApplyRandomEffect(target.GetComponent<EffectHandlerComponent>());
         }
-    }
-
-    private void Update()
-    {
-        currentTime += Time.deltaTime;
-
-        gameObject.transform.localScale = baseScale * Mathf.Sqrt(Mathf.Abs(maxDuration - currentTime) / maxDuration);
-
-        if (currentTime >= maxDuration)
-            Destroy(gameObject);
     }
 
     public void SetCaster(BeholderComponent casterI) => caster = casterI;
