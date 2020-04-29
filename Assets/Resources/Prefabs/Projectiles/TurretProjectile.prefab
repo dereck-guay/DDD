@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 681779461200782260}
   - component: {fileID: 3983338034783790020}
   - component: {fileID: 3787632927388681644}
+  - component: {fileID: 646708057808585515}
   m_Layer: 16
   m_Name: TurretProjectile
   m_TagString: Untagged
@@ -78,6 +79,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   direction: {x: 0, y: 0, z: 0}
   speed: 4
+  damage: 0
 --- !u!114 &3787632927388681644
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -93,6 +95,18 @@ MonoBehaviour:
   collisionLayers: 090000000a0000000e000000
   damageLayers: 0a0000000e000000
   damage: 10
+--- !u!114 &646708057808585515
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4768180493271869857}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 62f7ac7cf10684349a2db062214ab347, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
   maxDuration: 2
 --- !u!1 &7193290988237893201
 GameObject:

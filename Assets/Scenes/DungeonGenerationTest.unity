@@ -650,6 +650,11 @@ PrefabInstance:
       propertyPath: m_Enabled
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 7641843800066957252, guid: 622253fd38a7d9649abf64fb0f88a1f0,
+        type: 3}
+      propertyPath: statsInit.attackSpeed
+      value: 5
+      objectReference: {fileID: 0}
     - target: {fileID: 7684135597788278721, guid: 622253fd38a7d9649abf64fb0f88a1f0,
         type: 3}
       propertyPath: m_Layer

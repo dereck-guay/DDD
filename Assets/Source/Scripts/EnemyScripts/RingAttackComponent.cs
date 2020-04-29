@@ -5,7 +5,7 @@ using UnityEngine;
 [RequireComponent(typeof(Rigidbody))]
 public class RingAttackComponent : MonoBehaviour
 {
-    public StraightProjectile projectilePrefab; //BossProjectileCollisionComponent
+    public DaveCollisionComponent projectilePrefab;
     public EntityMonoBehaviour caster;
 
     [SerializeField]
