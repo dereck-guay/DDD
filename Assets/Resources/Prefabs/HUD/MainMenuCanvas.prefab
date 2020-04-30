@@ -443,7 +443,7 @@ GameObject:
   - component: {fileID: 3166278149732112514}
   - component: {fileID: 1786919952317460519}
   m_Layer: 5
-  m_Name: LEFT
+  m_Name: Parent_LEFT
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -464,9 +464,9 @@ RectTransform:
   m_Father: {fileID: 4407453362726850437}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 1}
-  m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 80, y: -205}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 160, y: 30}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &3166278149732112514
@@ -864,7 +864,7 @@ GameObject:
   - component: {fileID: 8022120356615906949}
   - component: {fileID: 7392699967224474651}
   m_Layer: 5
-  m_Name: DOWN
+  m_Name: Parent_DOWN
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -885,9 +885,9 @@ RectTransform:
   m_Father: {fileID: 4407453362726850437}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 1}
-  m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 80, y: -145}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 160, y: 30}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &8022120356615906949
@@ -1016,7 +1016,7 @@ GameObject:
   - component: {fileID: 4949763640463770867}
   - component: {fileID: 9181805781900810222}
   m_Layer: 5
-  m_Name: Element 2
+  m_Name: LEFT
   m_TagString: Keybind
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1281,13 +1281,14 @@ GameObject:
   m_Component:
   - component: {fileID: 4847335763945597826}
   - component: {fileID: 1874631738004371255}
+  - component: {fileID: 6811919714990828149}
   m_Layer: 5
   m_Name: ControlsMenu
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &4847335763945597826
 RectTransform:
   m_ObjectHideFlags: 0
@@ -1322,6 +1323,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 43a393ff90c225f4696f29fe7591754a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!225 &6811919714990828149
+CanvasGroup:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 995728428247248550}
+  m_Enabled: 1
+  m_Alpha: 0
+  m_Interactable: 1
+  m_BlocksRaycasts: 1
+  m_IgnoreParentGroups: 0
 --- !u!1 &1022360747141569915
 GameObject:
   m_ObjectHideFlags: 0
@@ -1484,7 +1497,7 @@ GameObject:
   - component: {fileID: 2840545166528841364}
   - component: {fileID: 3825594857397510979}
   m_Layer: 5
-  m_Name: UP
+  m_Name: Parent_UP
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1505,9 +1518,9 @@ RectTransform:
   m_Father: {fileID: 4407453362726850437}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 1}
-  m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 80, y: -85}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 160, y: 30}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &2840545166528841364
@@ -1817,7 +1830,7 @@ GameObject:
   - component: {fileID: 5166619788986610499}
   - component: {fileID: 5751574208336392804}
   m_Layer: 5
-  m_Name: ABILITY 3
+  m_Name: Parent_ABILITY 3
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1838,9 +1851,9 @@ RectTransform:
   m_Father: {fileID: 2606227139975542760}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 1}
-  m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 80, y: -255}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 160, y: 30}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &5166619788986610499
@@ -3453,7 +3466,7 @@ GameObject:
   - component: {fileID: 2085697360987236948}
   - component: {fileID: 6122408253827904012}
   m_Layer: 5
-  m_Name: ABILITY 1
+  m_Name: Parent_ABILITY 1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -3474,9 +3487,9 @@ RectTransform:
   m_Father: {fileID: 2606227139975542760}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 1}
-  m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 80, y: -135}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 160, y: 30}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &2085697360987236948
@@ -4374,7 +4387,7 @@ GameObject:
   - component: {fileID: 8255698603298892698}
   - component: {fileID: 3773556805652576051}
   m_Layer: 5
-  m_Name: Element 7
+  m_Name: ACT3
   m_TagString: Keybind
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -5023,8 +5036,8 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 995728428247248550}
-        m_MethodName: SetActive
+      - m_Target: {fileID: 0}
+        m_MethodName: 
         m_Mode: 6
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -5885,7 +5898,7 @@ GameObject:
   - component: {fileID: 8040377607860127805}
   - component: {fileID: 4206015520994636415}
   m_Layer: 5
-  m_Name: ABILITY 4
+  m_Name: Parent_ABILITY 4
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -5906,9 +5919,9 @@ RectTransform:
   m_Father: {fileID: 2606227139975542760}
   m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 1}
-  m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 80, y: -315}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 160, y: 30}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &8040377607860127805
@@ -5964,7 +5977,7 @@ GameObject:
   - component: {fileID: 6774054108036699}
   - component: {fileID: 8171755677611445034}
   m_Layer: 5
-  m_Name: Element 0
+  m_Name: ACTAA
   m_TagString: Keybind
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -6765,7 +6778,7 @@ GameObject:
   - component: {fileID: 5390939875760666529}
   - component: {fileID: 6152544519191656114}
   m_Layer: 5
-  m_Name: Element 8
+  m_Name: ACT4
   m_TagString: Keybind
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -8339,9 +8352,9 @@ RectTransform:
   m_Father: {fileID: 3347460138244362634}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 1}
-  m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 75, y: -355}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 150, y: 45}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &5585194939187682168
@@ -8785,7 +8798,7 @@ GameObject:
   - component: {fileID: 119440521519558632}
   - component: {fileID: 7827941859992381351}
   m_Layer: 5
-  m_Name: ABILITY 2
+  m_Name: Parent_ABILITY 2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -8806,9 +8819,9 @@ RectTransform:
   m_Father: {fileID: 2606227139975542760}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 1}
-  m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 80, y: -195}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 160, y: 30}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &119440521519558632
@@ -8976,9 +8989,9 @@ RectTransform:
   m_Father: {fileID: 3347460138244362634}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 1}
-  m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 75, y: -22.5}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 150, y: 45}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &1094886066360766490
@@ -9276,7 +9289,7 @@ GameObject:
   - component: {fileID: 6484231260943768999}
   - component: {fileID: 8647796655796800432}
   m_Layer: 5
-  m_Name: Element 1
+  m_Name: UP
   m_TagString: Keybind
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -10589,7 +10602,7 @@ GameObject:
   - component: {fileID: 225103410915237849}
   - component: {fileID: 1266610639328803452}
   m_Layer: 5
-  m_Name: Element 5
+  m_Name: ACT1
   m_TagString: Keybind
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -10851,7 +10864,7 @@ GameObject:
   - component: {fileID: 5902830008301813377}
   - component: {fileID: 1142908576343878603}
   m_Layer: 5
-  m_Name: RIGHT
+  m_Name: Parent_RIGHT
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -10872,9 +10885,9 @@ RectTransform:
   m_Father: {fileID: 4407453362726850437}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 1}
-  m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 80, y: -265}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 160, y: 30}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &5902830008301813377
@@ -11370,6 +11383,8 @@ MonoBehaviour:
   - {fileID: 3581892271075095210}
   - {fileID: 3365881941366499548}
   - {fileID: 7651496104665727282}
+  pauseMenu: {fileID: 0}
+  characterSelectMenu: {fileID: 0}
 --- !u!1 &7327351286974680455
 GameObject:
   m_ObjectHideFlags: 0
@@ -13567,7 +13582,7 @@ GameObject:
   - component: {fileID: 4268759967692805104}
   - component: {fileID: 8904852193647942494}
   m_Layer: 5
-  m_Name: AUTO-ATTACK
+  m_Name: Parent_AUTO-ATTACK
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -13588,9 +13603,9 @@ RectTransform:
   m_Father: {fileID: 2606227139975542760}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 1}
-  m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 80, y: -75}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 160, y: 30}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &4268759967692805104
@@ -14467,7 +14482,7 @@ GameObject:
   - component: {fileID: 1153771476239927069}
   - component: {fileID: 364088118758558436}
   m_Layer: 5
-  m_Name: Element 3
+  m_Name: DOWN
   m_TagString: Keybind
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -14848,7 +14863,7 @@ GameObject:
   - component: {fileID: 8042155645754851250}
   - component: {fileID: 7983655863650279368}
   m_Layer: 5
-  m_Name: Element 6
+  m_Name: ACT2
   m_TagString: Keybind
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -15361,7 +15376,7 @@ GameObject:
   - component: {fileID: 7131773882724608990}
   - component: {fileID: 357469864001718991}
   m_Layer: 5
-  m_Name: Element 4
+  m_Name: RIGHT
   m_TagString: Keybind
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

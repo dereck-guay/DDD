@@ -9,9 +9,9 @@ public class PauseMenuComponent : MonoBehaviour
     public GameObject pauseMenu;
     public GameObject audioMenu;
     public GameObject vsMenu;
-    public GameObject controlsMenu;
+    public CanvasGroup controlsMenu;
     public GameObject characterSelctMenu;
-    public Button resumeBtn;
+    public Button[] Buttons;
 
     void Update()
     {
@@ -29,11 +29,13 @@ public class PauseMenuComponent : MonoBehaviour
         pauseMenu.SetActive(false);
         audioMenu.SetActive(false);
         vsMenu.SetActive(false);
-        controlsMenu.SetActive(false);
+        controlsMenu.alpha = 0;
+        controlsMenu.blocksRaycasts = false;
         characterSelctMenu.SetActive(false);
         Time.timeScale = 1f;
         GameIsPaused = false;
-        resumeBtn.transform.localScale = Vector3.one;
+        foreach (Button btn in Buttons)
+            btn.transform.localScale = Vector3.one;
     }
     
     public void Pause()

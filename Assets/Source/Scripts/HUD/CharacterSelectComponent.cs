@@ -9,6 +9,7 @@ public class CharacterSelectComponent : MonoBehaviour
     public Button[] characterSelect;
     public GameObject pauseMenu;
     public GameObject characterSelectMenu;
+    private int lastIndex;
     private int index;
     private Vector3 lastPos;
 
@@ -31,12 +32,17 @@ public class CharacterSelectComponent : MonoBehaviour
 
     private void Update()
     {
+        for (int i = 0; i < characterList.Length; i++)
+        {
+            if (characterList[i].activeSelf == true)
+                lastIndex = i;
+        }
         for (int i = 0; i < characterSelect.Length; i++)
         {
             int counter = i;
             characterSelect[i].onClick.AddListener(() => Switch(counter));
         }
-        lastPos = characterList[index].transform.position;
+        lastPos = characterList[lastIndex].transform.position;
     }
 
     public void Select(int index)
@@ -55,7 +61,7 @@ public class CharacterSelectComponent : MonoBehaviour
 
         if (pauseMenu.activeInHierarchy == false)
         {
-            characterList[index].SetActive(false);
+            characterList[lastIndex].SetActive(false);
             characterList[newIndex].SetActive(true);
             characterList[newIndex].transform.position = lastPos;
         }
