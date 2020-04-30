@@ -27,17 +27,17 @@ public class KeybindManager : MonoBehaviour
         ActionBinds = new Dictionary<string, KeyCode>();
 
         // Movements.
-        BindKey("UP", KeyCode.W);
-        BindKey("LEFT", KeyCode.A);
-        BindKey("DOWN", KeyCode.S);
-        BindKey("RIGHT", KeyCode.D);
+        BindKey("UP", (KeyCode)System.Enum.Parse(typeof(KeyCode), PlayerPrefs.GetString("UP", "W")));
+        BindKey("LEFT", (KeyCode)System.Enum.Parse(typeof(KeyCode), PlayerPrefs.GetString("LEFT", "A")));
+        BindKey("DOWN", (KeyCode)System.Enum.Parse(typeof(KeyCode), PlayerPrefs.GetString("DOWN", "S")));
+        BindKey("RIGHT", (KeyCode)System.Enum.Parse(typeof(KeyCode), PlayerPrefs.GetString("RIGHT", "D")));
 
         // Spells.
-        BindKey("ACTAA", KeyCode.Mouse0); // AutoAttack.
-        BindKey("ACT1", KeyCode.Alpha1);
-        BindKey("ACT2", KeyCode.Alpha2);
-        BindKey("ACT3", KeyCode.Alpha3);
-        BindKey("ACT4", KeyCode.Alpha4);
+        BindKey("ACTAA", (KeyCode)System.Enum.Parse(typeof(KeyCode), PlayerPrefs.GetString("ACTAA", "Mouse0"))); // AutoAttack.
+        BindKey("ACT1", (KeyCode)System.Enum.Parse(typeof(KeyCode), PlayerPrefs.GetString("ACT1", "Alpha1")));
+        BindKey("ACT2", (KeyCode)System.Enum.Parse(typeof(KeyCode), PlayerPrefs.GetString("ACT2", "Alpha2")));
+        BindKey("ACT3", (KeyCode)System.Enum.Parse(typeof(KeyCode), PlayerPrefs.GetString("ACT3", "Alpha3")));
+        BindKey("ACT4", (KeyCode)System.Enum.Parse(typeof(KeyCode), PlayerPrefs.GetString("ACT4", "Alpha4")));
     }
 
     public void BindKey(string key, KeyCode keyBind)
@@ -47,21 +47,50 @@ public class KeybindManager : MonoBehaviour
         if (key.Contains("ACT"))
             currentDictionary = ActionBinds;
 
-        // Set new keyBind.
-        if (!currentDictionary.ContainsValue(keyBind))
+        // Set new keyBind
+        if (!currentDictionary.ContainsKey(key))
+        {
             currentDictionary.Add(key, keyBind);
+            UIManagerComponent.MyInstance.UpdateKeyText(key, keyBind);
+        }
         else if (currentDictionary.ContainsValue(keyBind))
         {
             var ValueKey = currentDictionary.FirstOrDefault(pair => pair.Value == keyBind).Key;
             currentDictionary[ValueKey] = KeyCode.None; // UnBind.
+            UIManagerComponent.MyInstance.UpdateKeyText(key, KeyCode.None);
         }
 
         currentDictionary[key] = keyBind; // Binds key.
+        UIManagerComponent.MyInstance.UpdateKeyText(key, keyBind);
         bindName = string.Empty;
     }
 
-    public void UpdateKeyText(string key, KeyCode code)
+    public void KeyBindOnClick(string bindName)
     {
+        this.bindName = bindName;
+    }
 
+    private void OnGUI()
+    {
+        if (bindName != string.Empty)
+        {
+            Event e = Event.current;
+
+            if(e.isKey)
+            {
+                BindKey(bindName, e.keyCode);
+            }
+        }
+    }
+
+    public void SaveKeys()
+    {
+        foreach (var key in KeyBinds)
+            PlayerPrefs.SetString(key.Key, key.Value.ToString());
+        
+        foreach (var actKey in ActionBinds)
+            PlayerPrefs.SetString(actKey.Key, actKey.Value.ToString());
+        
+        PlayerPrefs.Save();
     }
 }

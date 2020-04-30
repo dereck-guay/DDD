@@ -6,13 +6,33 @@ using UnityEngine.UI;
 
 public class UIManagerComponent : MonoBehaviour
 {
-    public GameObject keybindMenu;
+    private static UIManagerComponent instance;
+
+    public static UIManagerComponent MyInstance
+    {
+        get
+        {
+            if (instance == null)
+            {
+                instance = FindObjectOfType<UIManagerComponent>();
+            }
+            return instance;
+        }
+    }
+
+    public CanvasGroup keybindMenu;
 
     private GameObject[] keybindButtons;
 
     private void Awake()
     {
         keybindButtons = GameObject.FindGameObjectsWithTag("Keybind");
+    }
+
+    public void OpenCloseMenu()
+    {
+        keybindMenu.alpha = keybindMenu.alpha > 0 ? 0 : 1;
+        keybindMenu.blocksRaycasts = keybindMenu.blocksRaycasts == true ? false : true;
     }
 
     public void UpdateKeyText(string key, KeyCode code)
