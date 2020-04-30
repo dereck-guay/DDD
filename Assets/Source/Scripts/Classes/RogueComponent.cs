@@ -12,8 +12,6 @@ public class RogueComponent : PlayerMonoBehaviour
     public Camera camera;
 
     #region Stuff for inspector
-    [Header("Inputs")]
-    public KeyCode[] inputs;
 
     [Serializable]
     public class AutoAttack
@@ -76,78 +74,11 @@ public class RogueComponent : PlayerMonoBehaviour
         timeSinceLastAttack = value;
     }
     #endregion
-    private KeyBindings keyBindings;
     private Rigidbody rigidBody;
     private bool isDashing;
     private void Awake()
     {
-        keyBindings = new KeyBindings(
-            new Action[]
-            {
-                () => {
-                    if (canAttack)
-                    {
-                        var target = GetEntityAtMousePosition();
-                        if (ExistsAndIsntSelf(target) && TargetIsWithinRange(target, entityStats.Range.Current))
-                        {
-                            var autoAttackSpell = gameObject.AddComponent<RangedAutoAttackSpell>();
-                            autoAttackSpell.autoAttackPrefab = autoAttack.autoAttackPrefab;
-                            autoAttackSpell.damage = entityStats.AtkDamage.Current;
-                            autoAttackSpell.target = target.GetComponent<Transform>().gameObject;
-                            autoAttackSpell.Cast(entityStats.AtkSpeed.Current, transform.position);
-                            SetTimeSinceLastAttack(0) ;
-                            canAttack = false;
-                        }
-                    }
-                },
-                () => Move(Vector3.forward),
-                () => Move(Vector3.left),
-                () => Move(Vector3.back),
-                () => Move(Vector3.right),
-                () => {
-                    if (CanCast(stunningBlade.manaCost, typeof(StunningBladeSpell)))
-                    {
-                        var stunningBladeSpell = gameObject.AddComponent<StunningBladeSpell>();
-                        stunningBladeSpell.direction = GetMouseDirection();
-                        stunningBladeSpell.stunningBladePrefab = stunningBlade.stunningBladePrefab;
-                        stunningBladeSpell.cooldown = stunningBlade.cooldowns[entityStats.XP.Level - 1];
-                        stunningBladeSpell.effectDuration = stunningBlade.effectDurations[entityStats.XP.Level - 1];
-                        stunningBladeSpell.Cast();
-                    }
-                },
-                () =>{
-                    if(CanCast(dash.manaCost, typeof(DashSpell)))
-                    {
-                        var dashSpell = gameObject.AddComponent<DashSpell>();
-                        dashSpell.cooldown = dash.cooldowns[entityStats.XP.Level];
-                        dashSpell.player = this;
-                        dashSpell.Cast(GetMouseDirection(), dash.dashMultiplier);
-                    }
-                },
-                () =>{
-                    if (CanCast(smokeScreen.manaCost, typeof(SmokeScreenSpell)))
-                    {
-                        var smokeScreenSpell = gameObject.AddComponent<SmokeScreenSpell>();
-                        smokeScreenSpell.cooldown = smokeScreen.cooldowns[entityStats.XP.Level - 1];
-                        smokeScreenSpell.player = gameObject;
-                        smokeScreenSpell.smoke = smokeScreen.smoke;
-                        smokeScreenSpell.smokeDuration = smokeScreen.smokeDuration;
-                        smokeScreenSpell.Cast();
-                    }
-                },
-                () =>{
-                    if (CanCast(fanOfKnives.manaCost, typeof(FanOfKnivesSpell)))
-                    {
-                        var fanOfKnivesSpell = gameObject.AddComponent<FanOfKnivesSpell>();
-                        fanOfKnivesSpell.cooldown = fanOfKnives.cooldowns[entityStats.XP.Level - 1];
-                        fanOfKnivesSpell.daggerPrebab = fanOfKnives.daggerPrefab;
-                        fanOfKnivesSpell.direction = GetMouseDirection();
-                        fanOfKnivesSpell.damage = fanOfKnives.damage;
-                        fanOfKnivesSpell.Cast();
-                    }
-                }
-            }, inputs
-        );
+        canAttack = true;
     }
     private void Start()
     {
@@ -164,7 +95,7 @@ public class RogueComponent : PlayerMonoBehaviour
         if (!IsStunned)
         {
             DirectCharacter();
-            keyBindings.CallBindings();
+            GetInput();
         }
         entityStats.Regen();
 
@@ -185,5 +116,89 @@ public class RogueComponent : PlayerMonoBehaviour
         var directionToLookAt = transform.position + GetMouseDirection();
         directionToLookAt.y = transform.position.y;
         transform.LookAt(directionToLookAt);
+    }
+    private void GetInput()
+    {
+        //Movement
+        if (Input.GetKey(KeybindManager.Instance.KeyBinds["UP"]))
+        {
+            Move(Vector3.forward);
+        }
+        if (Input.GetKey(KeybindManager.Instance.KeyBinds["LEFT"]))
+        {
+            Move(Vector3.left);
+        }
+        if (Input.GetKey(KeybindManager.Instance.KeyBinds["DOWN"]))
+        {
+            Move(Vector3.back);
+        }
+        if (Input.GetKey(KeybindManager.Instance.KeyBinds["RIGHT"]))
+        {
+            Move(Vector3.right);
+        }
+        //Actions
+        if (Input.GetKey(KeybindManager.Instance.ActionBinds["ACTAA"]))
+        {
+            if (canAttack)
+            {
+                var target = GetEntityAtMousePosition();
+                if (ExistsAndIsntSelf(target) && TargetIsWithinRange(target, entityStats.Range.Current))
+                {
+                    var autoAttackSpell = gameObject.AddComponent<RangedAutoAttackSpell>();
+                    autoAttackSpell.autoAttackPrefab = autoAttack.autoAttackPrefab;
+                    autoAttackSpell.damage = entityStats.AtkDamage.Current;
+                    autoAttackSpell.target = target.GetComponent<Transform>().gameObject;
+                    autoAttackSpell.Cast(entityStats.AtkSpeed.Current, transform.position);
+                    SetTimeSinceLastAttack(0);
+                    canAttack = false;
+                }
+            }
+        }
+        if (Input.GetKey(KeybindManager.Instance.ActionBinds["ACT1"]))
+        {
+            if (CanCast(stunningBlade.manaCost, typeof(StunningBladeSpell)))
+            {
+                var stunningBladeSpell = gameObject.AddComponent<StunningBladeSpell>();
+                stunningBladeSpell.direction = GetMouseDirection();
+                stunningBladeSpell.stunningBladePrefab = stunningBlade.stunningBladePrefab;
+                stunningBladeSpell.cooldown = stunningBlade.cooldowns[entityStats.XP.Level - 1];
+                stunningBladeSpell.effectDuration = stunningBlade.effectDurations[entityStats.XP.Level - 1];
+                stunningBladeSpell.Cast();
+            }
+        }
+        if (Input.GetKey(KeybindManager.Instance.ActionBinds["ACT2"]))
+        {
+            if (CanCast(dash.manaCost, typeof(DashSpell)))
+            {
+                var dashSpell = gameObject.AddComponent<DashSpell>();
+                dashSpell.cooldown = dash.cooldowns[entityStats.XP.Level];
+                dashSpell.player = this;
+                dashSpell.Cast(GetMouseDirection(), dash.dashMultiplier);
+            }
+        }
+        if (Input.GetKey(KeybindManager.Instance.ActionBinds["ACT3"]))
+        {
+            if (CanCast(smokeScreen.manaCost, typeof(SmokeScreenSpell)))
+            {
+                var smokeScreenSpell = gameObject.AddComponent<SmokeScreenSpell>();
+                smokeScreenSpell.cooldown = smokeScreen.cooldowns[entityStats.XP.Level - 1];
+                smokeScreenSpell.player = gameObject;
+                smokeScreenSpell.smoke = smokeScreen.smoke;
+                smokeScreenSpell.smokeDuration = smokeScreen.smokeDuration;
+                smokeScreenSpell.Cast();
+            }
+        }
+        if (Input.GetKey(KeybindManager.Instance.ActionBinds["ACT4"]))
+        {
+            if (CanCast(fanOfKnives.manaCost, typeof(FanOfKnivesSpell)))
+            {
+                var fanOfKnivesSpell = gameObject.AddComponent<FanOfKnivesSpell>();
+                fanOfKnivesSpell.cooldown = fanOfKnives.cooldowns[entityStats.XP.Level - 1];
+                fanOfKnivesSpell.daggerPrebab = fanOfKnives.daggerPrefab;
+                fanOfKnivesSpell.direction = GetMouseDirection();
+                fanOfKnivesSpell.damage = fanOfKnives.damage;
+                fanOfKnivesSpell.Cast();
+            }
+        }
     }
 }

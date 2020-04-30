@@ -12,8 +12,6 @@ public class WizardComponent : PlayerMonoBehaviour
 
     #region Stuff for inspector
 
-    [Header("Inputs")]
-    public KeyCode[] inputs;
     [Serializable]
     public class AutoAttack
     {
@@ -72,92 +70,10 @@ public class WizardComponent : PlayerMonoBehaviour
     }
     #endregion
 
-    private KeyBindings keyBindings;
     private Rigidbody rigidBody;
     private void Awake()
     {
         canAttack = true;
-        keyBindings = new KeyBindings(
-            new Action[]
-            {
-                () => {
-                    if (canAttack)
-                    {
-                        var target = GetEntityAtMousePosition();
-                        if (ExistsAndIsntSelf(target) && TargetIsWithinRange(target, entityStats.Range.Current))
-                        {
-                            var autoAttackSpell = gameObject.AddComponent<RangedAutoAttackSpell>();
-                            autoAttackSpell.autoAttackPrefab = autoAttack.autoAttackPrefab;
-                            autoAttackSpell.damage = entityStats.AtkDamage.Current;
-                            autoAttackSpell.target = target.GetComponent<Transform>().gameObject;
-                            autoAttackSpell.Cast(entityStats.AtkSpeed.Current, transform.position);
-                            SetTimeSinceLastAttack(0) ;
-                            canAttack = false; 
-                        }
-                    }
-                },
-                () => Move(Vector3.forward),
-                () => Move(Vector3.left),
-                () => Move(Vector3.back),
-                () => Move(Vector3.right),
-                () => {
-                   if (CanCast(fireball.manaCost, typeof(FireballSpell)))
-                    {
-                        entityStats.Mana.UseMana(fireball.manaCost);
-                        var fireballSpell = gameObject.AddComponent<FireballSpell>();
-                        fireballSpell.fireballPrefab = fireball.fireballPrefab;
-                        fireballSpell.direction = GetMouseDirection();
-                        fireballSpell.cooldown = fireball.cooldowns[entityStats.XP.Level - 1];
-                        fireballSpell.damage = fireball.damage[entityStats.XP.Level - 1];
-                        fireballSpell.Cast();
-                    }
-                },
-                () => {
-                    if (CanCast(slow.manaCost, typeof(SlowSpell)))
-                    {
-                        var target = GetEntityAtMousePosition();
-                        if (ExistsAndIsntSelf(target))
-                        {
-                            entityStats.Mana.UseMana(slow.manaCost);
-                            var slowSpell = gameObject.AddComponent<SlowSpell>();
-                            slowSpell.target = target;
-                            slowSpell.slowValue = slow.slowValue;
-                            slowSpell.cooldown = slow.cooldowns[entityStats.XP.Level - 1];
-                            slowSpell.Cast(); 
-                        }
-                    }
-                },
-                () => {
-                    if (CanCast(heal.manaCost, typeof(HealSpell)))
-                    {
-                        var target = GetEntityAtMousePosition();
-                        if (target)
-                        {
-                            entityStats.Mana.UseMana(heal.manaCost);
-                            var healSpell = gameObject.AddComponent<HealSpell>();
-                            healSpell.target = target;
-                            healSpell.healValue = heal.healValues[entityStats.XP.Level];
-                            healSpell.cooldown = heal.cooldowns[entityStats.XP.Level];
-                            healSpell.Cast();
-                        }
-                    }
-                },
-                () => {
-                    if (CanCast(rayOfFrost.manaCost, typeof(RayOfFrostSpell)))
-                    {
-                        entityStats.Mana.UseMana(rayOfFrost.manaCost);
-                        var rayOfFrostSpell = gameObject.AddComponent<RayOfFrostSpell>();
-                        rayOfFrostSpell.rayOfFrostPrefab = rayOfFrost.rayOfFrostPrefab;
-                        rayOfFrostSpell.icePatchManagerPrefab = rayOfFrost.icePatchPrefab;
-                        rayOfFrostSpell.slowValue = rayOfFrost.slowValue;
-                        rayOfFrostSpell.direction = GetMouseDirection();
-                        rayOfFrostSpell.cooldown = rayOfFrost.cooldowns[entityStats.XP.Level - 1];
-                        rayOfFrostSpell.Cast(this);
-                    }
-                },
-                () => { entityStats.HP.TakeDamage(1); }
-            }, inputs
-        );
     }
 
     private void Start()
@@ -183,7 +99,7 @@ public class WizardComponent : PlayerMonoBehaviour
         if (!IsStunned)
         {
             DirectCharacter();
-            keyBindings.CallBindings();
+            GetInput();
         }
         entityStats.Regen();
 
@@ -204,6 +120,104 @@ public class WizardComponent : PlayerMonoBehaviour
         var directionToLookAt = transform.position + GetMouseDirection();
         directionToLookAt.y = transform.position.y;
         transform.LookAt(directionToLookAt);
+    }
+
+    private void GetInput()
+    {
+        //Movement
+        if (Input.GetKey(KeybindManager.Instance.KeyBinds["UP"]))
+        {
+            Move(Vector3.forward);
+        }
+        if (Input.GetKey(KeybindManager.Instance.KeyBinds["LEFT"]))
+        {
+            Move(Vector3.left);
+        }
+        if (Input.GetKey(KeybindManager.Instance.KeyBinds["DOWN"]))
+        {
+            Move(Vector3.back);
+        }
+        if (Input.GetKey(KeybindManager.Instance.KeyBinds["RIGHT"]))
+        {
+            Move(Vector3.right);
+        }
+        //Actions
+        if (Input.GetKey(KeybindManager.Instance.ActionBinds["ACTAA"]))
+        {
+            if (canAttack)
+            {
+                var target = GetEntityAtMousePosition();
+                if (ExistsAndIsntSelf(target) && TargetIsWithinRange(target, entityStats.Range.Current))
+                {
+                    var autoAttackSpell = gameObject.AddComponent<RangedAutoAttackSpell>();
+                    autoAttackSpell.autoAttackPrefab = autoAttack.autoAttackPrefab;
+                    autoAttackSpell.damage = entityStats.AtkDamage.Current;
+                    autoAttackSpell.target = target.GetComponent<Transform>().gameObject;
+                    autoAttackSpell.Cast(entityStats.AtkSpeed.Current, transform.position);
+                    SetTimeSinceLastAttack(0);
+                    canAttack = false;
+                }
+            }
+        }
+        if (Input.GetKey(KeybindManager.Instance.ActionBinds["ACT1"]))
+        {
+            if (CanCast(fireball.manaCost, typeof(FireballSpell)))
+            {
+                entityStats.Mana.UseMana(fireball.manaCost);
+                var fireballSpell = gameObject.AddComponent<FireballSpell>();
+                fireballSpell.fireballPrefab = fireball.fireballPrefab;
+                fireballSpell.direction = GetMouseDirection();
+                fireballSpell.cooldown = fireball.cooldowns[entityStats.XP.Level - 1];
+                fireballSpell.damage = fireball.damage[entityStats.XP.Level - 1];
+                fireballSpell.Cast();
+            }
+        }
+        if (Input.GetKey(KeybindManager.Instance.ActionBinds["ACT2"]))
+        {
+            if (CanCast(slow.manaCost, typeof(SlowSpell)))
+            {
+                var target = GetEntityAtMousePosition();
+                if (ExistsAndIsntSelf(target))
+                {
+                    entityStats.Mana.UseMana(slow.manaCost);
+                    var slowSpell = gameObject.AddComponent<SlowSpell>();
+                    slowSpell.target = target;
+                    slowSpell.slowValue = slow.slowValue;
+                    slowSpell.cooldown = slow.cooldowns[entityStats.XP.Level - 1];
+                    slowSpell.Cast();
+                }
+            }
+        }
+        if (Input.GetKey(KeybindManager.Instance.ActionBinds["ACT3"]))
+        {
+            if (CanCast(heal.manaCost, typeof(HealSpell)))
+            {
+                var target = GetEntityAtMousePosition();
+                if (target)
+                {
+                    entityStats.Mana.UseMana(heal.manaCost);
+                    var healSpell = gameObject.AddComponent<HealSpell>();
+                    healSpell.target = target;
+                    healSpell.healValue = heal.healValues[entityStats.XP.Level];
+                    healSpell.cooldown = heal.cooldowns[entityStats.XP.Level];
+                    healSpell.Cast();
+                }
+            }
+        }
+        if (Input.GetKey(KeybindManager.Instance.ActionBinds["ACT4"]))
+        {
+            if (CanCast(rayOfFrost.manaCost, typeof(RayOfFrostSpell)))
+            {
+                entityStats.Mana.UseMana(rayOfFrost.manaCost);
+                var rayOfFrostSpell = gameObject.AddComponent<RayOfFrostSpell>();
+                rayOfFrostSpell.rayOfFrostPrefab = rayOfFrost.rayOfFrostPrefab;
+                rayOfFrostSpell.icePatchManagerPrefab = rayOfFrost.icePatchPrefab;
+                rayOfFrostSpell.slowValue = rayOfFrost.slowValue;
+                rayOfFrostSpell.direction = GetMouseDirection();
+                rayOfFrostSpell.cooldown = rayOfFrost.cooldowns[entityStats.XP.Level - 1];
+                rayOfFrostSpell.Cast(this);
+            }
+        }
     }
     
 }
