@@ -129,6 +129,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   direction: {x: 0, y: 0, z: 1}
   speed: 10
+  damage: 0
 --- !u!114 &7782101106216196941
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -156,8 +157,8 @@ BoxCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 0.06246072, y: 1, z: 0.3748766}
-  m_Center: {x: 0.000107818225, y: 0, z: 0.00013292658}
+  m_Size: {x: 0.5464406, y: 1, z: 1.0031649}
+  m_Center: {x: 0.001887083, y: 0, z: -0.0019201636}
 --- !u!54 &3131699089582093425
 Rigidbody:
   m_ObjectHideFlags: 0

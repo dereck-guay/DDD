@@ -10,6 +10,8 @@ public class HP : IModifiableStat
 {
     float @base;
     float current;
+    EntityMonoBehaviour attacker;
+    float xpValue;
 
     public float HPRegen { get; set; }
     public float Base
@@ -47,29 +49,34 @@ public class HP : IModifiableStat
             current = value;
 
             if (current == 0)
+            {
                 OnDeath?.Invoke();
+                if (attacker)
+                    attacker.entityStats.XP.AddXP(xpValue);
+            }
             //Debug.Log($"New hp is {Current}");
         }
     }
     public bool IsInvulnerable { get; set; }
-    public HP(float hPBase, float hPRegen)
+    public HP(float hPBase, float hPRegen, float initXpValue)
     {
         Base = hPBase;
         Current = hPBase;
         HPRegen = hPRegen;
-        //OnTakeDamage += (float damage) => Debug.Log($"target has taken {damage} damage");
+        xpValue = initXpValue;
         //OnDeath += () => Debug.Log("target has died");
         IsInvulnerable = false;
-        //OnHeal += (float heal) => Debug.Log($"target has healed {heal}");
     }
     public string Name = "HP";
     public Action OnDeath { get; set; }
     public Action<float> OnTakeDamage { get; set; }
     public Action<float> OnHeal { get; set; }
-    public void TakeDamage(float damage)
+    public void TakeDamage(float damage, EntityMonoBehaviour initAttacker)
     {
+        attacker = initAttacker;
         if(!IsInvulnerable)
             Current -= damage;
+        attacker = null;
     }
     public void Heal(float hPToHeal) => Current += hPToHeal;
     public void Regen(float time)

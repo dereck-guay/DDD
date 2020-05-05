@@ -121,6 +121,12 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
+--- !u!1 &219840952 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 4022705104772730660, guid: b3a55247596b7ee4cbe346ea4a417ead,
+    type: 3}
+  m_PrefabInstance: {fileID: 1337713231}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &252469251
 GameObject:
   m_ObjectHideFlags: 0
@@ -1912,6 +1918,11 @@ PrefabInstance:
       propertyPath: respawnManager
       value: 
       objectReference: {fileID: 710166749}
+    - target: {fileID: 8654396917311496859, guid: b3a55247596b7ee4cbe346ea4a417ead,
+        type: 3}
+      propertyPath: autoAttack.staff
+      value: 
+      objectReference: {fileID: 219840952}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: b3a55247596b7ee4cbe346ea4a417ead, type: 3}
 --- !u!1 &1424157933

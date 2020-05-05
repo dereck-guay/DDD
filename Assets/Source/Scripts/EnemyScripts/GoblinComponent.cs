@@ -30,7 +30,7 @@ public class GoblinComponent : EnemyMonoBehaviour
 
     protected override void Attack(Transform target)
     {
-        target.GetComponent<Stats>().HP.TakeDamage(entityStats.AtkDamage.Current);
+        target.GetComponent<Stats>().HP.TakeDamage(entityStats.AtkDamage.Current, null);
         target.GetComponent<Rigidbody>().AddForce((target.position - transform.position).normalized * knockback);
     }
 

@@ -48,6 +48,6 @@ public class LaserCollisionComponent : CollisionMonoBehaviour
     void OnTriggerStay(Collider other)
     {
         if (CollidesWithAppropriateLayer(other.gameObject.layer, damageLayers))
-            other.GetComponent<Stats>().HP.TakeDamage(damage * Time.deltaTime);
+            other.GetComponent<Stats>().HP.TakeDamage(damage * Time.deltaTime, null);
     }
 }

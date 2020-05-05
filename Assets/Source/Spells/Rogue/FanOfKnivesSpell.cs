@@ -9,6 +9,7 @@ public class FanOfKnivesSpell : SpellMonoBehavior
     public Vector3 direction;
     public GameObject daggerPrebab;
     public float damage;
+    public PlayerMonoBehaviour caster;
     private GameObject[] daggers = new GameObject[5];
 
     public void Cast()
@@ -19,6 +20,7 @@ public class FanOfKnivesSpell : SpellMonoBehavior
         {
             var dagger = Instantiate(daggerPrebab, spawnPosition, Quaternion.Euler(directions[i]));
             dagger.GetComponent<DaggerCollision>().damage = damage;
+            dagger.GetComponent<DaggerCollision>().caster = caster;
             daggers[i] = dagger;
         }
     }

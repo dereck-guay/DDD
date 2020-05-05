@@ -172,6 +172,7 @@ public class FighterComponent : PlayerMonoBehaviour
                 slamSpell.knockbackForce = slam.knockbackForce;
                 slamSpell.landingPosition = GetMousePositionOn2DPlane();
                 slamSpell.cooldown = slam.cooldowns[entityStats.XP.Level - 1];
+                slamSpell.caster = this;
                 slamSpell.Cast();
             }
         }

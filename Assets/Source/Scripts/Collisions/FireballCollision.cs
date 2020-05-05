@@ -7,6 +7,7 @@ public class FireballCollision : CollisionMonoBehaviour
    public int[] damageLayers;
    public float damage;
    public ParticleSystem collideEffect;
+    public PlayerMonoBehaviour caster;
 
    private void OnCollisionEnter(Collision collision)
    {
@@ -19,6 +20,6 @@ public class FireballCollision : CollisionMonoBehaviour
       Destroy(gameObject);
       Instantiate(collideEffect as ParticleSystem, transform.position, Quaternion.identity);
       if (CollidesWithAppropriateLayer(target.layer, damageLayers))
-         target.GetComponent<Stats>().HP.TakeDamage(damage);
+         target.GetComponent<Stats>().HP.TakeDamage(damage, caster);
    }
 }

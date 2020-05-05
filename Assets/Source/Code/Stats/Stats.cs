@@ -15,6 +15,7 @@ public class StatsInit
     public float manaRegen;
     public float range;
     public float speed;
+    public float xpValue;
 };
 
 public class Stats : MonoBehaviour
@@ -31,7 +32,7 @@ public class Stats : MonoBehaviour
     {
         AtkDamage = new AtkDamage(statsInit.attackDamage);
         AtkSpeed = new AtkSpeed(statsInit.attackSpeed);
-        HP = new HP(statsInit.maxHp, statsInit.hpRegen);
+        HP = new HP(statsInit.maxHp, statsInit.hpRegen, statsInit.xpValue);
         Mana = new Mana(statsInit.maxMana, statsInit.manaRegen);
         Range = new Range(statsInit.range);
         Speed = new Speed(statsInit.speed);

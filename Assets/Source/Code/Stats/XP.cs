@@ -30,7 +30,7 @@ public class XP
         Current = 0;
         Level = 1;
     }
-    void AddXP(float value)
+    public void AddXP(float value)
     {
         if (Current + value > requiredXPPerLevel[Level - 1])
         {

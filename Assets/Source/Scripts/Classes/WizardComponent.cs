@@ -16,6 +16,7 @@ public class WizardComponent : PlayerMonoBehaviour
     public class AutoAttack
     {
         public GameObject autoAttackPrefab;
+        public GameObject staff;
     };
     [Serializable]
     public class Fireball
@@ -95,6 +96,7 @@ public class WizardComponent : PlayerMonoBehaviour
     }
     private void Update()
     {
+        //autoAttack.staff.transform.rotation = Quaternion.Euler(transform.rotation.x + 5, transform.rotation.y, transform.rotation.z);
         SetTimeSinceLastAttack(GetTimeSinceLastAttack() + Time.deltaTime);
         if (!IsStunned)
         {
@@ -149,6 +151,8 @@ public class WizardComponent : PlayerMonoBehaviour
                 var target = GetEntityAtMousePosition();
                 if (ExistsAndIsntSelf(target) && TargetIsWithinRange(target, entityStats.Range.Current))
                 {
+                    autoAttack.staff.AddComponent<StaffRotationComponent>();
+                    Debug.Log("auto has been cast");
                     var autoAttackSpell = gameObject.AddComponent<RangedAutoAttackSpell>();
                     autoAttackSpell.autoAttackPrefab = autoAttack.autoAttackPrefab;
                     autoAttackSpell.damage = entityStats.AtkDamage.Current;
@@ -169,6 +173,7 @@ public class WizardComponent : PlayerMonoBehaviour
                 fireballSpell.direction = GetMouseDirection();
                 fireballSpell.cooldown = fireball.cooldowns[entityStats.XP.Level - 1];
                 fireballSpell.damage = fireball.damage[entityStats.XP.Level - 1];
+                fireballSpell.caster = this;
                 fireballSpell.Cast();
             }
         }
@@ -219,5 +224,4 @@ public class WizardComponent : PlayerMonoBehaviour
             }
         }
     }
-    
 }

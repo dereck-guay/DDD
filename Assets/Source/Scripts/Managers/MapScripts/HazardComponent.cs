@@ -13,6 +13,6 @@ public class HazardComponent : CollisionMonoBehaviour
    private void OnTriggerStay(Collider other)
    {
       if (CollidesWithAppropriateLayer(other.gameObject.layer, damageLayers))
-         other.gameObject.GetComponentInParent<Stats>().HP.TakeDamage(damagePerSecond * Time.deltaTime);
+         other.gameObject.GetComponentInParent<Stats>().HP.TakeDamage(damagePerSecond * Time.deltaTime, null);
    }
 }

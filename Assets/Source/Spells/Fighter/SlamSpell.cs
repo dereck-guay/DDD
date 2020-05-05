@@ -9,6 +9,7 @@ public class SlamSpell : SpellMonoBehavior
     public float damage;
     public float knockbackForce;
     public LayerMask hitLayers;
+    public PlayerMonoBehaviour caster;
 
     public Vector3 landingPosition;
 
@@ -103,7 +104,7 @@ public class SlamSpell : SpellMonoBehavior
             {
                 var GOHit = entityCollider.gameObject;
 
-                GOHit.GetComponentInParent<EntityMonoBehaviour>().entityStats.HP.TakeDamage(damage);
+                GOHit.GetComponentInParent<EntityMonoBehaviour>().entityStats.HP.TakeDamage(damage, caster);
                 GOHit.GetComponentInChildren<Rigidbody>().AddForce(
                     (GOHit.transform.position - transform.position).normalized * knockbackForce
                 );

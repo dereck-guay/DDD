@@ -16,7 +16,7 @@ public class TurretCollisionComponent : CollisionMonoBehaviour
         {
             Destroy(gameObject);
             if (CollidesWithAppropriateLayer(target.layer, damageLayers))
-                target.GetComponent<Stats>().HP.TakeDamage(damage);
+                target.GetComponent<Stats>().HP.TakeDamage(damage, null);
         }
     }
 }

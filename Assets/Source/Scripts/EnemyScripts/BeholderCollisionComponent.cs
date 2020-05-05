@@ -19,7 +19,7 @@ public class BeholderCollisionComponent : CollisionMonoBehaviour
     {
         effects = new Action<EffectHandlerComponent>[]
         {
-            (eHandler) => { eHandler.GetComponent<Stats>().HP.TakeDamage(damage); },
+            (eHandler) => { eHandler.GetComponent<Stats>().HP.TakeDamage(damage, null); },
             (eHandler) => { caster.AddActiveEffect(new ActiveEffect(eHandler, ModifiableStats.Speed, effectBaseModifier, effectBaseDuration)); },
             (eHandler) => { caster.AddActiveEffect(new ActiveEffect(eHandler, ModifiableStats.Speed, effectBaseModifier / 2, effectBaseDuration / 2)); },
             (eHandler) => { caster.AddActiveEffect(new ActiveEffect(eHandler, ModifiableStats.HPRegen, effectBaseModifier / 4, effectBaseDuration)); }
