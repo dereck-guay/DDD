@@ -76,8 +76,46 @@ public class KeybindManager : MonoBehaviour
         {
             Event e = Event.current;
 
-            if(e.isKey)
+            if(e.isKey || e.isMouse)
             {
+                if (e.type == EventType.MouseDown)
+                {
+                    if (e.button == 0)
+                    {
+                        BindKey(bindName, KeyCode.Mouse0);
+                    }
+
+                    if (e.button == 1)
+                    {
+                        BindKey(bindName, KeyCode.Mouse1);
+                    }
+
+                    if (e.button == 2)
+                    {
+                        BindKey(bindName, KeyCode.Mouse2);
+                    }
+
+                    if (e.button == 3)
+                    {
+                        BindKey(bindName, KeyCode.Mouse3);
+                    }
+
+                    if (e.button == 4)
+                    {
+                        BindKey(bindName, KeyCode.Mouse4);
+                    }
+
+                    if (e.button == 5)
+                    {
+                        BindKey(bindName, KeyCode.Mouse5);
+                    }
+
+                    if (e.button == 6)
+                    {
+                        BindKey(bindName, KeyCode.Mouse6);
+                    }
+                }
+                    
                 BindKey(bindName, e.keyCode);
             }
         }
