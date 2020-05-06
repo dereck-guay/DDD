@@ -5,6 +5,26 @@ using UnityEngine;
 
 public abstract class PlayerMonoBehaviour : EntityMonoBehaviour
 {
+    public new Camera camera;
+    [HideInInspector]
+    public bool spellLocked = false;
+
+    #region Auto-attack stuff
+    protected bool canAttack;
+    private float timeSinceLastAttack;
+    protected float TimeSinceLastAttack
+    {
+        get { return timeSinceLastAttack; }
+        set
+        {
+            if (value > 1 / entityStats.AtkSpeed.Current)
+                canAttack = true;
+            timeSinceLastAttack = value;
+        }
+    }
+    #endregion
+    protected Rigidbody rigidBody;
+
     public List<LayerMask> selectableEntities;
     public LayerMask rayCastHitLayer;
     public RespawnManagerComponent respawnManager;
@@ -53,6 +73,78 @@ public abstract class PlayerMonoBehaviour : EntityMonoBehaviour
                 return hit.collider.gameObject;
 
         return null;
+    }
+
+    protected void Move(Vector3 direction)
+    {
+        if (!IsStunned)
+            rigidBody.AddForce(direction * entityStats.Speed.Current * Time.deltaTime * 100f);
+    }
+
+    // Makes the character face the direction of the mouse
+    protected void DirectCharacter()
+    {
+        var directionToLookAt = transform.position + GetMouseDirection();
+        directionToLookAt.y = transform.position.y;
+        transform.LookAt(directionToLookAt);
+    }
+
+    protected void InitializePlayer()
+    {
+        canAttack = true;
+
+        entityStats = GetComponent<Stats>();
+        entityStats.ApplyStats(statsInit);
+
+        rigidBody = GetComponent<Rigidbody>();
+        TimeSinceLastAttack = 0;
+
+        statusBars[0].SetMax(entityStats.HP.Base);
+        statusBars[1].SetMax(entityStats.Mana.Base);
+        entityStats.HP.OnTakeDamage += damage => statusBars[0].SetCurrent(entityStats.HP.Current);
+        entityStats.HP.OnHeal += regen => statusBars[0].SetCurrent(entityStats.HP.Current);
+        entityStats.Mana.OnUse += manaCost => statusBars[1].SetCurrent(entityStats.Mana.Current);
+        entityStats.Mana.OnRegen += manaCost => statusBars[1].SetCurrent(entityStats.Mana.Current);
+
+        entityStats.HP.OnDeath += () => Respawn();
+    }
+
+    protected void UpdatePlayer()
+    {
+        TimeSinceLastAttack += Time.deltaTime;
+        if (!(IsStunned || spellLocked))
+        {
+            DirectCharacter();
+            ManageInputs();
+        }
+        entityStats.Regen();
+
+        camera.transform.position = new Vector3(
+            transform.position.x,
+            camera.transform.position.y,
+            transform.position.z - 5
+        ); // Moves the camera according to the player.
+    }
+
+    protected virtual void ManageInputs()
+    {
+        //Movement
+        if (Input.GetKey(KeybindManager.Instance.KeyBinds["UP"]))
+        {
+            Move(Vector3.forward);
+        }
+        if (Input.GetKey(KeybindManager.Instance.KeyBinds["LEFT"]))
+        {
+            Move(Vector3.left);
+        }
+        if (Input.GetKey(KeybindManager.Instance.KeyBinds["DOWN"]))
+        {
+            Move(Vector3.back);
+        }
+        if (Input.GetKey(KeybindManager.Instance.KeyBinds["RIGHT"]))
+        {
+            Move(Vector3.right);
+        }
     }
 
     IEnumerator CoRespawn(Vector3 respawnPoint)

@@ -8,8 +8,6 @@ using Interfaces;
 using System.Linq;
 public class FighterComponent : PlayerMonoBehaviour
 {
-    public Camera camera;
-
     #region Stuff for inspector
 
     [Serializable]
@@ -49,11 +47,7 @@ public class FighterComponent : PlayerMonoBehaviour
         public GameObject shieldObject;
         public float[] cooldowns;
         public float[] effectiveTimes;
-    };
-    
-
-    
-    
+    };    
 
     [Header("Spell Settings")]
     public AutoAttack autoAttack;
@@ -62,86 +56,13 @@ public class FighterComponent : PlayerMonoBehaviour
     public TakeABreather takeABreather;
     public Shield shield;
     #endregion
-    #region Auto-attack stuff
-    private bool canAttack;
-    private float timeSinceLastAttack;
-    private float GetTimeSinceLastAttack()
-    { return timeSinceLastAttack; }
-    private void SetTimeSinceLastAttack(float value)
-    {
-        if (value > 1 / entityStats.AtkSpeed.Current)
-            canAttack = true;
-        timeSinceLastAttack = value;
-    }
-    #endregion
+    
+    private void Start() => InitializePlayer();
+    private void Update() => UpdatePlayer(); 
 
-    [HideInInspector]
-    public bool spellLocked = false;
-    private Rigidbody rigidBody;
-    private void Awake()
+    protected override void ManageInputs()
     {
-        canAttack = true;
-    }
-    private void Start()
-    {
-        entityStats = GetComponent<Stats>();
-        entityStats.ApplyStats(statsInit);
-
-        shield.shieldObject.SetActive(false);
-        rigidBody = GetComponentInChildren<Rigidbody>();
-        SetTimeSinceLastAttack(0);
-    }
-
-    private void Update()
-    {
-        SetTimeSinceLastAttack(GetTimeSinceLastAttack() + Time.deltaTime);
-        if (!(IsStunned || spellLocked))
-        {
-            DirectCharacter();
-            GetInput();
-        }
-        entityStats.Regen();
-
-        camera.transform.position = new Vector3(
-            transform.position.x,
-            camera.transform.position.y,
-            transform.position.z - 5
-        ); // Moves the camera according to the player.
-    }
-
-    private void Move(Vector3 direction)
-    {
-        if(!IsStunned)
-            rigidBody.AddForce(direction * entityStats.Speed.Current * Time.deltaTime * 100f);
-    }
-
-    // Makes the character face the direction of the mouse
-    void DirectCharacter() 
-    {
-        var directionToLookAt = transform.position + GetMouseDirection();
-        directionToLookAt.y = transform.position.y;
-        transform.LookAt(directionToLookAt);
-    }
-
-    private void GetInput()
-    {
-        //Movement
-        if (Input.GetKey(KeybindManager.Instance.KeyBinds["UP"]))
-        {
-            Move(Vector3.forward);
-        }
-        if (Input.GetKey(KeybindManager.Instance.KeyBinds["LEFT"]))
-        {
-            Move(Vector3.left);
-        }
-        if (Input.GetKey(KeybindManager.Instance.KeyBinds["DOWN"]))
-        {
-            Move(Vector3.back);
-        }
-        if (Input.GetKey(KeybindManager.Instance.KeyBinds["RIGHT"]))
-        {
-            Move(Vector3.right);
-        }
+        base.ManageInputs();
         //Actions
         if (Input.GetKey(KeybindManager.Instance.ActionBinds["ACTAA"]))
         {
@@ -155,7 +76,7 @@ public class FighterComponent : PlayerMonoBehaviour
                     autoAttackSpell.damage = entityStats.AtkDamage.Current;
                     autoAttackSpell.target = target.GetComponent<Transform>().gameObject;
                     autoAttackSpell.Cast(entityStats.AtkSpeed.Current, transform.position);
-                    SetTimeSinceLastAttack(0);
+                    TimeSinceLastAttack = 0;
                     canAttack = false;
                 }
             }

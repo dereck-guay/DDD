@@ -8,8 +8,6 @@ using Interfaces;
 [RequireComponent(typeof(Rigidbody))]
 public class WizardComponent : PlayerMonoBehaviour
 {
-    public Camera camera;
-
     #region Stuff for inspector
 
     [Serializable]
@@ -58,91 +56,17 @@ public class WizardComponent : PlayerMonoBehaviour
     public Heal heal;
     public RayOfFrost rayOfFrost;
     #endregion
-    #region Auto-attack stuff
-    private bool canAttack;
-    private float timeSinceLastAttack;
-    private float GetTimeSinceLastAttack()
-    { return timeSinceLastAttack; }
-    private void SetTimeSinceLastAttack(float value)
-    {
-        if (value > 1 / entityStats.AtkSpeed.Current)
-            canAttack = true;
-        timeSinceLastAttack = value;
-    }
-    #endregion
-
-    private Rigidbody rigidBody;
-    private void Awake()
-    {
-        canAttack = true;
-    }
-
-    private void Start()
-    {
-        entityStats = GetComponent<Stats>();
-        entityStats.ApplyStats(statsInit);
-
-        rigidBody = GetComponent<Rigidbody>();
-        SetTimeSinceLastAttack(0);
-
-        statusBars[0].SetMax(entityStats.HP.Base);
-        statusBars[1].SetMax(entityStats.Mana.Base);
-        entityStats.HP.OnTakeDamage += damage => statusBars[0].SetCurrent(entityStats.HP.Current);
-        entityStats.HP.OnHeal += regen => statusBars[0].SetCurrent(entityStats.HP.Current);
-        entityStats.Mana.OnUse += manaCost => statusBars[1].SetCurrent(entityStats.Mana.Current);
-        entityStats.Mana.OnRegen += manaCost => statusBars[1].SetCurrent(entityStats.Mana.Current);
-
-        entityStats.HP.OnDeath += () => Respawn();
-    }
+    
+    private void Start() => InitializePlayer();
     private void Update()
     {
         //autoAttack.staff.transform.rotation = Quaternion.Euler(transform.rotation.x + 5, transform.rotation.y, transform.rotation.z);
-        SetTimeSinceLastAttack(GetTimeSinceLastAttack() + Time.deltaTime);
-        if (!IsStunned)
-        {
-            DirectCharacter();
-            GetInput();
-        }
-        entityStats.Regen();
-
-        camera.transform.position = new Vector3(
-            transform.position.x,
-            camera.transform.position.y,
-            transform.position.z - 5
-        ); // Moves the camera according to the player.
-   }
-
-    private void Move(Vector3 direction)
-    {
-        if(!IsStunned)
-            rigidBody.AddForce(direction * entityStats.Speed.Current * Time.deltaTime * 100f);
-    }
-    void DirectCharacter() //make the character face the direction of the mouse
-    {
-        var directionToLookAt = transform.position + GetMouseDirection();
-        directionToLookAt.y = transform.position.y;
-        transform.LookAt(directionToLookAt);
+        UpdatePlayer();
     }
 
-    private void GetInput()
+    protected override void ManageInputs()
     {
-        //Movement
-        if (Input.GetKey(KeybindManager.Instance.KeyBinds["UP"]))
-        {
-            Move(Vector3.forward);
-        }
-        if (Input.GetKey(KeybindManager.Instance.KeyBinds["LEFT"]))
-        {
-            Move(Vector3.left);
-        }
-        if (Input.GetKey(KeybindManager.Instance.KeyBinds["DOWN"]))
-        {
-            Move(Vector3.back);
-        }
-        if (Input.GetKey(KeybindManager.Instance.KeyBinds["RIGHT"]))
-        {
-            Move(Vector3.right);
-        }
+        base.ManageInputs();
         //Actions
         if (Input.GetKey(KeybindManager.Instance.ActionBinds["ACTAA"]))
         {
@@ -158,7 +82,7 @@ public class WizardComponent : PlayerMonoBehaviour
                     autoAttackSpell.damage = entityStats.AtkDamage.Current;
                     autoAttackSpell.target = target.GetComponent<Transform>().gameObject;
                     autoAttackSpell.Cast(entityStats.AtkSpeed.Current, transform.position);
-                    SetTimeSinceLastAttack(0);
+                    TimeSinceLastAttack = 0;
                     canAttack = false;
                 }
             }

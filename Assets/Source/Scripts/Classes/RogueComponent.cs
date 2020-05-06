@@ -9,8 +9,6 @@ using System.Linq;
 
 public class RogueComponent : PlayerMonoBehaviour
 {
-    public Camera camera;
-
     #region Stuff for inspector
 
     [Serializable]
@@ -62,80 +60,14 @@ public class RogueComponent : PlayerMonoBehaviour
     public FanOfKnives fanOfKnives;
 
     #endregion
-    #region Auto-attack stuff
-    private bool canAttack;
-    private float timeSinceLastAttack;
-    private float GetTimeSinceLastAttack()
-    { return timeSinceLastAttack; }
-    private void SetTimeSinceLastAttack(float value)
-    {
-        if (value > 1 / entityStats.AtkSpeed.Current)
-            canAttack = true;
-        timeSinceLastAttack = value;
-    }
-    #endregion
-    private Rigidbody rigidBody;
     private bool isDashing;
-    private void Awake()
-    {
-        canAttack = true;
-    }
-    private void Start()
-    {
-        entityStats = GetComponent<Stats>();
-        entityStats.ApplyStats(statsInit);
+    
+    private void Start() => InitializePlayer();
+    private void Update() => UpdatePlayer();
 
-        rigidBody = GetComponentInChildren<Rigidbody>();
-        SetTimeSinceLastAttack(0);
-    }
-
-    private void Update()
+    protected override void ManageInputs()
     {
-        SetTimeSinceLastAttack(GetTimeSinceLastAttack() + Time.deltaTime);
-        if (!IsStunned)
-        {
-            DirectCharacter();
-            GetInput();
-        }
-        entityStats.Regen();
-
-        camera.transform.position = new Vector3(
-            transform.position.x,
-            camera.transform.position.y,
-            transform.position.z - 5
-        ); // Moves the camera according to the player.
-    }
-
-    private void Move(Vector3 direction)
-    {
-        if (!IsStunned && !isDashing)
-            rigidBody.AddForce(direction * entityStats.Speed.Current * Time.deltaTime * 100f);
-    }
-    void DirectCharacter() //make the character face the direction of the mouse
-    {
-        var directionToLookAt = transform.position + GetMouseDirection();
-        directionToLookAt.y = transform.position.y;
-        transform.LookAt(directionToLookAt);
-    }
-    private void GetInput()
-    {
-        //Movement
-        if (Input.GetKey(KeybindManager.Instance.KeyBinds["UP"]))
-        {
-            Move(Vector3.forward);
-        }
-        if (Input.GetKey(KeybindManager.Instance.KeyBinds["LEFT"]))
-        {
-            Move(Vector3.left);
-        }
-        if (Input.GetKey(KeybindManager.Instance.KeyBinds["DOWN"]))
-        {
-            Move(Vector3.back);
-        }
-        if (Input.GetKey(KeybindManager.Instance.KeyBinds["RIGHT"]))
-        {
-            Move(Vector3.right);
-        }
+        base.ManageInputs();
         //Actions
         if (Input.GetKey(KeybindManager.Instance.ActionBinds["ACTAA"]))
         {
@@ -149,7 +81,7 @@ public class RogueComponent : PlayerMonoBehaviour
                     autoAttackSpell.damage = entityStats.AtkDamage.Current;
                     autoAttackSpell.target = target.GetComponent<Transform>().gameObject;
                     autoAttackSpell.Cast(entityStats.AtkSpeed.Current, transform.position);
-                    SetTimeSinceLastAttack(0);
+                    TimeSinceLastAttack = 0;
                     canAttack = false;
                 }
             }
