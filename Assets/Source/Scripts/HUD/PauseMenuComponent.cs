@@ -41,6 +41,8 @@ public class PauseMenuComponent : MonoBehaviour
     public void Pause()
     {
         pauseMenu.SetActive(true);
+        foreach (Button btn in Buttons)
+            btn.interactable = true;
         Time.timeScale = 0f;
         GameIsPaused = true;
     }

@@ -37,7 +37,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 49.399994, y: 2.6799622}
+  m_AnchoredPosition: {x: -140.6, y: 2.6799622}
   m_SizeDelta: {x: 80, y: 80}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &1007027616188861859
@@ -101,7 +101,7 @@ GameObject:
   - component: {fileID: 1036927941358988474}
   - component: {fileID: 8162647953281904750}
   m_Layer: 5
-  m_Name: ExplosiveFireballText
+  m_Name: SText
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -768,7 +768,7 @@ GameObject:
   - component: {fileID: 5295089897687081264}
   - component: {fileID: 8104949372966179805}
   m_Layer: 5
-  m_Name: Frost
+  m_Name: Smoke
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -792,7 +792,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -140.59995, y: 2.6799622}
+  m_AnchoredPosition: {x: 49.4, y: 2.6799622}
   m_SizeDelta: {x: 80, y: 80}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &6346346139690077857
@@ -1179,7 +1179,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -51.3, y: 83.4}
+  m_AnchoredPosition: {x: 139, y: 86}
   m_SizeDelta: {x: 179.39, y: 17}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &3987606069236928111
@@ -1230,7 +1230,7 @@ GameObject:
   - component: {fileID: 8622672556293890115}
   - component: {fileID: 5356935230571605061}
   m_Layer: 5
-  m_Name: RFImage
+  m_Name: SImage
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1253,7 +1253,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 139.39, y: 86.8}
+  m_AnchoredPosition: {x: -51, y: 90}
   m_SizeDelta: {x: 174.96, y: -9.92}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &8622672556293890115
@@ -1762,6 +1762,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   dashMask: {fileID: 6661089831864439023}
   stunningMask: {fileID: 360151487375318077}
+  fanMask: {fileID: 0}
+  smokeMask: {fileID: 0}
 --- !u!1 &5721704769441255172
 GameObject:
   m_ObjectHideFlags: 0
@@ -1895,7 +1897,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 0.9215687, b: 0, a: 1}
+  m_Color: {r: 1, g: 0, b: 0, a: 1}
   m_RaycastTarget: 1
   m_OnCullStateChanged:
     m_PersistentCalls:
@@ -1995,7 +1997,7 @@ GameObject:
   - component: {fileID: 2562018914185451484}
   - component: {fileID: 662628025671397358}
   m_Layer: 5
-  m_Name: SlownessButton
+  m_Name: FanImage
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2069,7 +2071,7 @@ GameObject:
   - component: {fileID: 2336133948954137295}
   - component: {fileID: 3184954805766867792}
   m_Layer: 5
-  m_Name: SlownessText
+  m_Name: FText
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2373,7 +2375,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 0.9215687, b: 0, a: 1}
+  m_Color: {r: 1, g: 0, b: 0, a: 1}
   m_RaycastTarget: 1
   m_OnCullStateChanged:
     m_PersistentCalls:
@@ -2546,7 +2548,7 @@ GameObject:
   - component: {fileID: 7790204502354984071}
   - component: {fileID: 1102177251191769682}
   m_Layer: 5
-  m_Name: SImage
+  m_Name: FImage
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2570,7 +2572,7 @@ RectTransform:
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
   m_AnchoredPosition: {x: -142, y: 81.5}
-  m_SizeDelta: {x: 180.3, y: 17}
+  m_SizeDelta: {x: 180.30002, y: 17}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &7790204502354984071
 CanvasRenderer:
@@ -2694,7 +2696,7 @@ GameObject:
   - component: {fileID: 8353544964313119443}
   - component: {fileID: 4230330404596594417}
   m_Layer: 5
-  m_Name: Slowness
+  m_Name: FanOfKnives
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2829,7 +2831,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 0.9215687, b: 0, a: 1}
+  m_Color: {r: 1, g: 0, b: 0, a: 1}
   m_RaycastTarget: 1
   m_OnCullStateChanged:
     m_PersistentCalls:
@@ -3037,7 +3039,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 0.9215687, b: 0, a: 1}
+  m_Color: {r: 1, g: 0, b: 0, a: 1}
   m_RaycastTarget: 1
   m_OnCullStateChanged:
     m_PersistentCalls:
@@ -3226,7 +3228,7 @@ GameObject:
   - component: {fileID: 6103831446059554757}
   - component: {fileID: 2033853183383611743}
   m_Layer: 5
-  m_Name: RayOfFrostImage
+  m_Name: SmokeImage
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

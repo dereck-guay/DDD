@@ -22,8 +22,8 @@ public class FighterCooldownComponent : MonoBehaviour
 
     void Update()
     {
-        //if (fighter.GetComponent<SlamSpell>() != null)
-        //    SlamCooldown(fighter.slam.cooldowns[0]);
+        if (fighter.GetComponent<SlamSpell>() != null)
+            SlamCooldown(fighter.slam.cooldowns[0]);
         if (fighter.GetComponent<RageSpell>() != null)
             RageCooldown(fighter.rage.cooldowns[0]);
         if (fighter.GetComponent<TakeABreatherSpell>() != null)

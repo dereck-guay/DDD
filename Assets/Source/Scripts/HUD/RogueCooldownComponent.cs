@@ -7,12 +7,12 @@ public class RogueCooldownComponent : MonoBehaviour
 {
     private float nextDashTime = 0;
     private float nextStunningTime = 0;
-    //private float nextHealTime = 0;
-    //private float nextSlowTime = 0;
+    private float nextFanTime = 0;
+    private float nextSmokeTime = 0;
     public Image dashMask;
     public Image stunningMask;
-    //public Image healMask;
-    //public Image slowMask;
+    public Image fanMask;
+    public Image smokeMask;
     private RogueComponent rogue;
 
     private void Start()
@@ -22,14 +22,14 @@ public class RogueCooldownComponent : MonoBehaviour
 
     void Update()
     {
-        //if (rogue.GetComponent<>() != null)
-        //    DashCooldown(rogue..cooldowns[0]);
+        if (rogue.GetComponent<DashSpell>() != null)
+            DashCooldown(rogue.dash.cooldowns[0]);
         if (rogue.GetComponent<StunningBladeSpell>() != null)
             StunningCooldown(rogue.stunningBlade.cooldowns[0]);
-        //if (rogue.GetComponent<>() != null)
-        //    HealCooldown(rogue..cooldowns[0]);
-        //if (rogue.GetComponent<>() != null)
-        //    SlowCooldown(rogue..cooldowns[0]);
+        if (rogue.GetComponent<FanOfKnivesSpell>() != null)
+            FanCooldown(rogue.fanOfKnives.cooldowns[0]);
+        if (rogue.GetComponent<SmokeScreenSpell>() != null)
+            SmokeCooldown(rogue.smokeScreen.cooldowns[0]);
     }
 
     public void DashCooldown(float cooldownTime)
@@ -62,27 +62,27 @@ public class RogueCooldownComponent : MonoBehaviour
             nextStunningTime -= Time.deltaTime;
     }
 
-    //public void HealCooldown(float cooldownTime)
-    //{
-    //    stunningMask.fillAmount = (nextHealTime / cooldownTime);
+    public void SmokeCooldown(float cooldownTime)
+    {
+        smokeMask.fillAmount = (nextFanTime / cooldownTime);
 
-    //    if (nextHealTime == 0)
-    //        nextHealTime = cooldownTime;
-    //    if (nextHealTime <= 0)
-    //        nextHealTime = 0;
-    //    else if (nextHealTime > 0)
-    //        nextHealTime -= Time.deltaTime;
-    //}
+        if (nextFanTime == 0)
+            nextFanTime = cooldownTime;
+        if (nextFanTime <= 0)
+            nextFanTime = 0;
+        else if (nextFanTime > 0)
+            nextFanTime -= Time.deltaTime;
+    }
 
-    //public void SlowCooldown(float cooldownTime)
-    //{
-    //    stunningMask.fillAmount = (nextSlowTime / cooldownTime);
+    public void FanCooldown(float cooldownTime)
+    {
+        fanMask.fillAmount = (nextSmokeTime / cooldownTime);
 
-    //    if (nextSlowTime == 0)
-    //        nextSlowTime = cooldownTime;
-    //    if (nextSlowTime <= 0)
-    //        nextSlowTime = 0;
-    //    else if (nextSlowTime > 0)
-    //        nextSlowTime -= Time.deltaTime;
-    //}
+        if (nextSmokeTime == 0)
+            nextSmokeTime = cooldownTime;
+        if (nextSmokeTime <= 0)
+            nextSmokeTime = 0;
+        else if (nextSmokeTime > 0)
+            nextSmokeTime -= Time.deltaTime;
+    }
 }
