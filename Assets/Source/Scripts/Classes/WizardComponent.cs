@@ -76,7 +76,6 @@ public class WizardComponent : PlayerMonoBehaviour
                 if (ExistsAndIsntSelf(target) && TargetIsWithinRange(target, entityStats.Range.Current))
                 {
                     autoAttack.staff.AddComponent<StaffRotationComponent>();
-                    Debug.Log("auto has been cast");
                     var autoAttackSpell = gameObject.AddComponent<RangedAutoAttackSpell>();
                     autoAttackSpell.autoAttackPrefab = autoAttack.autoAttackPrefab;
                     autoAttackSpell.damage = entityStats.AtkDamage.Current;
