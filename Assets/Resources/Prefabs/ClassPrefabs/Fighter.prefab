@@ -272,6 +272,9 @@ MonoBehaviour:
     manaRegen: 5
     range: 5
     speed: 25
+    xpValue: 0
+  camera: {fileID: 0}
+  spellLocked: 0
   selectableEntities:
   - serializedVersion: 2
     m_Bits: 1024
@@ -286,8 +289,8 @@ MonoBehaviour:
   statusBars: []
   characterParts:
     body: {fileID: 3327950002639287408}
-  camera: {fileID: 0}
-  inputs: 430100007700000061000000730000006400000031000000320000003300000034000000
+  DeathSoundName: FighterDeath
+  SpawnSoundName: FighterSpawn
   autoAttack:
     autoAttackPrefab: {fileID: 405955550181731434, guid: aac1e7f679631db488ae156993deaa8f,
       type: 3}
@@ -314,7 +317,6 @@ MonoBehaviour:
     shieldObject: {fileID: 5592215202980429576}
     cooldowns: []
     effectiveTimes: []
-  spellLocked: 0
 --- !u!54 &981901871628974245
 Rigidbody:
   m_ObjectHideFlags: 0

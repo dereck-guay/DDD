@@ -53,6 +53,7 @@ public class HP : IModifiableStat
                 OnDeath?.Invoke();
                 if (attacker)
                     attacker.entityStats.XP.AddXP(xpValue);
+                Debug.Log(attacker.gameObject);
             }
             //Debug.Log($"New hp is {Current}");
         }
@@ -64,7 +65,7 @@ public class HP : IModifiableStat
         Current = hPBase;
         HPRegen = hPRegen;
         xpValue = initXpValue;
-        //OnDeath += () => Debug.Log("target has died");
+        OnDeath += () => Debug.Log("target has died");
         IsInvulnerable = false;
     }
     public string Name = "HP";
@@ -77,6 +78,7 @@ public class HP : IModifiableStat
         if(!IsInvulnerable)
             Current -= damage;
         attacker = null;
+
     }
     public void Heal(float hPToHeal) => Current += hPToHeal;
     public void Regen(float time)

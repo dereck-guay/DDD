@@ -9,7 +9,7 @@ public class XP
 {
     int level;
     const int MaxLevel = 3;
-    readonly float[] requiredXPPerLevel = new float[] { 1,2,3 };
+    readonly float[] requiredXPPerLevel = new float[] { 15,30,50 };
     public float Current { get; private set; }
     public int Level
     {
@@ -35,11 +35,14 @@ public class XP
         if (Current + value > requiredXPPerLevel[Level - 1])
         {
             ++Level;
-            Current += requiredXPPerLevel[Level];
-            value -= requiredXPPerLevel[Level];
             AddXP(value);
+            Debug.Log(value + " XP has been added");
         }
-        else { Current += value; }
+        else 
+        { 
+            Current += value;
+            Debug.Log(value + " XP has been added");
+        }
     }
     public string Name = "XP";
     public override string ToString()

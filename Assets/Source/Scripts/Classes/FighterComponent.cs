@@ -71,11 +71,10 @@ public class FighterComponent : PlayerMonoBehaviour
                 var target = GetEntityAtMousePosition();
                 if (ExistsAndIsntSelf(target) && TargetIsWithinRange(target, entityStats.Range.Current))
                 {
-                    var autoAttackSpell = gameObject.AddComponent<RangedAutoAttackSpell>();
+                    var autoAttackSpell = gameObject.AddComponent<MeleeAutoAttackSpell>();
                     autoAttackSpell.autoAttackPrefab = autoAttack.autoAttackPrefab;
                     autoAttackSpell.damage = entityStats.AtkDamage.Current;
-                    autoAttackSpell.target = target.GetComponent<Transform>().gameObject;
-                    autoAttackSpell.Cast(entityStats.AtkSpeed.Current, transform.position);
+                    autoAttackSpell.Cast(entityStats.AtkSpeed.Current, transform.position, GetMouseDirection(), transform, this);
                     TimeSinceLastAttack = 0;
                     canAttack = false;
                 }

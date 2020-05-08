@@ -41,6 +41,10 @@ public abstract class PlayerMonoBehaviour : EntityMonoBehaviour
     [Header("Character Parts")]
     public CharacterParts characterParts;
 
+    [Header("Audio Settings")]
+    public string DeathSoundName;
+    public string SpawnSoundName;
+
     protected bool IsOnCooldown(Type spellComponent) => GetComponent(spellComponent) != null;
 
     protected Vector3 GetMouseDirection() =>
@@ -107,6 +111,7 @@ public abstract class PlayerMonoBehaviour : EntityMonoBehaviour
         entityStats.Mana.OnRegen += manaCost => statusBars[1].SetCurrent(entityStats.Mana.Current);
 
         entityStats.HP.OnDeath += () => Respawn();
+        entityStats.HP.OnDeath += () => FindObjectOfType<AudioManager>().Play(DeathSoundName);
     }
 
     protected void UpdatePlayer()
@@ -153,7 +158,7 @@ public abstract class PlayerMonoBehaviour : EntityMonoBehaviour
         transform.Translate(20 * Vector3.down);
 
         yield return new WaitForSeconds(respawnManager.respawnDelay);
-
+        FindObjectOfType<AudioManager>().Play(SpawnSoundName);
         entityStats.HP.Heal(entityStats.HP.Base);
         statusBars[0].SetCurrent(entityStats.HP.Current);
 

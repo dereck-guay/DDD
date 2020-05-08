@@ -781,6 +781,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 10bda2d43c9192142b9b5535ffc5ae52, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!1 &660108129 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 4022705104772730660, guid: b3a55247596b7ee4cbe346ea4a417ead,
+    type: 3}
+  m_PrefabInstance: {fileID: 1337713231}
+  m_PrefabAsset: {fileID: 0}
 --- !u!114 &682465979 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 3647783612929683581, guid: a65c66f2c830f2047ad216e6b547ed78,
@@ -3093,6 +3099,11 @@ PrefabInstance:
       propertyPath: selectableEntities.Array.data[0].m_Bits
       value: 1024
       objectReference: {fileID: 0}
+    - target: {fileID: 8654396917311496859, guid: b3a55247596b7ee4cbe346ea4a417ead,
+        type: 3}
+      propertyPath: autoAttack.staff
+      value: 
+      objectReference: {fileID: 660108129}
     - target: {fileID: 8672809628951962435, guid: b3a55247596b7ee4cbe346ea4a417ead,
         type: 3}
       propertyPath: m_AnchorMin.y

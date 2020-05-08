@@ -80,7 +80,7 @@ public class RogueComponent : PlayerMonoBehaviour
                     autoAttackSpell.autoAttackPrefab = autoAttack.autoAttackPrefab;
                     autoAttackSpell.damage = entityStats.AtkDamage.Current;
                     autoAttackSpell.target = target.GetComponent<Transform>().gameObject;
-                    autoAttackSpell.Cast(entityStats.AtkSpeed.Current, transform.position);
+                    autoAttackSpell.Cast(entityStats.AtkSpeed.Current, transform.position, this);
                     TimeSinceLastAttack = 0;
                     canAttack = false;
                 }
