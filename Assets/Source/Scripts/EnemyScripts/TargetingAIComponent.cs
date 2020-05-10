@@ -54,6 +54,9 @@ public class TargetingAIComponent : MonoBehaviour
     {
         if (!isStunned)
         {
+            if (!agent.enabled)
+                agent.enabled = true;
+
             if (HasTarget)
                 agent.SetDestination(targetsInRange[0].position);
             else
@@ -62,6 +65,8 @@ public class TargetingAIComponent : MonoBehaviour
                 wanderingAI?.Go();
             }
         }
+        else if (agent.enabled)
+            agent.enabled = false;
     }
 
     IEnumerator TestForNavMesh()

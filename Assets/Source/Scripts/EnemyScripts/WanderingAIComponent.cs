@@ -42,7 +42,6 @@ public class WanderingAIComponent : MonoBehaviour
         {
             agent.enabled = false;
             walkingAnimation?.Stop();
-
         }
 
         if (!isStunned)
@@ -57,7 +56,9 @@ public class WanderingAIComponent : MonoBehaviour
                 StartCoroutine("SetDestination");
                 walkingAnimation?.Walk();
             }
-        }         
+        }
+        else if (agent.enabled)
+            agent.enabled = false;
     }
 
     IEnumerator SetDestination()
