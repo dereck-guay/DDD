@@ -23,13 +23,13 @@ public class RogueCooldownComponent : MonoBehaviour
     void Update()
     {
         if (rogue.GetComponent<DashSpell>() != null)
-            DashCooldown(rogue.dash.cooldowns[0]);
+            DashCooldown(rogue.dash.cooldowns[rogue.entityStats.XP.Level - 1]);
         if (rogue.GetComponent<StunningBladeSpell>() != null)
-            StunningCooldown(rogue.stunningBlade.cooldowns[0]);
+            StunningCooldown(rogue.stunningBlade.cooldowns[rogue.entityStats.XP.Level - 1]);
         if (rogue.GetComponent<FanOfKnivesSpell>() != null)
-            FanCooldown(rogue.fanOfKnives.cooldowns[0]);
+            FanCooldown(rogue.fanOfKnives.cooldowns[rogue.entityStats.XP.Level - 1]);
         if (rogue.GetComponent<SmokeScreenSpell>() != null)
-            SmokeCooldown(rogue.smokeScreen.cooldowns[0]);
+            SmokeCooldown(rogue.smokeScreen.cooldowns[rogue.entityStats.XP.Level - 1]);
     }
 
     public void DashCooldown(float cooldownTime)

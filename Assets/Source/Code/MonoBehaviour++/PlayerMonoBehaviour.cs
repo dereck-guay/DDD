@@ -30,6 +30,7 @@ public abstract class PlayerMonoBehaviour : EntityMonoBehaviour
     public RespawnManagerComponent respawnManager;
 
     public StatusBarsComponent[] statusBars;
+    public XPBarComponent xPBar;
 
     [Serializable]
     public class CharacterParts
@@ -88,9 +89,12 @@ public abstract class PlayerMonoBehaviour : EntityMonoBehaviour
     // Makes the character face the direction of the mouse
     protected void DirectCharacter()
     {
-        var directionToLookAt = transform.position + GetMouseDirection();
-        directionToLookAt.y = transform.position.y;
-        transform.LookAt(directionToLookAt);
+        if (PauseMenuComponent.GameIsPaused == false)
+        {
+            var directionToLookAt = transform.position + GetMouseDirection();
+            directionToLookAt.y = transform.position.y;
+            transform.LookAt(directionToLookAt);
+        }
     }
 
     protected void InitializePlayer()
@@ -122,6 +126,7 @@ public abstract class PlayerMonoBehaviour : EntityMonoBehaviour
             DirectCharacter();
             ManageInputs();
         }
+        xPBar.GainXP(entityStats.XP.Current, entityStats.XP.requiredXPPerLevel[entityStats.XP.Level - 1], entityStats.XP.Level);
         entityStats.Regen();
 
         camera.transform.position = new Vector3(

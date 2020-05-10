@@ -1132,6 +1132,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fd3b09a2fc2e4a34cb320dda27767f28, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  barText: {fileID: 7883177010525429195}
+  levelText: {fileID: 2787316327401238049}
   xpSlider: {fileID: 6857649066183861333}
   gradient:
     serializedVersion: 2
@@ -2745,8 +2747,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 1, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -151.6, y: 0}
-  m_SizeDelta: {x: 303.2, y: 0}
+  m_AnchoredPosition: {x: -293.3, y: 0}
+  m_SizeDelta: {x: 535.9, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &6607377242892057300
 CanvasRenderer:
@@ -2776,11 +2778,11 @@ MonoBehaviour:
       m_Calls: []
   m_FontData:
     m_Font: {fileID: 10102, guid: 0000000000000000e000000000000000, type: 0}
-    m_FontSize: 27
+    m_FontSize: 100
     m_FontStyle: 0
     m_BestFit: 0
     m_MinSize: 0
-    m_MaxSize: 40
+    m_MaxSize: 100
     m_Alignment: 5
     m_AlignByGeometry: 0
     m_RichText: 1

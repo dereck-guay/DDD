@@ -23,13 +23,13 @@ public class FighterCooldownComponent : MonoBehaviour
     void Update()
     {
         if (fighter.GetComponent<SlamSpell>() != null)
-            SlamCooldown(fighter.slam.cooldowns[0]);
+            SlamCooldown(fighter.slam.cooldowns[fighter.entityStats.XP.Level - 1]);
         if (fighter.GetComponent<RageSpell>() != null)
-            RageCooldown(fighter.rage.cooldowns[0]);
+            RageCooldown(fighter.rage.cooldowns[fighter.entityStats.XP.Level - 1]);
         if (fighter.GetComponent<TakeABreatherSpell>() != null)
-            BreatherCooldown(fighter.takeABreather.cooldowns[0]);
+            BreatherCooldown(fighter.takeABreather.cooldowns[fighter.entityStats.XP.Level - 1]);
         if (fighter.GetComponent<ShieldSpell>() != null)
-            ShieldCooldown(fighter.shield.cooldowns[0]);
+            ShieldCooldown(fighter.shield.cooldowns[fighter.entityStats.XP.Level - 1]);
     }
 
     public void SlamCooldown(float cooldownTime)

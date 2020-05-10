@@ -24,13 +24,13 @@ public class WizardCooldownComponent : MonoBehaviour
     void Update()
     {
         if (wizard.GetComponent<FireballSpell>() != null)
-            FireballCooldown(wizard.fireball.cooldowns[0]);
+            FireballCooldown(wizard.fireball.cooldowns[wizard.entityStats.XP.Level - 1]);
         if (wizard.GetComponent<RayOfFrostSpell>() != null)
-            FrostCooldown(wizard.rayOfFrost.cooldowns[0]);
+            FrostCooldown(wizard.rayOfFrost.cooldowns[wizard.entityStats.XP.Level - 1]);
         if (wizard.GetComponent<HealSpell>() != null)
-            HealCooldown(wizard.heal.cooldowns[0]);
+            HealCooldown(wizard.heal.cooldowns[wizard.entityStats.XP.Level - 1]);
         if (wizard.GetComponent<SlowSpell>() != null)
-            SlowCooldown(wizard.slow.cooldowns[0]);
+            SlowCooldown(wizard.slow.cooldowns[wizard.entityStats.XP.Level - 1]);
     }
 
     public void FireballCooldown(float cooldownTime)
