@@ -1754,6 +1754,7 @@ MonoBehaviour:
     manaRegen: 1
     range: 8
     speed: 2
+    xpYield: 5
   projectile: {fileID: 5380225086048190211, guid: 66529456c9fde734ab6b687f73d35ae4,
     type: 3}
   exit: {fileID: 5915807953252482617}

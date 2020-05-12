@@ -32,6 +32,10 @@ public abstract class PlayerMonoBehaviour : EntityMonoBehaviour
     public StatusBarsComponent[] statusBars;
     public XPBarComponent xPBar;
 
+    [SerializeField]
+    uint deathScorePenalty = 50;
+    public int Score { get; private set; }
+
     [Serializable]
     public class CharacterParts
     {
@@ -46,10 +50,14 @@ public abstract class PlayerMonoBehaviour : EntityMonoBehaviour
     public string DeathSoundName;
     public string SpawnSoundName;
 
+    Vector3 movementDirection;
+
     protected bool IsOnCooldown(Type spellComponent) => GetComponent(spellComponent) != null;
 
     protected Vector3 GetMouseDirection() =>
         (GetMousePositionOn2DPlane() - transform.position).normalized;
+
+    public void AddScore(int value) => Score += value;
 
     //------------------------------
     // NE VIENS PAS DE NOUS
@@ -83,7 +91,7 @@ public abstract class PlayerMonoBehaviour : EntityMonoBehaviour
     protected void Move(Vector3 direction)
     {
         if (!IsStunned)
-            rigidBody.AddForce(direction * entityStats.Speed.Current * Time.deltaTime * 100f);
+            rigidBody.AddForce(direction.normalized * entityStats.Speed.Current * Time.deltaTime * 100f);
     }
 
     // Makes the character face the direction of the mouse
@@ -107,15 +115,18 @@ public abstract class PlayerMonoBehaviour : EntityMonoBehaviour
         rigidBody = GetComponent<Rigidbody>();
         TimeSinceLastAttack = 0;
 
+        Score = 0;
+
         statusBars[0].SetMax(entityStats.HP.Base);
         statusBars[1].SetMax(entityStats.Mana.Base);
-        entityStats.HP.OnTakeDamage += damage => statusBars[0].SetCurrent(entityStats.HP.Current);
+        entityStats.HP.OnTakeDamage += (damage, player) => statusBars[0].SetCurrent(entityStats.HP.Current);
         entityStats.HP.OnHeal += regen => statusBars[0].SetCurrent(entityStats.HP.Current);
         entityStats.Mana.OnUse += manaCost => statusBars[1].SetCurrent(entityStats.Mana.Current);
         entityStats.Mana.OnRegen += manaCost => statusBars[1].SetCurrent(entityStats.Mana.Current);
 
         entityStats.HP.OnDeath += () => Respawn();
         entityStats.HP.OnDeath += () => FindObjectOfType<AudioManager>().Play(DeathSoundName);
+        entityStats.HP.OnDeath += () => AddScore(-(int)deathScorePenalty);
     }
 
     protected void UpdatePlayer()
@@ -138,23 +149,19 @@ public abstract class PlayerMonoBehaviour : EntityMonoBehaviour
 
     protected virtual void ManageInputs()
     {
+        movementDirection = Vector3.zero;
+
         //Movement
         if (Input.GetKey(KeybindManager.Instance.KeyBinds["UP"]))
-        {
-            Move(Vector3.forward);
-        }
+            movementDirection += Vector3.forward;
         if (Input.GetKey(KeybindManager.Instance.KeyBinds["LEFT"]))
-        {
-            Move(Vector3.left);
-        }
+            movementDirection += Vector3.left;
         if (Input.GetKey(KeybindManager.Instance.KeyBinds["DOWN"]))
-        {
-            Move(Vector3.back);
-        }
+            movementDirection += Vector3.back;
         if (Input.GetKey(KeybindManager.Instance.KeyBinds["RIGHT"]))
-        {
-            Move(Vector3.right);
-        }
+            movementDirection += Vector3.right;
+
+        Move(movementDirection);
     }
 
     IEnumerator CoRespawn(Vector3 respawnPoint)

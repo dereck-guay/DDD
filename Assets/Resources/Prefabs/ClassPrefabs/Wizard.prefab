@@ -276,7 +276,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &3775914533828635212
 Transform:
   m_ObjectHideFlags: 0
@@ -316,7 +316,7 @@ MonoBehaviour:
     manaRegen: 5
     range: 30
     speed: 30
-    xpValue: 0
+    xpYield: 20
   camera: {fileID: 0}
   spellLocked: 0
   selectableEntities:
@@ -333,6 +333,8 @@ MonoBehaviour:
   statusBars:
   - {fileID: 1232096846618532077}
   - {fileID: 1665371593489779862}
+  xPBar: {fileID: 3372883003369777077}
+  deathScorePenalty: 50
   characterParts:
     body: {fileID: 1191110277266146945}
   DeathSoundName: WizardDeath
@@ -1228,5 +1230,17 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 10bda2d43c9192142b9b5535ffc5ae52, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &3372883003369777077 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 157232440155966755, guid: 4d40e6e297deb4b4a9d2274b45359ff8,
+    type: 3}
+  m_PrefabInstance: {fileID: 3233717756337908374}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fd3b09a2fc2e4a34cb320dda27767f28, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 

@@ -10,8 +10,8 @@ public class HP : IModifiableStat
 {
     float @base;
     float current;
-    EntityMonoBehaviour attacker;
-    float xpValue;
+    PlayerMonoBehaviour attacker;
+    EntityMonoBehaviour target;
 
     public float HPRegen { get; set; }
     public float Base
@@ -36,7 +36,7 @@ public class HP : IModifiableStat
             }
             else if (value < Current)
             {
-                OnTakeDamage?.Invoke(Current - value);
+                OnTakeDamage?.Invoke(Current - value, attacker);
             }
             else if (value > Current)
             {
@@ -50,34 +50,42 @@ public class HP : IModifiableStat
 
             if (current == 0)
             {
+                if (attacker && target)
+                    attacker.entityStats.XP.AddXP(target.entityStats.XP.XPYield);
+
                 OnDeath?.Invoke();
-                if (attacker)
-                    attacker.entityStats.XP.AddXP(xpValue);
-                Debug.Log(attacker.gameObject);
+                //Debug.Log(attacker.gameObject);
             }
             //Debug.Log($"New hp is {Current}");
         }
     }
     public bool IsInvulnerable { get; set; }
-    public HP(float hPBase, float hPRegen, float initXpValue)
+    public HP(float hPBase, float hPRegen)
     {
         Base = hPBase;
         Current = hPBase;
         HPRegen = hPRegen;
-        xpValue = initXpValue;
         OnDeath += () => Debug.Log("target has died");
         IsInvulnerable = false;
     }
     public string Name = "HP";
     public Action OnDeath { get; set; }
-    public Action<float> OnTakeDamage { get; set; }
+    public Action<float, PlayerMonoBehaviour> OnTakeDamage { get; set; }
     public Action<float> OnHeal { get; set; }
-    public void TakeDamage(float damage, EntityMonoBehaviour initAttacker)
+    public void TakeDamage(float damage)
+    {
+        if (!IsInvulnerable)
+            Current -= damage;
+    }
+    //Use this method when the attacker is a player.
+    public void TakeDamage(float damage, PlayerMonoBehaviour initAttacker, EntityMonoBehaviour initTarget)
     {
         attacker = initAttacker;
-        if(!IsInvulnerable)
-            Current -= damage;
-        attacker = null;
+        target = initTarget;
+
+        TakeDamage(damage);
+
+        target = attacker = null;
 
     }
     public void Heal(float hPToHeal) => Current += hPToHeal;

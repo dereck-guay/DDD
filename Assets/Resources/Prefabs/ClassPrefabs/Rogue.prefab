@@ -112,7 +112,7 @@ MonoBehaviour:
     manaRegen: 5
     range: 25
     speed: 30
-    xpValue: 0
+    xpYield: 20
   camera: {fileID: 0}
   spellLocked: 0
   selectableEntities:
@@ -127,11 +127,12 @@ MonoBehaviour:
     m_Bits: 256
   respawnManager: {fileID: 0}
   statusBars: []
+  xPBar: {fileID: 5616172173109949958}
+  deathScorePenalty: 50
   characterParts:
     body: {fileID: 6635251231188629254}
   DeathSoundName: RogueDeath
   SpawnSoundName: RogueSpawn
-  spellLocked: 0
   autoAttack:
     autoAttackPrefab: {fileID: 7900316378766511606, guid: 9dd62bc4198e679478a4231f515f2db0,
       type: 3}
@@ -518,6 +519,16 @@ PrefabInstance:
       propertyPath: m_AnchorMax.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 4077065972571205579, guid: a04d32ed99e727b4a950d6fbca217b43,
+        type: 3}
+      propertyPath: m_AnchorMax.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4077065972571205579, guid: a04d32ed99e727b4a950d6fbca217b43,
+        type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 6012901509831035548, guid: a04d32ed99e727b4a950d6fbca217b43,
         type: 3}
       propertyPath: m_AnchorMax.x
@@ -541,3 +552,15 @@ RectTransform:
     type: 3}
   m_PrefabInstance: {fileID: 7967744790446959412}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &5616172173109949958 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 2550087946282310962, guid: a04d32ed99e727b4a950d6fbca217b43,
+    type: 3}
+  m_PrefabInstance: {fileID: 7967744790446959412}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fd3b09a2fc2e4a34cb320dda27767f28, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

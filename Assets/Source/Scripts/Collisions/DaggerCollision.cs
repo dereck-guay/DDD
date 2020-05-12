@@ -16,7 +16,7 @@ public class DaggerCollision : CollisionMonoBehaviour
             Destroy(gameObject);
 
             if (CollidesWithAppropriateLayer(other.gameObject.layer, damageLayers))
-                other.GetComponentInParent<Stats>().HP.TakeDamage(damage, caster);
+                other.GetComponentInParent<Stats>().HP.TakeDamage(damage, caster, other.GetComponent<EntityMonoBehaviour>());
         }
     }
     private void Update()

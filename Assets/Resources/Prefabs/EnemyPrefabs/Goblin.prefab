@@ -724,7 +724,7 @@ MonoBehaviour:
     manaRegen: 0
     range: 1
     speed: 3.5
-    xpValue: 10
+    xpYield: 3
   knockback: 1000
 --- !u!54 &8061069262770656121
 Rigidbody:

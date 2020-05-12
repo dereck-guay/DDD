@@ -103,8 +103,9 @@ public class SlamSpell : SpellMonoBehavior
             if (entityCollider.name != "Fighter")
             {
                 var GOHit = entityCollider.gameObject;
+                var target = GOHit.GetComponentInParent<EntityMonoBehaviour>();
 
-                GOHit.GetComponentInParent<EntityMonoBehaviour>().entityStats.HP.TakeDamage(damage, caster);
+                target.entityStats.HP.TakeDamage(damage, caster, target);
                 GOHit.GetComponentInChildren<Rigidbody>().AddForce(
                     (GOHit.transform.position - transform.position).normalized * knockbackForce
                 );

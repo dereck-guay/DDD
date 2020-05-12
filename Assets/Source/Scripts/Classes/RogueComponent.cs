@@ -16,9 +16,6 @@ public class RogueComponent : PlayerMonoBehaviour
     {
         public GameObject autoAttackPrefab;
     };
-    [HideInInspector]
-    public bool spellLocked = false;
-
 
     [Serializable]
     public class StunningBlade

@@ -27,6 +27,8 @@ public class BossComponent : EnemyMonoBehaviour
         entityStats.Speed.OnSpeedChanged += newSpeed => wanderingAI.agent.speed = newSpeed;
         OnStunChanged += IsStunned => wanderingAI.isStunned = IsStunned;
 
+        entityStats.HP.OnTakeDamage += (damage, player) => AddScore(player, (int)damage);
+
         StartCoroutine("UpdateStats");
     }
 
@@ -69,6 +71,8 @@ public class BossComponent : EnemyMonoBehaviour
         entityStats.AtkSpeed.EndModifier(1 - modifier + atkSpeedMultiplier * modifier);
         entityStats.Speed.EndModifier(1 - modifier + speedMultiplier * modifier);
     }
+
+    void AddScore(PlayerMonoBehaviour player, int value) => player.AddScore(value);
 
     protected override void Attack(Transform target)
     {

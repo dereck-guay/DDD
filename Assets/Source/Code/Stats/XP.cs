@@ -12,6 +12,7 @@ public class XP
     const int MaxLevel = 3;
     public readonly float[] requiredXPPerLevel = new float[] { 15,30,50 };
     public float Current { get; private set; }
+    public float XPYield { get; private set; }
     public int Level
     {
         get 
@@ -26,10 +27,11 @@ public class XP
                 level = value;
         }
     }
-    public XP()
+    public XP(float xpYield)
     {
         Current = 0;
         Level = 1;
+        XPYield = xpYield;
     }
     public void AddXP(float value)
     {

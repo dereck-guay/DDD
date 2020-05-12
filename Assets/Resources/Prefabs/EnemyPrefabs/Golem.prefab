@@ -871,6 +871,7 @@ MonoBehaviour:
     manaRegen: 0
     range: 5
     speed: 2
+    xpYield: 10
   core: {fileID: 7415984958779092564}
   coreDefaultColor: {r: 0.23148806, g: 0.9039426, b: 0.9622642, a: 0}
   coreChargedColor: {r: 1, g: 0, b: 0, a: 0}
