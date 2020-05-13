@@ -54,8 +54,8 @@ BoxCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 1, y: 1, z: 1}
-  m_Center: {x: 0, y: 0, z: 0}
+  m_Size: {x: 2.1082628, y: 15.677551, z: 1.1282794}
+  m_Center: {x: 0.027947314, y: 0.90420544, z: 0.064119376}
 --- !u!23 &405955550093667387
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -110,6 +110,7 @@ MonoBehaviour:
   collisionLayers: 0a0000000e00000011000000
   damageLayers: 0a0000000e00000011000000
   damage: 0
+  caster: {fileID: 0}
 --- !u!1 &405955550181731434
 GameObject:
   m_ObjectHideFlags: 0
@@ -134,8 +135,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 405955550181731434}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 10, y: 0, z: 0}
-  m_LocalScale: {x: 5, y: 1, z: 5}
+  m_LocalPosition: {x: 10, y: 0, z: 0.012813}
+  m_LocalScale: {x: 5, y: 1, z: 4.9375}
   m_Children:
   - {fileID: 518153018572019992}
   m_Father: {fileID: 0}

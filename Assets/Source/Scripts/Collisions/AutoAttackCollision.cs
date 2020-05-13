@@ -12,7 +12,6 @@ public class AutoAttackCollision : CollisionMonoBehaviour
         if (CollidesWithAppropriateLayer(other.gameObject.layer, collisionLayers))
         {
             Destroy(gameObject);
-
             if (CollidesWithAppropriateLayer(other.gameObject.layer, damageLayers))
                 other.GetComponentInParent<Stats>().HP.TakeDamage(damage, caster, other.GetComponent<EntityMonoBehaviour>());
         }
