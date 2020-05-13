@@ -12,8 +12,10 @@ public class FanOfKnivesSpell : SpellMonoBehavior
     public PlayerMonoBehaviour caster;
     private GameObject[] daggers = new GameObject[5];
 
+    readonly string audioName = "Rogue Fan Of Knives";
     public void Cast()
     {
+        Play(audioName);
         var spawnPosition = transform.position + 1.5f * direction;
         var directions = GenerateDirections();
         for (int i = 0; i < directions.Length; ++i)

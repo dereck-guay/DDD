@@ -17,6 +17,7 @@ public class FireballCollision : CollisionMonoBehaviour
 
    private void Explode(GameObject target)
    {
+        FindObjectOfType<AudioManager>().Play("Wizard Fireball Explosion");
       Destroy(gameObject);
       Instantiate(collideEffect as ParticleSystem, transform.position, Quaternion.identity);
       if (CollidesWithAppropriateLayer(target.layer, damageLayers))

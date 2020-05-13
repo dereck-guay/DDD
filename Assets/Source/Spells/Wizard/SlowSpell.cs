@@ -9,9 +9,10 @@ public class SlowSpell : SpellMonoBehavior
     public float slowValue;
     public float effectDuration;
     private bool isActive;
-
+    readonly string audioName = "Wizard Slow";
     public void Cast()
     {
+        Play(audioName);
         target.GetComponent<EffectHandlerComponent>().ApplyEffect((int)ModifiableStats.Speed, slowValue);
         isActive = true;
     }

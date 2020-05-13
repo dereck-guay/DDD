@@ -13,7 +13,7 @@ public class SlamSpell : SpellMonoBehavior
 
     public Vector3 landingPosition;
 
-    
+    readonly string audioName = "Fighter Slam";
     private bool hasLanded = false;
     private float initialY;
 
@@ -53,6 +53,7 @@ public class SlamSpell : SpellMonoBehavior
 
     public void Cast()
     {
+        Play(audioName);
         // Locks player movement.
         GetComponent<FighterComponent>().spellLocked = true;
         if (landingPosition.magnitude >= range)

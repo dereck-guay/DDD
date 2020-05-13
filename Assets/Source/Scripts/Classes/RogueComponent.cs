@@ -15,6 +15,7 @@ public class RogueComponent : PlayerMonoBehaviour
     public class AutoAttack
     {
         public GameObject autoAttackPrefab;
+        public string audioName = "Rogue Auto Attack";
     };
 
     [Serializable]
@@ -38,7 +39,6 @@ public class RogueComponent : PlayerMonoBehaviour
         public ParticleSystem smoke;
         public float manaCost;
         public float[] cooldowns = { 4f, 3f, 2f };
-        public float smokeDuration;
     };
     [Serializable]
     public class FanOfKnives
@@ -77,7 +77,7 @@ public class RogueComponent : PlayerMonoBehaviour
                     autoAttackSpell.autoAttackPrefab = autoAttack.autoAttackPrefab;
                     autoAttackSpell.damage = entityStats.AtkDamage.Current;
                     autoAttackSpell.target = target.GetComponent<Transform>().gameObject;
-                    autoAttackSpell.Cast(entityStats.AtkSpeed.Current, transform.position, this);
+                    autoAttackSpell.Cast(entityStats.AtkSpeed.Current, transform.position, this, autoAttack.audioName);
                     TimeSinceLastAttack = 0;
                     canAttack = false;
                 }
@@ -113,7 +113,6 @@ public class RogueComponent : PlayerMonoBehaviour
                 smokeScreenSpell.cooldown = smokeScreen.cooldowns[entityStats.XP.Level - 1];
                 smokeScreenSpell.player = gameObject;
                 smokeScreenSpell.smoke = smokeScreen.smoke;
-                smokeScreenSpell.smokeDuration = smokeScreen.smokeDuration;
                 smokeScreenSpell.Cast();
             }
         }

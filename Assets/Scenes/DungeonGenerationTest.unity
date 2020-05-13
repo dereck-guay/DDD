@@ -866,6 +866,26 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 4780790168831204996, guid: 3602716e320f28e4b9846bfe6f3acd94,
+        type: 3}
+      propertyPath: sounds.Array.data[6].name
+      value: Death Sound
+      objectReference: {fileID: 0}
+    - target: {fileID: 4780790168831204996, guid: 3602716e320f28e4b9846bfe6f3acd94,
+        type: 3}
+      propertyPath: sounds.Array.data[6].clip
+      value: 
+      objectReference: {fileID: 8300000, guid: 986f3d29b9946db438653f19e32fe6eb, type: 3}
+    - target: {fileID: 4780790168831204996, guid: 3602716e320f28e4b9846bfe6f3acd94,
+        type: 3}
+      propertyPath: sounds.Array.data[6].volume
+      value: 0.05
+      objectReference: {fileID: 0}
+    - target: {fileID: 5154078166097580189, guid: 3602716e320f28e4b9846bfe6f3acd94,
+        type: 3}
+      propertyPath: sounds.Array.size
+      value: 6
+      objectReference: {fileID: 0}
     - target: {fileID: 5553726411864762603, guid: 3602716e320f28e4b9846bfe6f3acd94,
         type: 3}
       propertyPath: m_Name

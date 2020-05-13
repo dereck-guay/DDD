@@ -12,8 +12,10 @@ public class StunningBladeSpell : SpellMonoBehavior
     private float stunDuration;
     private GameObject stunningBlade;
     private bool stunHasBegun;
+    readonly string audioName = "Rogue Stunning Blade";
     public void Cast()
     {
+        Play(audioName);
         var spawnPosition = transform.position + 1.5f * direction;
         stunningBlade = Instantiate(stunningBladePrefab, spawnPosition, transform.rotation);
         stunningBlade.GetComponent<StunningBladeCollision>().stunningBladeSpell = this;

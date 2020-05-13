@@ -2,16 +2,14 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class MeleeAutoAttackSpell : MonoBehaviour
+public class MeleeAutoAttackSpell : AutoAttackMonoBehaviour
 {
     public GameObject autoAttackPrefab;
-
-    public float currentLifeTime = 0;
-    float atkSpeed;
     public float damage;
 
-    public void Cast(float atkSpeedI, Vector3 casterPosition, Vector3 directionToLookAt, Transform parent, PlayerMonoBehaviour caster)
+    public void Cast(float atkSpeedI, Vector3 casterPosition, Vector3 directionToLookAt, Transform parent, PlayerMonoBehaviour caster, string audioName)
     {
+        Play(audioName);
         var spawnPosition = casterPosition;
         var autoAttack = Instantiate(autoAttackPrefab, spawnPosition, Quaternion.identity, parent);
         directionToLookAt.y = 0;
@@ -19,13 +17,5 @@ public class MeleeAutoAttackSpell : MonoBehaviour
         autoAttack.GetComponentInChildren<AutoAttackCollision>().damage = damage;
         autoAttack.GetComponentInChildren<AutoAttackCollision>().caster = caster;
         atkSpeed = atkSpeedI;
-    }
-
-    void Update()
-    {
-        if (currentLifeTime >= atkSpeed / 60f)
-            Destroy(this);
-
-        currentLifeTime += Time.deltaTime;
     }
 }

@@ -74,7 +74,7 @@ Transform:
   - {fileID: 4238491863596680105}
   - {fileID: 6897124878750817353}
   - {fileID: 7202555551783349287}
-  - {fileID: 1483867438345616401}
+  - {fileID: 1245790715675488776}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -196,13 +196,33 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 1757213641043683546}
   m_PrefabAsset: {fileID: 0}
---- !u!1001 &8585990532253872751
+--- !u!1001 &8284830538973396086
 PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Modification:
     m_TransformParent: {fileID: 4496947685173847943}
     m_Modifications:
+    - target: {fileID: 3504194336534045426, guid: 0cc435d5c86c0a74099edd429eb651d3,
+        type: 3}
+      propertyPath: sounds.Array.size
+      value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: 3504194336534045426, guid: 0cc435d5c86c0a74099edd429eb651d3,
+        type: 3}
+      propertyPath: sounds.Array.data[6].name
+      value: Rogue Auto Attack
+      objectReference: {fileID: 0}
+    - target: {fileID: 3504194336534045426, guid: 0cc435d5c86c0a74099edd429eb651d3,
+        type: 3}
+      propertyPath: sounds.Array.data[6].clip
+      value: 
+      objectReference: {fileID: 8300000, guid: 269ea956d670c384a8504fe7c86a576f, type: 3}
+    - target: {fileID: 3504194336534045426, guid: 0cc435d5c86c0a74099edd429eb651d3,
+        type: 3}
+      propertyPath: sounds.Array.data[6].volume
+      value: 0.5
+      objectReference: {fileID: 0}
     - target: {fileID: 5063931104048075466, guid: 0cc435d5c86c0a74099edd429eb651d3,
         type: 3}
       propertyPath: m_Name
@@ -265,9 +285,9 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 0cc435d5c86c0a74099edd429eb651d3, type: 3}
---- !u!4 &1483867438345616401 stripped
+--- !u!4 &1245790715675488776 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 7183330967593946750, guid: 0cc435d5c86c0a74099edd429eb651d3,
     type: 3}
-  m_PrefabInstance: {fileID: 8585990532253872751}
+  m_PrefabInstance: {fileID: 8284830538973396086}
   m_PrefabAsset: {fileID: 0}

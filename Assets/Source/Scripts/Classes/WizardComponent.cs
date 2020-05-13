@@ -17,6 +17,7 @@ public class WizardComponent : PlayerMonoBehaviour
     {
         public GameObject autoAttackPrefab;
         public GameObject staff;
+        public string audioName = "Wizard Auto Attack";
     };
     [Serializable]
     public class Fireball
@@ -84,7 +85,7 @@ public class WizardComponent : PlayerMonoBehaviour
                     autoAttackSpell.autoAttackPrefab = autoAttack.autoAttackPrefab;
                     autoAttackSpell.damage = entityStats.AtkDamage.Current;
                     autoAttackSpell.target = target.GetComponent<Transform>().gameObject;
-                    autoAttackSpell.Cast(entityStats.AtkSpeed.Current, transform.position, this);
+                    autoAttackSpell.Cast(entityStats.AtkSpeed.Current, transform.position, this, autoAttack.audioName);
                     TimeSinceLastAttack = 0;
                     canAttack = false;
                 }

@@ -6,8 +6,12 @@ using Enums;
 public class RageSpell : SpellMonoBehavior
 {
     public float atkSpeedValue = 1;
-    public void Cast() =>
+    readonly string audioName = "Fighter Rage";
+    public void Cast()
+    {
+        Play(audioName);
         GetComponent<EffectHandlerComponent>().ApplyEffect((int)ModifiableStats.AtkSpeed, atkSpeedValue);
+    }
 
     private void Update()
     {

@@ -47,8 +47,8 @@ public abstract class PlayerMonoBehaviour : EntityMonoBehaviour
     public CharacterParts characterParts;
 
     [Header("Audio Settings")]
-    public string DeathSoundName;
-    public string SpawnSoundName;
+    public string DeathSoundName = "Death Sound";
+    public string SpawnSoundName = "Spawn Sound";
 
     Vector3 movementDirection;
 

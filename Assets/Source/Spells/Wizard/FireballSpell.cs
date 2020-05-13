@@ -9,9 +9,10 @@ public class FireballSpell : SpellMonoBehavior
     public float damage;
     public PlayerMonoBehaviour caster;
     private GameObject fireball;
-
+    readonly string audioName = "Wizard Fireball";
     public void Cast()
     {
+        Play(audioName);
         var spawnPosition = transform.position + 1.5f * direction;
         fireball = Instantiate(fireballPrefab, spawnPosition, transform.rotation);
         fireball.GetComponent<FireballCollision>().damage = damage;

@@ -6,9 +6,12 @@ using Enums;
 public class TakeABreatherSpell : SpellMonoBehavior
 {
     public float regenValue = 1;
-    public void Cast() =>
+    readonly string audioName = "Fighter Take A Breather";
+    public void Cast()
+    {
+        Play(audioName);
         GetComponent<EffectHandlerComponent>().ApplyEffect((int)ModifiableStats.HPRegen, regenValue);
-
+    }
     private void Update()
     {
         if (currentLifeTime >= cooldown)

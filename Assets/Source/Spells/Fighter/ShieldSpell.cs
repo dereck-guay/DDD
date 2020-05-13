@@ -8,8 +8,10 @@ public class ShieldSpell : SpellMonoBehavior
     public float effectiveTime = 1;
     public GameObject player;
     public GameObject shield;
+    readonly string audioName = "Fighter Shield";
     public void Cast()
     {
+        Play(audioName);
         player.GetComponent<Stats>().HP.IsInvulnerable = true;
         shield.SetActive(true);
     }

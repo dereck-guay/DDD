@@ -7,9 +7,12 @@ public class HealSpell : SpellMonoBehavior
 {
     public GameObject target;
     public float healValue;
-
-    public void Cast() =>
-        target.GetComponent<PlayerMonoBehaviour>().entityStats.HP.Heal(healValue);
+    readonly string audioName = "Wizard Heal";
+    public void Cast()
+    {
+        Play(audioName);
+        target.GetComponent<PlayerMonoBehaviour>().entityStats.HP.Heal(healValue); 
+    }
 
     private void Update()
     {

@@ -337,7 +337,7 @@ MonoBehaviour:
   deathScorePenalty: 50
   characterParts:
     body: {fileID: 1191110277266146945}
-  DeathSoundName: WizardDeath
+  DeathSoundName: Death Sound
   SpawnSoundName: WizardSpawn
   CurrentXP: 0
   Level: 0
@@ -345,6 +345,7 @@ MonoBehaviour:
     autoAttackPrefab: {fileID: 7241867996618809226, guid: c1097aa1f5e92a344a8ba365cb5fdcad,
       type: 3}
     staff: {fileID: 4022705104772730660}
+    audioName: Wizard Auto Attack
   fireball:
     fireballPrefab: {fileID: 3649683291444178571, guid: d094952558deb094c859cab0eb697499,
       type: 3}

@@ -7,10 +7,12 @@ public class SmokeScreenSpell : SpellMonoBehavior
 {
     public ParticleSystem smoke;
     public GameObject player;
-    public float smokeDuration = 1;
+    public float smokeDuration = 5;
     private bool smokeIsOn;
+    readonly string audioName = "Rogue Smoke Screen";
     public void Cast()
     {
+        Play(audioName);
         Instantiate(smoke as ParticleSystem, player.transform);
         player.GetComponent<Stats>().HP.IsInvulnerable = true;
         smokeIsOn = true;
