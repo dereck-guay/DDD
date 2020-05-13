@@ -13,6 +13,8 @@ public class BossComponent : EnemyMonoBehaviour
     public float atkSpeedMultiplier;
     public float speedMultiplier;
 
+    public GameOverComponent gameOverManager;
+
     WanderingAIComponent wanderingAI;
     
     float cooldown;
@@ -27,7 +29,9 @@ public class BossComponent : EnemyMonoBehaviour
         entityStats.Speed.OnSpeedChanged += newSpeed => wanderingAI.agent.speed = newSpeed;
         OnStunChanged += IsStunned => wanderingAI.isStunned = IsStunned;
 
-        entityStats.HP.OnTakeDamage += (damage, player) => AddScore(player, (int)damage);
+        entityStats.HP.OnTakeDamage += (damage, player) => AddScore(player, (int)damage * 10);
+
+        entityStats.HP.OnDeath += () => gameOverManager.EndGame();
 
         StartCoroutine("UpdateStats");
     }

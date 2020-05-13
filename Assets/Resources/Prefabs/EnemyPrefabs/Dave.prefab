@@ -2341,6 +2341,7 @@ MonoBehaviour:
     manaRegen: 0
     range: 0
     speed: 4
+    xpYield: 0
   rings:
   - {fileID: 1147253536313939891}
   - {fileID: 5877994748993809325}
@@ -2348,6 +2349,7 @@ MonoBehaviour:
   damageMultiplier: 2
   atkSpeedMultiplier: 0.3
   speedMultiplier: 3
+  sceneLoader: {fileID: 0}
 --- !u!1 &2875893904447291451
 GameObject:
   m_ObjectHideFlags: 0

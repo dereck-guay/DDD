@@ -33,6 +33,7 @@ public class HP : IModifiableStat
             {
                 value = 0;
                 //OnDeath?.Invoke();
+                OnTakeDamage?.Invoke(Current - value, attacker);
             }
             else if (value < Current)
             {

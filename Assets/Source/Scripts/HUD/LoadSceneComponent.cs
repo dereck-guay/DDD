@@ -4,16 +4,15 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
-public class LoadSceneOnClickComponent : MonoBehaviour
+public class LoadSceneComponent : MonoBehaviour
 {
     public GameObject loadingScreen;
     public Slider slider;
     public Text progressText;
 
-    public void LoadSceneOnClick(string sceneName)
+    public void LoadScene(string sceneName)
     {
-        StartCoroutine(LoadAsynchronously(sceneName));
-        
+        StartCoroutine(LoadAsynchronously(sceneName));        
     }
 
     IEnumerator LoadAsynchronously (string sceneName)
