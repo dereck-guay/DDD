@@ -101,9 +101,7 @@ public class IcePatchManagerComponent : CollisionMonoBehaviour
     private void OnTriggerEnter(Collider other)
     {
         if (CollidesWithAppropriateLayer(other.gameObject.layer, collisionLayers) && playerCollider != other)
-        {
             Effect(true, other);
-        }
     }
     private void Effect(bool activate, Collider other)
     {

@@ -15,6 +15,7 @@ public class WizardComponent : PlayerMonoBehaviour
     {
         public GameObject autoAttackPrefab;
         public GameObject staff;
+        public string audioName;
     };
     [Serializable]
     public class Fireball
@@ -58,11 +59,7 @@ public class WizardComponent : PlayerMonoBehaviour
     #endregion
     
     private void Start() => InitializePlayer();
-    private void Update()
-    {
-        //autoAttack.staff.transform.rotation = Quaternion.Euler(transform.rotation.x + 5, transform.rotation.y, transform.rotation.z);
-        UpdatePlayer();
-    }
+    private void Update() => UpdatePlayer();
 
     protected override void ManageInputs()
     {
@@ -80,7 +77,7 @@ public class WizardComponent : PlayerMonoBehaviour
                     autoAttackSpell.autoAttackPrefab = autoAttack.autoAttackPrefab;
                     autoAttackSpell.damage = entityStats.AtkDamage.Current;
                     autoAttackSpell.target = target.GetComponent<Transform>().gameObject;
-                    autoAttackSpell.Cast(entityStats.AtkSpeed.Current, transform.position, this);
+                    autoAttackSpell.Cast(entityStats.AtkSpeed.Current, transform.position, this, autoAttack.audioName);
                     TimeSinceLastAttack = 0;
                     canAttack = false;
                 }
