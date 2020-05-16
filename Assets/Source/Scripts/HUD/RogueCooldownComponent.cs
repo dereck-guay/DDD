@@ -22,6 +22,7 @@ public class RogueCooldownComponent : MonoBehaviour
 
     void Update()
     {
+        SetFillToZero();
         if (rogue.GetComponent<DashSpell>() != null)
             DashCooldown(rogue.dash.cooldowns[rogue.entityStats.XP.Level - 1]);
         if (rogue.GetComponent<StunningBladeSpell>() != null)
@@ -39,10 +40,7 @@ public class RogueCooldownComponent : MonoBehaviour
         if (nextDashTime == 0)
             nextDashTime = cooldownTime;
         if (nextDashTime <= 0)
-        {
             nextDashTime = 0;
-            dashMask.fillAmount = 0;
-        }
         else if (nextDashTime > 0)
             nextDashTime -= Time.deltaTime;
     }
@@ -54,10 +52,7 @@ public class RogueCooldownComponent : MonoBehaviour
         if (nextStunningTime == 0)
             nextStunningTime = cooldownTime;
         if (nextStunningTime <= 0)
-        {
             nextStunningTime = 0;
-            stunningMask.fillAmount = 0;
-        }
         else if (nextStunningTime > 0)
             nextStunningTime -= Time.deltaTime;
     }
@@ -84,5 +79,13 @@ public class RogueCooldownComponent : MonoBehaviour
             nextSmokeTime = 0;
         else if (nextSmokeTime > 0)
             nextSmokeTime -= Time.deltaTime;
+    }
+
+    public void SetFillToZero()
+    {
+        dashMask.fillAmount = 0;
+        stunningMask.fillAmount = 0;
+        smokeMask.fillAmount = 0;
+        fanMask.fillAmount = 0;
     }
 }

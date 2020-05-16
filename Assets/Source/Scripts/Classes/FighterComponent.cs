@@ -14,7 +14,6 @@ public class FighterComponent : PlayerMonoBehaviour
     public class AutoAttack
     {
         public GameObject autoAttackPrefab;
-        public string audioName = "Fighter Auto Attack"; 
     };
     [Serializable]
     public class Slam 
@@ -75,7 +74,7 @@ public class FighterComponent : PlayerMonoBehaviour
                     var autoAttackSpell = gameObject.AddComponent<MeleeAutoAttackSpell>();
                     autoAttackSpell.autoAttackPrefab = autoAttack.autoAttackPrefab;
                     autoAttackSpell.damage = entityStats.AtkDamage.Current;
-                    autoAttackSpell.Cast(entityStats.AtkSpeed.Current, transform.position, GetMouseDirection(), transform, this, autoAttack.audioName);
+                    autoAttackSpell.Cast(entityStats.AtkSpeed.Current, transform.position, GetMouseDirection(), transform, this);
                     TimeSinceLastAttack = 0;
                     canAttack = false;
                 }

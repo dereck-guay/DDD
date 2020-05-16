@@ -15,8 +15,10 @@ public class RogueComponent : PlayerMonoBehaviour
     public class AutoAttack
     {
         public GameObject autoAttackPrefab;
-        public string audioName = "Rogue Auto Attack";
     };
+    [HideInInspector]
+    public bool spellLocked = false;
+
 
     [Serializable]
     public class StunningBlade
@@ -39,6 +41,7 @@ public class RogueComponent : PlayerMonoBehaviour
         public ParticleSystem smoke;
         public float manaCost;
         public float[] cooldowns = { 4f, 3f, 2f };
+        public float smokeDuration;
     };
     [Serializable]
     public class FanOfKnives
@@ -77,7 +80,7 @@ public class RogueComponent : PlayerMonoBehaviour
                     autoAttackSpell.autoAttackPrefab = autoAttack.autoAttackPrefab;
                     autoAttackSpell.damage = entityStats.AtkDamage.Current;
                     autoAttackSpell.target = target.GetComponent<Transform>().gameObject;
-                    autoAttackSpell.Cast(entityStats.AtkSpeed.Current, transform.position, this, autoAttack.audioName);
+                    autoAttackSpell.Cast(entityStats.AtkSpeed.Current, transform.position, this);
                     TimeSinceLastAttack = 0;
                     canAttack = false;
                 }
@@ -100,7 +103,7 @@ public class RogueComponent : PlayerMonoBehaviour
             if (CanCast(dash.manaCost, typeof(DashSpell)))
             {
                 var dashSpell = gameObject.AddComponent<DashSpell>();
-                dashSpell.cooldown = dash.cooldowns[entityStats.XP.Level];
+                dashSpell.cooldown = dash.cooldowns[entityStats.XP.Level - 1];
                 dashSpell.player = this;
                 dashSpell.Cast(GetMouseDirection(), dash.dashMultiplier);
             }
@@ -113,6 +116,7 @@ public class RogueComponent : PlayerMonoBehaviour
                 smokeScreenSpell.cooldown = smokeScreen.cooldowns[entityStats.XP.Level - 1];
                 smokeScreenSpell.player = gameObject;
                 smokeScreenSpell.smoke = smokeScreen.smoke;
+                smokeScreenSpell.smokeDuration = smokeScreen.smokeDuration;
                 smokeScreenSpell.Cast();
             }
         }

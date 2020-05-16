@@ -8,8 +8,6 @@ using Interfaces;
 [RequireComponent(typeof(Rigidbody))]
 public class WizardComponent : PlayerMonoBehaviour
 {
-    public float CurrentXP;
-    public int Level;
     #region Stuff for inspector
 
     [Serializable]
@@ -17,7 +15,6 @@ public class WizardComponent : PlayerMonoBehaviour
     {
         public GameObject autoAttackPrefab;
         public GameObject staff;
-        public string audioName = "Wizard Auto Attack";
     };
     [Serializable]
     public class Fireball
@@ -65,8 +62,6 @@ public class WizardComponent : PlayerMonoBehaviour
     {
         //autoAttack.staff.transform.rotation = Quaternion.Euler(transform.rotation.x + 5, transform.rotation.y, transform.rotation.z);
         UpdatePlayer();
-        CurrentXP = entityStats.XP.Current;
-        Level = entityStats.XP.Level;
     }
 
     protected override void ManageInputs()
@@ -85,7 +80,7 @@ public class WizardComponent : PlayerMonoBehaviour
                     autoAttackSpell.autoAttackPrefab = autoAttack.autoAttackPrefab;
                     autoAttackSpell.damage = entityStats.AtkDamage.Current;
                     autoAttackSpell.target = target.GetComponent<Transform>().gameObject;
-                    autoAttackSpell.Cast(entityStats.AtkSpeed.Current, transform.position, this, autoAttack.audioName);
+                    autoAttackSpell.Cast(entityStats.AtkSpeed.Current, transform.position, this);
                     TimeSinceLastAttack = 0;
                     canAttack = false;
                 }

@@ -80,98 +80,6 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
---- !u!1 &4492915752512376744
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 2330002192286039405}
-  - component: {fileID: 5475145995836918302}
-  m_Layer: 0
-  m_Name: Point Light
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &2330002192286039405
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4492915752512376744}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 3, z: 0}
-  m_LocalScale: {x: 0.5, y: 0.5, z: 0.5}
-  m_Children: []
-  m_Father: {fileID: 7654609879356970206}
-  m_RootOrder: 3
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!108 &5475145995836918302
-Light:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4492915752512376744}
-  m_Enabled: 1
-  serializedVersion: 10
-  m_Type: 2
-  m_Shape: 0
-  m_Color: {r: 1, g: 0.78527075, b: 0.36320752, a: 1}
-  m_Intensity: 2
-  m_Range: 30
-  m_SpotAngle: 30
-  m_InnerSpotAngle: 21.80208
-  m_CookieSize: 10
-  m_Shadows:
-    m_Type: 2
-    m_Resolution: -1
-    m_CustomResolution: -1
-    m_Strength: 1
-    m_Bias: 0.05
-    m_NormalBias: 0.4
-    m_NearPlane: 0.2
-    m_CullingMatrixOverride:
-      e00: 1
-      e01: 0
-      e02: 0
-      e03: 0
-      e10: 0
-      e11: 1
-      e12: 0
-      e13: 0
-      e20: 0
-      e21: 0
-      e22: 1
-      e23: 0
-      e30: 0
-      e31: 0
-      e32: 0
-      e33: 1
-    m_UseCullingMatrixOverride: 0
-  m_Cookie: {fileID: 0}
-  m_DrawHalo: 0
-  m_Flare: {fileID: 0}
-  m_RenderMode: 0
-  m_CullingMask:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  m_RenderingLayerMask: 1
-  m_Lightmapping: 2
-  m_LightShadowCasterMode: 0
-  m_AreaSize: {x: 1, y: 1}
-  m_BounceIntensity: 10
-  m_ColorTemperature: 6570
-  m_UseColorTemperature: 0
-  m_BoundingSphereOverride: {x: 0, y: 0, z: 0, w: 0}
-  m_UseBoundingSphereOverride: 0
-  m_ShadowRadius: 10
-  m_ShadowAngle: 0
 --- !u!1 &5592215202980429576
 GameObject:
   m_ObjectHideFlags: 0
@@ -189,7 +97,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &3697718672700448013
 Transform:
   m_ObjectHideFlags: 0
@@ -197,9 +105,9 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5592215202980429576}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 1.042, z: 0.7}
-  m_LocalScale: {x: 0.5887867, y: 1.0010042, z: 0.20250002}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 2.5, z: 0}
+  m_LocalScale: {x: 0.3, y: 0.1125, z: 0.3}
   m_Children: []
   m_Father: {fileID: 7654609879356970206}
   m_RootOrder: 1
@@ -339,7 +247,6 @@ Transform:
   - {fileID: 4676277268715582991}
   - {fileID: 3697718672700448013}
   - {fileID: 6336223517563372609}
-  - {fileID: 2330002192286039405}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -365,7 +272,7 @@ MonoBehaviour:
     manaRegen: 5
     range: 5
     speed: 25
-    xpYield: 20
+    xpValue: 0
   camera: {fileID: 0}
   spellLocked: 0
   selectableEntities:
@@ -379,61 +286,40 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 256
   respawnManager: {fileID: 0}
-  statusBars: []
+  statusBars:
+  - {fileID: 6100935404091960648}
+  - {fileID: 3647783612929683581}
   xPBar: {fileID: 3291060002612122262}
-  deathScorePenalty: 50
   characterParts:
     body: {fileID: 3327950002639287408}
-  DeathSoundName: Death Sound
+  DeathSoundName: FighterDeath
   SpawnSoundName: FighterSpawn
   autoAttack:
     autoAttackPrefab: {fileID: 405955550181731434, guid: aac1e7f679631db488ae156993deaa8f,
       type: 3}
-    audioName: Fighter Auto Attack
   slam:
     manaCost: 0
-    cooldowns:
-    - 9
-    - 7
-    - 6
-    range: 20
-    shockWaveRadius: 10
-    damage: 10
-    knockbackForce: 10
+    cooldowns: []
+    range: 0
+    shockWaveRadius: 0
+    damage: 0
+    knockbackForce: 0
     hitLayers:
       serializedVersion: 2
-      m_Bits: 16384
+      m_Bits: 0
   rage:
     manaCost: 0
-    cooldowns:
-    - 9
-    - 8
-    - 7
-    atkSpeedValues:
-    - 1.2
-    - 1.4
-    - 2
+    cooldowns: []
+    atkSpeedValues: []
   takeABreather:
     manaCost: 0
-    cooldowns:
-    - 9
-    - 8
-    - 7
-    regenValues:
-    - 1.2
-    - 1.4
-    - 1.6
+    cooldowns: []
+    regenValues: []
   shield:
     manaCost: 0
     shieldObject: {fileID: 5592215202980429576}
-    cooldowns:
-    - 8
-    - 6
-    - 5
-    effectiveTimes:
-    - 2
-    - 3
-    - 4
+    cooldowns: []
+    effectiveTimes: []
 --- !u!54 &981901871628974245
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -654,6 +540,30 @@ RectTransform:
     type: 3}
   m_PrefabInstance: {fileID: 4282615971469579974}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &6100935404091960648 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 8053571809768553358, guid: a51aafab1d5c5bf4ca4c6b286786d9ac,
+    type: 3}
+  m_PrefabInstance: {fileID: 4282615971469579974}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 10bda2d43c9192142b9b5535ffc5ae52, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &3647783612929683581 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 716476238049437371, guid: a51aafab1d5c5bf4ca4c6b286786d9ac,
+    type: 3}
+  m_PrefabInstance: {fileID: 4282615971469579974}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 10bda2d43c9192142b9b5535ffc5ae52, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &3291060002612122262 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 1640111995689288784, guid: a51aafab1d5c5bf4ca4c6b286786d9ac,

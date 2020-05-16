@@ -22,6 +22,7 @@ public class FighterCooldownComponent : MonoBehaviour
 
     void Update()
     {
+        SetFillToZero();
         if (fighter.GetComponent<SlamSpell>() != null)
             SlamCooldown(fighter.slam.cooldowns[fighter.entityStats.XP.Level - 1]);
         if (fighter.GetComponent<RageSpell>() != null)
@@ -39,10 +40,7 @@ public class FighterCooldownComponent : MonoBehaviour
         if (nextSlamTime == 0)
             nextSlamTime = cooldownTime;
         if (nextSlamTime <= 0)
-        {
             nextShieldTime = 0;
-            slamMask.fillAmount = 0;
-        }
         else if (nextSlamTime > 0)
             nextSlamTime -= Time.deltaTime;
     }
@@ -54,10 +52,7 @@ public class FighterCooldownComponent : MonoBehaviour
         if (nextRageTime == 0)
             nextRageTime = cooldownTime;
         if (nextRageTime <= 0)
-        {
             nextRageTime = 0;
-            rageMask.fillAmount = 0;
-        }
         else if (nextRageTime > 0)
             nextRageTime -= Time.deltaTime;
     }
@@ -69,10 +64,7 @@ public class FighterCooldownComponent : MonoBehaviour
         if (nextBreatherCooldown == 0)
             nextBreatherCooldown = cooldownTime;
         if (nextBreatherCooldown <= 0)
-        {
             nextBreatherCooldown = 0;
-            breatherMask.fillAmount = 0;
-        }
         else if (nextBreatherCooldown > 0)
             nextBreatherCooldown -= Time.deltaTime;
     }
@@ -84,11 +76,16 @@ public class FighterCooldownComponent : MonoBehaviour
         if (nextShieldTime == 0)
             nextShieldTime = cooldownTime;
         if (nextShieldTime <= 0)
-        {
             nextShieldTime = 0;
-            shieldMask.fillAmount = 0;
-        }
         else if (nextShieldTime > 0)
             nextShieldTime -= Time.deltaTime;
+    }
+
+    public void SetFillToZero()
+    {
+        slamMask.fillAmount = 0;
+        rageMask.fillAmount = 0;
+        breatherMask.fillAmount = 0;
+        shieldMask.fillAmount = 0;
     }
 }

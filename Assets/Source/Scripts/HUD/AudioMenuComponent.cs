@@ -13,9 +13,9 @@ public class AudioMenuComponent : MonoBehaviour
 
     private void Start()
     {
-        masterVolumeControl.value = PlayerPrefs.GetFloat("MasterVolume");
-        effectsVolumeControl.value = PlayerPrefs.GetFloat("EffectsVolume");
-        musicVolumeControl.value = PlayerPrefs.GetFloat("MusicVolume");
+        masterVolumeControl.value = PlayerPrefs.GetFloat("MasterVolume", 100);
+        effectsVolumeControl.value = PlayerPrefs.GetFloat("EffectsVolume", 100);
+        musicVolumeControl.value = PlayerPrefs.GetFloat("MusicVolume", 100);
     }
 
     public void Save()

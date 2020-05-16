@@ -25,16 +25,16 @@ public class VideoSettingsComponent : MonoBehaviour
                 currentResolutionIndex = i;
         }
         resolutionDropdown.AddOptions(options);
-        resolutionDropdown.value = PlayerPrefs.GetInt("Resolution");
+        resolutionDropdown.value = PlayerPrefs.GetInt("Resolution", currentResolutionIndex);
         resolutionDropdown.RefreshShownValue();
 
-        graphicsDropdown.value = PlayerPrefs.GetInt("Graphics");
+        graphicsDropdown.value = PlayerPrefs.GetInt("Graphics", 4);
         graphicsDropdown.RefreshShownValue();
 
-        vsyncDropdown.value = PlayerPrefs.GetInt("Vsync");
+        vsyncDropdown.value = PlayerPrefs.GetInt("Vsync", 0);
         vsyncDropdown.RefreshShownValue();
 
-        fpsSlider.value = PlayerPrefs.GetInt("FPS");
+        fpsSlider.value = PlayerPrefs.GetInt("FPS", 60);
     }
 
     private void Update()

@@ -3095,7 +3095,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 6706420950639054821}
-        m_MethodName: LoadScene
+        m_MethodName: LoadSceneOnClick
         m_Mode: 5
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -3444,7 +3444,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 8630830371689319083}
-        m_MethodName: LoadScene
+        m_MethodName: LoadSceneOnClick
         m_Mode: 5
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -6639,8 +6639,8 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 8630830371689319083}
-        m_MethodName: LoadScene
+      - m_Target: {fileID: 532955294620440271}
+        m_MethodName: LoadSceneOnClick
         m_Mode: 5
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
