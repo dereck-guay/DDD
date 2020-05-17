@@ -21,25 +21,9 @@ public class NetworkManagerComponent : MonoBehaviourPunCallbacks
 
     private void Start() =>
         PhotonNetwork.ConnectUsingSettings();
+
     public override void OnConnectedToMaster() =>
         Debug.Log("Connected to: " + PhotonNetwork.CloudRegion);
 
-    // Create Room.
-    public void CreateRoom(string roomName) => PhotonNetwork.CreateRoom(roomName);
-    public override void OnCreatedRoom() => Debug.Log("You create a room.");
-    public override void OnCreateRoomFailed(short returnCode, string message) => Debug.Log(message);
-
-    // Join Room.
-    public void JoinRoom(string roomName) => PhotonNetwork.JoinRoom(roomName);
-    public void CancelJoinRoom() => PhotonNetwork.LeaveRoom();
-    public override void OnJoinedRoom() => Debug.Log("You joined the room");
-    public override void OnJoinRoomFailed(short returnCode, string message) => Debug.Log(message);
-
     // Change de scene au niveau du serveur.
-    public void ChangeScene(string sceneName)
-    {
-        if (PhotonNetwork.IsMasterClient)
-            PhotonNetwork.LoadLevel(sceneName);
-    }
-        
 }
