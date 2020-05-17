@@ -73,7 +73,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &1729600041794869160
 Transform:
   m_ObjectHideFlags: 0
@@ -112,7 +112,7 @@ MonoBehaviour:
     manaRegen: 5
     range: 25
     speed: 30
-    xpValue: 0
+    xpYield: 0
   camera: {fileID: 0}
   spellLocked: 0
   selectableEntities:
@@ -130,6 +130,7 @@ MonoBehaviour:
   - {fileID: 1403060342132583572}
   - {fileID: 2637110027400356727}
   xPBar: {fileID: 5616172173109949958}
+  deathScorePenalty: 50
   characterParts:
     body: {fileID: 6635251231188629254}
   DeathSoundName: RogueDeath
@@ -138,6 +139,7 @@ MonoBehaviour:
   autoAttack:
     autoAttackPrefab: {fileID: 7900316378766511606, guid: 9dd62bc4198e679478a4231f515f2db0,
       type: 3}
+    audioName: 
   stunningBlade:
     stunningBladePrefab: {fileID: 5211548123859151994, guid: 1a0cd0d3b3de2d84181e9027deec2358,
       type: 3}

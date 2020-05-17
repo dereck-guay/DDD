@@ -232,7 +232,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &7654609879356970206
 Transform:
   m_ObjectHideFlags: 0
@@ -272,7 +272,7 @@ MonoBehaviour:
     manaRegen: 5
     range: 5
     speed: 25
-    xpValue: 0
+    xpYield: 0
   camera: {fileID: 0}
   spellLocked: 0
   selectableEntities:
@@ -290,6 +290,7 @@ MonoBehaviour:
   - {fileID: 6100935404091960648}
   - {fileID: 3647783612929683581}
   xPBar: {fileID: 3291060002612122262}
+  deathScorePenalty: 50
   characterParts:
     body: {fileID: 3327950002639287408}
   DeathSoundName: FighterDeath
@@ -297,6 +298,7 @@ MonoBehaviour:
   autoAttack:
     autoAttackPrefab: {fileID: 405955550181731434, guid: aac1e7f679631db488ae156993deaa8f,
       type: 3}
+    audioName: 
   slam:
     manaCost: 0
     cooldowns: []
