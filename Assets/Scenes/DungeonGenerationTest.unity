@@ -289,7 +289,6 @@ GameObject:
   m_Component:
   - component: {fileID: 182723072}
   - component: {fileID: 182723071}
-  - component: {fileID: 182723073}
   m_Layer: 0
   m_Name: GameOverManager
   m_TagString: Untagged
@@ -325,21 +324,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 11
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &182723073
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 182723070}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: cad1e0b637ce9d74bbc976f9edf1873a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  loadingScreen: {fileID: 1704605794}
-  slider: {fileID: 1406594974}
-  progressText: {fileID: 1231809709}
 --- !u!1 &252469251
 GameObject:
   m_ObjectHideFlags: 0
@@ -892,7 +876,7 @@ PrefabInstance:
         type: 3}
       propertyPath: sceneLoader
       value: 
-      objectReference: {fileID: 182723073}
+      objectReference: {fileID: 0}
     - target: {fileID: 7641843800066957252, guid: 622253fd38a7d9649abf64fb0f88a1f0,
         type: 3}
       propertyPath: gameOverManager

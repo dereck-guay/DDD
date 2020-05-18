@@ -14,4 +14,10 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/GameOverScreen.unity
     guid: eaa9e5b6fe1b73f43821f8bf1b8dbf33
+  - enabled: 1
+    path: Assets/Scenes/NetworkScenes/DelayStartMenu.unity
+    guid: bc447ca4aa51b364ca02054a2c4bbd50
+  - enabled: 1
+    path: Assets/Scenes/NetworkScenes/DelayStartWaitingRoom.unity
+    guid: 5391edf97c3e5fb40a546afea5da227c
   m_configObjects: {}
