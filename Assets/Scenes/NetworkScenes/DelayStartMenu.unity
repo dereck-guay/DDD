@@ -1291,7 +1291,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   delayStartButton: {fileID: 870410835}
   delayCancelButton: {fileID: 1725281909}
-  roomSize: 4
+  roomSize: 3
 --- !u!1001 &2447237256862475815
 PrefabInstance:
   m_ObjectHideFlags: 0

@@ -34,6 +34,7 @@ MonoBehaviour:
   - ClickRpc
   - DestroyRpc
   - RPC_SendTimer
+  - RPC_AddCharacter
   DisableAutoOpenWizard: 1
   ShowSettings: 0
   DevRegionSetOnce: 1

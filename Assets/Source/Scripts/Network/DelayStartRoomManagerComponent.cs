@@ -2,7 +2,7 @@
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-public class DelayStartRoomManager : MonoBehaviourPunCallbacks
+public class DelayStartRoomManagerComponent : MonoBehaviourPunCallbacks
 {
     // Scene to be loaded when the room is joined
     public int waitingRoomSceneIndex; 

@@ -2,7 +2,7 @@
 using Photon.Realtime;
 using UnityEngine;
 
-public class DelayStartLobbyManager : MonoBehaviourPunCallbacks
+public class DelayStartLobbyManagerComponent : MonoBehaviourPunCallbacks
 {
     public GameObject delayStartButton;
     public GameObject delayCancelButton;
