@@ -404,7 +404,7 @@ MonoBehaviour:
     knockbackForce: 10
     hitLayers:
       serializedVersion: 2
-      m_Bits: 4294967295
+      m_Bits: 148480
   rage:
     manaCost: 10
     cooldowns:
