@@ -127,6 +127,8 @@ public abstract class PlayerMonoBehaviour : EntityMonoBehaviour
         entityStats.HP.OnDeath += () => Respawn();
         entityStats.HP.OnDeath += () => FindObjectOfType<AudioManager>().Play(DeathSoundName);
         entityStats.HP.OnDeath += () => AddScore(-(int)deathScorePenalty);
+
+        Respawn();
     }
 
     protected void UpdatePlayer()
