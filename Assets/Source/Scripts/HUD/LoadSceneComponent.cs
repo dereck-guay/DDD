@@ -1,11 +1,13 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using System.Security.Cryptography;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public class LoadSceneComponent : MonoBehaviour
 {
+    public GameObject managers;
     public GameObject loadingScreen;
     public Slider slider;
     public Text progressText;
@@ -17,6 +19,8 @@ public class LoadSceneComponent : MonoBehaviour
 
     IEnumerator LoadAsynchronously (string sceneName)
     {
+        Destroy(managers);
+
         AsyncOperation operation = SceneManager.LoadSceneAsync(sceneName);
 
         loadingScreen.SetActive(true);

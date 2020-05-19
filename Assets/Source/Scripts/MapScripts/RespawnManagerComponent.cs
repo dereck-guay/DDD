@@ -4,10 +4,18 @@ using UnityEngine;
 
 public class RespawnManagerComponent : MonoBehaviour
 {
+    public static RespawnManagerComponent RMC;
+
     public float respawnDelay;
-    List<Vector3> respawnPoints;
-    
-    void Awake() => respawnPoints = new List<Vector3>(4);
+    public List<Vector3> respawnPoints;
+
+    void Awake()
+    {
+        respawnPoints = new List<Vector3>(4);
+
+        if (RespawnManagerComponent.RMC == null)
+            RespawnManagerComponent.RMC = this;
+    }
 
 
     public void AddRespawnPoint(Vector3 position) => respawnPoints.Add(position);

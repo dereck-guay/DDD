@@ -1273,6 +1273,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   respawnDelay: 3
+  respawnPoints: []
 --- !u!1001 &740347714
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -2640,6 +2641,36 @@ PrefabInstance:
     - target: {fileID: 7818930920682794445, guid: 9ec79bee9db649f4290c8aaba9941af4,
         type: 3}
       propertyPath: m_AnchoredPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7967744790446959712, guid: 9ec79bee9db649f4290c8aaba9941af4,
+        type: 3}
+      propertyPath: m_AnchorMax.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7967744790446959712, guid: 9ec79bee9db649f4290c8aaba9941af4,
+        type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7967744790446959813, guid: 9ec79bee9db649f4290c8aaba9941af4,
+        type: 3}
+      propertyPath: m_AnchorMax.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7967744790446959813, guid: 9ec79bee9db649f4290c8aaba9941af4,
+        type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7967744790446959849, guid: 9ec79bee9db649f4290c8aaba9941af4,
+        type: 3}
+      propertyPath: m_AnchorMax.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7967744790446959849, guid: 9ec79bee9db649f4290c8aaba9941af4,
+        type: 3}
+      propertyPath: m_AnchorMax.y
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8330877539835647752, guid: 9ec79bee9db649f4290c8aaba9941af4,

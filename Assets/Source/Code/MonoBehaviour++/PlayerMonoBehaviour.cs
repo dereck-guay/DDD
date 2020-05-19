@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
+using Photon.Pun;
 using UnityEngine;
 
 public abstract class PlayerMonoBehaviour : EntityMonoBehaviour
@@ -128,7 +129,7 @@ public abstract class PlayerMonoBehaviour : EntityMonoBehaviour
         entityStats.HP.OnDeath += () => FindObjectOfType<AudioManager>().Play(DeathSoundName);
         entityStats.HP.OnDeath += () => AddScore(-(int)deathScorePenalty);
 
-        Respawn();
+        transform.position = RespawnManagerComponent.RMC.GetRandomRespawnPoint();
     }
 
     protected void UpdatePlayer()
