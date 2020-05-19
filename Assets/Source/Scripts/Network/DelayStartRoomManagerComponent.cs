@@ -2,10 +2,10 @@
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-public class DelayStartRoomManager : MonoBehaviourPunCallbacks
+public class DelayStartRoomManagerComponent : MonoBehaviourPunCallbacks
 {
     // Scene to be loaded when the room is joined
-    public string sceneName; 
+    public int waitingRoomSceneIndex; 
 
     // AddCallbackTarget makes function available to other scripts.
     public override void OnEnable() => PhotonNetwork.AddCallbackTarget(this);
@@ -13,5 +13,5 @@ public class DelayStartRoomManager : MonoBehaviourPunCallbacks
     public override void OnDisable() => PhotonNetwork.RemoveCallbackTarget(this);
 
     // Should load into waiting room (Champ select).
-    public override void OnJoinedRoom() => SceneManager.LoadScene(sceneName);
+    public override void OnJoinedRoom() => SceneManager.LoadScene(waitingRoomSceneIndex);
 }

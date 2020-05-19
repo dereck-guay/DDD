@@ -13,17 +13,14 @@ public class NetworkManagerComponent : MonoBehaviourPunCallbacks
         if (instance != null && instance != this)
             gameObject.SetActive(false);
         else
-        {
             instance = this;
-            DontDestroyOnLoad(gameObject); // Garde le gameObject quand on change de scene.
-        }
     }
 
     private void Start() =>
         PhotonNetwork.ConnectUsingSettings();
 
-    public override void OnConnectedToMaster() =>
-        Debug.Log("Connected to: " + PhotonNetwork.CloudRegion);
-
-    // Change de scene au niveau du serveur.
+    public override void OnConnectedToMaster()
+    {
+        PhotonNetwork.AutomaticallySyncScene = true;
+    }
 }

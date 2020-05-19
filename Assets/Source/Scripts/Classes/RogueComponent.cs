@@ -17,9 +17,6 @@ public class RogueComponent : PlayerMonoBehaviour
         public GameObject autoAttackPrefab;
         public string audioName;
     };
-    [HideInInspector]
-    public bool spellLocked = false;
-
 
     [Serializable]
     public class StunningBlade

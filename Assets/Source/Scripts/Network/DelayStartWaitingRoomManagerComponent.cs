@@ -1,17 +1,16 @@
 ﻿using Photon.Pun;
 using Photon.Realtime;
-using UnityEditor.UI;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 using PhotonView = Photon.Pun.PhotonView;
 
-public class DelayStartWaitingRoomManager : MonoBehaviourPunCallbacks
+public class DelayStartWaitingRoomManagerComponent : MonoBehaviourPunCallbacks
 {
     private PhotonView myPhotonView;
 
-    public string multiplayerSceneName;
-    public string menuSceneName;
+    public int multiplayerSceneIndex;
+    public int menuSceneIndex;
     public int minPlayersToStart;
 
     public Text roomCountText;
@@ -61,7 +60,7 @@ public class DelayStartWaitingRoomManager : MonoBehaviourPunCallbacks
 
     private void WaitingForMorePlayers()
     {
-        if (playerCount <= 1)
+        if (playerCount < minPlayersToStart)
         {
             ResetTimer();
         }
@@ -100,7 +99,7 @@ public class DelayStartWaitingRoomManager : MonoBehaviourPunCallbacks
             PhotonNetwork.CurrentRoom.IsOpen = false;
 
             // Load la scene de multipalyer gameplay.
-            PhotonNetwork.LoadLevel(multiplayerSceneName);
+            PhotonNetwork.LoadLevel(multiplayerSceneIndex);
         }
     }
 
@@ -120,7 +119,7 @@ public class DelayStartWaitingRoomManager : MonoBehaviourPunCallbacks
     public void DelayCancel()
     {
         PhotonNetwork.LeaveRoom();
-        SceneManager.LoadScene(menuSceneName);
+        SceneManager.LoadScene(menuSceneIndex);
     }
 
     /// <summary>

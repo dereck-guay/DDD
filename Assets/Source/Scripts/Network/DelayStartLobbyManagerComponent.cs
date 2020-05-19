@@ -2,32 +2,25 @@
 using Photon.Realtime;
 using UnityEngine;
 
-public class DelayStartLobbyManager : MonoBehaviourPunCallbacks
+public class DelayStartLobbyManagerComponent : MonoBehaviourPunCallbacks
 {
-    public GameObject delayStartButton;
+    public GameObject playingOptions;
     public GameObject delayCancelButton;
+    public GameObject backButton;
     public byte roomSize;
 
-    public override void OnConnectedToMaster()
+    public void DelayStartPvPvE()
     {
-        // Every clients loads the same scene.
-        PhotonNetwork.AutomaticallySyncScene = true; 
-        delayStartButton.SetActive(true);
-    }
-
-    public void DelayStart()
-    {
-        delayStartButton.SetActive(false);
+        playingOptions.SetActive(false);
         delayCancelButton.SetActive(true);
 
-        // Tries to join a room.
         PhotonNetwork.JoinRandomRoom();
     }
 
     public void DelayCancel()
     {
         delayCancelButton.SetActive(false);
-        delayStartButton.SetActive(true);
+        playingOptions.SetActive(true);
 
         PhotonNetwork.LeaveRoom();
     }
