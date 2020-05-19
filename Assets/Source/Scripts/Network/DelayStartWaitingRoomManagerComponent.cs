@@ -60,7 +60,7 @@ public class DelayStartWaitingRoomManagerComponent : MonoBehaviourPunCallbacks
 
     private void WaitingForMorePlayers()
     {
-        if (playerCount <= 1)
+        if (playerCount < minPlayersToStart)
         {
             ResetTimer();
         }

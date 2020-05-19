@@ -8,13 +8,15 @@ using UnityEngine.SceneManagement;
 
 public class PlayerInfo : MonoBehaviourPunCallbacks, IInRoomCallbacks
 {
-    private PhotonView PV;
     public static PlayerInfo PI;
+    public int currentScene;
+    public int multiplayerSceneIndex;
     public int mySelectedCharacter;
     public GameObject[] allCharacters;
 
-    public int currentScene;
-    public int multiplayerSceneIndex;
+    private PhotonView PV;
+
+
 
     private void Awake()
     {
@@ -70,6 +72,7 @@ public class PlayerInfo : MonoBehaviourPunCallbacks, IInRoomCallbacks
 
     private void CreatePlayer()
     {
+        Debug.Log("Instantiating a new NetworkPlayer");
         PhotonNetwork.Instantiate(Path.Combine("Prefabs", "Network", "NetworkPlayer"), transform.position, Quaternion.identity, 0);
     }
 }

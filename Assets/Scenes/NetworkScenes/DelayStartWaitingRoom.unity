@@ -1955,7 +1955,7 @@ PrefabInstance:
     - target: {fileID: 3622016286552939764, guid: 4dd9d0142978da6479825fec7e363125,
         type: 3}
       propertyPath: minPlayersToStart
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3622016286552939764, guid: 4dd9d0142978da6479825fec7e363125,
         type: 3}
@@ -2226,6 +2226,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3093200821875422416, guid: 80ae147c4b4a1d341ad9e3fc10f6d941,
+        type: 3}
+      propertyPath: multiplayerSceneIndex
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 5783171236346899826, guid: 80ae147c4b4a1d341ad9e3fc10f6d941,
         type: 3}
