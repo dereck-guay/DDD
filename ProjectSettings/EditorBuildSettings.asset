@@ -9,6 +9,9 @@ EditorBuildSettings:
     path: 
     guid: 00000000000000000000000000000000
   - enabled: 1
+    path: Assets/Scenes/MainMenu.unity
+    guid: a44e56d6013aa47478e4b51e711e1fe0
+  - enabled: 1
     path: Assets/Scenes/NetworkScenes/DelayStartMenu.unity
     guid: bc447ca4aa51b364ca02054a2c4bbd50
   - enabled: 1

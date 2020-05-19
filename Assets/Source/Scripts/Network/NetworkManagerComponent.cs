@@ -22,8 +22,8 @@ public class NetworkManagerComponent : MonoBehaviourPunCallbacks
     private void Start() =>
         PhotonNetwork.ConnectUsingSettings();
 
-    public override void OnConnectedToMaster() =>
-        Debug.Log("Connected to: " + PhotonNetwork.CloudRegion);
-
-    // Change de scene au niveau du serveur.
+    public override void OnConnectedToMaster()
+    {
+        PhotonNetwork.AutomaticallySyncScene = true;
+    }
 }
