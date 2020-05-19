@@ -35,6 +35,10 @@ public class XP
     }
     public void AddXP(float value)
     {
+        if(Current + value > requiredXPPerLevel[2])
+        {
+            Current = requiredXPPerLevel[2];
+        }
         if (Current + value > requiredXPPerLevel[Level - 1])
         {
             ++Level;
