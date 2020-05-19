@@ -365,7 +365,7 @@ MonoBehaviour:
     manaRegen: 5
     range: 5
     speed: 25
-    xpYield: 0
+    xpYield: 10
   camera: {fileID: 0}
   spellLocked: 0
   selectableEntities:
@@ -393,28 +393,49 @@ MonoBehaviour:
       type: 3}
     audioName: 
   slam:
-    manaCost: 0
-    cooldowns: []
-    range: 0
-    shockWaveRadius: 0
-    damage: 0
-    knockbackForce: 0
+    manaCost: 10
+    cooldowns:
+    - 9
+    - 8
+    - 7
+    range: 10
+    shockWaveRadius: 10
+    damage: 10
+    knockbackForce: 10
     hitLayers:
       serializedVersion: 2
-      m_Bits: 0
+      m_Bits: 4294967295
   rage:
-    manaCost: 0
-    cooldowns: []
-    atkSpeedValues: []
+    manaCost: 10
+    cooldowns:
+    - 9
+    - 8
+    - 7
+    atkSpeedValues:
+    - 1.2
+    - 1.5
+    - 2
   takeABreather:
-    manaCost: 0
-    cooldowns: []
-    regenValues: []
+    manaCost: 10
+    cooldowns:
+    - 9
+    - 8
+    - 7
+    regenValues:
+    - 1.2
+    - 1.4
+    - 1.7
   shield:
-    manaCost: 0
+    manaCost: 10
     shieldObject: {fileID: 5592215202980429576}
-    cooldowns: []
-    effectiveTimes: []
+    cooldowns:
+    - 8
+    - 7
+    - 6
+    effectiveTimes:
+    - 2
+    - 3
+    - 4
 --- !u!54 &981901871628974245
 Rigidbody:
   m_ObjectHideFlags: 0

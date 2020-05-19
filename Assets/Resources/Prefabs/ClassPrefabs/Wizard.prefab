@@ -316,7 +316,7 @@ MonoBehaviour:
     manaRegen: 5
     range: 30
     speed: 30
-    xpYield: 0
+    xpYield: 10
   camera: {fileID: 0}
   spellLocked: 0
   selectableEntities:
