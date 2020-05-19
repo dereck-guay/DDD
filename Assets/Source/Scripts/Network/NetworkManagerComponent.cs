@@ -13,10 +13,7 @@ public class NetworkManagerComponent : MonoBehaviourPunCallbacks
         if (instance != null && instance != this)
             gameObject.SetActive(false);
         else
-        {
             instance = this;
-            DontDestroyOnLoad(gameObject); // Garde le gameObject quand on change de scene.
-        }
     }
 
     private void Start() =>

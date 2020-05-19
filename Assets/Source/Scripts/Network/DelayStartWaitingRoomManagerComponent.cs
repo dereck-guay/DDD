@@ -49,7 +49,6 @@ public class DelayStartWaitingRoomManagerComponent : MonoBehaviourPunCallbacks
 
     public override void OnPlayerEnteredRoom(Player player)
     {
-        Debug.Log("Player has entered the room.");
         PlayerCountUpdate();
 
         // Send master clients countdown timer to all other players in order to sync time.
@@ -61,10 +60,10 @@ public class DelayStartWaitingRoomManagerComponent : MonoBehaviourPunCallbacks
 
     private void WaitingForMorePlayers()
     {
-        //if (playerCount <= 1) FOR BUILD
-        //{
-        //    ResetTimer();
-        //}
+        if (playerCount <= 1)
+        {
+            ResetTimer();
+        }
 
         if (readyToStart)
         {
