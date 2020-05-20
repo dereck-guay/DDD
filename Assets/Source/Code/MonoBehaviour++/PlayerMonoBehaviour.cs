@@ -6,6 +6,9 @@ using UnityEngine;
 
 public abstract class PlayerMonoBehaviour : EntityMonoBehaviour
 {
+    public bool isSinglePlayer = false;
+    private PhotonView PV;
+
     public new Camera camera;
     [HideInInspector]
     public bool spellLocked = false;
@@ -66,7 +69,7 @@ public abstract class PlayerMonoBehaviour : EntityMonoBehaviour
     protected Vector3 GetMousePositionOn2DPlane()
     {
         var position = Vector3.zero;
-        Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+        Ray ray = camera.ScreenPointToRay(Input.mousePosition);
         RaycastHit hit;
 
         if (Physics.Raycast(ray, out hit, Mathf.Infinity, rayCastHitLayer))
@@ -79,7 +82,7 @@ public abstract class PlayerMonoBehaviour : EntityMonoBehaviour
 
     protected GameObject GetEntityAtMousePosition()
     {
-        Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+        Ray ray = camera.ScreenPointToRay(Input.mousePosition);
         RaycastHit hit;
 
         foreach (var layer in selectableEntities)
@@ -130,24 +133,28 @@ public abstract class PlayerMonoBehaviour : EntityMonoBehaviour
         entityStats.HP.OnDeath += () => AddScore(-(int)deathScorePenalty);
 
         transform.position = RespawnManagerComponent.RMC.GetRandomRespawnPoint();
+        PV = GetComponent<PhotonView>();
     }
 
     protected void UpdatePlayer()
     {
-        TimeSinceLastAttack += Time.deltaTime;
-        if (!(IsStunned || spellLocked))
+        if (PV.IsMine || isSinglePlayer)
         {
-            DirectCharacter();
-            ManageInputs();
-        }
-        xPBar.GainXP(entityStats.XP.Current, entityStats.XP.requiredXPPerLevel[entityStats.XP.Level - 1], entityStats.XP.Level);
-        entityStats.Regen();
+            TimeSinceLastAttack += Time.deltaTime;
+            if (!(IsStunned || spellLocked))
+            {
+                DirectCharacter();
+                ManageInputs();
+            }
+            xPBar.GainXP(entityStats.XP.Current, entityStats.XP.requiredXPPerLevel[entityStats.XP.Level - 1], entityStats.XP.Level);
+            entityStats.Regen();
 
-        camera.transform.position = new Vector3(
-            transform.position.x,
-            camera.transform.position.y,
-            transform.position.z - 5
-        ); // Moves the camera according to the player.
+            camera.transform.position = new Vector3(
+                transform.position.x,
+                camera.transform.position.y,
+                transform.position.z - 5
+            ); // Moves the camera according to the player.
+        }
     }
 
     protected virtual void ManageInputs()

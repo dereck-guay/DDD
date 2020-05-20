@@ -68,6 +68,7 @@ GameObject:
   - component: {fileID: 3485751777455309138}
   - component: {fileID: 6632716992985063672}
   - component: {fileID: 8196104805913610978}
+  - component: {fileID: 8099368247654556214}
   m_Layer: 10
   m_Name: Rogue
   m_TagString: Untagged
@@ -87,8 +88,8 @@ Transform:
   m_LocalScale: {x: 0.5, y: 0.5, z: 0.5}
   m_Children:
   - {fileID: 3665679776303887737}
-  - {fileID: 5424995441882163724}
   - {fileID: 7073060982553295773}
+  - {fileID: 7967744790446959789}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -115,6 +116,7 @@ MonoBehaviour:
     range: 25
     speed: 30
     xpYield: 10
+  isSinglePlayer: 0
   camera: {fileID: 0}
   spellLocked: 0
   selectableEntities:
@@ -129,9 +131,9 @@ MonoBehaviour:
     m_Bits: 256
   respawnManager: {fileID: 0}
   statusBars:
-  - {fileID: 1403060342132583572}
-  - {fileID: 2637110027400356727}
-  xPBar: {fileID: 5616172173109949958}
+  - {fileID: 7967744790446958395}
+  - {fileID: 7967744790446957035}
+  xPBar: {fileID: 7967744790446957252}
   deathScorePenalty: 50
   characterParts:
     body: {fileID: 6635251231188629254}
@@ -247,12 +249,28 @@ MonoBehaviour:
   ObservedComponentsFoldoutOpen: 1
   Group: 0
   prefixField: -1
-  Synchronization: 0
+  Synchronization: 3
   OwnershipTransfer: 0
-  ObservedComponents: []
+  ObservedComponents:
+  - {fileID: 8099368247654556214}
   viewIdField: 0
   InstantiationId: 0
   isRuntimeInstantiated: 0
+--- !u!114 &8099368247654556214
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1855886320233541759}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 627855c7f81362d41938ffe0b1475957, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_SynchronizePosition: 1
+  m_SynchronizeRotation: 1
+  m_SynchronizeScale: 0
 --- !u!1 &2770764824873820918
 GameObject:
   m_ObjectHideFlags: 0
@@ -361,7 +379,7 @@ Transform:
   m_LocalScale: {x: 0.5, y: 0.5, z: 0.5}
   m_Children: []
   m_Father: {fileID: 1729600041794869160}
-  m_RootOrder: 2
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!108 &2417845156757622737
 Light:
@@ -560,7 +578,7 @@ PrefabInstance:
     - target: {fileID: 2727608181536620856, guid: a04d32ed99e727b4a950d6fbca217b43,
         type: 3}
       propertyPath: m_RootOrder
-      value: 1
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 2727608181536620856, guid: a04d32ed99e727b4a950d6fbca217b43,
         type: 3}
@@ -664,13 +682,13 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: a04d32ed99e727b4a950d6fbca217b43, type: 3}
---- !u!224 &5424995441882163724 stripped
+--- !u!224 &7967744790446959789 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 2727608181536620856, guid: a04d32ed99e727b4a950d6fbca217b43,
     type: 3}
   m_PrefabInstance: {fileID: 7967744790446959412}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &1403060342132583572 stripped
+--- !u!114 &7967744790446958395 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 9073546391473571744, guid: a04d32ed99e727b4a950d6fbca217b43,
     type: 3}
@@ -682,7 +700,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 10bda2d43c9192142b9b5535ffc5ae52, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!114 &2637110027400356727 stripped
+--- !u!114 &7967744790446957035 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 5335631090459527235, guid: a04d32ed99e727b4a950d6fbca217b43,
     type: 3}
@@ -694,7 +712,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 10bda2d43c9192142b9b5535ffc5ae52, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!114 &5616172173109949958 stripped
+--- !u!114 &7967744790446957252 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 2550087946282310962, guid: a04d32ed99e727b4a950d6fbca217b43,
     type: 3}

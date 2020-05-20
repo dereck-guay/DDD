@@ -2673,6 +2673,11 @@ PrefabInstance:
       propertyPath: m_AnchorMax.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 8196104805913610978, guid: 9ec79bee9db649f4290c8aaba9941af4,
+        type: 3}
+      propertyPath: viewIdField
+      value: 3
+      objectReference: {fileID: 0}
     - target: {fileID: 8330877539835647752, guid: 9ec79bee9db649f4290c8aaba9941af4,
         type: 3}
       propertyPath: statusBars.Array.size
@@ -2698,6 +2703,11 @@ PrefabInstance:
       propertyPath: respawnManager
       value: 
       objectReference: {fileID: 710166749}
+    - target: {fileID: 8330877539835647752, guid: 9ec79bee9db649f4290c8aaba9941af4,
+        type: 3}
+      propertyPath: isSinglePlayer
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 8908127084996574927, guid: 9ec79bee9db649f4290c8aaba9941af4,
         type: 3}
       propertyPath: m_AnchorMax.x
@@ -2963,6 +2973,16 @@ PrefabInstance:
       propertyPath: respawnManager
       value: 
       objectReference: {fileID: 710166749}
+    - target: {fileID: 6049392572040121324, guid: a65c66f2c830f2047ad216e6b547ed78,
+        type: 3}
+      propertyPath: isSinglePlayer
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6705551629415018888, guid: a65c66f2c830f2047ad216e6b547ed78,
+        type: 3}
+      propertyPath: viewIdField
+      value: 2
+      objectReference: {fileID: 0}
     - target: {fileID: 7654609879356970206, guid: a65c66f2c830f2047ad216e6b547ed78,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -3417,6 +3437,11 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 7085935386628518492, guid: b3a55247596b7ee4cbe346ea4a417ead,
+        type: 3}
+      propertyPath: viewIdField
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 7488783315110983791, guid: b3a55247596b7ee4cbe346ea4a417ead,
         type: 3}
       propertyPath: m_RootOrder
@@ -3507,6 +3532,11 @@ PrefabInstance:
       propertyPath: autoAttack.staff
       value: 
       objectReference: {fileID: 660108129}
+    - target: {fileID: 8654396917311496859, guid: b3a55247596b7ee4cbe346ea4a417ead,
+        type: 3}
+      propertyPath: isSinglePlayer
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 8672809628951962435, guid: b3a55247596b7ee4cbe346ea4a417ead,
         type: 3}
       propertyPath: m_AnchorMin.y
