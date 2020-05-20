@@ -46,8 +46,6 @@ public class TargetingAIComponent : MonoBehaviour
         detectionRange.isTrigger = true;
         TryGetComponent(out walkingAnimation);
         TryGetComponent(out wanderingAI);
-
-        //StartCoroutine("TestForNavMesh");
     }
 
     void Update()
@@ -67,17 +65,6 @@ public class TargetingAIComponent : MonoBehaviour
         }
         else if (agent.enabled)
             agent.enabled = false;
-    }
-
-    IEnumerator TestForNavMesh()
-    {
-        NavMeshHit navMeshHit;
-        while (true)
-        {
-            yield return new WaitUntil(() => !agent.isOnNavMesh);
-            agent.FindClosestEdge(out navMeshHit);
-            agent.Warp(navMeshHit.position);
-        }
     }
 
     private void OnTriggerEnter(Collider other)

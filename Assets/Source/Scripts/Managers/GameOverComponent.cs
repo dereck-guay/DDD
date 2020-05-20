@@ -1,6 +1,8 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using System.Text;
 using UnityEngine;
+using UnityEngine.UI;
 
 public struct Rank
 {
@@ -22,6 +24,10 @@ public struct Rank
 public class GameOverComponent : MonoBehaviour
 {
     public PlayerMonoBehaviour[] players;
+
+    public Text text;
+    public GameObject canvas;
+
     bool gameOver;
     Rank[] ranks;
 
@@ -29,14 +35,18 @@ public class GameOverComponent : MonoBehaviour
     {
         ranks = new Rank[players.Length];
         //find players...
-        DontDestroyOnLoad(this);
+
+        canvas.SetActive(false);
     }
 
     public void EndGame()
     {
         GetRanks();
         GetComponent<LoadSceneComponent>().LoadScene("GameOverScreen");
-        Debug.Log(ranks[0].ToString());
+
+        canvas.SetActive(true);
+        text.text = RanksToString();
+        //Debug.Log(ranks[0].ToString());
     }
 
     void GetRanks()
@@ -51,10 +61,20 @@ public class GameOverComponent : MonoBehaviour
             {
                 if (players[b].Score < players[c].Score)
                     rankTemp++;
-
             }
-
+            Debug.Log(ranks);
             ranks[rankTemp] = new Rank($"Player {b + 1}", (byte)(rankTemp + 1), players[b].Score);
         }
+    }
+
+    string RanksToString()
+    {
+        var sb = new StringBuilder();
+
+        for (byte b = 0; b < players.Length; b++)
+        {
+            sb.AppendLine(ranks[b].ToString());
+        }
+        return sb.ToString();
     }
 }

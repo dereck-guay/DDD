@@ -18,24 +18,17 @@ public class WanderingAIComponent : MonoBehaviour
     [HideInInspector]
     public bool isStunned;
 
-    float test;
-
     float cooldown = 0;
     Vector3 spawnPosition;
     WalkingAnimationComponent walkingAnimation;
-
-    // Start is called before the first frame update
+    
     void Start()
     {
         agent = GetComponent<NavMeshAgent>();
         TryGetComponent(out walkingAnimation);
         spawnPosition = transform.position;
-
-        test = Time.time;
-        //StartCoroutine("TestForNavMesh");
     }
-
-    // Update is called once per frame
+    
     void Update()
     {
         if (agent.enabled && agent.remainingDistance == 0)

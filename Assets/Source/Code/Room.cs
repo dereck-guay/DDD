@@ -9,7 +9,6 @@ using UnityEngine;
 public class Room
 {
    int[,] roomLayout;
-   Transform map;
 
    public const int Width = 17,
                     Length = 11;
