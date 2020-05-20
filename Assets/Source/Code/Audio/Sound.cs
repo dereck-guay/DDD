@@ -1,6 +1,6 @@
 ﻿using UnityEngine.Audio;
 using UnityEngine;
-
+// ----------------
 [System.Serializable]
 public class Sound
 {
@@ -12,3 +12,5 @@ public class Sound
     [HideInInspector]
     public AudioSource source;
 }
+//Vient de https://youtu.be/6OT43pvUyfY
+// -----------------

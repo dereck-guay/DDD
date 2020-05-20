@@ -1,7 +1,7 @@
 ﻿using System;
 using UnityEngine.Audio;
 using UnityEngine;
-
+// --------------------
 public class AudioManager : MonoBehaviour
 {
     public Sound[] sounds;
@@ -36,3 +36,5 @@ public class AudioManager : MonoBehaviour
         s.source.Play();
     }
 }
+//Vient de https://youtu.be/6OT43pvUyfY
+// -----------------------
